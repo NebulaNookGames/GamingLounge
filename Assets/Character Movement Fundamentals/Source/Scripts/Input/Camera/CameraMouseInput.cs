@@ -41,7 +41,7 @@ namespace CMF
             if(invertHorizontalInput)
                 _input *= -1f;
 
-            return _input;
+            return 0;
         }
 
         public override float GetVerticalCameraInput()
@@ -65,7 +65,7 @@ namespace CMF
             if(invertVerticalInput)
                 _input *= -1f;
 
-            return _input;
+            return 0;
         }
     }
 }

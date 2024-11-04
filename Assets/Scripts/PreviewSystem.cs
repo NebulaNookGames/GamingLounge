@@ -4,13 +4,13 @@ public class PreviewSystem : MonoBehaviour
 {
     [SerializeField] float previewYOffset = 0.06f;
     [SerializeField] GameObject cellIndicator;
-    GameObject previewObject;
-
+    public GameObject previewObject;
+    [SerializeField] private InputManager inputManager;
     [SerializeField] Material previewMaterialPrefabs;
     Material previewMaterialInstance;
 
     Renderer cellIndicatorRenderer;
-
+    
     private void Start()
     {
         previewMaterialInstance = new Material(previewMaterialPrefabs);
@@ -24,8 +24,15 @@ public class PreviewSystem : MonoBehaviour
         PreparePreview(previewObject);
         PrepareCursor(size);
         cellIndicator.SetActive(true);
+        inputManager.OnRotate += RotatePreview;
     }
 
+    private void RotatePreview()
+    {
+        if (previewObject == null) return;
+        previewObject.GetComponent<RotatePlacementObject>().Rotate();
+    }
+    
     private void PrepareCursor(Vector2Int size)
     {
         if(size.x > 0 && size.y > 0)

@@ -5,12 +5,14 @@ public class RemovingState : IBuildingState
 {
     private int gameObjectIndex = -1;
     Grid grid;
+    PlacementSystem placementSystem;
     PreviewSystem previewSystem;
     GridData floorData, wallData, wallDecorData, furnitureData;
     ObjectPlacer objectPlacer;
 
     public RemovingState(Grid grid,
                          PreviewSystem previewSystem,
+                         PlacementSystem placementSystem,
                          GridData floorData,
                          GridData wallData,
                          GridData wallDecorData,
@@ -18,6 +20,7 @@ public class RemovingState : IBuildingState
                          ObjectPlacer objectPlacer)
     {
         this.grid = grid;
+        this.placementSystem = placementSystem;
         this.previewSystem = previewSystem;
         this.floorData = floorData;
         this.wallData = wallData;
@@ -35,21 +38,33 @@ public class RemovingState : IBuildingState
 
     public void OnAction(Vector3Int gridPosition)
     {
+        Vector3 newPosition = Vector3.zero;
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = placementSystem.cam.nearClipPlane;
+        Ray ray = placementSystem.cam.ScreenPointToRay(mousePos);
+        RaycastHit hit;
+        if(Physics.Raycast(ray, out hit, 100, placementSystem.placementMask))
+        {
+            newPosition = hit.point;
+        }
+        Debug.DrawLine(placementSystem.player.transform.position, newPosition, Color.green, 5f);
+
+        
         GridData selectedData = null;
 
-        if (!floorData.canPlaceObjectAt(gridPosition, Vector2Int.one))
+        if (!floorData.canPlaceObjectAt(gridPosition, Vector2Int.one) && Vector3.Distance(placementSystem.player.transform.position, newPosition) < 3)
         {
             selectedData = floorData;
         }
-        else if (!wallData.canPlaceObjectAt(gridPosition, Vector2Int.one))
+        else if (!wallData.canPlaceObjectAt(gridPosition, Vector2Int.one) && Vector3.Distance(placementSystem.player.transform.position, newPosition) < 3)
         {
             selectedData = wallData;
         }
-        else if(!wallDecorData.canPlaceObjectAt(gridPosition, Vector2Int.one))
+        else if(!wallDecorData.canPlaceObjectAt(gridPosition, Vector2Int.one) && Vector3.Distance(placementSystem.player.transform.position, newPosition) < 3)
         {
             selectedData = wallDecorData;
         }
-        else if(!furnitureData.canPlaceObjectAt(gridPosition, Vector2Int.one))
+        else if(!furnitureData.canPlaceObjectAt(gridPosition, Vector2Int.one) && Vector3.Distance(placementSystem.player.transform.position, newPosition) < 3)
         {
             selectedData = furnitureData;
         }

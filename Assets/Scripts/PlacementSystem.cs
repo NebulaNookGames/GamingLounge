@@ -4,14 +4,18 @@ public class PlacementSystem : MonoBehaviour
 {
     [SerializeField] Grid grid; 
     [SerializeField] InputManager inputManager;
+    [SerializeField] public GameObject player;
     [SerializeField] ObjectsDatabaseSO database;  
     [SerializeField] GameObject gridVisualization;
     private GridData floorData, wallData, wallDecorData, furnitureData;
     [SerializeField] PreviewSystem preview;
     Vector3Int lastDetectedPosition = Vector3Int.zero;
     [SerializeField] ObjectPlacer objectPlacer;
-    IBuildingState buildingState; 
-
+    IBuildingState buildingState;
+    public Camera cam;
+    public LayerMask placementMask;
+    private bool placementOn = true;
+    public GameObject placementCanvas;
     private void Start()
     {
         StopPlacement();
@@ -19,7 +23,10 @@ public class PlacementSystem : MonoBehaviour
         wallData = new GridData();  
         wallDecorData = new GridData();
         furnitureData = new GridData();
+        inputManager.OnPlacementToggle += TogglePlacement;
+        TogglePlacement();
     }
+    
 
     private void Update()
     {
@@ -34,6 +41,25 @@ public class PlacementSystem : MonoBehaviour
         }
     }
 
+    void TogglePlacement()
+    {
+        if (placementOn)
+        {
+            placementOn = false;
+            placementCanvas.SetActive(false);
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            StopPlacement();
+        }
+        else
+        {
+            placementOn = true;
+            placementCanvas.SetActive(true);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+    }
+    
     public void StartPlacement(int ID)
     {
         StopPlacement();
@@ -41,6 +67,7 @@ public class PlacementSystem : MonoBehaviour
         buildingState = new PlacementState(ID,
                                            grid,
                                            preview,
+                                           this,
                                            database,
                                            floorData,
                                            wallData,
@@ -48,7 +75,6 @@ public class PlacementSystem : MonoBehaviour
                                            furnitureData,
                                            objectPlacer);
         inputManager.OnClicked += PlaceStructure;
-        inputManager.OnExit += StopPlacement;
     }
 
     public void StartRemoving()
@@ -57,13 +83,13 @@ public class PlacementSystem : MonoBehaviour
         gridVisualization.SetActive(true);
         buildingState = new RemovingState(grid,
                                           preview,
+                           this,
                                           floorData,
                                           wallData,
                                           wallDecorData,
                                           furnitureData,
                                           objectPlacer);
         inputManager.OnClicked += PlaceStructure;
-        inputManager.OnExit += StopPlacement;
     }
 
     private void PlaceStructure()
@@ -77,12 +103,12 @@ public class PlacementSystem : MonoBehaviour
 
     private void StopPlacement()
     {
-        if(buildingState == null) return;
-
         gridVisualization.SetActive(false);
+        
+        if(buildingState == null) return;
+        
         buildingState.EndState();
         inputManager.OnClicked -= PlaceStructure;
-        inputManager.OnExit -= StopPlacement;
         lastDetectedPosition = Vector3Int.zero;
         buildingState = null;
     }

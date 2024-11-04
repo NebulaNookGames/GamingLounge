@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class PlacementState : IBuildingState
@@ -6,6 +7,7 @@ public class PlacementState : IBuildingState
     int ID;
     Grid grid;
     PreviewSystem previewSystem;
+    PlacementSystem placementSystem;
     ObjectsDatabaseSO database;
     GridData floorData, wallData, wallDecorData, furnitureData;
     ObjectPlacer objectPlacer;
@@ -13,6 +15,7 @@ public class PlacementState : IBuildingState
     public PlacementState(int iD,
                           Grid grid,
                           PreviewSystem previewSystem,
+                          PlacementSystem placementSystem,
                           ObjectsDatabaseSO database,
                           GridData floorData,
                           GridData wallData,
@@ -22,6 +25,7 @@ public class PlacementState : IBuildingState
     {
         ID = iD;
         selectedObjectIndex = iD;
+        this.placementSystem = placementSystem;
         this.grid = grid;
         this.previewSystem = previewSystem;
         this.database = database;
@@ -50,7 +54,21 @@ public class PlacementState : IBuildingState
 
     private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedObjectIndex)
     {
+        Vector3 newPosition = Vector3.zero;
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = placementSystem.cam.nearClipPlane;
+        Ray ray = placementSystem.cam.ScreenPointToRay(mousePos);
+        RaycastHit hit;
+        if(Physics.Raycast(ray, out hit, 100, placementSystem.placementMask))
+        {
+            newPosition = hit.point;
+        }
 
+        Debug.DrawLine(placementSystem.player.transform.position, newPosition, Color.green, 5f);
+        if (Vector3.Distance(placementSystem.player.transform.position, newPosition) > 3)
+        {
+            return false; 
+        }
         GridData selectedData = GetUsedGridData();
 
         return selectedData.canPlaceObjectAt(gridPosition, database.objectsData[selectedObjectIndex].Size);
@@ -60,7 +78,9 @@ public class PlacementState : IBuildingState
     {
         bool placementValidity = CheckPlacementValidity(gridPosition, selectedObjectIndex);
         if (!placementValidity) return;
-        int index = objectPlacer.PlaceObject(database.objectsData[selectedObjectIndex].Prefab, grid.CellToWorld(gridPosition));
+        int index = objectPlacer.PlaceObject(database.objectsData[selectedObjectIndex].Prefab,
+                                       grid.CellToWorld(gridPosition),
+                                              previewSystem.previewObject.GetComponent<RotatePlacementObject>().objectToRotate.transform.rotation);
 
         GridData selectedData = GetUsedGridData();
 

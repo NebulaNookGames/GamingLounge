@@ -25,7 +25,7 @@ public class CameraMovement : MonoBehaviour
     /// <summary>
     /// Set to true when free looking (on right mouse button).
     /// </summary>
-    private bool looking;
+    private bool looking = false;
 
     #endregion Variables
 
@@ -45,44 +45,44 @@ public class CameraMovement : MonoBehaviour
     #region Methods
 
     /// <summary>
-    /// Moves the game object using the old input system.
+    /// Moves the gameobject using the old input system.
     /// </summary>
     private void Movement()
     {
         var fastMode = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
-        var moveSpeed = fastMode ? this.fastMovementSpeed : this.movementSpeed;
+        var movementSpeed = fastMode ? this.fastMovementSpeed : this.movementSpeed;
 
         // Move left
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-            transform.position = transform.position + (-transform.right * (moveSpeed * Time.deltaTime));
+            transform.position = transform.position + (-transform.right * movementSpeed * Time.deltaTime);
 
         // Move right
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-            transform.position = transform.position + (transform.right * (moveSpeed * Time.deltaTime));
+            transform.position = transform.position + (transform.right * movementSpeed * Time.deltaTime);
 
         // Move forward
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-            transform.position = transform.position + (transform.forward * (moveSpeed * Time.deltaTime));
+            transform.position = transform.position + (transform.forward * movementSpeed * Time.deltaTime);
 
         // Move back
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-            transform.position = transform.position + (-transform.forward * (moveSpeed * Time.deltaTime));
+            transform.position = transform.position + (-transform.forward * movementSpeed * Time.deltaTime);
 
         // Move up
         if (Input.GetKey(KeyCode.Q))
-            transform.position = transform.position + (transform.up * (moveSpeed * Time.deltaTime));
+            transform.position = transform.position + (transform.up * movementSpeed * Time.deltaTime);
 
         // Move up
         if (Input.GetKey(KeyCode.R) || Input.GetKey(KeyCode.PageUp))
-            transform.position = transform.position + (Vector3.up * (moveSpeed * Time.deltaTime));
+            transform.position = transform.position + (Vector3.up * movementSpeed * Time.deltaTime);
 
         // Move down
         if (Input.GetKey(KeyCode.E))
-            transform.position = transform.position + (-transform.up * (moveSpeed * Time.deltaTime));
+            transform.position = transform.position + (-transform.up * movementSpeed * Time.deltaTime);
 
         // Move down
         if (Input.GetKey(KeyCode.F) || Input.GetKey(KeyCode.PageDown))
-            transform.position = transform.position + (-Vector3.up * (moveSpeed * Time.deltaTime));
+            transform.position = transform.position + (-Vector3.up * movementSpeed * Time.deltaTime);
     }
 
     /// <summary>
@@ -102,8 +102,8 @@ public class CameraMovement : MonoBehaviour
         float axis = Input.GetAxis("Mouse ScrollWheel");
         if (axis != 0)
         {
-            var zoomSens = fastMode ? this.fastZoomSensitivity : this.zoomSensitivity;
-            transform.position = transform.position + transform.forward * (axis * zoomSens);
+            var zoomSensitivity = fastMode ? this.fastZoomSensitivity : this.zoomSensitivity;
+            transform.position = transform.position + transform.forward * axis * zoomSensitivity;
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse1))

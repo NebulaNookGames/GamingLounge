@@ -6,18 +6,16 @@ public class InputManager : MonoBehaviour
 {
     [SerializeField] private Camera sceneCamera;
 
-    public event Action OnClicked, OnExit;
+    public event Action OnClicked, OnPlacementToggle, OnRotate;
 
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
+        if (Input.GetKeyDown(KeyCode.E))
+            OnPlacementToggle?.Invoke();
+        else if(Input.GetMouseButtonDown(0))
             OnClicked?.Invoke();
-        }
-        else if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            OnExit?.Invoke();           
-        }
+        else if (Input.GetKeyDown(KeyCode.R))
+            OnRotate?.Invoke();
     }
 
     public bool IsPointerOverUI()

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,7 +21,13 @@ namespace CMF
         //All mouse input will be multiplied by this value;
         public float mouseInputMultiplier = 0.01f;
 
-	    public override float GetHorizontalCameraInput()
+        // private void Awake()
+        // {
+        //     Cursor.visible = false;
+        //     Cursor.lockState = CursorLockMode.Locked;
+        // }
+
+        public override float GetHorizontalCameraInput()
         {
             //Get raw mouse input;
             float _input = Input.GetAxisRaw(mouseHorizontalAxis);

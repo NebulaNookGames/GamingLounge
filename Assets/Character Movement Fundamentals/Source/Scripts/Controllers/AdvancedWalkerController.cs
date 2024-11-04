@@ -15,11 +15,11 @@ namespace CMF
 		protected CharacterInput characterInput;
 		protected CeilingDetector ceilingDetector;
 
-        //Jump key variables;
-        bool jumpInputIsLocked = false;
-        bool jumpKeyWasPressed = false;
-		bool jumpKeyWasLetGo = false;
-		bool jumpKeyIsPressed = false;
+  //       //Jump key variables;
+  //       bool jumpInputIsLocked = false;
+  //       bool jumpKeyWasPressed = false;
+		// bool jumpKeyWasLetGo = false;
+		// bool jumpKeyIsPressed = false;
 
 		//Movement speed;
 		public float movementSpeed = 7f;
@@ -28,12 +28,12 @@ namespace CMF
 		//Higher values result in more air control;
 		public float airControlRate = 2f;
 
-		//Jump speed;
-		public float jumpSpeed = 10f;
-
-		//Jump duration variables;
-		public float jumpDuration = 0.2f;
-		float currentJumpStartTime = 0f;
+		// //Jump speed;
+		// public float jumpSpeed = 10f;
+		//
+		// //Jump duration variables;
+		// public float jumpDuration = 0.2f;
+		// float currentJumpStartTime = 0f;
 
 		//'AirFriction' determines how fast the controller loses its momentum while in the air;
 		//'GroundFriction' is used instead, if the controller is grounded;
@@ -93,27 +93,27 @@ namespace CMF
 		{
 		}
 
-		void Update()
-		{
-			HandleJumpKeyInput();
-		}
+		// void Update()
+		// {
+		// 	HandleJumpKeyInput();
+		// }
 
-        //Handle jump booleans for later use in FixedUpdate;
-        void HandleJumpKeyInput()
-        {
-            bool _newJumpKeyPressedState = IsJumpKeyPressed();
-
-            if (jumpKeyIsPressed == false && _newJumpKeyPressedState == true)
-                jumpKeyWasPressed = true;
-
-            if (jumpKeyIsPressed == true && _newJumpKeyPressedState == false)
-            {
-                jumpKeyWasLetGo = true;
-                jumpInputIsLocked = false;
-            }
-
-            jumpKeyIsPressed = _newJumpKeyPressedState;
-        }
+        // //Handle jump booleans for later use in FixedUpdate;
+        // void HandleJumpKeyInput()
+        // {
+        //     bool _newJumpKeyPressedState = IsJumpKeyPressed();
+        //
+        //     if (jumpKeyIsPressed == false && _newJumpKeyPressedState == true)
+        //         jumpKeyWasPressed = true;
+        //
+        //     if (jumpKeyIsPressed == true && _newJumpKeyPressedState == false)
+        //     {
+        //         jumpKeyWasLetGo = true;
+        //         jumpInputIsLocked = false;
+        //     }
+        //
+        //     jumpKeyIsPressed = _newJumpKeyPressedState;
+        // }
 
         void FixedUpdate()
 		{
@@ -133,8 +133,8 @@ namespace CMF
 			//Apply friction and gravity to 'momentum';
 			HandleMomentum();
 
-			//Check if the player has initiated a jump;
-			HandleJumping();
+			// //Check if the player has initiated a jump;
+			// HandleJumping();
 
 			//Calculate movement velocity;
 			Vector3 _velocity = Vector3.zero;
@@ -162,9 +162,9 @@ namespace CMF
 			//Save controller movement velocity;
 			savedMovementVelocity = CalculateMovementVelocity();
 
-			//Reset jump key booleans;
-			jumpKeyWasLetGo = false;
-			jumpKeyWasPressed = false;
+			// //Reset jump key booleans;
+			// jumpKeyWasLetGo = false;
+			// jumpKeyWasPressed = false;
 
 			//Reset ceiling detector, if one is attached to this gameobject;
 			if(ceilingDetector != null)
@@ -316,13 +316,13 @@ namespace CMF
 			//Jumping;
 			if(currentControllerState == ControllerState.Jumping)
 			{
-				//Check for jump timeout;
-				if((Time.time - currentJumpStartTime) > jumpDuration)
-					return ControllerState.Rising;
-
-				//Check if jump key was let go;
-				if(jumpKeyWasLetGo)
-					return ControllerState.Rising;
+				// //Check for jump timeout;
+				// if((Time.time - currentJumpStartTime) > jumpDuration)
+				// 	return ControllerState.Rising;
+				//
+				// //Check if jump key was let go;
+				// if(jumpKeyWasLetGo)
+				// 	return ControllerState.Rising;
 
 				//If a ceiling detector has been attached to this gameobject, check for ceiling hits;
 				if(ceilingDetector != null)
@@ -339,21 +339,21 @@ namespace CMF
 			return ControllerState.Falling;
 		}
 
-        //Check if player has initiated a jump;
-        void HandleJumping()
-        {
-            if (currentControllerState == ControllerState.Grounded)
-            {
-                if ((jumpKeyIsPressed == true || jumpKeyWasPressed) && !jumpInputIsLocked)
-                {
-                    //Call events;
-                    OnGroundContactLost();
-                    OnJumpStart();
-
-                    currentControllerState = ControllerState.Jumping;
-                }
-            }
-        }
+        // //Check if player has initiated a jump;
+        // void HandleJumping()
+        // {
+        //     if (currentControllerState == ControllerState.Grounded)
+        //     {
+        //         if ((jumpKeyIsPressed == true || jumpKeyWasPressed) && !jumpInputIsLocked)
+        //         {
+        //             //Call events;
+        //             OnGroundContactLost();
+        //             OnJumpStart();
+        //
+        //             currentControllerState = ControllerState.Jumping;
+        //         }
+        //     }
+        // }
 
         //Apply friction to both vertical and horizontal momentum based on 'friction' and 'gravity';
 		//Handle movement in the air;
@@ -445,12 +445,12 @@ namespace CMF
 				momentum += _slideDirection * slideGravity * Time.deltaTime;
 			}
 			
-			//If controller is jumping, override vertical velocity with jumpSpeed;
-			if(currentControllerState == ControllerState.Jumping)
-			{
-				momentum = VectorMath.RemoveDotVector(momentum, tr.up);
-				momentum += tr.up * jumpSpeed;
-			}
+			// //If controller is jumping, override vertical velocity with jumpSpeed;
+			// if(currentControllerState == ControllerState.Jumping)
+			// {
+			// 	momentum = VectorMath.RemoveDotVector(momentum, tr.up);
+			// 	momentum += tr.up * jumpSpeed;
+			// }
 
 			if(useLocalMomentum)
 				momentum = tr.worldToLocalMatrix * momentum;
@@ -458,29 +458,29 @@ namespace CMF
 
 		//Events;
 
-		//This function is called when the player has initiated a jump;
-		void OnJumpStart()
-		{
-			//If local momentum is used, transform momentum into world coordinates first;
-			if(useLocalMomentum)
-				momentum = tr.localToWorldMatrix * momentum;
-
-			//Add jump force to momentum;
-			momentum += tr.up * jumpSpeed;
-
-			//Set jump start time;
-			currentJumpStartTime = Time.time;
-
-            //Lock jump input until jump key is released again;
-            jumpInputIsLocked = true;
-
-            //Call event;
-            if (OnJump != null)
-				OnJump(momentum);
-
-			if(useLocalMomentum)
-				momentum = tr.worldToLocalMatrix * momentum;
-		}
+		// //This function is called when the player has initiated a jump;
+		// void OnJumpStart()
+		// {
+		// 	//If local momentum is used, transform momentum into world coordinates first;
+		// 	if(useLocalMomentum)
+		// 		momentum = tr.localToWorldMatrix * momentum;
+  //
+		// 	//Add jump force to momentum;
+		// 	momentum += tr.up * jumpSpeed;
+  //
+		// 	//Set jump start time;
+		// 	currentJumpStartTime = Time.time;
+  //
+  //           //Lock jump input until jump key is released again;
+  //           jumpInputIsLocked = true;
+  //
+  //           //Call event;
+  //           if (OnJump != null)
+		// 		OnJump(momentum);
+  //
+		// 	if(useLocalMomentum)
+		// 		momentum = tr.worldToLocalMatrix * momentum;
+		// }
 
 		//This function is called when the controller has lost ground contact, i.e. is either falling or rising, or generally in the air;
 		void OnGroundContactLost()

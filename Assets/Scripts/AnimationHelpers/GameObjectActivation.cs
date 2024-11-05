@@ -2,15 +2,17 @@ using UnityEngine;
 
 public class GameObjectActivation : MonoBehaviour
 {
-    [SerializeField] private GameObject gameObject;
+    [SerializeField] private GameObject[] gameObjectsToActivate;
 
     public void Activate()
     {
-        gameObject.SetActive(true);
+        foreach (GameObject go in gameObjectsToActivate)
+            go.SetActive(true);
     }
 
     public void Deactivate()
     {
-        gameObject.SetActive(false);
+        foreach (GameObject go in gameObjectsToActivate)
+            go.SetActive(false);
     }
 }

@@ -12,6 +12,8 @@ public class ObjectPlacer : MonoBehaviour
     [SerializeField]
     private List<GameObject> placedGameObjects = new();
 
+    [SerializeField] PlacementSystem placementSystem; 
+    
     /// <summary>
     /// Instantiates a prefab at the specified position and rotation.
     /// </summary>
@@ -26,6 +28,7 @@ public class ObjectPlacer : MonoBehaviour
         newObject.GetComponent<RotatePlacementObject>().objectToRotate.transform.rotation = rotation;
         
         placedGameObjects.Add(newObject);
+        placementSystem.OnPlaced?.Invoke();
         return placedGameObjects.Count - 1;
     }
 
@@ -40,5 +43,11 @@ public class ObjectPlacer : MonoBehaviour
 
         Destroy(placedGameObjects[gameObjectIndex]);
         placedGameObjects[gameObjectIndex] = null;
+        Invoke("ActionInvocation", .2f);
+    }
+
+    void ActionInvocation()
+    {
+        placementSystem.OnPlaced?.Invoke();
     }
 }

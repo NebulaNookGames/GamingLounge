@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 /// <summary>
@@ -40,6 +41,8 @@ public class PlacementSystem : MonoBehaviour
 
     public GameObject placementCanvas; // UI canvas for placement mode.
 
+    public Action OnPlaced; 
+    
     /// <summary>
     /// Initializes the placement system and sets up the grid data.
     /// </summary>
@@ -103,6 +106,7 @@ public class PlacementSystem : MonoBehaviour
         gridVisualization.SetActive(true);
         buildingState = new PlacementState(ID, grid, preview, this, database, floorData, wallData, wallDecorData, furnitureData, objectPlacer);
         inputManager.OnClicked += PlaceStructure;
+        placementCanvas.SetActive(false);
     }
 
     /// <summary>
@@ -114,6 +118,7 @@ public class PlacementSystem : MonoBehaviour
         gridVisualization.SetActive(true);
         buildingState = new RemovingState(grid, preview, this, floorData, wallData, wallDecorData, furnitureData, objectPlacer);
         inputManager.OnClicked += PlaceStructure;
+        placementCanvas.SetActive(false);
     }
 
     /// <summary>
@@ -126,6 +131,7 @@ public class PlacementSystem : MonoBehaviour
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
         buildingState.OnAction(gridPosition);
+      
     }
 
     /// <summary>

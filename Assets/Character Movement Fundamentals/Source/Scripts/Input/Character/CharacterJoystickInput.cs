@@ -11,7 +11,8 @@ namespace CMF
 		public string horizontalInputAxis = "Horizontal";
 		public string verticalInputAxis = "Vertical";
 		public KeyCode jumpKey = KeyCode.Joystick1Button0;
-
+		public KeyCode runKey = KeyCode.LeftShift;
+		
 		//If this is enabled, Unity's internal input smoothing is bypassed;
 		public bool useRawInput = true;
 
@@ -54,6 +55,11 @@ namespace CMF
 		public override bool IsJumpKeyPressed()
 		{
 			return Input.GetKey(jumpKey);
+		}
+		
+		public override bool IsRunKeyPressed()
+		{
+			return Input.GetKey(runKey);
 		}
 
 	}

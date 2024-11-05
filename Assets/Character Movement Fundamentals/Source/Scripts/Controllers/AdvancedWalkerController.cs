@@ -96,6 +96,7 @@ namespace CMF
 		void Update()
 		{
 			HandleJumpKeyInput();
+			HandleRunKeyInput();
 		}
 
         //Handle jump booleans for later use in FixedUpdate;
@@ -113,6 +114,16 @@ namespace CMF
             }
 
             jumpKeyIsPressed = _newJumpKeyPressedState;
+        }
+
+        void HandleRunKeyInput()
+        {
+	        bool _newRunKeyPressedState = IsRunKeyPressed();
+
+	        if (_newRunKeyPressedState)
+		        movementSpeed = 7;
+	        else
+		        movementSpeed = 3; 
         }
 
         void FixedUpdate()
@@ -222,6 +233,14 @@ namespace CMF
 				return false;
 
 			return characterInput.IsJumpKeyPressed();
+		}
+
+		protected virtual bool IsRunKeyPressed()
+		{
+			if (characterInput == null)
+				return false;
+
+			return characterInput.IsRunKeyPressed();
 		}
 
 		//Determine current controller state based on current momentum and whether the controller is grounded (or not);

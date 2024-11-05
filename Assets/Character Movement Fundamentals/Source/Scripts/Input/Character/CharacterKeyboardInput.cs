@@ -34,7 +34,7 @@ namespace CMF
 		public override bool IsJumpKeyPressed()
 		{
 			return false;
-			return Input.GetKey(jumpKey);
+			// return Input.GetKey(jumpKey);
 		}
 
 		public override bool IsRunKeyPressed()

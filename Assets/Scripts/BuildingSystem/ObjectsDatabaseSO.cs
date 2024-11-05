@@ -60,4 +60,16 @@ public class ObjectData
     /// </summary>
     [field: SerializeField]
     public ObjectType objectType { get; private set; }
+    
+    /// <summary>
+    /// World resource name
+    /// </summary>
+    [field: SerializeField]
+    public string worldResourceName { get; private set; }
+    
+    /// <summary>
+    /// World resource name
+    /// </summary>
+    [field: SerializeField]
+    public int cost { get; private set; }
 }

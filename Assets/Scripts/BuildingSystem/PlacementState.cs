@@ -124,10 +124,10 @@ public class PlacementState : IBuildingState
         bool placementValidity = CheckPlacementValidity(gridPosition, selectedObjectIndex);
         if (!placementValidity) return;
 
-        int index = objectPlacer.PlaceObject(database.objectsData[selectedObjectIndex].Prefab,
+        int index = objectPlacer.PlaceObject(database.objectsData[selectedObjectIndex],
                                              grid.CellToWorld(gridPosition),
                                              previewSystem.previewObject.GetComponent<RotatePlacementObject>().objectToRotate.transform.rotation);
-
+        
         GridData selectedData = GetUsedGridData();
         selectedData.AddObjectAt(gridPosition, database.objectsData[selectedObjectIndex].Size, database.objectsData[selectedObjectIndex].ID, index);
         previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), false);

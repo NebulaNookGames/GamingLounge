@@ -1,0 +1,58 @@
+using System;
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+/// <summary>
+/// Manages player input for placing objects, toggling placement mode, and rotating objects.
+/// </summary>
+public class InputManager : MonoBehaviour
+{
+    [SerializeField] private Camera sceneCamera; // The camera used to determine the position of objects in the scene
+
+    public event Action OnClicked; // Event triggered when the player clicks
+    public event Action OnPlacementToggle; // Event triggered when placement mode is toggled
+    public event Action OnRotate; // Event triggered when the player rotates an object
+
+    private void Update()
+    {
+        // Check for key presses and invoke corresponding events
+        if (Input.GetKeyDown(KeyCode.E))
+            OnPlacementToggle?.Invoke(); // Toggle placement mode when 'E' is pressed
+        else if (Input.GetMouseButtonDown(0))
+            OnClicked?.Invoke(); // Trigger click event when the left mouse button is clicked
+        else if (Input.GetKeyDown(KeyCode.R))
+            OnRotate?.Invoke(); // Trigger rotation event when 'R' is pressed
+    }
+
+    /// <summary>
+    /// Checks if the pointer is currently over a UI element.
+    /// </summary>
+    /// <returns>True if the pointer is over a UI element; otherwise, false.</returns>
+    public bool IsPointerOverUI()
+    {
+        return EventSystem.current.IsPointerOverGameObject(); // Return true if the pointer is over a UI object
+    }
+
+    private Vector3 lastPosition; // Last known position hit by the raycast
+
+    [SerializeField] private LayerMask placementLayermask; // LayerMask to determine what can be placed on
+
+    /// <summary>
+    /// Gets the position in the world where the player has clicked on the map.
+    /// </summary>
+    /// <returns>The world position of the selected map point.</returns>
+    public Vector3 GetSelectedMapPosition()
+    {
+        Vector3 mousePos = Input.mousePosition; // Get the current mouse position
+        mousePos.z = sceneCamera.nearClipPlane; // Set z to the near clip plane of the camera
+        Ray ray = sceneCamera.ScreenPointToRay(mousePos); // Create a ray from the camera to the mouse position
+        RaycastHit hit; // Variable to store raycast hit information
+
+        // Perform a raycast to detect objects in the scene
+        if (Physics.Raycast(ray, out hit, 100, placementLayermask))
+        {
+            lastPosition = hit.point; // Update last known position with the hit point
+        }
+        return lastPosition; // Return the last position hit
+    }
+}

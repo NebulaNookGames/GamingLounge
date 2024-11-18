@@ -6,6 +6,9 @@ using UnityEngine;
 /// </summary>
 public class ObjectPlacer : MonoBehaviour
 {
+
+    [SerializeField] private int arcadeMachineIndex = 12; 
+    
     /// <summary>
     /// List of GameObjects that have been placed in the scene.
     /// </summary>
@@ -28,7 +31,7 @@ public class ObjectPlacer : MonoBehaviour
         newObject.transform.position = position;
         newObject.GetComponent<RotatePlacementObject>().objectToRotate.transform.rotation = rotation;
  
-        if (objectData.ID == 3)
+        if (objectData.ID == arcadeMachineIndex)
         {
             WorldInteractables.instance.ArcadeMachines.Add(newObject);
             Debug.Log(WorldInteractables.instance.ArcadeMachines.Count.ToString());

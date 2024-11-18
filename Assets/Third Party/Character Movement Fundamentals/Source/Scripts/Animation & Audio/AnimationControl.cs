@@ -26,7 +26,8 @@ namespace CMF
 		void Awake () {
 			controller = GetComponent<Controller>();
 			animator = GetComponentInChildren<Animator>();
-			animatorTransform = animator.transform;
+			if(animator)
+				animatorTransform = animator.transform;
 
 			tr = transform;
 		}

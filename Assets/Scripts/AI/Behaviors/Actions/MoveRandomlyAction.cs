@@ -47,10 +47,11 @@ public partial class MoveRandomlyAction : Action
         if (agent.Value.GetComponent<NavMeshAgent>().pathStatus == NavMeshPathStatus.PathInvalid)
             return Status.Failure;
         
-        if (Vector3.Distance(randomPosition, agent.Value.transform.position) < 0.5f)
+        if (Vector3.Distance(randomPosition, agent.Value.transform.position) < 1f)
         {
             return Status.Success;
         }
+        
         return Status.Running;
     }
 

@@ -15,13 +15,12 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
-        // Check for key presses and invoke corresponding events
         if (Input.GetKeyDown(KeyCode.E))
-            OnPlacementToggle?.Invoke(); // Toggle placement mode when 'E' is pressed
+            OnPlacementToggle?.Invoke();
         else if (Input.GetMouseButtonDown(0))
-            OnClicked?.Invoke(); // Trigger click event when the left mouse button is clicked
+            OnClicked?.Invoke();
         else if (Input.GetKeyDown(KeyCode.R))
-            OnRotate?.Invoke(); // Trigger rotation event when 'R' is pressed
+            OnRotate?.Invoke();
     }
 
     /// <summary>

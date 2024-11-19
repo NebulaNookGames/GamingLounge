@@ -13,7 +13,6 @@ public class RotatePlacementObject : MonoBehaviour
     /// </summary>
     public void Rotate()
     {
-        Debug.Log("Rotate"); // Log the rotation action to the console
         objectToRotate.transform.Rotate(rotationDegree); // Rotate the object by the specified degrees
     }
 }

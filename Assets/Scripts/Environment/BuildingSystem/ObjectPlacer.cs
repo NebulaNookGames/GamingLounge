@@ -29,8 +29,12 @@ public class ObjectPlacer : MonoBehaviour
         
         GameObject newObject = Instantiate(objectData.Prefab);
         newObject.transform.position = position;
-        newObject.GetComponent<RotatePlacementObject>().objectToRotate.transform.rotation = rotation;
- 
+        if(newObject.GetComponent<RotatePlacementObject>()) 
+            newObject.GetComponent<RotatePlacementObject>().objectToRotate.transform.rotation = rotation;
+        
+        if(newObject.GetComponent<EnableColliders>()) 
+            newObject.GetComponent<EnableColliders>().Enable();
+        
         if (objectData.ID == arcadeMachineIndex)
         {
             WorldInteractables.instance.ArcadeMachines.Add(newObject);

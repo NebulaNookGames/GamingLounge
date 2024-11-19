@@ -83,6 +83,7 @@ public class PreviewSystem : MonoBehaviour
     public void StopShowingPreview()
     {
         cellIndicator.SetActive(false); // Hide the cell indicator
+        inputManager.OnRotate -= RotatePreview; // Subscribe to rotation events
 
         if (previewObject != null)
             Destroy(previewObject); // Destroy the preview object if it exists
@@ -110,7 +111,7 @@ public class PreviewSystem : MonoBehaviour
     /// <param name="validity">Indicates whether the placement is valid.</param>
     private void ApplyFeedbackToPreview(bool validity)
     {
-        Color c = validity ? Color.white : Color.red; // Choose color based on validity
+        Color c = validity ? Color.green : Color.red; // Choose color based on validity
         c.a = 0.5f; // Set transparency
         previewMaterialInstance.color = c; // Apply color to the preview material
     }
@@ -121,7 +122,7 @@ public class PreviewSystem : MonoBehaviour
     /// <param name="validity">Indicates whether the placement is valid.</param>
     private void ApplyFeedbackToCursor(bool validity)
     {
-        Color c = validity ? Color.white : Color.red; // Choose color based on validity
+        Color c = validity ? Color.green : Color.red; // Choose color based on validity
         c.a = 0.5f; // Set transparency
         cellIndicatorRenderer.material.color = c; // Apply color to the cursor material
     }

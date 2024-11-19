@@ -105,7 +105,6 @@ public class PlacementState : IBuildingState
             newPosition = hit.point;
         }
 
-        Debug.DrawLine(placementSystem.player.transform.position, newPosition, Color.green, 5f);
         if (Vector3.Distance(placementSystem.player.transform.position, newPosition) > 3)
         {
             return false;

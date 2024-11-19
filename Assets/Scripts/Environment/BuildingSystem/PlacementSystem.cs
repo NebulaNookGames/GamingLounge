@@ -41,7 +41,9 @@ public class PlacementSystem : MonoBehaviour
 
     public GameObject placementCanvas; // UI canvas for placement mode.
 
-    public Action OnPlaced; 
+    public Action OnPlaced;
+
+    private float timer = .1f;
     
     /// <summary>
     /// Initializes the placement system and sets up the grid data.
@@ -63,12 +65,13 @@ public class PlacementSystem : MonoBehaviour
     private void Update()
     {
         if (buildingState == null) return;
-
-        Vector3 mousePosition = inputManager.GetSelectedMapPosition();
-        Vector3Int gridPosition = grid.WorldToCell(mousePosition);
-
-        if (lastDetectedPosition != gridPosition)
+        
+        timer -= Time.deltaTime;
+        if (timer <= 0)
         {
+            timer = .1f;
+            Vector3 mousePosition = inputManager.GetSelectedMapPosition();
+            Vector3Int gridPosition = grid.WorldToCell(mousePosition);
             buildingState.UpdateState(gridPosition);
             lastDetectedPosition = gridPosition;
         }

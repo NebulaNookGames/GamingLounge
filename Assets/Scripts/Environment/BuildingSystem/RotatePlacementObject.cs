@@ -13,6 +13,8 @@ public class RotatePlacementObject : MonoBehaviour
     /// </summary>
     public void Rotate()
     {
+        if (!objectToRotate) return; 
+        
         objectToRotate.transform.Rotate(rotationDegree); // Rotate the object by the specified degrees
     }
 }

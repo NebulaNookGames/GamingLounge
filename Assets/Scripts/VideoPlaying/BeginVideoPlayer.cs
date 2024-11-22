@@ -1,22 +1,56 @@
-using System;
 using UnityEngine;
 using UnityEngine.Video;
 
-/// <summary>
-/// Controls the behavior of a VideoPlayer component, starting playback on Awake.
-/// </summary>
 public class BeginVideoPlayer : MonoBehaviour
 {
-    /// <summary>
-    /// Reference to the VideoPlayer component that will play the video.
-    /// </summary>
-    public VideoPlayer videoPlayer;
+    public Material objectMaterial; // Assign your object's material
+    public VideoPlayer videoPlayer; // Assign your VideoPlayer component
+    public RenderTexture renderTexture; // Default render texture (if any)
 
-    /// <summary>
-    /// Automatically starts video playback when the object is initialized.
-    /// </summary>
-    private void Awake()
+    void Awake()
     {
+        // Check if the necessary components are assigned
+        if (objectMaterial == null || videoPlayer == null)
+        {
+            Debug.LogError("Missing required components: objectMaterial or videoPlayer.");
+            return;
+        }
+
+        // Create a unique RenderTexture for this object
+        RenderTexture uniqueTexture = new RenderTexture(renderTexture.width, renderTexture.height, renderTexture.depth);
+    
+        // Create a unique material instance by duplicating the original material
+        Material uniqueMaterial = new Material(objectMaterial);
+
+        // Assign the unique RenderTexture to the unique material
+        uniqueMaterial.mainTexture = uniqueTexture;
+
+        // Apply the unique material to the renderer of the object
+        Renderer renderer = GetComponent<Renderer>();
+        if (renderer != null && renderer.materials.Length > 1)
+        {
+            // Assign the material to the second slot (index 1)
+            Material[] materials = renderer.materials;
+            materials[1] = uniqueMaterial; // Replace the material at index 1
+            renderer.materials = materials; // Reassign the materials array
+        }
+        else
+        {
+            Debug.LogError("Renderer or materials not found.");
+            return;
+        }
+
+        // Assign the RenderTexture to the VideoPlayer
+        videoPlayer.targetTexture = uniqueTexture;
+
+        // Ensure the VideoPlayer is set up properly (e.g., a valid video clip is assigned)
+        if (videoPlayer.clip == null)
+        {
+            Debug.LogError("No video clip assigned to the VideoPlayer.");
+            return;
+        }
+
+        // Optionally, set the VideoPlayer to automatically play
         videoPlayer.Play();
     }
 }

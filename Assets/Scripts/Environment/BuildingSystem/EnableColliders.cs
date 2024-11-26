@@ -4,6 +4,13 @@ using UnityEngine;
 public class EnableColliders : MonoBehaviour
 {
     [SerializeField] private Collider[] colliders;
+    AddMoneyOnDestroy addMoney;
+    
+    private void Awake()
+    {
+        if (GetComponent<AddMoneyOnDestroy>())
+            addMoney = GetComponent<AddMoneyOnDestroy>();
+    }
 
     private void OnEnable()
     {
@@ -19,5 +26,7 @@ public class EnableColliders : MonoBehaviour
         { 
             col.enabled = true;
         }
+        addMoney.enabled = true;
+
     }
 }

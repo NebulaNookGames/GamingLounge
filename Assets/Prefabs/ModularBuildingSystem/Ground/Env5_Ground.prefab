@@ -64,6 +64,7 @@ GameObject:
   - component: {fileID: 4824455036354411417}
   - component: {fileID: 1857104312158302377}
   - component: {fileID: 9134839852499443606}
+  - component: {fileID: 5396356564217531015}
   m_Layer: 0
   m_Name: Env5_Ground
   m_TagString: Untagged
@@ -115,6 +116,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliders:
   - {fileID: 3446268133230133529}
+--- !u!114 &5396356564217531015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4513232400945504466}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0f97c2819672f143b7619775d77f6af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 5
+  shouldAddMoney: 0
 --- !u!1 &8787773293432541361
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,7 +189,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9e1bf3716e50a0448a6bc31bb34d7228, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9e1bf3716e50a0448a6bc31bb34d7228, type: 3}
       propertyPath: m_LocalPosition.z
@@ -211,7 +226,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 9e1bf3716e50a0448a6bc31bb34d7228, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 386bd04e3f1e4384fa044693c9545b20, type: 2}
+      objectReference: {fileID: 2100000, guid: 71da9b6e38dedd746bbae77ece676929, type: 2}
     - target: {fileID: -5754084199372789682, guid: 9e1bf3716e50a0448a6bc31bb34d7228, type: 3}
       propertyPath: m_Mesh
       value: 

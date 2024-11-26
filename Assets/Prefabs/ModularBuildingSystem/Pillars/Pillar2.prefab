@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 8261431243125015676}
   - component: {fileID: 791790361386115188}
   - component: {fileID: 6796647712577527533}
+  - component: {fileID: 8693153716481221156}
   m_Layer: 0
   m_Name: Pillar2
   m_TagString: Untagged
@@ -95,6 +96,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliders:
   - {fileID: 2256975579161552245}
+--- !u!114 &8693153716481221156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5767364422584940774}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0f97c2819672f143b7619775d77f6af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 25
+  shouldAddMoney: 0
 --- !u!1 &7225890426856399354
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,7 +226,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: b564e3d867b374641994c2dfaedc80e4, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: -6987284099981323992, guid: 08d27dd239b388f4e8859e982fd1279e, type: 3}
+      objectReference: {fileID: 2100000, guid: bebb5b3c4727a0d4fb95afc5ad4e57f6, type: 2}
     - target: {fileID: -5754084199372789682, guid: b564e3d867b374641994c2dfaedc80e4, type: 3}
       propertyPath: m_Mesh
       value: 

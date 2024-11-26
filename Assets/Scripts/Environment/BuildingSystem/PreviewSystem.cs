@@ -13,14 +13,14 @@ public class PreviewSystem : MonoBehaviour
     [SerializeField] Material previewMaterialPrefabs; // Material used for the preview object
     private Material previewMaterialInstance; // Instance of the preview material for the preview object
 
-    private Renderer cellIndicatorRenderer; // Renderer for the cell indicator
+    private SpriteRenderer cellIndicatorRenderer; // Renderer for the cell indicator
 
     private void Start()
     {
         // Initialize the preview material and set the cell indicator to inactive
         previewMaterialInstance = new Material(previewMaterialPrefabs);
         cellIndicator.SetActive(false);
-        cellIndicatorRenderer = cellIndicator.GetComponentInChildren<Renderer>();
+        cellIndicatorRenderer = cellIndicator.GetComponentInChildren<SpriteRenderer>();
     }
 
     /// <summary>
@@ -124,7 +124,7 @@ public class PreviewSystem : MonoBehaviour
     {
         Color c = validity ? Color.green : Color.red; // Choose color based on validity
         c.a = 0.5f; // Set transparency
-        cellIndicatorRenderer.material.color = c; // Apply color to the cursor material
+        cellIndicatorRenderer.color = c; 
     }
 
     /// <summary>

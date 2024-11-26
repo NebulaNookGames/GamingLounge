@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 8261431243125015676}
   - component: {fileID: 5446822832387352636}
   - component: {fileID: 6808146344011077689}
+  - component: {fileID: -7677811884494447090}
   m_Layer: 0
   m_Name: Env2_Window
   m_TagString: Untagged
@@ -95,6 +96,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colliders:
   - {fileID: 1444397150326828983}
+--- !u!114 &-7677811884494447090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5767364422584940774}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0f97c2819672f143b7619775d77f6af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 50
+  shouldAddMoney: 0
 --- !u!1 &5943574919932686319
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,11 +234,11 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 2c6b7c81e584a824da8af34af8ce33d6, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: b1700abeb5913434dbe911b6d0ff97b9, type: 2}
+      objectReference: {fileID: 2100000, guid: bebb5b3c4727a0d4fb95afc5ad4e57f6, type: 2}
     - target: {fileID: -7511558181221131132, guid: 2c6b7c81e584a824da8af34af8ce33d6, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
-      objectReference: {fileID: 8863888083177718082, guid: 4551ca72b9c695d47abfe860b1fe547a, type: 3}
+      objectReference: {fileID: 2100000, guid: 792e6b47abd0d144ca449168406783c4, type: 2}
     - target: {fileID: -5754084199372789682, guid: 2c6b7c81e584a824da8af34af8ce33d6, type: 3}
       propertyPath: m_Mesh
       value: 

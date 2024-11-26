@@ -440,7 +440,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1332702632364527700, guid: 79cee49041e637b41bfc9f48df296d99, type: 3}
+  - {fileID: 2100000, guid: 6c1f148128604dd4fb51dec411a727a8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1680,6 +1680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9806a79a7c280da4e9e905f2be44bbce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moneyAmount: 5000
 --- !u!4 &422037092
 Transform:
   m_ObjectHideFlags: 0
@@ -2744,6 +2745,7 @@ GameObject:
   - component: {fileID: 771030504}
   - component: {fileID: 771030503}
   - component: {fileID: 771030502}
+  - component: {fileID: 771030505}
   m_Layer: 5
   m_Name: BasePanel
   m_TagString: Untagged
@@ -2818,9 +2820,37 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 3.4, y: 41.779053}
+  m_AnchoredPosition: {x: 3.4, y: 41.779297}
   m_SizeDelta: {x: 371.0203, y: 188.54}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &771030505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 771030501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3ff156883b34a844bf3887f0c19e064, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataBase: {fileID: 11400000, guid: 79cc30f8e09dadc4c8c56638d2b7ac06, type: 2}
+  buttons:
+  - {fileID: 1448233208}
+  - {fileID: 299839695}
+  - {fileID: 1291913628}
+  - {fileID: 1176625170}
+  - {fileID: 1710691582}
+  - {fileID: 1179428228}
+  - {fileID: 939849270}
+  - {fileID: 2059745818}
+  - {fileID: 1783671284}
+  - {fileID: 222508016}
+  - {fileID: 960660624}
+  - {fileID: 1578519426}
+  - {fileID: 1376428421}
+  indexes: 0300000004000000050000000d000000060000000700000008000000090000000a0000000b000000000000000100000002000000
 --- !u!1 &775346080
 GameObject:
   m_ObjectHideFlags: 0
@@ -3216,7 +3246,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -24.050049, y: 33.600098}
+  m_AnchoredPosition: {x: -24.050293, y: 33.600098}
   m_SizeDelta: {x: 216.7799, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &862689720
@@ -3796,6 +3826,7 @@ GameObject:
   - component: {fileID: 1064092815}
   - component: {fileID: 1064092817}
   - component: {fileID: 1064092816}
+  - component: {fileID: 1064092818}
   m_Layer: 5
   m_Name: PropPanel
   m_TagString: Untagged
@@ -3820,7 +3851,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 3.4, y: 41.779053}
+  m_AnchoredPosition: {x: 3.4, y: 41.779297}
   m_SizeDelta: {x: 371.0203, y: 188.54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1064092816
@@ -3861,6 +3892,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1064092814}
   m_CullTransparentMesh: 1
+--- !u!114 &1064092818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064092814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3ff156883b34a844bf3887f0c19e064, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataBase: {fileID: 11400000, guid: 79cc30f8e09dadc4c8c56638d2b7ac06, type: 2}
+  buttons:
+  - {fileID: 416688992}
+  indexes: 0e000000
 --- !u!1 &1065713354
 GameObject:
   m_ObjectHideFlags: 0
@@ -5528,6 +5575,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GridCellSprite
       objectReference: {fileID: 0}
+    - target: {fileID: 8218648398524237789, guid: 5a004b24a476a684982e44fc5393bc5e, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: -876546973899608171, guid: 79c25a2280869d942941cbe46521d365, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6920,6 +6971,7 @@ GameObject:
   - component: {fileID: 1729100237}
   - component: {fileID: 1729100236}
   - component: {fileID: 1729100235}
+  - component: {fileID: 1729100238}
   m_Layer: 5
   m_Name: ArcadeMachinePanel
   m_TagString: Untagged
@@ -6982,9 +7034,25 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 3.4, y: 41.779053}
+  m_AnchoredPosition: {x: 3.4, y: 41.779297}
   m_SizeDelta: {x: 371.0203, y: 188.54}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1729100238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729100234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3ff156883b34a844bf3887f0c19e064, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dataBase: {fileID: 11400000, guid: 79cc30f8e09dadc4c8c56638d2b7ac06, type: 2}
+  buttons:
+  - {fileID: 2098805762}
+  indexes: 0c000000
 --- !u!1 &1783671284
 GameObject:
   m_ObjectHideFlags: 0
@@ -8405,7 +8473,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 3.4, y: 41.779053}
+  m_AnchoredPosition: {x: 3.4, y: 41.779297}
   m_SizeDelta: {x: 371.0203, y: 188.54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1660057539 &9223372036854775807

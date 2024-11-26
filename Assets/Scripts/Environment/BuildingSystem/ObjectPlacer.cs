@@ -40,7 +40,7 @@ public class ObjectPlacer : MonoBehaviour
             WorldInteractables.instance.ArcadeMachines.Add(newObject);
             Debug.Log(WorldInteractables.instance.ArcadeMachines.Count.ToString());
         }
-        MoneyManager.instance.ChangeMoney(-objectData.cost);
+        
         placedGameObjects.Add(newObject);
         placementSystem.OnPlaced?.Invoke();
         return placedGameObjects.Count - 1;

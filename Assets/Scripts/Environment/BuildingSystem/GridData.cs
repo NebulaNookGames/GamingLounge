@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class GridData
 {
-    private Dictionary<Vector3Int, PlacementData> placedObjects = new(); 
+    private Dictionary<Vector3Int, PlacementData> placedObjects = new();
 
     /// <summary>
     /// Adds an object to the grid at the specified position.

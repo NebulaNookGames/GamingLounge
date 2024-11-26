@@ -21,7 +21,6 @@ public class UpdateMoneyText : MonoBehaviour
     {
         text = GetComponent<TextMeshProUGUI>(); // Get the TextMeshProUGUI component.
         moneyManager.OnMoneyChanged += UpdateText; // Subscribe to money change event.
-        UpdateText(moneyManager.MoneyAmount);
     }
 
     /// <summary>

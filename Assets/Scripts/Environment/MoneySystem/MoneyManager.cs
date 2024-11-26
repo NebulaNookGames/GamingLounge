@@ -7,11 +7,20 @@ using System;
 /// </summary>
 public class MoneyManager : MonoBehaviour
 {
+    public static MoneyManager instance; 
+    
     // The current amount of money the player has.
-    public int moneyAmount { get; private set; }
+    [SerializeField] int moneyAmount = 50; 
+    public int MoneyAmount {
+        get { return moneyAmount; } private set {moneyAmount = value; } }
 
     // Event triggered when the money amount changes.
     public event Action<int> OnMoneyChanged;
+
+    private void Awake()
+    {
+        instance = this; 
+    }
 
     /// <summary>
     /// Changes the money amount by a specified amount and triggers the OnMoneyChanged event.
@@ -19,7 +28,7 @@ public class MoneyManager : MonoBehaviour
     /// <param name="amount">The amount to change the money by.</param>
     public void ChangeMoney(int amount)
     {
-        moneyAmount += amount; // Update the money amount.
+        MoneyAmount += amount; // Update the money amount.
         OnMoneyChanged?.Invoke(moneyAmount); // Trigger the OnMoneyChanged event.
     }
 }

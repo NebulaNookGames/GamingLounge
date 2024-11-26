@@ -23,7 +23,7 @@ public class BeginVideoPlayer : MonoBehaviour
         Material uniqueMaterial = new Material(objectMaterial);
 
         // Assign the unique RenderTexture to the unique material
-        uniqueMaterial.mainTexture = uniqueTexture;
+        uniqueMaterial.SetTexture("_Base", uniqueTexture);
 
         // Apply the unique material to the renderer of the object
         Renderer renderer = GetComponent<Renderer>();

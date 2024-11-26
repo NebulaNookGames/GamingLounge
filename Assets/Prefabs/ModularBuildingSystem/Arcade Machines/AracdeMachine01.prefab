@@ -110,8 +110,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 0
+  m_fontColor: {r: 0, g: 0, b: 0, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -466,6 +466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amount: 50
+  shouldAddMoney: 0
 --- !u!1 &7297006359242145388
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,7 +525,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -621,9 +622,17 @@ PrefabInstance:
       value: 180
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 1874cdee338d3d848bddfaf8a3d58654, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 622270ef64eb2084fac75bddf6e5a756, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 1874cdee338d3d848bddfaf8a3d58654, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
-      objectReference: {fileID: 2100000, guid: 1a8c6839705d64344a2ba47b09337ec9, type: 2}
+      objectReference: {fileID: 2100000, guid: 2ce29e750d459854a9d8ecbcf62a0b7c, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 1874cdee338d3d848bddfaf8a3d58654, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: bebb5b3c4727a0d4fb95afc5ad4e57f6, type: 2}
     - target: {fileID: 919132149155446097, guid: 1874cdee338d3d848bddfaf8a3d58654, type: 3}
       propertyPath: m_Name
       value: Console
@@ -695,6 +704,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2071b599ea93b9a428f2752ac893657c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectMaterial: {fileID: 2100000, guid: 1a8c6839705d64344a2ba47b09337ec9, type: 2}
+  objectMaterial: {fileID: 2100000, guid: 2ce29e750d459854a9d8ecbcf62a0b7c, type: 2}
   videoPlayer: {fileID: 4308810279655234116}
   renderTexture: {fileID: 8400000, guid: aa6fda22856e0f24697038ec37a39d32, type: 2}

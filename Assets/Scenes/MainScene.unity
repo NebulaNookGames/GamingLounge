@@ -440,7 +440,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1332702632364527700, guid: 79cee49041e637b41bfc9f48df296d99, type: 3}
+  - {fileID: 2100000, guid: 6c1f148128604dd4fb51dec411a727a8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1680,7 +1680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9806a79a7c280da4e9e905f2be44bbce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyAmount: 50
+  moneyAmount: 5000
 --- !u!4 &422037092
 Transform:
   m_ObjectHideFlags: 0
@@ -2820,7 +2820,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 3.4, y: 41.779053}
+  m_AnchoredPosition: {x: 3.4, y: 41.779297}
   m_SizeDelta: {x: 371.0203, y: 188.54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &771030505
@@ -3246,7 +3246,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -24.050049, y: 33.600098}
+  m_AnchoredPosition: {x: -24.050293, y: 33.600098}
   m_SizeDelta: {x: 216.7799, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &862689720
@@ -3851,7 +3851,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 3.4, y: 41.779053}
+  m_AnchoredPosition: {x: 3.4, y: 41.779297}
   m_SizeDelta: {x: 371.0203, y: 188.54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1064092816
@@ -5575,6 +5575,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GridCellSprite
       objectReference: {fileID: 0}
+    - target: {fileID: 8218648398524237789, guid: 5a004b24a476a684982e44fc5393bc5e, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: -876546973899608171, guid: 79c25a2280869d942941cbe46521d365, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7030,7 +7034,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 3.4, y: 41.779053}
+  m_AnchoredPosition: {x: 3.4, y: 41.779297}
   m_SizeDelta: {x: 371.0203, y: 188.54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1729100238
@@ -8469,7 +8473,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 3.4, y: 41.779053}
+  m_AnchoredPosition: {x: 3.4, y: 41.779297}
   m_SizeDelta: {x: 371.0203, y: 188.54}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1660057539 &9223372036854775807

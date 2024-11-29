@@ -110,8 +110,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 0
-  m_fontColor: {r: 0, g: 0, b: 0, a: 0}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -185,6 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moneyHolder: {fileID: 6732165050990669055}
+  text: {fileID: 0}
 --- !u!1 &3946985909411535287
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,7 +257,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6843872649709050110
 RectTransform:
   m_ObjectHideFlags: 0
@@ -356,6 +357,8 @@ GameObject:
   - component: {fileID: 288612246321268316}
   - component: {fileID: 3423836063309542442}
   - component: {fileID: 2523462624664329234}
+  - component: {fileID: 8871937973763760718}
+  - component: {fileID: 8266837353630050922}
   m_Layer: 0
   m_Name: AracdeMachine01
   m_TagString: Machine
@@ -466,7 +469,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amount: 50
-  shouldAddMoney: 0
+--- !u!114 &8871937973763760718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5767364422584940774}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 600d13ac38d6460469892ebf0ef560c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagToCheck: Player
+  objectsToActivate:
+  - {fileID: 4058700455186546146}
+--- !u!114 &8266837353630050922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5767364422584940774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3c0cbea96893d444afe130c0f07fc69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moneyHolder: {fileID: 6732165050990669055}
+  text: {fileID: 9186927928692536963}
 --- !u!1 &7297006359242145388
 GameObject:
   m_ObjectHideFlags: 0
@@ -525,7 +556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

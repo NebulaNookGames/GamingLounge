@@ -25,6 +25,7 @@ public partial class GoToArcadeMachineAction : Action
     /// <returns>Status of the action (Running, Failure, etc.)</returns>
     protected override Status OnStart()
     {
+        Agent.Value.GetComponent<NavMeshAgent>().isStopped = false; 
         if (WorldInteractables.instance.ArcadeMachines.Count < 1)
             return Status.Failure;
         

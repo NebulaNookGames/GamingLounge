@@ -3,11 +3,15 @@ using Unity.Behavior;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
 using Unity.Properties;
+using UnityEngine.AI; 
 
 [Serializable, GeneratePropertyBag]
 [NodeDescription(name: "SpendMoney", story: "SpendMoney", category: "Action", id: "108eb02ce75216e6b3b46a0e95b076e8")]
 public partial class SpendMoneyAction : Action
 {
+    // Blackboard variable for the agent (the GameObject representing the character).
+    [SerializeReference] public BlackboardVariable<GameObject> Agent;
+    
     // Blackboard variable representing the amount of money to be spent.
     [SerializeReference] public BlackboardVariable<int> spendAmount;
 
@@ -20,6 +24,7 @@ public partial class SpendMoneyAction : Action
     /// <returns>Status of the action (Running, Failure, etc.)</returns>
     protected override Status OnStart()
     {
+        Agent.Value.GetComponent<NavMeshAgent>().isStopped = false; 
         return Status.Running;
     }
 

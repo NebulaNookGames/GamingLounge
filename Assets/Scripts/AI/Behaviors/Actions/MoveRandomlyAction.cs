@@ -25,6 +25,7 @@ public partial class MoveRandomlyAction : Action
     /// <returns>Status of the action (Running, Failure, etc.)</returns>
     protected override Status OnStart()
     {
+        agent.Value.GetComponent<NavMeshAgent>().isStopped = false;
         // Random point within a sphere
         Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * radius;
         randomDirection += agent.Value.transform.position;
@@ -49,6 +50,7 @@ public partial class MoveRandomlyAction : Action
         
         if (Vector3.Distance(randomPosition, agent.Value.transform.position) < 1f)
         {
+            agent.Value.GetComponent<NavMeshAgent>().isStopped = true;
             return Status.Success;
         }
         

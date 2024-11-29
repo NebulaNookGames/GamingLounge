@@ -10,7 +10,7 @@ using System.Collections.Generic;
 public class AnimInteractionOnTrigger : MonoBehaviour
 {
     // The tag of the object that will trigger the animation change.
-    [SerializeField] private string tagToCompare = "Entity";
+    [SerializeField] private string[] tagsToCompare;
 
     // The name of the Animator parameter to control (e.g., a bool parameter).
     [SerializeField] private string parameterName = "interact";
@@ -26,11 +26,17 @@ public class AnimInteractionOnTrigger : MonoBehaviour
     /// <param name="other">The collider of the object entering the trigger.</param>
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag(tagToCompare)) return; 
-        if (objectsInTrigger.Contains(other.gameObject)) return;
+        foreach (string currentTag in tagsToCompare)
+        {
+            if (other.CompareTag(currentTag))
+            {
+                if (objectsInTrigger.Contains(other.gameObject)) return;
 
-        objectsInTrigger.Add(other.gameObject);
-        anim.SetBool(parameterName, true);
+                objectsInTrigger.Add(other.gameObject);
+                anim.SetBool(parameterName, true);
+                return;
+            }
+        }
     }
 
     /// <summary>
@@ -39,12 +45,18 @@ public class AnimInteractionOnTrigger : MonoBehaviour
     /// <param name="other">The collider of the object exiting the trigger.</param>
     private void OnTriggerExit(Collider other)
     {
-        if (!other.CompareTag(tagToCompare)) return; 
-        if (!objectsInTrigger.Contains(other.gameObject)) return; 
-        
-        objectsInTrigger.Remove(other.gameObject);
+        foreach (string currentTag in tagsToCompare)
+        {
+            if (other.CompareTag(currentTag))
+            {
+                if (!objectsInTrigger.Contains(other.gameObject)) return;
 
-        if(objectsInTrigger.Count <= 0)
-            anim.SetBool(parameterName, false);
+                objectsInTrigger.Remove(other.gameObject);
+
+                if (objectsInTrigger.Count <= 0)
+                    anim.SetBool(parameterName, false);
+                return;
+            }
+        }
     }
 }

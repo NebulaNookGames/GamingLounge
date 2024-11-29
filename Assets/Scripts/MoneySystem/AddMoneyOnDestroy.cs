@@ -4,7 +4,7 @@ using UnityEngine;
 public class AddMoneyOnDestroy : MonoBehaviour
 {
     public int amount;
-    public bool shouldAddMoney;
+    bool shouldAddMoney;
 
     private void OnEnable()
     {

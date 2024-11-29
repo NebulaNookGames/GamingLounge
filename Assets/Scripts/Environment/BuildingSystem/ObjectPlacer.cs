@@ -32,8 +32,11 @@ public class ObjectPlacer : MonoBehaviour
         if(newObject.GetComponent<RotatePlacementObject>()) 
             newObject.GetComponent<RotatePlacementObject>().objectToRotate.transform.rotation = rotation;
         
-        if(newObject.GetComponent<EnableColliders>()) 
-            newObject.GetComponent<EnableColliders>().Enable();
+        if(newObject.GetComponent<ActivatePlacedObject>()) 
+            newObject.GetComponent<ActivatePlacedObject>().Enable();
+
+        if (newObject.GetComponent<AddMoneyOnDestroy>())
+            newObject.GetComponent<AddMoneyOnDestroy>().amount = objectData.cost; 
         
         if (objectData.ID == arcadeMachineIndex)
         {
@@ -41,6 +44,7 @@ public class ObjectPlacer : MonoBehaviour
             Debug.Log(WorldInteractables.instance.ArcadeMachines.Count.ToString());
         }
         
+        MoneyManager.instance.ChangeMoney(-objectData.cost);
         placedGameObjects.Add(newObject);
         placementSystem.OnPlaced?.Invoke();
         return placedGameObjects.Count - 1;

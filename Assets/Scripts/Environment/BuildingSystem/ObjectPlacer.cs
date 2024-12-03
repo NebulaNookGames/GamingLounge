@@ -7,7 +7,7 @@ using UnityEngine;
 public class ObjectPlacer : MonoBehaviour
 {
 
-    [SerializeField] private int arcadeMachineIndex = 12; 
+    [SerializeField] private int[] arcadeMachineIndexes; 
     
     /// <summary>
     /// List of GameObjects that have been placed in the scene.
@@ -36,14 +36,17 @@ public class ObjectPlacer : MonoBehaviour
             newObject.GetComponent<ActivatePlacedObject>().Enable();
 
         if (newObject.GetComponent<AddMoneyOnDestroy>())
-            newObject.GetComponent<AddMoneyOnDestroy>().amount = objectData.cost; 
-        
-        if (objectData.ID == arcadeMachineIndex)
+            newObject.GetComponent<AddMoneyOnDestroy>().amount = objectData.cost;
+
+        foreach (var index in arcadeMachineIndexes)
         {
-            WorldInteractables.instance.ArcadeMachines.Add(newObject);
-            Debug.Log(WorldInteractables.instance.ArcadeMachines.Count.ToString());
+            if (objectData.ID == index)
+            {
+                WorldInteractables.instance.AddArcadeMachine(newObject);
+                break;
+            }
         }
-        
+
         MoneyManager.instance.ChangeMoney(-objectData.cost);
         placedGameObjects.Add(newObject);
         placementSystem.OnPlaced?.Invoke();
@@ -60,10 +63,7 @@ public class ObjectPlacer : MonoBehaviour
             return;
 
         if (placedGameObjects[gameObjectIndex].CompareTag(("Machine")))
-        {
-            WorldInteractables.instance.ArcadeMachines.Remove(placedGameObjects[gameObjectIndex]);
-            Debug.Log(WorldInteractables.instance.ArcadeMachines.Count.ToString());
-        }
+            WorldInteractables.instance.RemoveArcadeMachine(placedGameObjects[gameObjectIndex]);
         
         Destroy(placedGameObjects[gameObjectIndex]);
         placedGameObjects[gameObjectIndex] = null;

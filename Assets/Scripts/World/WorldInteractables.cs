@@ -19,11 +19,25 @@ public class WorldInteractables : MonoBehaviour
     /// </summary>
     public List<GameObject> ArcadeMachines { get; private set; } = new List<GameObject>();
 
+    public event Action<int> OnValueChanged;
+    
     /// <summary>
     /// Initializes the singleton instance on Awake.
     /// </summary>
     private void Awake()
     {
         instance = this;
+    }
+
+    public void AddArcadeMachine(GameObject obj)
+    {
+        ArcadeMachines.Add(obj);
+        OnValueChanged?.Invoke(ArcadeMachines.Count);
+    }
+
+    public void RemoveArcadeMachine(GameObject obj)
+    {
+        ArcadeMachines.Remove(obj);
+        OnValueChanged?.Invoke(ArcadeMachines.Count);
     }
 }

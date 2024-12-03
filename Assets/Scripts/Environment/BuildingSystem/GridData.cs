@@ -24,10 +24,6 @@ public class GridData
 
         foreach (var pos in positionsToOccupy)
         {
-            if (placedObjects.ContainsKey(pos))
-            {
-                throw new Exception($"Dictionary already contains this cell position {pos}");
-            }
             placedObjects[pos] = data;
         }
     }
@@ -50,7 +46,6 @@ public class GridData
                 positions.Add(position);
             }
         }
-        Debug.Log($"Calculated positions: {string.Join(", ", positions)}");
         return positions;
     }
 
@@ -67,7 +62,6 @@ public class GridData
         {
             if (placedObjects.ContainsKey(pos))
             {
-                Debug.Log($"Position {pos} is already occupied.");
                 return false;
             }
         }

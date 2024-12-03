@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using TMPro;
 
@@ -21,12 +22,24 @@ public class MoneyHolderTextUpdater : MonoBehaviour
         moneyHolder.OnMoneyChanged += UpdateText; // Subscribe to money change event.
     }
 
+    private void OnEnable()
+    {
+        moneyHolder.OnMoneyChanged += UpdateText; // Subscribe to money change event.
+    }
+
+    private void OnDisable()
+    {
+        moneyHolder.OnMoneyChanged -= UpdateText; // Subscribe to money change event.
+    }
+
     /// <summary>
     /// Updates the displayed money text when the money value changes.
     /// </summary>
     /// <param name="money">The new amount of money to display.</param>
     void UpdateText(int money)
     {
+        if (text == null) return; 
+        
         if(text.enabled)
             text.text = money.ToString(); // Update the money text.
     }

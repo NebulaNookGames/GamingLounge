@@ -25,12 +25,8 @@ public partial class GoToArcadeMachineAction : Action
     /// <returns>Status of the action (Running, Failure, etc.)</returns>
     protected override Status OnStart()
     {
+        Agent.Value.GetComponent<NavMeshAgent>().enabled = true;
         Agent.Value.GetComponent<NavMeshAgent>().isStopped = false; 
-        if (WorldInteractables.instance.ArcadeMachines.Count < 1)
-            return Status.Failure;
-        
-        OccupiedArcadeMachine.Value = WorldInteractables.instance.ArcadeMachines[0];
-        WorldInteractables.instance.ArcadeMachines.Remove(OccupiedArcadeMachine.Value);
         
         if (OccupiedArcadeMachine.Value == null) return Status.Failure;
         
@@ -49,8 +45,15 @@ public partial class GoToArcadeMachineAction : Action
             return Status.Failure;
         if (OccupiedArcadeMachine.Value == null)
             return Status.Failure;
-        if (Vector3.Distance(Agent.Value.transform.position, OccupiedArcadeMachine.Value.GetComponent<UsagePositionStorage>().usagePosition.position) < 1f)
+        if (Vector3.Distance(Agent.Value.transform.position,
+                OccupiedArcadeMachine.Value.GetComponent<UsagePositionStorage>().usagePosition.position) < 1f)
+        {
+            Vector3 aimPos = Agent.Value.GetComponent<NavMeshAgent>().destination;
+            Agent.Value.transform.position = new Vector3(aimPos.x, Agent.Value.transform.position.y, aimPos.z);
+            Agent.Value.GetComponent<NavMeshAgent>().enabled = false;
+            Agent.Value.transform.rotation = Quaternion.LookRotation(OccupiedArcadeMachine.Value.GetComponent<RotatePlacementObject>().objectToRotate.transform.forward, Vector3.up);            
             return Status.Success;
+        }
 
         return Status.Running;
     }

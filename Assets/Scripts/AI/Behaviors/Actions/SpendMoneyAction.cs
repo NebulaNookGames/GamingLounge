@@ -24,7 +24,6 @@ public partial class SpendMoneyAction : Action
     /// <returns>Status of the action (Running, Failure, etc.)</returns>
     protected override Status OnStart()
     {
-        Agent.Value.GetComponent<NavMeshAgent>().isStopped = false; 
         return Status.Running;
     }
 

@@ -1,3 +1,4 @@
+using System; 
 using Unity.AI.Navigation;
 using UnityEngine;
 
@@ -16,6 +17,8 @@ public class SurfaceReBake : MonoBehaviour
     // A static instance of the SurfaceReBake class, useful for accessing the class methods globally.
     public static SurfaceReBake instance;
 
+    public event Action OnRebake; 
+    
     /// <summary>
     /// Called when the script is initialized. Sets up the instance and subscribes to the placement system's event.
     /// </summary>
@@ -39,5 +42,6 @@ public class SurfaceReBake : MonoBehaviour
     {
         // Rebuild the NavMesh to account for any changes in the environment.
         navMeshSurface.BuildNavMesh();
+        OnRebake?.Invoke();
     }
 }

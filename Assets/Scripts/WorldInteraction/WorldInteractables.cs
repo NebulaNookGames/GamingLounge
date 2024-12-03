@@ -13,6 +13,8 @@ public class WorldInteractables : MonoBehaviour
     /// </summary>
     public static WorldInteractables instance;
 
+    private int totalAmount = 0; 
+    
     /// <summary>
     /// List of arcade machines available in the world. 
     /// This property is read-only outside this class.
@@ -32,12 +34,14 @@ public class WorldInteractables : MonoBehaviour
     public void AddArcadeMachine(GameObject obj)
     {
         ArcadeMachines.Add(obj);
-        OnValueChanged?.Invoke(ArcadeMachines.Count);
+        totalAmount++;
+        OnValueChanged?.Invoke(totalAmount);
     }
 
     public void RemoveArcadeMachine(GameObject obj)
     {
         ArcadeMachines.Remove(obj);
-        OnValueChanged?.Invoke(ArcadeMachines.Count);
+        totalAmount--;
+        OnValueChanged?.Invoke(totalAmount);
     }
 }

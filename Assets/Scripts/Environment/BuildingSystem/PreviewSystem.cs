@@ -14,7 +14,8 @@ public class PreviewSystem : MonoBehaviour
     private Material previewMaterialInstance; // Instance of the preview material for the preview object
 
     private SpriteRenderer cellIndicatorRenderer; // Renderer for the cell indicator
-
+    public Vector2Int sizeToUse;
+    private GameObject currentObject; 
     private void Start()
     {
         // Initialize the preview material and set the cell indicator to inactive
@@ -30,6 +31,8 @@ public class PreviewSystem : MonoBehaviour
     /// <param name="size">The size of the object being placed.</param>
     public void StartShowingPlacementPreview(GameObject prefab, Vector2Int size)
     {
+        sizeToUse = size;
+        currentObject = prefab;
         previewObject = Instantiate(prefab); // Instantiate the preview object
         PreparePreview(previewObject); // Prepare the preview with the appropriate material
         PrepareCursor(size); // Adjust the cell indicator to match the size of the object
@@ -43,7 +46,18 @@ public class PreviewSystem : MonoBehaviour
     private void RotatePreview()
     {
         if (previewObject == null) return; // Check if the preview object exists
-        previewObject.GetComponent<RotatePlacementObject>().Rotate(); // Rotate the object
+        
+        if(sizeToUse.x == sizeToUse.y)
+            previewObject.GetComponent<RotatePlacementObject>().RotateAround(); // Rotate the object
+        else
+        {
+            int tempX = sizeToUse.x;
+            int tempY = sizeToUse.y;
+            sizeToUse.x = tempY;
+            sizeToUse.y = tempX;
+            PrepareCursor(sizeToUse); // Adjust the cell indicator to match the size of the object
+            previewObject.GetComponent<RotatePlacementObject>().RotateOnce();
+        }
     }
 
     /// <summary>

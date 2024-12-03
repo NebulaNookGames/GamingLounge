@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 /// <summary>
@@ -44,9 +45,12 @@ public class GridData
         {
             for (int y = 0; y < objectSize.y; y++)
             {
-                positions.Add(gridPosition + new Vector3Int(x, 0, y));
+                gridPosition.z = 0; 
+                Vector3Int position = gridPosition + new Vector3Int(x, y, 0);
+                positions.Add(position);
             }
         }
+        Debug.Log($"Calculated positions: {string.Join(", ", positions)}");
         return positions;
     }
 
@@ -62,7 +66,10 @@ public class GridData
         foreach (var pos in positionsToOccupy)
         {
             if (placedObjects.ContainsKey(pos))
+            {
+                Debug.Log($"Position {pos} is already occupied.");
                 return false;
+            }
         }
         return true;
     }

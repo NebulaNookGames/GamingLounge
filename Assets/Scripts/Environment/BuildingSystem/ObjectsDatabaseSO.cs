@@ -62,6 +62,12 @@ public class ObjectData
     public ObjectType objectType { get; private set; }
     
     /// <summary>
+    /// The type of the objects that deny collisions (e.g., ground, wall).
+    /// </summary>
+    [field: SerializeField]
+    public ObjectType[] collisionObjectTypes { get; private set; }
+    
+    /// <summary>
     /// World resource name
     /// </summary>
     [field: SerializeField]

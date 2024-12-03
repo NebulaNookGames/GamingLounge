@@ -11,10 +11,20 @@ public class RotatePlacementObject : MonoBehaviour
     /// <summary>
     /// Rotates the specified GameObject by the defined rotation degrees.
     /// </summary>
-    public void Rotate()
+    public void RotateAround()
     {
         if (!objectToRotate) return; 
         
         objectToRotate.transform.Rotate(rotationDegree); // Rotate the object by the specified degrees
+    }
+
+    public void RotateOnce()
+    {
+        if (!objectToRotate) return; 
+        
+        if(objectToRotate.transform.eulerAngles.y == 0)
+            objectToRotate.transform.eulerAngles = new Vector3(0,-90,0);
+        else 
+            objectToRotate.transform.eulerAngles = new Vector3(0,0,0);
     }
 }

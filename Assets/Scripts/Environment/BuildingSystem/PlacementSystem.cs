@@ -107,7 +107,7 @@ public class PlacementSystem : MonoBehaviour
     {
         StopPlacement();
         gridVisualization.SetActive(true);
-        buildingState = new PlacementState(ID, grid, preview, this, database, floorData, wallData, wallDecorData, furnitureData, objectPlacer);
+        buildingState = new PlacementState(ID, grid, preview, this, database, floorData, wallData, wallDecorData,furnitureData, objectPlacer);
         inputManager.OnClicked += PlaceStructure;
         placementCanvas.SetActive(false);
     }

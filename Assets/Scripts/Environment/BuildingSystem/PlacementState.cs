@@ -111,9 +111,30 @@ public class PlacementState : IBuildingState
         {
             return false;
         }
+        bool canPlace = true; 
+        
+        for (int i = 0; i < database.objectsData[selectedObjectIndex].collisionObjectTypes.Length; i++)
+        {
+            switch (database.objectsData[selectedObjectIndex].collisionObjectTypes[i])
+            {
+                case ObjectType.Ground:
+                    canPlace = floorData.CanPlaceObjectAt(gridPosition, previewSystem.sizeToUse);
+                    break;
+                case ObjectType.Wall:
+                    canPlace = wallData.CanPlaceObjectAt(gridPosition, previewSystem.sizeToUse);
+                    break;
+                case ObjectType.WallDecor:
+                    canPlace = wallDecorData.CanPlaceObjectAt(gridPosition, previewSystem.sizeToUse);
+                    break;
+                case ObjectType.Furniture:
+                    canPlace = furnitureData.CanPlaceObjectAt(gridPosition, previewSystem.sizeToUse);
+                    break;
+            }
+            if (!canPlace)
+                break;
+        }
 
-        GridData selectedData = GetUsedGridData();
-        return selectedData.CanPlaceObjectAt(gridPosition, database.objectsData[selectedObjectIndex].Size);
+        return canPlace;
     }
 
     /// <summary>
@@ -130,7 +151,7 @@ public class PlacementState : IBuildingState
                                              previewSystem.previewObject.GetComponent<RotatePlacementObject>().objectToRotate.transform.rotation);
         
         GridData selectedData = GetUsedGridData();
-        selectedData.AddObjectAt(gridPosition, database.objectsData[selectedObjectIndex].Size, database.objectsData[selectedObjectIndex].ID, index);
+        selectedData.AddObjectAt(gridPosition, previewSystem.sizeToUse, database.objectsData[selectedObjectIndex].ID, index);
         previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), false);
     }
 

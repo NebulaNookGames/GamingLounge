@@ -31,7 +31,6 @@ public class SurfaceReBake : MonoBehaviour
         if (placementSystem == null) return;
 
         // Subscribe to the OnPlaced event to trigger the Rebake method when placement happens.
-        placementSystem.OnPlaced += Rebake;
     }
 
     /// <summary>
@@ -40,6 +39,7 @@ public class SurfaceReBake : MonoBehaviour
     /// </summary>
     public void Rebake()
     {
+        Debug.Log("Rebake");
         // Rebuild the NavMesh to account for any changes in the environment.
         navMeshSurface.BuildNavMesh();
         OnRebake?.Invoke();

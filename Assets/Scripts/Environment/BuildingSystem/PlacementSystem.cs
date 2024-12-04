@@ -44,6 +44,9 @@ public class PlacementSystem : MonoBehaviour
 
     public GameObject placementCanvas; // UI canvas for placement mode.
 
+    public GameObject EImage;
+    public GameObject RImage; 
+    
     public Action OnPlaced;
 
     private float timer = .1f;
@@ -89,6 +92,8 @@ public class PlacementSystem : MonoBehaviour
         {
             placementOn = false;
             placementCanvas.SetActive(false);
+            EImage.SetActive(true);
+            RImage.SetActive(false);
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             StopPlacement();
@@ -97,6 +102,8 @@ public class PlacementSystem : MonoBehaviour
         {
             placementOn = true;
             placementCanvas.SetActive(true);
+            EImage.SetActive(false);
+            RImage.SetActive(false);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
@@ -115,6 +122,8 @@ public class PlacementSystem : MonoBehaviour
         buildingState = new PlacementState(ID, grid, preview, this, database, floorData, wallData, wallDecorData,furnitureData, objectPlacer);
         inputManager.OnClicked += PlaceStructure;
         placementCanvas.SetActive(false);
+        EImage.SetActive(true);
+        RImage.SetActive(true);
     }
 
     /// <summary>
@@ -130,6 +139,7 @@ public class PlacementSystem : MonoBehaviour
         buildingState = new RemovingState(grid, preview, this, floorData, wallData, wallDecorData, furnitureData, objectPlacer);
         inputManager.OnClicked += PlaceStructure;
         placementCanvas.SetActive(false);
+        EImage.SetActive(true);
     }
 
     /// <summary>

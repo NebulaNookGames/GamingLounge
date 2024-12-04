@@ -11,9 +11,6 @@ public partial class SpendMoneyAction : Action
 {
     // Blackboard variable for the agent (the GameObject representing the character).
     [SerializeReference] public BlackboardVariable<GameObject> Agent;
-    
-    // Blackboard variable representing the amount of money to be spent.
-    [SerializeReference] public BlackboardVariable<int> spendAmount;
 
     // Blackboard variable for the arcade machine currently in use.
     [SerializeReference] public BlackboardVariable<GameObject> machineInUse;
@@ -43,6 +40,6 @@ public partial class SpendMoneyAction : Action
     /// </summary>
     protected override void OnEnd()
     {
-        machineInUse.Value.GetComponent<MoneyHolder>().ChangeMoney(spendAmount.Value);
+        machineInUse.Value.GetComponent<MoneyHolder>().ChangeMoney(machineInUse.Value.GetComponent<Cost>().amount);
     }
 }

@@ -10,6 +10,8 @@ public class MoneyGrabber : MonoBehaviour
     // Reference to the MoneyManager that handles the player's money.
     [SerializeField] private MoneyManager moneyManager;
 
+    private bool canGrabMoney = false; 
+    MoneyHolder moneyHolder;
     /// <summary>
     /// Checks if the player is in range of a machine and presses the interaction key to grab money.
     /// </summary>
@@ -20,12 +22,20 @@ public class MoneyGrabber : MonoBehaviour
         {
             if (other.GetComponent<MoneyHolder>().moneyBeingHeld > 0)
             {
-                if (Input.GetKeyDown(KeyCode.F))
-                {
-                    moneyManager.ChangeMoney(other.GetComponent<MoneyHolder>().moneyBeingHeld);
-                    other.GetComponent<MoneyHolder>().ChangeMoney(-other.GetComponent<MoneyHolder>().moneyBeingHeld);
-                }
+                canGrabMoney = true;
+                moneyHolder = other.GetComponent<MoneyHolder>();
             }
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F) && canGrabMoney)
+        {
+            moneyManager.ChangeMoney(moneyHolder.moneyBeingHeld);
+            moneyHolder.ChangeMoney(-moneyHolder.moneyBeingHeld);
+            moneyHolder = null;
+            canGrabMoney = false;
         }
     }
 }

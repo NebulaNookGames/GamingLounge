@@ -36,7 +36,7 @@ public class ObjectActivator : MonoBehaviour
     /// <summary>
     /// Disables all objects and re-enables the overview panel when this component is disabled.
     /// </summary>
-    private void OnDisable()
+    public void OnDisable()
     {
         // Deactivate all objects in the array.
         foreach (GameObject obj in objects)

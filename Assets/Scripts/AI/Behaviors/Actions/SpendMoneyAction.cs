@@ -40,6 +40,7 @@ public partial class SpendMoneyAction : Action
     /// </summary>
     protected override void OnEnd()
     {
-        machineInUse.Value.GetComponent<MoneyHolder>().ChangeMoney(machineInUse.Value.GetComponent<Cost>().amount);
+        if(machineInUse.Value != null)
+            machineInUse.Value.GetComponent<MoneyHolder>().ChangeMoney(machineInUse.Value.GetComponent<Cost>().amount);
     }
 }

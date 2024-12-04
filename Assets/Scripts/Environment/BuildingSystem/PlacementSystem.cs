@@ -1,5 +1,8 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
+using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// Manages the placement and removal of objects in the game world.
@@ -19,7 +22,7 @@ public class PlacementSystem : MonoBehaviour
     private ObjectsDatabaseSO database; // Database containing the objects available for placement.
 
     [SerializeField]
-    private GameObject gridVisualization; // Visual representation of the grid.
+    public List<GameObject> unlockedGridParts; // Visual representation of the grid.
 
     private GridData floorData, wallData, wallDecorData, furnitureData; // Grid data for various object types.
 
@@ -106,7 +109,9 @@ public class PlacementSystem : MonoBehaviour
     public void StartPlacement(int ID)
     {
         StopPlacement();
-        gridVisualization.SetActive(true);
+        foreach (GameObject gridPart in unlockedGridParts)
+            gridPart.SetActive(true);
+        
         buildingState = new PlacementState(ID, grid, preview, this, database, floorData, wallData, wallDecorData,furnitureData, objectPlacer);
         inputManager.OnClicked += PlaceStructure;
         placementCanvas.SetActive(false);
@@ -118,7 +123,10 @@ public class PlacementSystem : MonoBehaviour
     public void StartRemoving()
     {
         StopPlacement();
-        gridVisualization.SetActive(true);
+        
+        foreach (GameObject gridPart in unlockedGridParts)
+            gridPart.SetActive(true);
+        
         buildingState = new RemovingState(grid, preview, this, floorData, wallData, wallDecorData, furnitureData, objectPlacer);
         inputManager.OnClicked += PlaceStructure;
         placementCanvas.SetActive(false);
@@ -142,7 +150,8 @@ public class PlacementSystem : MonoBehaviour
     /// </summary>
     private void StopPlacement()
     {
-        gridVisualization.SetActive(false);
+        foreach (GameObject gridPart in unlockedGridParts)
+            gridPart.SetActive(false);
 
         if (buildingState == null) return;
 

@@ -31,51 +31,40 @@ public class ObjectsDatabaseSO : ScriptableObject
 [Serializable]
 public class ObjectData
 {
-    /// <summary>
-    /// The name of the object.
-    /// </summary>
-    [field: SerializeField]
-    public string Name { get; private set; }
-
-    /// <summary>
-    /// The unique ID of the object.
-    /// </summary>
-    [field: SerializeField]
-    public int ID { get; private set; }
-
-    /// <summary>
-    /// The size of the object in grid units.
-    /// </summary>
-    [field: SerializeField]
-    public Vector2Int Size { get; private set; } = Vector2Int.one;
-
-    /// <summary>
-    /// The prefab associated with this object.
-    /// </summary>
-    [field: SerializeField]
-    public GameObject Prefab { get; private set; }
-
-    /// <summary>
-    /// The type of the object (e.g., ground, wall).
-    /// </summary>
-    [field: SerializeField]
-    public ObjectType objectType { get; private set; }
+    [Header("General Settings")]
     
-    /// <summary>
-    /// The type of the objects that deny collisions (e.g., ground, wall).
-    /// </summary>
-    [field: SerializeField]
-    public ObjectType[] collisionObjectTypes { get; private set; }
+    [Tooltip("The name of the object")]
+    [field: SerializeField] public string Name { get; private set; }
     
-    /// <summary>
-    /// World resource name
-    /// </summary>
-    [field: SerializeField]
-    public string worldResourceName { get; private set; }
+    [Tooltip("The unique ID of the object.")]
+    [field: SerializeField] public int ID { get; private set; }
     
-    /// <summary>
-    /// World resource name
-    /// </summary>
-    [field: SerializeField]
-    public int cost { get; private set; }
+    [Tooltip("The size of the object in grid units.")]
+    [field: SerializeField] public Vector2Int Size { get; private set; } = Vector2Int.one;
+    
+    [Tooltip("The prefab associated with this object.")]
+    [field: SerializeField] public GameObject Prefab { get; private set; }
+    
+    [Tooltip("The type of the object (e.g., ground, wall).")]
+    [field: SerializeField] public ObjectType objectType { get; private set; }
+    
+    [Tooltip("World resource name.")]
+    [field: SerializeField] public string worldResourceName { get; private set; }
+    
+    [Tooltip("Object cost.")]
+    [field: SerializeField] public int cost { get; private set; }
+    
+    [Header("Collision Settings")]
+    
+    [Tooltip("Should collision be checked through overlapping?")]
+    [field: SerializeField] public bool shouldCheckForOverlap { get; private set; }
+    
+    [Tooltip("The Layermask to use while overlap checking.")]
+    [field: SerializeField] public LayerMask overlapCheckingLayermask { get; private set; }
+    
+    [Tooltip("Should collision be checked by grid database cell occupation?")]
+    [field: SerializeField] public bool shouldCheckForDatabase { get; private set; }
+    
+    [Tooltip("The type of the objects that deny collisions (e.g., ground, wall).")]
+    [field: SerializeField] public ObjectType[] collisionObjectTypes { get; private set; }
 }

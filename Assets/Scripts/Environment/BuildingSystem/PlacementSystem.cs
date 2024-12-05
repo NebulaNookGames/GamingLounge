@@ -72,15 +72,10 @@ public class PlacementSystem : MonoBehaviour
     {
         if (buildingState == null) return;
         
-        timer -= Time.deltaTime;
-        if (timer <= 0)
-        {
-            timer = .1f;
-            Vector3 mousePosition = inputManager.GetSelectedMapPosition();
-            Vector3Int gridPosition = grid.WorldToCell(mousePosition);
-            buildingState.UpdateState(gridPosition);
-            lastDetectedPosition = gridPosition;
-        }
+        Vector3 mousePosition = inputManager.GetSelectedMapPosition();
+        Vector3Int gridPosition = grid.WorldToCell(mousePosition);
+        buildingState.UpdateState(gridPosition);
+        lastDetectedPosition = gridPosition;
     }
 
     /// <summary>

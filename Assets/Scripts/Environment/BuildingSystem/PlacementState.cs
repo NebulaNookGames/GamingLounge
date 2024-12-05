@@ -44,15 +44,15 @@ public class PlacementState : IBuildingState
     /// <param name="furnitureData">Grid data for furniture objects.</param>
     /// <param name="objectPlacer">The object placer system for managing placed objects.</param>
     public PlacementState(int iD,
-                          Grid grid,
-                          PreviewSystem previewSystem,
-                          PlacementSystem placementSystem,
-                          ObjectsDatabaseSO database,
-                          GridData floorData,
-                          GridData wallData,
-                          GridData wallDecorData,
-                          GridData furnitureData,
-                          ObjectPlacer objectPlacer)
+        Grid grid,
+        PreviewSystem previewSystem,
+        PlacementSystem placementSystem,
+        ObjectsDatabaseSO database,
+        GridData floorData,
+        GridData wallData,
+        GridData wallDecorData,
+        GridData furnitureData,
+        ObjectPlacer objectPlacer)
     {
         ID = iD;
         selectedObjectIndex = iD;
@@ -70,7 +70,7 @@ public class PlacementState : IBuildingState
         {
             selectedObjectIndex = database.objectsData.FindIndex(data => data.ID == ID);
             previewSystem.StartShowingPlacementPreview(database.objectsData[selectedObjectIndex].Prefab,
-                                                       database.objectsData[selectedObjectIndex].Size);
+                database.objectsData[selectedObjectIndex].Size);
         }
         else
         {
@@ -94,8 +94,8 @@ public class PlacementState : IBuildingState
     /// <returns>True if the object can be placed, false otherwise.</returns>
     private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedObjectIndex)
     {
-        if (database.objectsData[selectedObjectIndex].cost > MoneyManager.instance.MoneyAmount) return false; 
-        
+        if (database.objectsData[selectedObjectIndex].cost > MoneyManager.instance.MoneyAmount) return false;
+
         Vector3 newPosition = Vector3.zero;
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = placementSystem.cam.nearClipPlane;
@@ -111,33 +111,61 @@ public class PlacementState : IBuildingState
         {
             return false;
         }
-        bool canPlace = true; 
-        
-        for (int i = 0; i < database.objectsData[selectedObjectIndex].collisionObjectTypes.Length; i++)
+
+        if (database.objectsData[selectedObjectIndex].shouldCheckForOverlap)
         {
-            switch (database.objectsData[selectedObjectIndex].collisionObjectTypes[i])
+            Collider[] hitColliders =
+                Physics.OverlapBox(
+                    previewSystem.previewObject.GetComponentInChildren<MeshRenderer>().transform.position,
+                    previewSystem.previewObject.transform.localScale / 2, Quaternion.identity,
+                    database.objectsData[selectedObjectIndex].overlapCheckingLayermask);
+            if (hitColliders.Length > 0)
             {
-                case ObjectType.Ground:
-                    canPlace = floorData.CanPlaceObjectAt(gridPosition, previewSystem.sizeToUse);
-                    break;
-                case ObjectType.Wall:
-                    canPlace = wallData.CanPlaceObjectAt(gridPosition, previewSystem.sizeToUse);
-                    break;
-                case ObjectType.WallDecor:
-                    canPlace = wallDecorData.CanPlaceObjectAt(gridPosition, previewSystem.sizeToUse);
-                    break;
-                case ObjectType.Furniture:
-                    canPlace = furnitureData.CanPlaceObjectAt(gridPosition, previewSystem.sizeToUse);
-                    break;
+                foreach (Collider collider in hitColliders)
+                {
+                    Debug.Log(collider.gameObject.name);
+                    if (collider.transform.root != previewSystem.previewObject.transform)
+                    {
+                        return false;
+                    }
+                }
+                
             }
-            if (!canPlace)
-                break;
         }
 
-        return canPlace;
+
+        if (database.objectsData[selectedObjectIndex].shouldCheckForDatabase)
+        {
+            bool canPlace = true;
+
+            for (int i = 0; i < database.objectsData[selectedObjectIndex].collisionObjectTypes.Length; i++)
+            {
+                switch (database.objectsData[selectedObjectIndex].collisionObjectTypes[i])
+                {
+                    case ObjectType.Ground:
+                        canPlace = floorData.CanPlaceObjectAt(gridPosition, previewSystem.sizeToUse);
+                        break;
+                    case ObjectType.Wall:
+                        canPlace = wallData.CanPlaceObjectAt(gridPosition, previewSystem.sizeToUse);
+                        break;
+                    case ObjectType.WallDecor:
+                        canPlace = wallDecorData.CanPlaceObjectAt(gridPosition, previewSystem.sizeToUse);
+                        break;
+                    case ObjectType.Furniture:
+                        canPlace = furnitureData.CanPlaceObjectAt(gridPosition, previewSystem.sizeToUse);
+                        break;
+                }
+
+                if (!canPlace)
+                    break;
+            }
+
+            return canPlace;
+        }
+        return true;
     }
 
-    /// <summary>
+/// <summary>
     /// Handles the action of placing an object at a grid position.
     /// </summary>
     /// <param name="gridPosition">The grid position where the object will be placed.</param>

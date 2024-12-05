@@ -13,7 +13,7 @@ public class InputManager : MonoBehaviour
     public event Action OnPlacementToggle; // Event triggered when placement mode is toggled
     public event Action OnRotate; // Event triggered when the player rotates an object
 
-    private void Update()
+    private void LateUpdate()
     {
         if (Input.GetKeyDown(KeyCode.E))
             OnPlacementToggle?.Invoke();

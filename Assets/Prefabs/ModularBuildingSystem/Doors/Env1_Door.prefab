@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4680293099189492453}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Parent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1417778090136736141}
   - component: {fileID: 7074439392309292513}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NavObstacle02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6547234379879589699}
   - component: {fileID: 6470229511969444780}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NavObstacle01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4484924605109587790}
   - component: {fileID: 4735937327116266089}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DoorCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 5446822832387352636}
   - component: {fileID: 8370391607201243440}
   - component: {fileID: 6943281352829728341}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Env1_Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 6358907911238231178}
   - component: {fileID: 2840315861450862342}
   - component: {fileID: 7927895925704309196}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DoorSense
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,7 +370,7 @@ GameObject:
   - component: {fileID: 4030938232310808152}
   - component: {fileID: 2174089983220868259}
   - component: {fileID: 7675570078431028381}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WallCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -434,54 +434,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.04, y: 1.9, z: 0.46}
   m_Center: {x: -0.12, y: 0, z: -0.08}
---- !u!1 &7578183826787431947
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2046232723974612511}
-  - component: {fileID: 118207748523961667}
-  m_Layer: 0
-  m_Name: NavObstacle03
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2046232723974612511
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7578183826787431947}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.4183415, y: 1.2102113, z: -0.5993159}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3490467008396401279}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!208 &118207748523961667
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7578183826787431947}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.555, y: 1.325, z: 0.29}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 1
-  m_Center: {x: -0.09, y: -0.47, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1001 &4033563067761393044
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -562,6 +514,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -0.9959998
       objectReference: {fileID: 0}
+    - target: {fileID: -8140752539568417527, guid: 5928509aeb5cb30438dab07781381914, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: -7626978544243044657, guid: 5928509aeb5cb30438dab07781381914, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -0.000013660378
@@ -578,9 +534,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -0.000013660378
       objectReference: {fileID: 0}
+    - target: {fileID: -2821851909640341218, guid: 5928509aeb5cb30438dab07781381914, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -2466125482591138149, guid: 5928509aeb5cb30438dab07781381914, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5928509aeb5cb30438dab07781381914, type: 3}
       propertyPath: m_Name
       value: Door01
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5928509aeb5cb30438dab07781381914, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3985485831514190357, guid: 5928509aeb5cb30438dab07781381914, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6337842703939756443, guid: 5928509aeb5cb30438dab07781381914, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7598934385223187274, guid: 5928509aeb5cb30438dab07781381914, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -628,9 +604,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5928509aeb5cb30438dab07781381914, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1417778090136736141}
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5928509aeb5cb30438dab07781381914, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2046232723974612511}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6337842703939756443, guid: 5928509aeb5cb30438dab07781381914, type: 3}
       insertIndex: -1
@@ -685,4 +658,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameObjectsToActivate:
   - {fileID: 3818999087378302315}
-  - {fileID: 7578183826787431947}

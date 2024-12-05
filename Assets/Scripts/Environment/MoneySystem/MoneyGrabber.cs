@@ -20,10 +20,10 @@ public class MoneyGrabber : MonoBehaviour
     {
         if (other.CompareTag("Machine"))
         {
-            if (other.GetComponent<MoneyHolder>().moneyBeingHeld > 0)
+            if (other.transform.root.GetComponent<MoneyHolder>().moneyBeingHeld > 0)
             {
                 canGrabMoney = true;
-                moneyHolder = other.GetComponent<MoneyHolder>();
+                moneyHolder = other.transform.root.GetComponent<MoneyHolder>();
             }
         }
     }

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -114,16 +115,22 @@ public class PlacementState : IBuildingState
 
         if (database.objectsData[selectedObjectIndex].shouldCheckForOverlap)
         {
+            // Get the mesh's bounds
+            MeshRenderer meshRenderer = previewSystem.previewObject.GetComponentInChildren<MeshRenderer>();
+            Bounds meshBounds = meshRenderer.bounds;
+
+            // Calculate the half-extents from the mesh's size
+            Vector3 halfExtents = meshBounds.size / 2f;
+
             Collider[] hitColliders =
                 Physics.OverlapBox(
                     previewSystem.previewObject.GetComponentInChildren<MeshRenderer>().transform.position,
-                    previewSystem.previewObject.transform.localScale / 2, Quaternion.identity,
+                    halfExtents, Quaternion.identity,
                     database.objectsData[selectedObjectIndex].overlapCheckingLayermask);
             if (hitColliders.Length > 0)
             {
                 foreach (Collider collider in hitColliders)
                 {
-                    Debug.Log(collider.gameObject.name);
                     if (collider.transform.root != previewSystem.previewObject.transform)
                     {
                         return false;
@@ -132,7 +139,6 @@ public class PlacementState : IBuildingState
                 
             }
         }
-
 
         if (database.objectsData[selectedObjectIndex].shouldCheckForDatabase)
         {

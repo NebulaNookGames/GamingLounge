@@ -125,10 +125,10 @@ public class RemovingState : IBuildingState
             return wallDecorData;
         if (!furnitureData.CanPlaceObjectAt(gridPosition, Vector2Int.one) && IsWithinRemovalRange(newPosition))
             return furnitureData;
-        if (!floorData.CanPlaceObjectAt(gridPosition, Vector2Int.one) && IsWithinRemovalRange(newPosition))
-            return floorData;
         if (!wallData.CanPlaceObjectAt(gridPosition, Vector2Int.one) && IsWithinRemovalRange(newPosition))
             return wallData;
+        if (!floorData.CanPlaceObjectAt(gridPosition, Vector2Int.one) && IsWithinRemovalRange(newPosition))
+            return floorData;
         
         return null;
     }

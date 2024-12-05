@@ -121,15 +121,15 @@ public class RemovingState : IBuildingState
     /// <returns>The appropriate GridData for removal, or null if none is valid.</returns>
     private GridData GetGridDataForRemoval(Vector3Int gridPosition, Vector3 newPosition)
     {
-        if (!floorData.CanPlaceObjectAt(gridPosition, Vector2Int.one) && IsWithinRemovalRange(newPosition))
-            return floorData;
-        if (!wallData.CanPlaceObjectAt(gridPosition, Vector2Int.one) && IsWithinRemovalRange(newPosition))
-            return wallData;
         if (!wallDecorData.CanPlaceObjectAt(gridPosition, Vector2Int.one) && IsWithinRemovalRange(newPosition))
             return wallDecorData;
         if (!furnitureData.CanPlaceObjectAt(gridPosition, Vector2Int.one) && IsWithinRemovalRange(newPosition))
             return furnitureData;
-
+        if (!floorData.CanPlaceObjectAt(gridPosition, Vector2Int.one) && IsWithinRemovalRange(newPosition))
+            return floorData;
+        if (!wallData.CanPlaceObjectAt(gridPosition, Vector2Int.one) && IsWithinRemovalRange(newPosition))
+            return wallData;
+        
         return null;
     }
 

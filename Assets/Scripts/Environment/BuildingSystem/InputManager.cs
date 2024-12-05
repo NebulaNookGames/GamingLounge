@@ -21,6 +21,11 @@ public class InputManager : MonoBehaviour
             OnClicked?.Invoke();
         else if (Input.GetKeyDown(KeyCode.R))
             OnRotate?.Invoke();
+        
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     /// <summary>

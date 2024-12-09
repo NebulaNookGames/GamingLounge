@@ -4,7 +4,6 @@ using UnityEngine;
 using Action = Unity.Behavior.Action;
 using Unity.Properties;
 using UnityEngine.AI;
-using Random = System.Random;
 
 [Serializable, GeneratePropertyBag]
 [NodeDescription(name: "GoToSitPosition", story: "Use [Machine] for [SitPosition] for [Agent] movement", category: "Action", id: "2862f95bca7a223f122706bac69779e8")]
@@ -19,10 +18,8 @@ public partial class GoToSitPositionAction : Action
         Agent.Value.GetComponent<NavMeshAgent>().isStopped = false; 
         
         if (Machine.Value == null) return Status.Failure;
-        
-        SitPosition.Value = Machine.Value.GetComponentInChildren<SitPositionRecognition>().validObjects[UnityEngine.Random.Range(0, Machine.Value.GetComponentInChildren<SitPositionRecognition>().validObjects.Count)];
-        SitPosition.Value.GetComponent<SitPositionAvailability>().available = false;
-        Machine.Value.GetComponentInChildren<SitPositionRecognition>().validObjects.Remove(SitPosition.Value);
+
+        SitPosition.Value = Machine.Value.GetComponentInChildren<SitPositionRecognition>().GetSitPosition();
         
         Agent.Value.GetComponent<NavMeshAgent>().SetDestination(
             SitPosition.Value.transform.position - SitPosition.Value.transform.forward.normalized * 0.7f);
@@ -39,7 +36,7 @@ public partial class GoToSitPositionAction : Action
         if(SitPosition.Value == null)
             return Status.Failure;
         if (Vector3.Distance(Agent.Value.transform.position,
-                SitPosition.Value.transform.position - SitPosition.Value.transform.forward) < .5f)
+                SitPosition.Value.transform.position - SitPosition.Value.transform.forward) < 1f)
         {
             Vector3 aimPos = Agent.Value.GetComponent<NavMeshAgent>().destination;
             Agent.Value.transform.position = new Vector3(aimPos.x, Agent.Value.transform.position.y, aimPos.z);

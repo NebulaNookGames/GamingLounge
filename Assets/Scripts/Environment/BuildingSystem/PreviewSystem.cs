@@ -96,7 +96,9 @@ public class PreviewSystem : MonoBehaviour
     /// </summary>
     public void StopShowingPreview()
     {
-        cellIndicator.SetActive(false); // Hide the cell indicator
+        if(cellIndicator != null)
+            cellIndicator.SetActive(false); // Hide the cell indicator
+        
         inputManager.OnRotate -= RotatePreview; // Subscribe to rotation events
 
         if (previewObject != null)
@@ -168,34 +170,4 @@ public class PreviewSystem : MonoBehaviour
         PrepareCursor(Vector2Int.one); // Prepare the cursor for single cell removal
         ApplyFeedbackToCursor(false); // Set feedback to invalid
     }
-    
-    // void OnDrawGizmos()
-    // {
-    //     Debug.Log("Drawing Gizmos");
-    //     
-    //     // Ensure previewObject is not null
-    //     if (previewObject == null)
-    //         return;
-    //
-    //     // Get the MeshRenderer to access the bounds
-    //     MeshRenderer meshRenderer = previewObject.GetComponentInChildren<MeshRenderer>();
-    //     if (meshRenderer == null)
-    //         return;
-    //
-    //     // Get the bounds of the mesh
-    //     Bounds meshBounds = meshRenderer.bounds;
-    //
-    //     // Calculate the half-extents (size / 2)
-    //     Vector3 halfExtents = meshBounds.size / 2f;
-    //
-    //     // Set the Gizmo color to make it visible
-    //     Gizmos.color = Color.green;
-    //
-    //     // Draw the Gizmo box at the position of the mesh's center with the calculated half-extents
-    //     Gizmos.DrawWireCube(meshBounds.center, meshBounds.size);
-    //
-    //     // Optionally, you can add a sphere at the center of the box to indicate the overlap position
-    //     Gizmos.color = Color.red;
-    //     Gizmos.DrawSphere(meshBounds.center, 0.1f);
-    // }
 }

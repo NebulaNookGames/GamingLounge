@@ -9,6 +9,9 @@ using System.Collections.Generic;
 /// </summary>
 public class PlacementSystem : MonoBehaviour
 {
+    
+    public static PlacementSystem Instance;
+    
     [SerializeField]
     private Grid grid; // The grid used for object placement.
 
@@ -50,7 +53,12 @@ public class PlacementSystem : MonoBehaviour
     public Action OnPlaced;
 
     private float timer = .1f;
-    
+
+    private void Awake()
+    {
+        Instance = this; 
+    }
+
     /// <summary>
     /// Initializes the placement system and sets up the grid data.
     /// </summary>
@@ -116,11 +124,10 @@ public class PlacementSystem : MonoBehaviour
         
         buildingState = new PlacementState(ID, grid, preview, this, database, floorData, wallData, wallDecorData,furnitureData, objectPlacer);
         inputManager.OnClicked += PlaceStructure;
-        placementCanvas.SetActive(false);
-        EImage.SetActive(true);
         RImage.SetActive(true);
     }
-
+    
+    
     /// <summary>
     /// Starts the removal mode for removing objects.
     /// </summary>
@@ -131,10 +138,9 @@ public class PlacementSystem : MonoBehaviour
         foreach (GameObject gridPart in unlockedGridParts)
             gridPart.SetActive(true);
         
+        RImage.SetActive(false);
         buildingState = new RemovingState(grid, preview, this, floorData, wallData, wallDecorData, furnitureData, objectPlacer);
         inputManager.OnClicked += PlaceStructure;
-        placementCanvas.SetActive(false);
-        EImage.SetActive(true);
     }
 
     /// <summary>
@@ -153,10 +159,13 @@ public class PlacementSystem : MonoBehaviour
     /// <summary>
     /// Stops the current placement or removal mode.
     /// </summary>
-    private void StopPlacement()
+    public void StopPlacement()
     {
         foreach (GameObject gridPart in unlockedGridParts)
-            gridPart.SetActive(false);
+        {
+            if(gridPart)
+                gridPart.SetActive(false);
+        }
 
         if (buildingState == null) return;
 

@@ -15,17 +15,14 @@ public class InputManager : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (Time.timeScale == 0) return; 
+        
         if (Input.GetKeyDown(KeyCode.E))
             OnPlacementToggle?.Invoke();
         else if (Input.GetMouseButtonDown(0))
             OnClicked?.Invoke();
         else if (Input.GetKeyDown(KeyCode.R))
             OnRotate?.Invoke();
-        
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
     }
 
     /// <summary>

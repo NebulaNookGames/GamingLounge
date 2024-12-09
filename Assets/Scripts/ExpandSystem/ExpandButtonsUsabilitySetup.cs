@@ -28,6 +28,11 @@ public class ExpandButtonsUsabilitySetup : MonoBehaviour
 
     private void OnEnable()
     {
+        Refresh();
+    }
+
+    public void Refresh()
+    {
         moneyManager = MoneyManager.instance;
         
         for (int i = 0; i < buttons.Length; i++)

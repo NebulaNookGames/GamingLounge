@@ -46,5 +46,7 @@ public class ObjectActivator : MonoBehaviour
 
         // Show the overview panel.
         overviewPanel.SetActive(true);
+        
+        PlacementSystem.Instance.StopPlacement();
     }
 }

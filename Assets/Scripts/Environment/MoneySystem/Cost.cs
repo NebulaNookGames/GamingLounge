@@ -61,6 +61,8 @@ public class Cost : MonoBehaviour
     // Optional: Visualize raycasts in the Scene view for debugging
     private void OnDrawGizmos()
     {
+        if (!Application.isPlaying) return; 
+        
         if (transformToCheckFrom == null) return;
 
         Gizmos.color = Color.red;

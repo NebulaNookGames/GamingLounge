@@ -23,20 +23,20 @@ public class UnlockPanelHandler : MonoBehaviour
 
     void UpdateButtonInteractable(int amount)
     {
+        Debug.Log(amount);
         for(int i = 0; i < buttons.Length; i++)
         {
             if (bought[i])
             {
                 buttons[i].GetComponent<Button>().interactable = false;
                 buttons[i].GetComponent<Button>().image.color = unlockedColor;
-                return;
+                continue;
             }
             
             if (cost[i] <= amount)
             {
                 buttons[i].GetComponent<Button>().interactable = true;
                 buttons[i].GetComponent<Button>().image.color = validColor;
-
             }
 
             else
@@ -52,9 +52,23 @@ public class UnlockPanelHandler : MonoBehaviour
         if (cost[index] > MoneyManager.instance.MoneyAmount) return;
        
         bought[index] = true;
-        MoneyManager.instance.ChangeMoney(cost[index]);
         unlockables[index].SetActive(true);
         buttons[index].GetComponent<Button>().interactable = false;
         buttons[index].GetComponent<Button>().image.color = unlockedColor;
+        MoneyManager.instance.ChangeMoney(-cost[index]);
+    }
+
+    public void UnlockAllItems()
+    {
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            unlockables[i].SetActive(true);
+            buttons[i].GetComponent<Button>().interactable = false;
+            buttons[i].GetComponent<Button>().image.color = unlockedColor;
+            bought[i] = true;
+            
+        }
+        
+        UpdateButtonInteractable(MoneyManager.instance.MoneyAmount);
     }
 }

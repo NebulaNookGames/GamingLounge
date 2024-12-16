@@ -42,7 +42,7 @@ public class PauseHandler : MonoBehaviour
    /// </summary>
    void Update()
    {
-      if(Input.GetKeyDown(KeyCode.Escape) && canPause)
+      if(Input.GetKeyDown(KeyCode.Escape) && canPause && Time.timeScale != 0)
       {
          HandlePause();
       }

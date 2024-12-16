@@ -37,7 +37,8 @@ public class EntitySpawner : MonoBehaviour
         if (entityPrefab != null)
         {
             // Instantiate the entityPrefab at the spawner's position with no rotation
-            Instantiate(entityPrefab, transform.position, Quaternion.identity);
+            GameObject newEntity = Instantiate(entityPrefab, transform.position, Quaternion.identity);
+            newEntity.transform.parent = transform; 
             amount++; 
         }
     }

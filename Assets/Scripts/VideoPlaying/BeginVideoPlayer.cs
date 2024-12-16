@@ -6,7 +6,8 @@ public class BeginVideoPlayer : MonoBehaviour
     public Material objectMaterial; // Assign your object's material
     public VideoPlayer videoPlayer; // Assign your VideoPlayer component
     public RenderTexture renderTexture; // Default render texture (if any)
-
+    public int materialIndex = 0; 
+        
     void Awake()
     {
         // Check if the necessary components are assigned
@@ -31,7 +32,7 @@ public class BeginVideoPlayer : MonoBehaviour
         {
             // Assign the material to the second slot (index 1)
             Material[] materials = renderer.materials;
-            materials[1] = uniqueMaterial; // Replace the material at index 1
+            materials[materialIndex] = uniqueMaterial; // Replace the material at index 1
             renderer.materials = materials; // Reassign the materials array
         }
         else

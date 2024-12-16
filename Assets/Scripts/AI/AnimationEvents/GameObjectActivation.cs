@@ -26,4 +26,10 @@ public class GameObjectActivation : MonoBehaviour
         foreach (GameObject go in gameObjectsToActivate)
             go.SetActive(false);
     }
+
+    public void Invert()
+    {
+        foreach (GameObject go in gameObjectsToActivate)
+            go.active = !go.activeSelf;
+    }
 }

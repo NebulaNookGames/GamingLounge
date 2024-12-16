@@ -12,7 +12,8 @@ public partial class MachineAvailabilityCondition : Condition
     {
         if (WorldInteractables.instance.ArcadeMachines.Count > 0)
         {
-            Machine.Value = WorldInteractables.instance.ArcadeMachines[0];
+            int randomMachineIndex = UnityEngine.Random.Range(0, WorldInteractables.instance.ArcadeMachines.Count);
+            Machine.Value = WorldInteractables.instance.ArcadeMachines[randomMachineIndex];
             WorldInteractables.instance.ArcadeMachines.Remove(Machine.Value);
             return true;
         }

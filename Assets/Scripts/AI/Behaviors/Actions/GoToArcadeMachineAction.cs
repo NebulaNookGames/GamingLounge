@@ -49,9 +49,9 @@ public partial class GoToArcadeMachineAction : Action
         if (Vector3.Distance(Agent.Value.transform.position,
                 OccupiedArcadeMachine.Value.GetComponent<UsagePositionStorage>().usagePosition.position) < 1f)
         {
-            Vector3 aimPos = Agent.Value.GetComponent<NavMeshAgent>().destination;
-            Agent.Value.transform.position = new Vector3(aimPos.x, Agent.Value.transform.position.y, aimPos.z);
             Agent.Value.GetComponent<NavMeshAgent>().enabled = false;
+            Vector3 aimPos = OccupiedArcadeMachine.Value.GetComponent<UsagePositionStorage>().usagePosition.position;
+            Agent.Value.transform.position = new Vector3(aimPos.x, Agent.Value.transform.position.y, aimPos.z);
             Agent.Value.transform.rotation = Quaternion.LookRotation(OccupiedArcadeMachine.Value.GetComponent<RotatePlacementObject>().objectToRotate.transform.forward, Vector3.up);            
             return Status.Success;
         }

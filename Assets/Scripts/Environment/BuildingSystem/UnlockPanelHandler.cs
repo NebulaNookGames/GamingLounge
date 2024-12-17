@@ -5,7 +5,7 @@ public class UnlockPanelHandler : MonoBehaviour
 {
     [SerializeField] private GameObject[] buttons;
     [SerializeField] private int[] cost;
-    [SerializeField] private bool[] bought;
+    [SerializeField] public bool[] bought;
     [SerializeField] private Color validColor = Color.green;
     [SerializeField] private Color invalidColor = Color.red;
     [SerializeField] private Color unlockedColor = Color.blue;
@@ -23,7 +23,6 @@ public class UnlockPanelHandler : MonoBehaviour
 
     void UpdateButtonInteractable(int amount)
     {
-        Debug.Log(amount);
         for(int i = 0; i < buttons.Length; i++)
         {
             if (bought[i])
@@ -70,5 +69,15 @@ public class UnlockPanelHandler : MonoBehaviour
         }
         
         UpdateButtonInteractable(MoneyManager.instance.MoneyAmount);
+    }
+
+    public void LoadUnlocks(bool[] bought)
+    {
+        this.bought = bought;
+        for(int i = 0; i < this.bought.Length; i++)
+        {
+            if(this.bought[i]) 
+                unlockables[i].SetActive(true);
+        }
     }
 }

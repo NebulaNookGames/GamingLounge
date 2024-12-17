@@ -25,4 +25,15 @@ public class ExpandHandler : MonoBehaviour
         
         expandButtonsUsabilitySetup.Refresh();
     }
+
+    public void UpdateBoughtLand(bool[] boughtLand)
+    {
+        this.boughtLand = boughtLand;
+        for (int i = 0; i < lands.Length; i++)
+        {
+            if(this.boughtLand[i])
+                placementSystem.unlockedGridParts.Add(lands[i]);
+        }
+        expandButtonsUsabilitySetup.Refresh();
+    }
 }

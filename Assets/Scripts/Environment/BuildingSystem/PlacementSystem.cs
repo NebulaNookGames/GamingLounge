@@ -27,7 +27,7 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField]
     public List<GameObject> unlockedGridParts; // Visual representation of the grid.
 
-    private GridData floorData, wallData, wallDecorData, furnitureData; // Grid data for various object types.
+    public GridData floorData, wallData, wallDecorData, furnitureData; // Grid data for various object types.
 
     [SerializeField]
     private PreviewSystem preview; // System for showing placement previews.

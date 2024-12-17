@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 /// <summary>
@@ -8,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class GridData
 {
-    private Dictionary<Vector3Int, PlacementData> placedObjects = new();
+    public Dictionary<Vector3Int, PlacementData> placedObjects = new();
 
     /// <summary>
     /// Adds an object to the grid at the specified position.
@@ -28,6 +27,14 @@ public class GridData
         }
     }
 
+    public void AddObjectAt(KeyValuePair<Vector3Int, PlacementData> data)
+    {
+        for(int i = 0; i < data.Value.occupiedPositions.Count; i++)
+        {
+            placedObjects[new Vector3Int(data.Key.x, data.Key.y, data.Key.z)] = data.Value;
+        }
+    }
+    
     /// <summary>
     /// Calculates all grid positions occupied by an object based on its size.
     /// </summary>
@@ -79,7 +86,7 @@ public class GridData
         {
             return -1;
         }
-        return placedObjects[gridPosition].PlacedObjectIndex;
+        return placedObjects[gridPosition].placedObjectIndex;
     }
 
     /// <summary>
@@ -88,21 +95,22 @@ public class GridData
     /// <param name="gridPosition">The grid position to remove the object from.</param>
     internal void RemoveObjectAt(Vector3Int gridPosition)
     {
-        foreach (var pos in placedObjects[gridPosition].OccupiedPositions)
+        foreach (var pos in placedObjects[gridPosition].occupiedPositions)
         {
             placedObjects.Remove(pos);
         }
     }
 }
 
+[Serializable]
 /// <summary>
 /// Stores data about a placed object, including its occupied positions and identifiers.
 /// </summary>
 public class PlacementData
 {
-    public List<Vector3Int> OccupiedPositions { get; private set; }
-    public int ID { get; private set; }
-    public int PlacedObjectIndex { get; private set; }
+    public List<Vector3Int> occupiedPositions;
+    public int iD;
+    public int placedObjectIndex;
 
     /// <summary>
     /// Initializes a new instance of the PlacementData class.
@@ -112,8 +120,8 @@ public class PlacementData
     /// <param name="placedObjectIndex">The index of the object in the object placer.</param>
     public PlacementData(List<Vector3Int> occupiedPositions, int iD, int placedObjectIndex)
     {
-        OccupiedPositions = occupiedPositions;
-        ID = iD;
-        PlacedObjectIndex = placedObjectIndex;
+        this.occupiedPositions = occupiedPositions;
+        this.iD = iD;
+        this.placedObjectIndex = placedObjectIndex;
     }
 }

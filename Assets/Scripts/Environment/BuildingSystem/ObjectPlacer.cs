@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,20 +14,19 @@ public class ObjectPlacer : MonoBehaviour
     /// List of GameObjects that have been placed in the scene.
     /// </summary>
     [SerializeField]
-    private List<GameObject> placedGameObjects = new();
+    public List<KeyValuePair<GameObject, int>> placedGameObjects = new();
 
-    [SerializeField] PlacementSystem placementSystem; 
+    [SerializeField] PlacementSystem placementSystem;
     
     /// <summary>
     /// Instantiates a prefab at the specified position and rotation.
     /// </summary>
-    /// <param name="prefab">The prefab to instantiate.</param>
+    /// <param name="objectData">The data of a placed object type.</param>
     /// <param name="position">The position to place the object.</param>
     /// <param name="rotation">The rotation to apply to the object.</param>
     /// <returns>The index of the newly placed object in the list.</returns>
     public int PlaceObject(ObjectData objectData, Vector3 position, Quaternion rotation)
     {
-        
         GameObject newObject = Instantiate(objectData.Prefab);
         newObject.transform.position = position;
         if(newObject.GetComponent<RotatePlacementObject>()) 
@@ -48,7 +48,7 @@ public class ObjectPlacer : MonoBehaviour
         }
 
         MoneyManager.instance.ChangeMoney(-objectData.cost);
-        placedGameObjects.Add(newObject);
+        placedGameObjects.Add(new KeyValuePair<GameObject, int>(newObject, objectData.ID));
         placementSystem.OnPlaced?.Invoke();
         return placedGameObjects.Count - 1;
     }
@@ -59,14 +59,17 @@ public class ObjectPlacer : MonoBehaviour
     /// <param name="gameObjectIndex">The index of the object to remove.</param>
     internal void RemoveObjectAt(int gameObjectIndex)
     {
-        if (placedGameObjects.Count <= gameObjectIndex || placedGameObjects[gameObjectIndex] == null)
+        if (placedGameObjects.Count <= gameObjectIndex || placedGameObjects[gameObjectIndex].Key == null)
             return;
-
-        if (placedGameObjects[gameObjectIndex].CompareTag(("Machine")))
-            WorldInteractables.instance.RemoveArcadeMachine(placedGameObjects[gameObjectIndex]);
         
-        Destroy(placedGameObjects[gameObjectIndex]);
-        placedGameObjects[gameObjectIndex] = null;
+        if (placedGameObjects[gameObjectIndex].Key.CompareTag(("Machine")))
+            WorldInteractables.instance.RemoveArcadeMachine(placedGameObjects[gameObjectIndex].Key);
+        
+        PlacementSystemDataHandler.Instance.RemoveGameObjectData(gameObjectIndex);
+        PlacementSystemDataHandler.Instance.UpdateData();
+        
+        Destroy(placedGameObjects[gameObjectIndex].Key);
+        placedGameObjects.RemoveAt(gameObjectIndex);
         Invoke("ActionInvocation", .2f);
     }
 

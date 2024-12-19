@@ -42,7 +42,7 @@ public class ObjectPlacer : MonoBehaviour
         {
             if (objectData.ID == index)
             {
-                WorldInteractables.instance.AddArcadeMachine(newObject);
+                WorldInteractables.instance.InitializeNewAracadeMachine(newObject);
                 break;
             }
         }
@@ -64,7 +64,7 @@ public class ObjectPlacer : MonoBehaviour
             return;
         
         if (placedGameObjects[gameObjectIndex].CompareTag(("Machine")))
-            WorldInteractables.instance.RemoveArcadeMachine(placedGameObjects[gameObjectIndex]);
+            WorldInteractables.instance.DeleteArcadeMachine(placedGameObjects[gameObjectIndex]);
 
         PlacementDataHandler.instance.RemovePlacedObject(placedGameObjects[gameObjectIndex]);
         Destroy(placedGameObjects[gameObjectIndex]);

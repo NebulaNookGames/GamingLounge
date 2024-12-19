@@ -20,6 +20,10 @@ public class SaveData
     
     
     public int savedMoney;
+    public List<int> moneyInArcadeMachines;
+    public List<Vector3> arcadeMachinePositions;
+    
+    
     public bool[] boughtObjects;
     public bool[] boughtLand;
 }

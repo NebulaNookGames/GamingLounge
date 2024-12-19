@@ -12,13 +12,11 @@ public class EntitySpawner : MonoBehaviour
     void Start()
     {
         timer = spawnInterval; // Set the timer to the spawn interval initially
-        WorldInteractables.instance.OnValueChanged += UpdateMaxAmount;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (amount >= maxAmount || maxAmount == 0) return; 
         
         // Update the timer
         timer -= Time.deltaTime;
@@ -26,6 +24,8 @@ public class EntitySpawner : MonoBehaviour
         // Check if it's time to spawn
         if (timer <= 0f)
         {
+            UpdateMaxAmount(WorldInteractables.instance.allAracadeMachines.Count);
+            if (amount >= maxAmount || maxAmount == 0) return; 
             SpawnEntity(); // Call the spawn method
             timer = spawnInterval; // Reset the timer
         }

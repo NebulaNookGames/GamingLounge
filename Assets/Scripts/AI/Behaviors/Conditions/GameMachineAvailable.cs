@@ -16,10 +16,10 @@ public partial class GameMachineAvailable : Condition
     /// <returns>True if the arcade machines list has elements, otherwise false.</returns>
     public override bool IsTrue()
     {
-        if (WorldInteractables.instance.ArcadeMachines.Count > 0)
+        if (WorldInteractables.instance.availableArcadeMachines.Count > 0)
         {
-            gameObject.Value = WorldInteractables.instance.ArcadeMachines[0];
-            WorldInteractables.instance.ArcadeMachines.Remove(gameObject.Value);
+            gameObject.Value = WorldInteractables.instance.availableArcadeMachines[0];
+            WorldInteractables.instance.availableArcadeMachines.Remove(gameObject.Value);
             return true;
         }
 

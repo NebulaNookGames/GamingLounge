@@ -122,6 +122,7 @@ public class PlacementState : IBuildingState
             // Calculate the half-extents from the mesh's size
             Vector3 halfExtents = meshBounds.size / 2f;
 
+            
             Collider[] hitColliders =
                 Physics.OverlapBox(
                     previewSystem.previewObject.GetComponentInChildren<MeshRenderer>().transform.position,

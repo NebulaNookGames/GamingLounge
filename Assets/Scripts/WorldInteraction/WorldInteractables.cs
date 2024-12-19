@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 /// <summary>
 /// Manages interactable objects in the world, specifically arcade machines.
@@ -13,15 +14,13 @@ public class WorldInteractables : MonoBehaviour
     /// </summary>
     public static WorldInteractables instance;
 
-    private int totalAmount = 0; 
+    public List<GameObject> allAracadeMachines; 
     
     /// <summary>
     /// List of arcade machines available in the world. 
     /// This property is read-only outside this class.
     /// </summary>
-    public List<GameObject> ArcadeMachines { get; private set; } = new List<GameObject>();
-
-    public event Action<int> OnValueChanged;
+    public List<GameObject> availableArcadeMachines;
     
     /// <summary>
     /// Initializes the singleton instance on Awake.
@@ -31,17 +30,25 @@ public class WorldInteractables : MonoBehaviour
         instance = this;
     }
 
-    public void AddArcadeMachine(GameObject obj)
+    public void EndArcadeMachineOccupation(GameObject obj)
     {
-        ArcadeMachines.Add(obj);
-        totalAmount++;
-        OnValueChanged?.Invoke(totalAmount);
+        availableArcadeMachines.Add(obj);
     }
 
-    public void RemoveArcadeMachine(GameObject obj)
+    public void OccupyAradeMachine(GameObject obj)
     {
-        ArcadeMachines.Remove(obj);
-        totalAmount--;
-        OnValueChanged?.Invoke(totalAmount);
+        availableArcadeMachines.Remove(obj);
+    }
+
+    public void InitializeNewAracadeMachine(GameObject obj)
+    {
+        availableArcadeMachines.Add(obj);
+        allAracadeMachines.Add(obj);
+    }
+
+    public void DeleteArcadeMachine(GameObject obj)
+    {
+        allAracadeMachines.Remove(obj);
+        availableArcadeMachines.Remove(obj);
     }
 }

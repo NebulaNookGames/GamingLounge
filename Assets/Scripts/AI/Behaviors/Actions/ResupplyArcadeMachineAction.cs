@@ -40,7 +40,7 @@ public partial class ResupplyArcadeMachineAction : Action
     protected override void OnEnd()
     {
         // Add the arcade machine back to the list of available machines
-        WorldInteractables.instance.ArcadeMachines.Add(OccupiedArcadeMachine.Value);
+        WorldInteractables.instance.EndArcadeMachineOccupation(OccupiedArcadeMachine.Value);
         
         // Set the status to indicate the agent is no longer at the machine
         atMachine.Value = false;

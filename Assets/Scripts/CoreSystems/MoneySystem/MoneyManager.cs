@@ -24,6 +24,12 @@ public class MoneyManager : MonoBehaviour
         instance = this; 
     }
 
+    public void SetMoney(int amount)
+    {
+        moneyAmount = amount;
+        OnMoneyChanged?.Invoke(moneyAmount);
+    }
+
     /// <summary>
     /// Changes the money amount by a specified amount and triggers the OnMoneyChanged event.
     /// </summary>

@@ -27,7 +27,7 @@ public class PlacementSystem : MonoBehaviour
     [SerializeField]
     public List<GameObject> unlockedGridParts; // Visual representation of the grid.
 
-    private GridData floorData, wallData, wallDecorData, furnitureData; // Grid data for various object types.
+    public GridData floorData, wallData, wallDecorData, furnitureData; // Grid data for various object types.
 
     [SerializeField]
     private PreviewSystem preview; // System for showing placement previews.
@@ -71,6 +71,18 @@ public class PlacementSystem : MonoBehaviour
         furnitureData = new GridData();
         inputManager.OnPlacementToggle += TogglePlacement;
         TogglePlacement();
+    }
+
+    public void ShowDetails()
+    {
+        Debug.Log("FloorDatas: " + floorData.placedObjects.Count);
+        Debug.Log("WallDatas: " + wallData.placedObjects.Count);
+        Debug.Log("WalLDecorDatas: " + wallDecorData.placedObjects.Count);
+        Debug.Log("FurnitureDatas: " + furnitureData.placedObjects.Count);
+        foreach (Vector3Int temp in wallData.placedObjects.Keys)
+        {
+            Debug.Log(temp);
+        }
     }
 
     /// <summary>

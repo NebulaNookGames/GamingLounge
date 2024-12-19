@@ -10,11 +10,11 @@ public partial class MachineAvailabilityCondition : Condition
 
     public override bool IsTrue()
     {
-        if (WorldInteractables.instance.ArcadeMachines.Count > 0)
+        if (WorldInteractables.instance.availableArcadeMachines.Count > 0)
         {
-            int randomMachineIndex = UnityEngine.Random.Range(0, WorldInteractables.instance.ArcadeMachines.Count);
-            Machine.Value = WorldInteractables.instance.ArcadeMachines[randomMachineIndex];
-            WorldInteractables.instance.ArcadeMachines.Remove(Machine.Value);
+            int randomMachineIndex = UnityEngine.Random.Range(0, WorldInteractables.instance.availableArcadeMachines.Count);
+            Machine.Value = WorldInteractables.instance.availableArcadeMachines[randomMachineIndex];
+            WorldInteractables.instance.OccupyAradeMachine(Machine.Value);
             return true;
         }
         return false;

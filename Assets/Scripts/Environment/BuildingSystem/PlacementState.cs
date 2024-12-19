@@ -187,7 +187,6 @@ public class PlacementState : IBuildingState
         
         GridData selectedData = GetUsedGridData();
         selectedData.AddObjectAt(gridPosition, previewSystem.sizeToUse, database.objectsData[selectedObjectIndex].ID, index);
-        PlacementSystemDataHandler.Instance.UpdateData();
         previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), false);
     }
 

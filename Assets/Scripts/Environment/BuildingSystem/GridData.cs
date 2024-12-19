@@ -25,14 +25,7 @@ public class GridData
         {
             placedObjects[pos] = data;
         }
-    }
-
-    public void AddObjectAt(KeyValuePair<Vector3Int, PlacementData> data)
-    {
-        for(int i = 0; i < data.Value.occupiedPositions.Count; i++)
-        {
-            placedObjects[new Vector3Int(data.Key.x, data.Key.y, data.Key.z)] = data.Value;
-        }
+        PlacementDataHandler.instance.AddPlacedObject(gridPosition, objectSize, ID, placedObjectIndex);
     }
     
     /// <summary>

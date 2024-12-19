@@ -73,6 +73,18 @@ public class PlacementSystem : MonoBehaviour
         TogglePlacement();
     }
 
+    public void ShowDetails()
+    {
+        Debug.Log("FloorDatas: " + floorData.placedObjects.Count);
+        Debug.Log("WallDatas: " + wallData.placedObjects.Count);
+        Debug.Log("WalLDecorDatas: " + wallDecorData.placedObjects.Count);
+        Debug.Log("FurnitureDatas: " + furnitureData.placedObjects.Count);
+        foreach (Vector3Int temp in wallData.placedObjects.Keys)
+        {
+            Debug.Log(temp);
+        }
+    }
+
     /// <summary>
     /// Updates the placement system each frame, checking for changes in grid position.
     /// </summary>

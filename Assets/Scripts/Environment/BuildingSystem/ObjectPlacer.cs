@@ -14,7 +14,7 @@ public class ObjectPlacer : MonoBehaviour
     /// List of GameObjects that have been placed in the scene.
     /// </summary>
     [SerializeField]
-    public List<KeyValuePair<GameObject, int>> placedGameObjects = new();
+    public List<GameObject> placedGameObjects = new();
 
     [SerializeField] PlacementSystem placementSystem;
     
@@ -48,7 +48,8 @@ public class ObjectPlacer : MonoBehaviour
         }
 
         MoneyManager.instance.ChangeMoney(-objectData.cost);
-        placedGameObjects.Add(new KeyValuePair<GameObject, int>(newObject, objectData.ID));
+        placedGameObjects.Add(newObject);
+        PlacementDataHandler.instance.AddData(objectData, position, rotation);
         placementSystem.OnPlaced?.Invoke();
         return placedGameObjects.Count - 1;
     }
@@ -59,17 +60,15 @@ public class ObjectPlacer : MonoBehaviour
     /// <param name="gameObjectIndex">The index of the object to remove.</param>
     internal void RemoveObjectAt(int gameObjectIndex)
     {
-        if (placedGameObjects.Count <= gameObjectIndex || placedGameObjects[gameObjectIndex].Key == null)
+        if (placedGameObjects.Count <= gameObjectIndex || placedGameObjects[gameObjectIndex] == null)            
             return;
         
-        if (placedGameObjects[gameObjectIndex].Key.CompareTag(("Machine")))
-            WorldInteractables.instance.RemoveArcadeMachine(placedGameObjects[gameObjectIndex].Key);
-        
-        PlacementSystemDataHandler.Instance.RemoveGameObjectData(gameObjectIndex);
-        PlacementSystemDataHandler.Instance.UpdateData();
-        
-        Destroy(placedGameObjects[gameObjectIndex].Key);
-        placedGameObjects.RemoveAt(gameObjectIndex);
+        if (placedGameObjects[gameObjectIndex].CompareTag(("Machine")))
+            WorldInteractables.instance.RemoveArcadeMachine(placedGameObjects[gameObjectIndex]);
+
+        PlacementDataHandler.instance.RemovePlacedObject(placedGameObjects[gameObjectIndex]);
+        Destroy(placedGameObjects[gameObjectIndex]);
+        placedGameObjects[gameObjectIndex] = null;
         Invoke("ActionInvocation", .2f);
     }
 

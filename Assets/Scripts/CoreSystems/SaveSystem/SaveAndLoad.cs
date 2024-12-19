@@ -16,7 +16,7 @@ public class SaveAndLoad : MonoBehaviour
     [SerializeField] private bool autoSaveEnabled = true;
 
     [Tooltip("Interval in seconds between auto-saves.")]
-    [SerializeField] private float autoSaveInterval = 10f;
+    [SerializeField] private float autoSaveInterval = 300f;
 
     void Awake()
     {

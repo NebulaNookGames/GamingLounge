@@ -11,6 +11,7 @@ public class HeadTracking : MonoBehaviour
     public float retargetSpeed = 4;
     public bool noTracking;
     public Vector3 originalPos;
+    public Vector3 beginPosOffset = Vector3.zero;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,10 +21,10 @@ public class HeadTracking : MonoBehaviour
 
     private void Update()
     {
-        originalPos = transform.position + (transform.forward * 2f);
+        originalPos = transform.position + beginPosOffset + (transform.forward * 2f);
         
         // Default target position in world space
-        Vector3 targetPos = transform.position + (transform.forward * 2f);
+        Vector3 targetPos = transform.position + beginPosOffset + (transform.forward * 2f);
         Transform closestTracking = null;
         if (!noTracking)
         {

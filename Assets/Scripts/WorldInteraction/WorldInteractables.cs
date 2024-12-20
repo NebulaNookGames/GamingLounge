@@ -22,6 +22,7 @@ public class WorldInteractables : MonoBehaviour
     /// </summary>
     public List<GameObject> availableArcadeMachines;
     
+    public List<PointOfInterest> pointOfInterests;
     /// <summary>
     /// Initializes the singleton instance on Awake.
     /// </summary>

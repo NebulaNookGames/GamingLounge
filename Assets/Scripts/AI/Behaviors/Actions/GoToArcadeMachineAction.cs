@@ -12,7 +12,9 @@ public partial class GoToArcadeMachineAction : Action
 {
     // Blackboard variable for the agent (the GameObject representing the character).
     [SerializeReference] public BlackboardVariable<GameObject> Agent;
-
+    
+    [SerializeReference] public BlackboardVariable<GameObject> HeadTracker;
+    
     // Blackboard variable for the arcade machine that the agent is heading to.
     [SerializeReference] public BlackboardVariable<GameObject> OccupiedArcadeMachine;
 
@@ -53,6 +55,10 @@ public partial class GoToArcadeMachineAction : Action
             Vector3 aimPos = OccupiedArcadeMachine.Value.GetComponent<UsagePositionStorage>().usagePosition.position;
             Agent.Value.transform.position = new Vector3(aimPos.x, Agent.Value.transform.position.y, aimPos.z);
             Agent.Value.transform.rotation = Quaternion.LookRotation(OccupiedArcadeMachine.Value.GetComponent<RotatePlacementObject>().objectToRotate.transform.forward, Vector3.up);            
+
+            if (HeadTracker.Value != null)
+                HeadTracker.Value.GetComponent<HeadTracking>().noTracking = true; 
+            
             return Status.Success;
         }
 

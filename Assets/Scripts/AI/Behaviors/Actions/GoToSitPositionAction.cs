@@ -12,7 +12,7 @@ public partial class GoToSitPositionAction : Action
     [SerializeReference] public BlackboardVariable<GameObject> Agent;
     [SerializeReference] public BlackboardVariable<GameObject> Machine;
     [SerializeReference] public BlackboardVariable<GameObject> SitPosition;
-    
+    [SerializeReference] public BlackboardVariable<GameObject> HeadTracker;
     protected override Status OnStart()
     {
         Agent.Value.GetComponent<NavMeshAgent>().isStopped = false; 
@@ -42,6 +42,8 @@ public partial class GoToSitPositionAction : Action
             Agent.Value.transform.position = new Vector3(aimPos.x, Agent.Value.transform.position.y, aimPos.z);
             Agent.Value.GetComponent<NavMeshAgent>().enabled = false;
             Agent.Value.transform.rotation = Quaternion.LookRotation(-SitPosition.Value.transform.forward, Vector3.up);            
+            if (HeadTracker.Value != null)
+                HeadTracker.Value.GetComponent<HeadTracking>().noTracking = true; 
             return Status.Success;
         }
 

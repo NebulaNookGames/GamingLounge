@@ -11,15 +11,21 @@ public partial class ResupplyArcadeMachineAction : Action
     // Blackboard variable for the arcade machine to be resupplied.
     [SerializeReference] public BlackboardVariable<GameObject> OccupiedArcadeMachine;
 
+    // Blackboard variable for the agent (the GameObject representing the character).
+    [SerializeReference] public BlackboardVariable<GameObject> Agent;
+    
     // Blackboard variable indicating whether the agent is at the machine.
     [SerializeReference] public BlackboardVariable<bool> atMachine;
 
+    [SerializeReference] public BlackboardVariable<GameObject> HeadTracker;
+    
     /// <summary>
     /// Starts the resupply action. Currently, no logic is executed in this method, the action remains running.
     /// </summary>
     /// <returns>Status of the action (Running, Failure, etc.)</returns>
     protected override Status OnStart()
-    {
+    {   if (HeadTracker.Value != null) 
+            HeadTracker.Value.GetComponent<HeadTracking>().noTracking = false; 
         return Status.Running;
     }
 

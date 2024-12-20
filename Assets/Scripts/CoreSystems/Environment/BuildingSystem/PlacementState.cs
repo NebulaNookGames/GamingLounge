@@ -114,7 +114,8 @@ public class PlacementState : IBuildingState
         }
 
         MeshFilter meshFilter = previewSystem.previewObject.GetComponentInChildren<MeshFilter>();
-
+        SkinnedMeshRenderer skinnedMeshRenderer = previewSystem.previewObject.GetComponentInChildren<SkinnedMeshRenderer>();
+        
         if (meshFilter != null)
         {
             // Get the mesh's local bounds
@@ -122,6 +123,48 @@ public class PlacementState : IBuildingState
 
             // Transform the local bounds to world space
             Transform meshTransform = meshFilter.transform;
+            Vector3 worldCenter = meshTransform.TransformPoint(localBounds.center);
+            Vector3 worldExtents = Vector3.Scale(localBounds.extents, meshTransform.lossyScale);
+            worldExtents.x = worldExtents.x * .5f;
+            worldExtents.z = worldExtents.z * .25f;
+            // Use the object's rotation
+            Quaternion rotation = meshTransform.rotation;
+
+            // Visualize the bounds using the rotation
+            DrawBoxWithRotation(worldCenter, worldExtents, rotation, Color.yellow);
+
+            // Perform the overlap check using the world-space bounds and rotation
+            Collider[] hitColliders = Physics.OverlapBox(
+                worldCenter,
+                worldExtents,
+                rotation,
+                database.objectsData[selectedObjectIndex].overlapCheckingLayermask);
+
+            if (hitColliders.Length > 0)
+            {
+                foreach (Collider hitCollider in hitColliders)
+                {
+                    if (hitCollider.transform.root != previewSystem.previewObject.transform)
+                    {
+                        // Highlight overlapping colliders in red
+                        DrawBoxWithRotation(hitCollider.bounds.center, hitCollider.bounds.extents, Quaternion.identity, Color.red);
+                        return false; // Overlap detected
+                    }
+                }
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No MeshFilter found on the preview object.");
+        }
+        
+        if (skinnedMeshRenderer != null)
+        {
+            // Get the mesh's local bounds
+            Bounds localBounds = skinnedMeshRenderer.sharedMesh.bounds;
+
+            // Transform the local bounds to world space
+            Transform meshTransform = skinnedMeshRenderer.transform;
             Vector3 worldCenter = meshTransform.TransformPoint(localBounds.center);
             Vector3 worldExtents = Vector3.Scale(localBounds.extents, meshTransform.lossyScale);
             worldExtents.x = worldExtents.x * .5f;

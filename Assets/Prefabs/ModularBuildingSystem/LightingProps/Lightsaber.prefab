@@ -27,11 +27,11 @@ Transform:
   m_GameObject: {fileID: 2479965876946610132}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.489, y: 0.764, z: 0.533}
+  m_LocalPosition: {x: 0, y: 0.25399995, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3610165944730273518}
+  m_Father: {fileID: 5428539166597214225}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &6157866425908920094
 Light:
@@ -152,7 +152,6 @@ Transform:
   m_Children:
   - {fileID: 4977402575082355034}
   - {fileID: 1278779028140276109}
-  - {fileID: 4474502001920020821}
   - {fileID: 5428539166597214225}
   m_Father: {fileID: 8261431243125015676}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -258,7 +257,7 @@ Transform:
   m_GameObject: {fileID: 7225890426856399354}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 0.099, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0.099, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -312,10 +311,11 @@ Transform:
   m_GameObject: {fileID: 8028732570077322808}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.489, y: 0.51, z: 0.533}
+  m_LocalPosition: {x: 0.034, y: 0.51, z: 0.019}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4474502001920020821}
   m_Father: {fileID: 3610165944730273518}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &8342205613529044752
@@ -416,7 +416,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: de8ba6f9a4351854993c857cc8e60703, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: de8ba6f9a4351854993c857cc8e60703, type: 3}
       propertyPath: m_LocalPosition.y
@@ -424,7 +424,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: de8ba6f9a4351854993c857cc8e60703, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.513
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: de8ba6f9a4351854993c857cc8e60703, type: 3}
       propertyPath: m_LocalRotation.w

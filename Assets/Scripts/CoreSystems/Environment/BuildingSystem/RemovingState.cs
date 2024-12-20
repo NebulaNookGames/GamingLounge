@@ -53,7 +53,6 @@ public class RemovingState : IBuildingState
     {
         if (gameObjectToColor != null)
         {
-            Debug.Log("3");
             previewSystem.ResetFeedbackToRemovalPreview(gameObjectToColor);
             gameObjectToColor = null;
         }
@@ -116,7 +115,6 @@ public class RemovingState : IBuildingState
                 GameObject currentGameObjectToColor = objectPlacer.placedGameObjects[gameObjectIndex];
                 if (currentGameObjectToColor != null && gameObjectToColor == null)
                 {
-                    Debug.Log("1");
                     gameObjectToColor = currentGameObjectToColor;
                     previewSystem.ApplyFeedbackToRemovalPreview(gameObjectToColor);
                 }
@@ -131,7 +129,6 @@ public class RemovingState : IBuildingState
         }
         else if(gameObjectToColor != null)
         {
-            Debug.Log("2");
             previewSystem.ResetFeedbackToRemovalPreview(gameObjectToColor);
             gameObjectToColor = null;
         }

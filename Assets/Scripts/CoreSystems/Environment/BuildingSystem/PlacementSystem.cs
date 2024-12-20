@@ -46,9 +46,6 @@ public class PlacementSystem : MonoBehaviour
     private bool placementOn = true; // Indicates whether placement mode is active.
 
     public GameObject placementCanvas; // UI canvas for placement mode.
-
-    public GameObject EImage;
-    public GameObject RImage; 
     
     public Action OnPlaced;
 
@@ -107,8 +104,6 @@ public class PlacementSystem : MonoBehaviour
         {
             placementOn = false;
             placementCanvas.SetActive(false);
-            EImage.SetActive(true);
-            RImage.SetActive(false);
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             StopPlacement();
@@ -117,8 +112,6 @@ public class PlacementSystem : MonoBehaviour
         {
             placementOn = true;
             placementCanvas.SetActive(true);
-            EImage.SetActive(false);
-            RImage.SetActive(false);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
@@ -136,7 +129,6 @@ public class PlacementSystem : MonoBehaviour
         
         buildingState = new PlacementState(ID, grid, preview, this, database, floorData, wallData, wallDecorData,furnitureData, objectPlacer);
         inputManager.OnClicked += PlaceStructure;
-        RImage.SetActive(true);
     }
     
     
@@ -150,7 +142,6 @@ public class PlacementSystem : MonoBehaviour
         foreach (GameObject gridPart in unlockedGridParts)
             gridPart.SetActive(true);
         
-        RImage.SetActive(false);
         buildingState = new RemovingState(grid, preview, this, floorData, wallData, wallDecorData, furnitureData, objectPlacer);
         inputManager.OnClicked += PlaceStructure;
     }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -11,7 +12,8 @@ public class RemovingState : IBuildingState
     private PreviewSystem previewSystem;
     private GridData floorData, wallData, wallDecorData, furnitureData;
     private ObjectPlacer objectPlacer;
-
+    private GameObject gameObjectToColor; 
+    
     /// <summary>
     /// Initializes a new instance of the <see cref="RemovingState"/> class.
     /// </summary>
@@ -49,6 +51,13 @@ public class RemovingState : IBuildingState
     /// </summary>
     public void EndState()
     {
+        if (gameObjectToColor != null)
+        {
+            Debug.Log("3");
+            previewSystem.ResetFeedbackToRemovalPreview(gameObjectToColor);
+            gameObjectToColor = null;
+        }
+
         previewSystem.StopShowingPreview();
     }
 
@@ -58,20 +67,8 @@ public class RemovingState : IBuildingState
     /// <param name="gridPosition">The grid position where the removal action is performed.</param>
     public void OnAction(Vector3Int gridPosition)
     {
-        Vector3 newPosition = Vector3.zero;
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = placementSystem.cam.nearClipPlane;
-        Ray ray = placementSystem.cam.ScreenPointToRay(mousePos);
-        RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 100, placementSystem.placementMask))
-        {
-            newPosition = hit.point;
-        }
-
-        Debug.DrawLine(placementSystem.player.transform.position, newPosition, Color.green, 5f);
-
-        GridData selectedData = GetGridDataForRemoval(gridPosition, newPosition);
+        GridData selectedData = GetGridDataForRemoval(gridPosition, GetMousePosition());
         
         if (selectedData == null)
         {
@@ -87,7 +84,7 @@ public class RemovingState : IBuildingState
         }
 
         Vector3 cellPosition = grid.CellToWorld(gridPosition);
-        previewSystem.UpdatePosition(cellPosition, CheckIfSelectionIsValid(gridPosition));
+        previewSystem.UpdatePosition(cellPosition, CheckIfSelectionIsValid(gridPosition), false);
     }
 
     /// <summary>
@@ -110,7 +107,36 @@ public class RemovingState : IBuildingState
     public void UpdateState(Vector3Int gridPosition)
     {
         bool validity = CheckIfSelectionIsValid(gridPosition);
-        previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), validity);
+        GridData selectedData = GetGridDataForRemoval(gridPosition, GetMousePosition());
+        if (selectedData != null)
+        {
+            gameObjectIndex = selectedData.GetRepresentationIndex(gridPosition);
+            if (gameObjectIndex > -1)
+            {
+                GameObject currentGameObjectToColor = objectPlacer.placedGameObjects[gameObjectIndex];
+                if (currentGameObjectToColor != null && gameObjectToColor == null)
+                {
+                    Debug.Log("1");
+                    gameObjectToColor = currentGameObjectToColor;
+                    previewSystem.ApplyFeedbackToRemovalPreview(gameObjectToColor);
+                }
+                else if (currentGameObjectToColor != null && gameObjectToColor != null &&
+                         currentGameObjectToColor != gameObjectToColor)
+                {
+                    previewSystem.ResetFeedbackToRemovalPreview(gameObjectToColor);
+                    gameObjectToColor = currentGameObjectToColor;
+                    previewSystem.ApplyFeedbackToRemovalPreview(gameObjectToColor);
+                }
+            }
+        }
+        else if(gameObjectToColor != null)
+        {
+            Debug.Log("2");
+            previewSystem.ResetFeedbackToRemovalPreview(gameObjectToColor);
+            gameObjectToColor = null;
+        }
+
+        previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), validity, false);
     }
 
     /// <summary>
@@ -141,5 +167,23 @@ public class RemovingState : IBuildingState
     private bool IsWithinRemovalRange(Vector3 newPosition)
     {
         return Vector3.Distance(placementSystem.player.transform.position, newPosition) < 3;
+    }
+
+    Vector3 GetMousePosition()
+    {
+        Vector3 newPosition = Vector3.zero;
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = placementSystem.cam.nearClipPlane;
+        Ray ray = placementSystem.cam.ScreenPointToRay(mousePos);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 100, placementSystem.placementMask))
+        {
+            newPosition = hit.point;
+            return newPosition;
+        }
+
+        Debug.DrawLine(placementSystem.player.transform.position, newPosition, Color.green, 5f);
+        return newPosition;
     }
 }

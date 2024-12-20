@@ -10,7 +10,6 @@ public class PlacementDataHandler : DataHandler
 
     public List<Vector3Int> gridPositions = new();
     public List<Vector2Int> objectSizes = new();
-    public List<int> iDs = new();
     public List<int> placedObjectiDs = new();
 
     public List<ObjectData> objectDatas = new();
@@ -26,7 +25,6 @@ public class PlacementDataHandler : DataHandler
     {
         gridPositions.Clear();
         objectSizes.Clear();
-        iDs.Clear();
         placedObjectiDs.Clear();
         objectDatas.Clear();
         positions.Clear();
@@ -34,7 +32,7 @@ public class PlacementDataHandler : DataHandler
         
         for(int i = 0; i < saveData.gridPositions.Count; i++)
         {
-            objectPlacer.PlaceObject(
+            int index = objectPlacer.PlaceObject(
                 saveData.objectDatas[i],
                 saveData.positions[i],
                 saveData.rotations[i]);
@@ -45,29 +43,25 @@ public class PlacementDataHandler : DataHandler
                    placementSystem.floorData.AddObjectAt(
                        saveData.gridPositions[i],
                        saveData.objectSizes[i],
-                       saveData.iDs[i],
-                       saveData.placedObjectiDs[i]);
+                       index);
                    break;
                case ObjectType.Wall:
                    placementSystem.wallData.AddObjectAt(
                        saveData.gridPositions[i],
                        saveData.objectSizes[i],
-                       saveData.iDs[i],
-                       saveData.placedObjectiDs[i]);
+                       index);
                    break;
                case ObjectType.WallDecor:
                    placementSystem.wallDecorData.AddObjectAt(
                        saveData.gridPositions[i],
                        saveData.objectSizes[i],
-                       saveData.iDs[i],
-                       saveData.placedObjectiDs[i]);
+                       index);
                    break;
                case ObjectType.Furniture:
                    placementSystem.furnitureData.AddObjectAt(
                        saveData.gridPositions[i],
                        saveData.objectSizes[i],
-                       saveData.iDs[i],
-                       saveData.placedObjectiDs[i]);
+                       index);
                    break;
             }
         }
@@ -77,18 +71,16 @@ public class PlacementDataHandler : DataHandler
     {
         saveData.gridPositions = new List<Vector3Int>(gridPositions);
         saveData.objectSizes = new List<Vector2Int>(objectSizes);
-        saveData.iDs = new List<int>(iDs);
         saveData.placedObjectiDs = new List<int>(placedObjectiDs);
         saveData.objectDatas = new List<ObjectData>(objectDatas);
         saveData.positions = new List<Vector3>(positions);
         saveData.rotations = new List<Quaternion>(rotations);
     }
 
-    public void AddPlacedObject(Vector3Int gridPosition, Vector2Int objectSize, int iD, int placedObjectiD)
+    public void AddPlacedObject(Vector3Int gridPosition, Vector2Int objectSize, int placedObjectiD)
     {
         gridPositions.Add(gridPosition);
         objectSizes.Add(objectSize);
-        iDs.Add(iD);
         placedObjectiDs.Add(placedObjectiD);
     }
 
@@ -101,18 +93,25 @@ public class PlacementDataHandler : DataHandler
 
     public void RemovePlacedObject(GameObject go)
     {
+        List<int> indicesToRemove = new List<int>();
+
         for (int i = 0; i < gridPositions.Count; i++)
         {
             if (positions[i] == go.transform.position)
             {
-                gridPositions.RemoveAt(i);
-                objectSizes.RemoveAt(i);
-                iDs.RemoveAt(i);
-                placedObjectiDs.RemoveAt(i);
-                objectDatas.RemoveAt(i);
-                positions.RemoveAt(i);
-                rotations.RemoveAt(i);
+                indicesToRemove.Add(i);
             }
+        }
+
+        for (int i = indicesToRemove.Count - 1; i >= 0; i--)
+        {
+            int index = indicesToRemove[i];
+            gridPositions.RemoveAt(index);
+            objectSizes.RemoveAt(index);
+            placedObjectiDs.RemoveAt(index);
+            objectDatas.RemoveAt(index);
+            positions.RemoveAt(index);
+            rotations.RemoveAt(index);
         }
     }
 }

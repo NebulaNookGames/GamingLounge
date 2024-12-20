@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 /// <summary>
 /// Manages the visual representation of object placement and removal in the game world.
@@ -12,10 +13,10 @@ public class PreviewSystem : MonoBehaviour
     [SerializeField] private InputManager inputManager; // Handles player input for actions like rotation
     [SerializeField] Material previewMaterialPrefabs; // Material used for the preview object
     private Material previewMaterialInstance; // Instance of the preview material for the preview object
-
+    public List<Material> standardMaterials = new List<Material>();
     private SpriteRenderer cellIndicatorRenderer; // Renderer for the cell indicator
     public Vector2Int sizeToUse;
-    private GameObject currentObject; 
+
     private void Start()
     {
         // Initialize the preview material and set the cell indicator to inactive
@@ -32,7 +33,6 @@ public class PreviewSystem : MonoBehaviour
     public void StartShowingPlacementPreview(GameObject prefab, Vector2Int size)
     {
         sizeToUse = size;
-        currentObject = prefab;
         previewObject = Instantiate(prefab); // Instantiate the preview object
         PreparePreview(previewObject); // Prepare the preview with the appropriate material
         PrepareCursor(size); // Adjust the cell indicator to match the size of the object
@@ -110,7 +110,7 @@ public class PreviewSystem : MonoBehaviour
     /// </summary>
     /// <param name="position">The new position for the preview.</param>
     /// <param name="validity">Indicates whether the placement is valid.</param>
-    public void UpdatePosition(Vector3 position, bool validity)
+    public void UpdatePosition(Vector3 position, bool validity, bool inPlacement)
     {
         if (previewObject != null)
         {
@@ -118,7 +118,7 @@ public class PreviewSystem : MonoBehaviour
             ApplyFeedbackToPreview(validity); // Update feedback for the preview object
         }
         MoveCursor(position); // Move the cursor indicator
-        ApplyFeedbackToCursor(validity); // Update feedback for the cursor
+        ApplyFeedbackToCursor(validity, inPlacement); // Update feedback for the cursor
     }
 
     /// <summary>
@@ -136,11 +136,46 @@ public class PreviewSystem : MonoBehaviour
     /// Applies visual feedback to the cursor indicator based on placement validity.
     /// </summary>
     /// <param name="validity">Indicates whether the placement is valid.</param>
-    private void ApplyFeedbackToCursor(bool validity)
+    private void ApplyFeedbackToCursor(bool validity, bool inPlacement)
     {
-        Color c = validity ? Color.green : Color.red; // Choose color based on validity
+        Color c = new Color();
+        
+        if (inPlacement)
+            c = validity ? Color.green : Color.red; // Choose color based on validity
+        else
+            c = validity ? Color.red : Color.white; // Choose color based on validity
+
         c.a = 0.5f; // Set transparency
         cellIndicatorRenderer.color = c; 
+    }
+
+    public void ApplyFeedbackToRemovalPreview(GameObject gameObject)
+    {
+        standardMaterials.Clear();
+        Color c = Color.red; // Choose color based on validity
+        c.a = 0.5f; // Set transparency
+        previewMaterialInstance.color = c;
+        Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>(); // Get all renderers in the preview object
+        foreach (Renderer renderer in renderers)
+        {
+            Material[] materials = renderer.materials; // Get the current materials
+            for (int i = 0; i < materials.Length; i++)
+            {
+                standardMaterials.Add(renderer.materials[i]);
+                materials[i] = previewMaterialInstance; // Replace with the preview material instance
+            }
+            renderer.materials = materials; // Assign updated materials
+        }
+    }
+
+    public void ResetFeedbackToRemovalPreview(GameObject gameObject)
+    {
+        Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>(); // Get all renderers in the preview object
+        foreach (Renderer renderer in renderers)
+        {
+                renderer.materials = standardMaterials.ToArray();
+        }
+        standardMaterials.Clear();
     }
 
     /// <summary>
@@ -168,6 +203,6 @@ public class PreviewSystem : MonoBehaviour
     {
         cellIndicator.SetActive(true); // Show the cell indicator
         PrepareCursor(Vector2Int.one); // Prepare the cursor for single cell removal
-        ApplyFeedbackToCursor(false); // Set feedback to invalid
+        ApplyFeedbackToCursor(false, false); // Set feedback to invalid
     }
 }

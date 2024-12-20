@@ -186,8 +186,8 @@ public class PlacementState : IBuildingState
                                              previewSystem.previewObject.GetComponent<RotatePlacementObject>().objectToRotate.transform.rotation);
         
         GridData selectedData = GetUsedGridData();
-        selectedData.AddObjectAt(gridPosition, previewSystem.sizeToUse, database.objectsData[selectedObjectIndex].ID, index);
-        previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), false);
+        selectedData.AddObjectAt(gridPosition, previewSystem.sizeToUse, index);
+        previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), false, true);
     }
 
     /// <summary>
@@ -218,6 +218,6 @@ public class PlacementState : IBuildingState
     public void UpdateState(Vector3Int gridPosition)
     {
         bool placementValidity = CheckPlacementValidity(gridPosition, selectedObjectIndex);
-        previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), placementValidity);
+        previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), placementValidity, true);
     }
 }

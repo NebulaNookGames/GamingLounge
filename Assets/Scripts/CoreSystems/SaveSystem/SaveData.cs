@@ -11,7 +11,6 @@ public class SaveData
 {
     public List<Vector3Int> gridPositions;
     public List<Vector2Int> objectSizes;
-    public List<int> iDs;
     public List<int> placedObjectiDs;
 
     public List<ObjectData> objectDatas;

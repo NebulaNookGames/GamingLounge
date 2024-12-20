@@ -35,6 +35,7 @@ public class MoneyDataHandler : DataHandler
         
         foreach (GameObject go in WorldInteractables.instance.allAracadeMachines)
         {
+            if (go == null) continue;
             saveData.moneyInArcadeMachines.Add(go.GetComponent<MoneyHolder>().moneyBeingHeld);
             saveData.arcadeMachinePositions.Add(go.transform.position);
         }

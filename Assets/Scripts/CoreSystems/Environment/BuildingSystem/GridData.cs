@@ -16,16 +16,16 @@ public class GridData
     /// <param name="objectSize">The size of the object in grid cells.</param>
     /// <param name="ID">The ID of the object being placed.</param>
     /// <param name="placedObjectIndex">The index of the placed object in the object placer.</param>
-    public void AddObjectAt(Vector3Int gridPosition, Vector2Int objectSize, int ID, int placedObjectIndex)
+    public void AddObjectAt(Vector3Int gridPosition, Vector2Int objectSize, int placedObjectIndex)
     {
         List<Vector3Int> positionsToOccupy = CalculatePositions(gridPosition, objectSize);
-        PlacementData data = new PlacementData(positionsToOccupy, ID, placedObjectIndex);
+        PlacementData data = new PlacementData(positionsToOccupy, placedObjectIndex);
 
         foreach (var pos in positionsToOccupy)
         {
             placedObjects[pos] = data;
         }
-        PlacementDataHandler.instance.AddPlacedObject(gridPosition, objectSize, ID, placedObjectIndex);
+        PlacementDataHandler.instance.AddPlacedObject(gridPosition, objectSize, placedObjectIndex);
     }
     
     /// <summary>
@@ -102,7 +102,6 @@ public class GridData
 public class PlacementData
 {
     public List<Vector3Int> occupiedPositions;
-    public int iD;
     public int placedObjectIndex;
 
     /// <summary>
@@ -111,10 +110,9 @@ public class PlacementData
     /// <param name="occupiedPositions">The grid positions occupied by the object.</param>
     /// <param name="iD">The ID of the object.</param>
     /// <param name="placedObjectIndex">The index of the object in the object placer.</param>
-    public PlacementData(List<Vector3Int> occupiedPositions, int iD, int placedObjectIndex)
+    public PlacementData(List<Vector3Int> occupiedPositions, int placedObjectIndex)
     {
         this.occupiedPositions = occupiedPositions;
-        this.iD = iD;
         this.placedObjectIndex = placedObjectIndex;
     }
 }

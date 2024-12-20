@@ -113,32 +113,48 @@ public class PlacementState : IBuildingState
             return false;
         }
 
-        if (database.objectsData[selectedObjectIndex].shouldCheckForOverlap)
+        MeshFilter meshFilter = previewSystem.previewObject.GetComponentInChildren<MeshFilter>();
+
+        if (meshFilter != null)
         {
-            // Get the mesh's bounds
-            MeshRenderer meshRenderer = previewSystem.previewObject.GetComponentInChildren<MeshRenderer>();
-            Bounds meshBounds = meshRenderer.bounds;
+            // Get the mesh's local bounds
+            Bounds localBounds = meshFilter.sharedMesh.bounds;
 
-            // Calculate the half-extents from the mesh's size
-            Vector3 halfExtents = meshBounds.size / 2f;
+            // Transform the local bounds to world space
+            Transform meshTransform = meshFilter.transform;
+            Vector3 worldCenter = meshTransform.TransformPoint(localBounds.center);
+            Vector3 worldExtents = Vector3.Scale(localBounds.extents, meshTransform.lossyScale);
+            worldExtents.x = worldExtents.x * .5f;
+            worldExtents.z = worldExtents.z * .25f;
+            // Use the object's rotation
+            Quaternion rotation = meshTransform.rotation;
 
-            
-            Collider[] hitColliders =
-                Physics.OverlapBox(
-                    previewSystem.previewObject.GetComponentInChildren<MeshRenderer>().transform.position,
-                    halfExtents, Quaternion.identity,
-                    database.objectsData[selectedObjectIndex].overlapCheckingLayermask);
+            // Visualize the bounds using the rotation
+            DrawBoxWithRotation(worldCenter, worldExtents, rotation, Color.yellow);
+
+            // Perform the overlap check using the world-space bounds and rotation
+            Collider[] hitColliders = Physics.OverlapBox(
+                worldCenter,
+                worldExtents,
+                rotation,
+                database.objectsData[selectedObjectIndex].overlapCheckingLayermask);
+
             if (hitColliders.Length > 0)
             {
-                foreach (Collider collider in hitColliders)
+                foreach (Collider hitCollider in hitColliders)
                 {
-                    if (collider.transform.root != previewSystem.previewObject.transform)
+                    if (hitCollider.transform.root != previewSystem.previewObject.transform)
                     {
-                        return false;
+                        // Highlight overlapping colliders in red
+                        DrawBoxWithRotation(hitCollider.bounds.center, hitCollider.bounds.extents, Quaternion.identity, Color.red);
+                        return false; // Overlap detected
                     }
                 }
-                
             }
+        }
+        else
+        {
+            Debug.LogWarning("No MeshFilter found on the preview object.");
         }
 
         if (database.objectsData[selectedObjectIndex].shouldCheckForDatabase)
@@ -220,4 +236,35 @@ public class PlacementState : IBuildingState
         bool placementValidity = CheckPlacementValidity(gridPosition, selectedObjectIndex);
         previewSystem.UpdatePosition(grid.CellToWorld(gridPosition), placementValidity, true);
     }
+    
+    void DrawBoxWithRotation(Vector3 center, Vector3 extents, Quaternion rotation, Color color)
+    {
+        Vector3[] points = new Vector3[8];
+
+        points[0] = center + rotation * new Vector3(-extents.x, -extents.y, -extents.z);
+        points[1] = center + rotation * new Vector3(-extents.x, -extents.y, extents.z);
+        points[2] = center + rotation * new Vector3(-extents.x, extents.y, -extents.z);
+        points[3] = center + rotation * new Vector3(-extents.x, extents.y, extents.z);
+        points[4] = center + rotation * new Vector3(extents.x, -extents.y, -extents.z);
+        points[5] = center + rotation * new Vector3(extents.x, -extents.y, extents.z);
+        points[6] = center + rotation * new Vector3(extents.x, extents.y, -extents.z);
+        points[7] = center + rotation * new Vector3(extents.x, extents.y, extents.z);
+
+        Debug.DrawLine(points[0], points[1], color);
+        Debug.DrawLine(points[1], points[3], color);
+        Debug.DrawLine(points[3], points[2], color);
+        Debug.DrawLine(points[2], points[0], color);
+
+        Debug.DrawLine(points[4], points[5], color);
+        Debug.DrawLine(points[5], points[7], color);
+        Debug.DrawLine(points[7], points[6], color);
+        Debug.DrawLine(points[6], points[4], color);
+
+        Debug.DrawLine(points[0], points[4], color);
+        Debug.DrawLine(points[1], points[5], color);
+        Debug.DrawLine(points[2], points[6], color);
+        Debug.DrawLine(points[3], points[7], color);
+    }
+
+
 }

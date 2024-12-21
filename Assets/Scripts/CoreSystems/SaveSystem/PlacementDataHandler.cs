@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class PlacementDataHandler : DataHandler
 {
     public static PlacementDataHandler instance; 
+    public ObjectsDatabaseSO objectsDatabaseSO;
     
     public PlacementSystem placementSystem;
     public ObjectPlacer objectPlacer;
@@ -32,10 +33,17 @@ public class PlacementDataHandler : DataHandler
         
         for(int i = 0; i < saveData.gridPositions.Count; i++)
         {
-            int index = objectPlacer.PlaceObject(
-                saveData.objectDatas[i],
-                saveData.positions[i],
-                saveData.rotations[i]);
+            int index = 0; 
+            foreach (ObjectData objData in objectsDatabaseSO.objectsData)
+            {
+                if (saveData.objectDatas[i].ID == objData.ID)
+                {
+                    index = objectPlacer.PlaceObject(
+                        objData,
+                        saveData.positions[i],
+                        saveData.rotations[i]);
+                }
+            }
        
             switch (saveData.objectDatas[i].objectType)
             {

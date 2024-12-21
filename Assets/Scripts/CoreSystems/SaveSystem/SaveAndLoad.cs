@@ -18,6 +18,8 @@ public class SaveAndLoad : MonoBehaviour
     [Tooltip("Interval in seconds between auto-saves.")]
     [SerializeField] private float autoSaveInterval = 300f;
 
+    private SaveData loadedSaveData; 
+    
     void Awake()
     {
         if (instance == null) { instance = this; }
@@ -77,21 +79,16 @@ public class SaveAndLoad : MonoBehaviour
     /// </summary>
     public void Load()
     {
-        try
-        {
-            string jsonString = File.ReadAllText(Application.persistentDataPath + "/saveFile.json"); // Save the data into a string.
+        string jsonString =
+            File.ReadAllText(Application.persistentDataPath + "/saveFile.json"); // Save the data into a string.
 
-            SaveData saveData = JsonUtility.FromJson<SaveData>(jsonString); // Save the string information to a save data object.
+        loadedSaveData =
+            JsonUtility.FromJson<SaveData>(jsonString); // Save the string information to a save data object.
 
-            foreach (DataHandler dataHandler in dataHandlers) // Distribute the save data information to each data handler.
-            {
-                dataHandler.ReceiveData(saveData);
-            }
-            onDataLoaded?.Invoke();
-        }
-        catch
+        foreach (DataHandler dataHandler in dataHandlers) // Distribute the save data information to each data handler.
         {
-            Debug.Log("No JSON saveFile found.");
+            dataHandler.ReceiveData(loadedSaveData);
         }
+        onDataLoaded?.Invoke();
     }
 }

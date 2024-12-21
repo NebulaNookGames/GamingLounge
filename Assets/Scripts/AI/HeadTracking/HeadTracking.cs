@@ -50,18 +50,11 @@ public class HeadTracking : MonoBehaviour
 
         if (closestTracking != null)
         {
-           
             if (Vector3.Distance(closestTracking.position, transform.position) > radius)
-            {
-                Debug.Log("Reset 01");
                 targetPos = originalPos;
-            }
         }
         else
-        {
-            Debug.Log("Reset 02");
             targetPos = originalPos;
-        }
      
         target.position = Vector3.Lerp(target.position, targetPos, Time.deltaTime * retargetSpeed);
     }

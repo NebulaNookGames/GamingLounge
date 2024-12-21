@@ -61,17 +61,25 @@ public class SaveAndLoad : MonoBehaviour
     /// </summary>
     public void Save()
     {
-        File.Delete(Application.persistentDataPath + "/saveFile.json");
-        SaveData saveData = new SaveData();
-
-        foreach (DataHandler dataHandler in dataHandlers) // Recieve data from all data handlers.
+        try
         {
-            dataHandler.SendData(saveData);
+            File.Delete(Application.persistentDataPath + "/saveFile.json");
+            SaveData saveData = new SaveData();
+
+            foreach (DataHandler dataHandler in dataHandlers) // Recieve data from all data handlers.
+            {
+                dataHandler.SendData(saveData);
+            }
+
+            string jsonString = JsonUtility.ToJson(saveData, true); // Create a new string for saving as JSON file data.
+
+            File.WriteAllText(Application.persistentDataPath + "/saveFile.json",
+                jsonString); // Save the string in a JSON file.
         }
-
-        string jsonString = JsonUtility.ToJson(saveData, true); // Create a new string for saving as JSON file data.
-
-        File.WriteAllText(Application.persistentDataPath + "/saveFile.json", jsonString); // Save the string in a JSON file.
+        catch
+        {
+            Debug.Log("Failed saving File.");
+        }
     }
 
     /// <summary>
@@ -79,16 +87,25 @@ public class SaveAndLoad : MonoBehaviour
     /// </summary>
     public void Load()
     {
-        string jsonString =
-            File.ReadAllText(Application.persistentDataPath + "/saveFile.json"); // Save the data into a string.
-
-        loadedSaveData =
-            JsonUtility.FromJson<SaveData>(jsonString); // Save the string information to a save data object.
-
-        foreach (DataHandler dataHandler in dataHandlers) // Distribute the save data information to each data handler.
+        try
         {
-            dataHandler.ReceiveData(loadedSaveData);
+            string jsonString =
+                File.ReadAllText(Application.persistentDataPath + "/saveFile.json"); // Save the data into a string.
+
+            loadedSaveData =
+                JsonUtility.FromJson<SaveData>(jsonString); // Save the string information to a save data object.
+
+            foreach (DataHandler dataHandler in
+                     dataHandlers) // Distribute the save data information to each data handler.
+            {
+                dataHandler.ReceiveData(loadedSaveData);
+            }
+
+            onDataLoaded?.Invoke();
         }
-        onDataLoaded?.Invoke();
+        catch
+        {
+            Debug.Log("Failed loading File.");
+        }
     }
 }

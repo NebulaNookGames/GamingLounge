@@ -17,7 +17,7 @@ public partial class GoToSitPositionAction : Action
     {
         Agent.Value.GetComponent<NavMeshAgent>().isStopped = false; 
         
-        if (Machine.Value == null) return Status.Failure;
+        if (Machine.Value == null || Machine.Value.GetComponentInChildren<SitPositionRecognition>().GetSitPosition() == null) return Status.Failure;
 
         SitPosition.Value = Machine.Value.GetComponentInChildren<SitPositionRecognition>().GetSitPosition();
         

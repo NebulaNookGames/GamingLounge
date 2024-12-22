@@ -24,7 +24,7 @@ public class EntitySpawner : MonoBehaviour
         // Check if it's time to spawn
         if (timer <= 0f)
         {
-            UpdateMaxAmount(WorldInteractables.instance.allAracadeMachines.Count);
+            UpdateMaxAmount();
             if (amount >= maxAmount || maxAmount == 0) return; 
             SpawnEntity(); // Call the spawn method
             timer = spawnInterval; // Reset the timer
@@ -43,8 +43,9 @@ public class EntitySpawner : MonoBehaviour
         }
     }
 
-    void UpdateMaxAmount(int newAmount)
+    void UpdateMaxAmount()
     {
-        maxAmount = newAmount; 
+        int machineAmount = WorldInteractables.instance.allAracadeMachines.Count;
+        maxAmount = machineAmount; 
     }
 }

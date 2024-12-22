@@ -73,9 +73,13 @@ public class SitPositionRecognition : MonoBehaviour
     public GameObject GetSitPosition()
     {
         FillValidObjectList();
-        GameObject tempObject = validObjects[UnityEngine.Random.Range(0, validObjects.Count)];
-        tempObject.GetComponent<SitPositionAvailability>().available = false;
-        validObjects.Remove(tempObject);
+        GameObject tempObject = null;
+        if(validObjects.Count > 0)
+        {
+            tempObject = validObjects[UnityEngine.Random.Range(0, validObjects.Count)];
+            tempObject.GetComponent<SitPositionAvailability>().available = false;
+            validObjects.Remove(tempObject);
+        }
         return tempObject;
     }
 }

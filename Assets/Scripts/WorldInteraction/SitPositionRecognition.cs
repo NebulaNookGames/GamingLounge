@@ -8,6 +8,7 @@ public class SitPositionRecognition : MonoBehaviour
     [SerializeField] private LayerMask layerMaskToMakeThisInvalid;
     public List<GameObject> collidedObjects = new List<GameObject>();
     public List<GameObject> validObjects = new List<GameObject>();
+
     private void Awake()
     {
         PlacementSystem.Instance.OnPlaced += FillValidObjectList;
@@ -50,7 +51,7 @@ public class SitPositionRecognition : MonoBehaviour
             if (collidedObject == null || !collidedObject.GetComponent<SitPositionAvailability>().available) continue; 
             
             // Calculate the vector pointing from the other object to this object
-            Vector3 directionToThis = (transform.parent.position - collidedObject.transform.parent.position).normalized;
+            Vector3 directionToThis = (transform.position - collidedObject.transform.parent.position).normalized;
 
             // Check the dot product between the other object's forward vector and the direction to this object
             float dotProduct = Vector3.Dot(collidedObject.transform.parent.forward, directionToThis);

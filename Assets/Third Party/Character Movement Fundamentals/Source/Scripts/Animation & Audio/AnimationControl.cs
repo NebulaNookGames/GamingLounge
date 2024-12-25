@@ -74,8 +74,8 @@ namespace CMF
 			}
 
 			//Pass values to animator;
-			animator.SetBool("IsGrounded", controller.IsGrounded());
-			animator.SetBool("IsStrafing", useStrafeAnimations);
+			//animator.SetBool("IsGrounded", controller.IsGrounded());
+			//animator.SetBool("IsStrafing", useStrafeAnimations);
 		}
 
 		void OnLand(Vector3 _v)

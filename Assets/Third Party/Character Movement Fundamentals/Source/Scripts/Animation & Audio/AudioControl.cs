@@ -65,7 +65,7 @@ namespace CMF
 			//Calculate horizontal velocity;
 			Vector3 _horizontalVelocity = VectorMath.RemoveDotVector(_velocity, tr.up);
 
-			FootStepUpdate(_horizontalVelocity.magnitude);
+			// FootStepUpdate(_horizontalVelocity.magnitude);
 		}
 
 		void FootStepUpdate(float _movementSpeed)

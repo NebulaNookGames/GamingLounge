@@ -49,8 +49,6 @@ public class PlacementSystem : MonoBehaviour
     
     public Action OnPlaced;
 
-    private float timer = .1f;
-
     private void Awake()
     {
         Instance = this; 

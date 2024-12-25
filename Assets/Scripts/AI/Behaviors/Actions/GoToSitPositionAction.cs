@@ -17,10 +17,10 @@ public partial class GoToSitPositionAction : Action
     {
         Agent.Value.GetComponent<NavMeshAgent>().isStopped = false; 
         
-        if (Machine.Value == null || Machine.Value.GetComponentInChildren<SitPositionRecognition>().GetSitPosition() == null) return Status.Failure;
-
+        if (Machine.Value == null) return Status.Failure;
         SitPosition.Value = Machine.Value.GetComponentInChildren<SitPositionRecognition>().GetSitPosition();
         
+        if(SitPosition.Value == null) return Status.Failure;
         Agent.Value.GetComponent<NavMeshAgent>().SetDestination(
             SitPosition.Value.transform.position - SitPosition.Value.transform.forward.normalized * 0.7f);
        

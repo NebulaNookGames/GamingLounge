@@ -43,6 +43,21 @@ public class ObjectPlacer : MonoBehaviour
             if (objectData.ID == index)
             {
                 WorldInteractables.instance.InitializeNewAracadeMachine(newObject);
+                switch (objectData.ID)
+                {
+                    case 12:
+                        newObject.GetComponent<UsagePositionStorage>().machineType = MachineType.Console;
+                        break;
+                    case 16:
+                        newObject.GetComponent<UsagePositionStorage>().machineType = MachineType.ArcadeMachine;
+                        break;
+                    case 23:
+                        newObject.GetComponent<UsagePositionStorage>().machineType = MachineType.Bike;
+                        break;
+                    case 24:
+                        newObject.GetComponent<UsagePositionStorage>().machineType = MachineType.Race;
+                        break;
+                }
                 break;
             }
         }

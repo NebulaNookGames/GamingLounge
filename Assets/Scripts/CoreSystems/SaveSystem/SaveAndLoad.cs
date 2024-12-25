@@ -87,8 +87,6 @@ public class SaveAndLoad : MonoBehaviour
     /// </summary>
     public void Load()
     {
-        try
-        {
             string jsonString =
                 File.ReadAllText(Application.persistentDataPath + "/saveFile.json"); // Save the data into a string.
 
@@ -102,10 +100,6 @@ public class SaveAndLoad : MonoBehaviour
             }
 
             onDataLoaded?.Invoke();
-        }
-        catch
-        {
-            Debug.Log("Failed loading File.");
-        }
+        
     }
 }

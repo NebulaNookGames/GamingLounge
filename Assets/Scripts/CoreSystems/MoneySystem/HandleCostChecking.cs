@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; 
+using TMPro;
 
 public class HandleCostChecking : MonoBehaviour
 {
@@ -9,6 +9,7 @@ public class HandleCostChecking : MonoBehaviour
     [SerializeField] private int[] indexes;
     [SerializeField] private Color validColor = Color.green;
     [SerializeField] private Color invalidColor = Color.red;
+    [SerializeField] private ObjectPlacer objectPlacer;
     
     private void OnEnable()
     {
@@ -38,6 +39,12 @@ public class HandleCostChecking : MonoBehaviour
             }
 
             else
+            {
+                buttons[i].GetComponent<Button>().interactable = false;
+                buttons[i].GetComponent<Button>().image.color = invalidColor;
+            }
+            
+            if (i == 8 && objectPlacer.upgradePCIsPlaced)
             {
                 buttons[i].GetComponent<Button>().interactable = false;
                 buttons[i].GetComponent<Button>().image.color = invalidColor;

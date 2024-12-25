@@ -95,6 +95,8 @@ public class PlacementState : IBuildingState
     /// <returns>True if the object can be placed, false otherwise.</returns>
     private bool CheckPlacementValidity(Vector3Int gridPosition, int selectedObjectIndex)
     {
+        if (selectedObjectIndex == 25 && objectPlacer.upgradePCIsPlaced) return false;
+
         if (database.objectsData[selectedObjectIndex].cost > MoneyManager.instance.MoneyAmount) return false;
 
         Vector3 newPosition = Vector3.zero;

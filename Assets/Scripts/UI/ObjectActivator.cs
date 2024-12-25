@@ -41,6 +41,8 @@ public class ObjectActivator : MonoBehaviour
         // Deactivate all objects in the array.
         foreach (GameObject obj in objects)
         {
+            if(obj == null) continue;
+            
             obj.SetActive(false);
         }
 

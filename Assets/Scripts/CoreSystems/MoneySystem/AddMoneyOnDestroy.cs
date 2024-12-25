@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class AddMoneyOnDestroy : MonoBehaviour
 {
-    public int amount;
+    int amount;
     bool shouldAddMoney;
 
     private void OnEnable()
@@ -11,6 +11,11 @@ public class AddMoneyOnDestroy : MonoBehaviour
         shouldAddMoney = true;
     }
 
+    public void SetAmount(int amount)
+    {
+        this.amount = amount;
+    }
+    
     private void OnDestroy()
     {
         if(shouldAddMoney)

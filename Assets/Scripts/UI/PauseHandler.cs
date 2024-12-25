@@ -21,6 +21,8 @@ public class PauseHandler : MonoBehaviour
    
    // Is the game currently paused.
    bool isPaused;
+
+   public bool pausedByOtherSystem;
    public bool IsPaused
    {
       get { return isPaused;}
@@ -42,7 +44,7 @@ public class PauseHandler : MonoBehaviour
    /// </summary>
    void Update()
    {
-      if(Input.GetKeyDown(KeyCode.Escape) && canPause && Time.timeScale != 0)
+      if(Input.GetKeyDown(KeyCode.Escape) && !pausedByOtherSystem)
       {
          HandlePause();
       }

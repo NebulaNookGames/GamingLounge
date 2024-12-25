@@ -17,6 +17,8 @@ public class ObjectPlacer : MonoBehaviour
     public List<GameObject> placedGameObjects = new();
 
     [SerializeField] PlacementSystem placementSystem;
+
+    public bool upgradePCIsPlaced = false; 
     
     /// <summary>
     /// Instantiates a prefab at the specified position and rotation.
@@ -27,6 +29,8 @@ public class ObjectPlacer : MonoBehaviour
     /// <returns>The index of the newly placed object in the list.</returns>
     public int PlaceObject(ObjectData objectData, Vector3 position, Quaternion rotation)
     {
+        if(objectData.ID == 25) upgradePCIsPlaced = true;
+        
         GameObject newObject = Instantiate(objectData.Prefab);
         newObject.transform.position = position;
         if(newObject.GetComponent<RotatePlacementObject>()) 
@@ -36,8 +40,11 @@ public class ObjectPlacer : MonoBehaviour
             newObject.GetComponent<ActivatePlacedObject>().Enable();
 
         if (newObject.GetComponent<AddMoneyOnDestroy>())
-            newObject.GetComponent<AddMoneyOnDestroy>().amount = objectData.cost;
-
+            newObject.GetComponent<AddMoneyOnDestroy>().SetAmount(objectData.cost);
+        
+        if (newObject.GetComponent<ActivateAtDistance>())
+            newObject.GetComponent<ActivateAtDistance>().enabled = true;
+        
         foreach (var index in arcadeMachineIndexes)
         {
             if (objectData.ID == index)
@@ -61,7 +68,7 @@ public class ObjectPlacer : MonoBehaviour
                 break;
             }
         }
-
+        
         MoneyManager.instance.ChangeMoney(-objectData.cost);
         placedGameObjects.Add(newObject);
         PlacementDataHandler.instance.AddData(objectData, position, rotation);
@@ -75,6 +82,9 @@ public class ObjectPlacer : MonoBehaviour
     /// <param name="gameObjectIndex">The index of the object to remove.</param>
     internal void RemoveObjectAt(int gameObjectIndex)
     {
+        if(placedGameObjects[gameObjectIndex].CompareTag("UpgradePC"))
+            upgradePCIsPlaced = false;
+        
         if (placedGameObjects.Count <= gameObjectIndex || placedGameObjects[gameObjectIndex] == null)            
             return;
         

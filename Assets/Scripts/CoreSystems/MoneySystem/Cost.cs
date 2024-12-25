@@ -7,6 +7,7 @@ public class Cost : MonoBehaviour
     [SerializeField] private int maximumAmount = 20; // Maximum cost, when placed inside of buildings
     [SerializeField] private LayerMask layerMask; // Layer mask for walls
     [SerializeField] private Transform transformToCheckFrom; // Origin point for raycasts
+    [SerializeField] private bool showRaycastGizmos = false; // Should raycasts be shown inside of the scene view to show cost checking?
     private Vector3[] directions =  // 16 Directions to cast rays
     {
         Vector3.left,                             // Left
@@ -58,17 +59,17 @@ public class Cost : MonoBehaviour
         return false;
     }
 
-    // Optional: Visualize raycasts in the Scene view for debugging
-    // private void OnDrawGizmos()
-    // {
-    //     if (!Application.isPlaying) return; 
-    //     
-    //     if (transformToCheckFrom == null) return;
-    //
-    //     Gizmos.color = Color.red;
-    //     foreach (var direction in directions)
-    //     {
-    //         Gizmos.DrawRay(transformToCheckFrom.position, direction * 1000); // Adjust ray distance
-    //     }
-    // }
+    //Optional: Visualize raycasts in the Scene view for debugging
+    private void OnDrawGizmos()
+    {
+        if (!Application.isPlaying || !showRaycastGizmos) return; 
+        
+        if (transformToCheckFrom == null) return;
+    
+        Gizmos.color = Color.red;
+        foreach (var direction in directions)
+        {
+            Gizmos.DrawRay(transformToCheckFrom.position, direction * 1000); // Adjust ray distance
+        }
+    }
 }

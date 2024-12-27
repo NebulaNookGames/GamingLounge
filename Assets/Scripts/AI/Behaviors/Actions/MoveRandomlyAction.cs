@@ -32,7 +32,8 @@ public partial class MoveRandomlyAction : Action
         agent.Value.GetComponent<NavMeshAgent>().isStopped = false;
 
         bool positionFound = false;
-
+        int tries = 0; 
+        
         while (!positionFound)
         {
             // Random point within a sphere
@@ -50,6 +51,17 @@ public partial class MoveRandomlyAction : Action
                 positionFound = true;
                 randomPosition = hit.position;
                 agent.Value.GetComponent<NavMeshAgent>().SetDestination(randomPosition);
+            }
+
+            tries++;
+            if (tries >= 10)
+            {
+                if (!buildingChecker.Value.GetComponent<CheckIfInBuilding>().IsInBuilding())
+                {
+                    positionFound = true;
+                    randomPosition = hit.position;
+                    agent.Value.GetComponent<NavMeshAgent>().SetDestination(randomPosition);
+                }  
             }
         }
 

@@ -1,14 +1,12 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
-public class Cost : MonoBehaviour
+public class CheckIfInBuilding : MonoBehaviour
 {
-    [SerializeField] private int minimumAmount = 5; // Minimum cost, when placed outside of buildings
-    [SerializeField] private int maximumAmount = 20; // Maximum cost, when placed inside of buildings
     [SerializeField] private LayerMask layerMask; // Layer mask for walls
     [SerializeField] private Transform transformToCheckFrom; // Origin point for raycasts
     [SerializeField] private bool showRaycastGizmos = false; // Should raycasts be shown inside of the scene view to show cost checking?
-    [SerializeField] private float raycastDistance = 20f;
+    [SerializeField] private float raycastDistance = 1000f; // The distance the raycasts should check.
+    
     private Vector3[] directions =  // 16 Directions to cast rays
     {
         Vector3.left,                             // Left
@@ -29,19 +27,19 @@ public class Cost : MonoBehaviour
         (Vector3.back + Vector3.right * 0.35f).normalized     // Midpoint: Backward-right and Backward
     };
 
-    public int GetCost()
+    public bool IsInBuilding()
     {
         foreach (var direction in directions)
         {
             if (!IsWallInDirection(direction))
             {
                 // If any raycast fails to hit a wall, return base cost
-                return minimumAmount;
+                return false;
             }
         }
 
         // If all raycasts hit a wall, double the cost
-        return maximumAmount;
+        return true;
     }
 
     private bool IsWallInDirection(Vector3 direction)

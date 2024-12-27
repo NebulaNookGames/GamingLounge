@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class EntitySpawner : MonoBehaviour
 {
@@ -6,7 +7,12 @@ public class EntitySpawner : MonoBehaviour
     public float spawnInterval = 10f; // Time between spawns in seconds
     private float timer;
     private int maxAmount = 0;
-    private int amount; 
+    private int amount;
+
+    [SerializeField] private float spawnDistance = 30;
+    [SerializeField] GameObject buildingChecker;
+
+    private bool spawningBlocked = false; 
     
     // Start is called before the first frame update
     void Start()
@@ -17,6 +23,7 @@ public class EntitySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (spawningBlocked) return; 
         
         // Update the timer
         timer -= Time.deltaTime;
@@ -26,20 +33,42 @@ public class EntitySpawner : MonoBehaviour
         {
             UpdateMaxAmount();
             if (amount >= maxAmount || maxAmount == 0) return; 
-            SpawnEntity(); // Call the spawn method
+            StartCoroutine(SpawnEntity()); // Call the spawn method
             timer = spawnInterval; // Reset the timer
         }
     }
 
     // Method to spawn the entity
-    void SpawnEntity()
+    IEnumerator SpawnEntity()
     {
-        if (entityPrefab != null)
+        spawningBlocked = true; 
+        bool foundSpawnPos = false;
+        
+        while (!foundSpawnPos)
+        {
+            Vector3 randomPos = transform.position;
+            
+            randomPos = new Vector3(
+                Random.Range(transform.position.x - spawnDistance, transform.position.x + spawnDistance),
+                transform.position.y,
+                Random.Range(transform.position.z - spawnDistance, transform.position.x + spawnDistance));
+
+            buildingChecker.transform.position = randomPos;
+
+            yield return new WaitForSeconds(.2f);
+            if (!buildingChecker.GetComponent<CheckIfInBuilding>().IsInBuilding())
+            {
+                foundSpawnPos = true; 
+            }
+        }
+
+        if (entityPrefab != null && buildingChecker != null)
         {
             // Instantiate the entityPrefab at the spawner's position with no rotation
-            GameObject newEntity = Instantiate(entityPrefab, transform.position, Quaternion.identity);
+            GameObject newEntity = Instantiate(entityPrefab, buildingChecker.transform.position, Quaternion.identity);
             newEntity.transform.parent = transform; 
-            amount++; 
+            amount++;
+            spawningBlocked = false;
         }
     }
 

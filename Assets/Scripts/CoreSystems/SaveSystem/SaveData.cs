@@ -25,4 +25,6 @@ public class SaveData
     
     public bool[] boughtObjects;
     public bool[] boughtLand;
+    
+    public List<NPCValues> npcValues;
 }

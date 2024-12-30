@@ -29,17 +29,18 @@ public class CheckIfInBuilding : MonoBehaviour
 
     public bool IsInBuilding()
     {
+        bool inBuilding = true; 
+        
         foreach (var direction in directions)
         {
             if (!IsWallInDirection(direction))
             {
-                // If any raycast fails to hit a wall, return base cost
-                return false;
+                inBuilding = false;
             }
         }
 
         // If all raycasts hit a wall, double the cost
-        return true;
+        return inBuilding;
     }
 
     private bool IsWallInDirection(Vector3 direction)
@@ -51,7 +52,6 @@ public class CheckIfInBuilding : MonoBehaviour
             // Check if the hit object is on the "Wall" layer
             return true;
         }
-
         // No wall detected in this direction
         return false;
     }

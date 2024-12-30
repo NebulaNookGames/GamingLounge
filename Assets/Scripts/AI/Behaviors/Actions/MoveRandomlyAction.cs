@@ -12,6 +12,9 @@ public partial class MoveRandomlyAction : Action
     // Blackboard variable for the agent (the GameObject that will move randomly).
     [SerializeReference] public BlackboardVariable<GameObject> agent;
 
+    // Blackboard variable for the agent (the GameObject that will move randomly).
+    [SerializeReference] public BlackboardVariable<bool> moveOnlyInBuilding;
+    
     // Blackboard variable for the radius within which the agent can move randomly.
     [SerializeReference] public BlackboardVariable<float> radius;
 
@@ -46,25 +49,22 @@ public partial class MoveRandomlyAction : Action
                 buildingChecker.Value.transform.position = hit.position;
             }
 
-            if (buildingChecker.Value.GetComponent<CheckIfInBuilding>().IsInBuilding())
+            if (buildingChecker.Value.GetComponent<CheckIfInBuilding>().IsInBuilding() && moveOnlyInBuilding.Value ||
+                !buildingChecker.Value.GetComponent<CheckIfInBuilding>().IsInBuilding() && !moveOnlyInBuilding.Value)
             {
                 positionFound = true;
                 randomPosition = hit.position;
                 agent.Value.GetComponent<NavMeshAgent>().SetDestination(randomPosition);
             }
-
+           
             tries++;
-            if (tries >= 10)
+            if (tries >= 50)
             {
-                if (!buildingChecker.Value.GetComponent<CheckIfInBuilding>().IsInBuilding())
-                {
                     positionFound = true;
                     randomPosition = hit.position;
                     agent.Value.GetComponent<NavMeshAgent>().SetDestination(randomPosition);
-                }  
             }
         }
-
         return Status.Running;
     }
     

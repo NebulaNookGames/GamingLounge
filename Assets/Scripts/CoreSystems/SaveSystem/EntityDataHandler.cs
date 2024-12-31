@@ -1,3 +1,5 @@
+using UnityEngine; 
+
 public class EntityDataHandler : DataHandler
 {
     public override void ReceiveData(SaveData saveData)
@@ -8,6 +10,11 @@ public class EntityDataHandler : DataHandler
 
     public override void SendData(SaveData saveData)
     {
+        for (int i = 0; i < EntityManager.instance.npcValues.Count; i++)
+        {
+            EntityManager.instance.npcValues[i].lastLocation = EntityManager.instance.currentNPCs[i].transform.position;
+        }
+        
         saveData.npcValues = EntityManager.instance.npcValues;
     }
 }

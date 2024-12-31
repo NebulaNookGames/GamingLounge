@@ -76,6 +76,7 @@ public class EntitySpawner : MonoBehaviour
             newEntity.transform.parent = transform; 
             amount++;
             spawningBlocked = false;
+            EntityManager.instance.currentNPCs.Add(newEntity);
         }
     }
 
@@ -83,34 +84,44 @@ public class EntitySpawner : MonoBehaviour
     {
         foreach (NPCValues npcValues in EntityManager.instance.npcValues)
         {
-            bool foundSpawnPos = false;
-
-            while (!foundSpawnPos)
+            Vector3 spawnPos = Vector3.zero; 
+            
+            if (npcValues.lastLocation == Vector3.zero)
             {
-                Vector3 randomPos = transform.position;
-
-                randomPos = new Vector3(
-                    Random.Range(transform.position.x - spawnDistance, transform.position.x + spawnDistance),
-                    transform.position.y,
-                    Random.Range(transform.position.z - spawnDistance, transform.position.x + spawnDistance));
-
-                buildingChecker.transform.position =
-                    new Vector3(randomPos.x, buildingChecker.transform.position.y, randomPos.z);
-
-                yield return new WaitForSeconds(.2f);
-                if (!buildingChecker.GetComponent<CheckIfInBuilding>().IsInBuilding())
+                bool foundSpawnPos = false; 
+                
+                while (!foundSpawnPos)
                 {
-                    foundSpawnPos = true;
+                    Vector3 randomPos = transform.position;
+            
+                    randomPos = new Vector3(
+                        Random.Range(transform.position.x - spawnDistance, transform.position.x + spawnDistance),
+                        transform.position.y,
+                        Random.Range(transform.position.z - spawnDistance, transform.position.x + spawnDistance));
+
+                    buildingChecker.transform.position = new Vector3(randomPos.x, buildingChecker.transform.position.y, randomPos.z);
+
+                    yield return new WaitForSeconds(.2f);
+                    if (!buildingChecker.GetComponent<CheckIfInBuilding>().IsInBuilding())
+                    {
+                        foundSpawnPos = true; 
+                        spawnPos = buildingChecker.transform.position;
+                    }
                 }
+            }
+            else
+            {
+                spawnPos = npcValues.lastLocation;
             }
 
             if (entityPrefab != null && buildingChecker != null)
             {
                 // Instantiate the entityPrefab at the spawner's position with no rotation
                 GameObject newEntity =
-                    Instantiate(entityPrefab, buildingChecker.transform.position, Quaternion.identity);
+                    Instantiate(entityPrefab, spawnPos, Quaternion.identity);
                 newEntity.GetComponentInChildren<RandomizeCharacter>().LoadExisting(npcValues);
                 newEntity.transform.parent = transform;
+                EntityManager.instance.currentNPCs.Add(newEntity);
                 amount++;
             }
 

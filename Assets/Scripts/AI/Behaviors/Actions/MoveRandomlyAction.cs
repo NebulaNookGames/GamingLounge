@@ -12,9 +12,15 @@ public partial class MoveRandomlyAction : Action
     // Blackboard variable for the agent (the GameObject that will move randomly).
     [SerializeReference] public BlackboardVariable<GameObject> agent;
 
+    // Blackboard variable for the agent (the GameObject that will move randomly).
+    [SerializeReference] public BlackboardVariable<bool> moveOnlyInBuilding;
+    
     // Blackboard variable for the radius within which the agent can move randomly.
     [SerializeReference] public BlackboardVariable<float> radius;
 
+    // Blackboard variable for the radius within which the agent can move randomly.
+    [SerializeReference] public BlackboardVariable<GameObject> buildingChecker;
+    
     // The random position the agent will move to.
     private Vector3 randomPosition = Vector3.zero;
 
@@ -27,16 +33,38 @@ public partial class MoveRandomlyAction : Action
     {
         agent.Value.GetComponent<NavMeshAgent>().enabled = true; 
         agent.Value.GetComponent<NavMeshAgent>().isStopped = false;
-        // Random point within a sphere
-        Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * radius;
-        randomDirection += agent.Value.transform.position;
 
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(randomDirection, out hit, radius, NavMesh.AllAreas))
+        bool positionFound = false;
+        int tries = 0; 
+        
+        while (!positionFound)
         {
-            randomPosition = hit.position;
+            // Random point within a sphere
+            Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * radius;
+            randomDirection += agent.Value.transform.position;
+
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(randomDirection, out hit, radius, NavMesh.AllAreas))
+            {
+                buildingChecker.Value.transform.position = hit.position;
+            }
+
+            if (buildingChecker.Value.GetComponent<CheckIfInBuilding>().IsInBuilding() && moveOnlyInBuilding.Value ||
+                !buildingChecker.Value.GetComponent<CheckIfInBuilding>().IsInBuilding() && !moveOnlyInBuilding.Value)
+            {
+                positionFound = true;
+                randomPosition = hit.position;
+                agent.Value.GetComponent<NavMeshAgent>().SetDestination(randomPosition);
+            }
+           
+            tries++;
+            if (tries >= 50)
+            {
+                    positionFound = true;
+                    randomPosition = hit.position;
+                    agent.Value.GetComponent<NavMeshAgent>().SetDestination(randomPosition);
+            }
         }
-        agent.Value.GetComponent<NavMeshAgent>().SetDestination(randomPosition);
         return Status.Running;
     }
     

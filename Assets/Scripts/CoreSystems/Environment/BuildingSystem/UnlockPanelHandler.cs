@@ -28,20 +28,20 @@ public class UnlockPanelHandler : MonoBehaviour
             if (bought[i])
             {
                 buttons[i].GetComponent<Button>().interactable = false;
-                //buttons[i].GetComponent<Button>().image.color = unlockedColor;
+                buttons[i].GetComponent<Button>().image.color = unlockedColor;
                 continue;
             }
             
             if (cost[i] <= amount)
             {
                 buttons[i].GetComponent<Button>().interactable = true;
-                //buttons[i].GetComponent<Button>().image.color = validColor;
+                buttons[i].GetComponent<Button>().image.color = validColor;
             }
 
             else
             {
                 buttons[i].GetComponent<Button>().interactable = false;
-                //buttons[i].GetComponent<Button>().image.color = invalidColor;
+                buttons[i].GetComponent<Button>().image.color = invalidColor;
             }
         }
     }
@@ -53,7 +53,7 @@ public class UnlockPanelHandler : MonoBehaviour
         bought[index] = true;
         unlockables[index].SetActive(true);
         buttons[index].GetComponent<Button>().interactable = false;
-        //buttons[index].GetComponent<Button>().image.color = unlockedColor;
+        buttons[index].GetComponent<Button>().image.color = unlockedColor;
         MoneyManager.instance.ChangeMoney(-cost[index]);
     }
 
@@ -63,7 +63,7 @@ public class UnlockPanelHandler : MonoBehaviour
         {
             unlockables[i].SetActive(true);
             buttons[i].GetComponent<Button>().interactable = false;
-            //buttons[i].GetComponent<Button>().image.color = unlockedColor;
+            buttons[i].GetComponent<Button>().image.color = unlockedColor;
             bought[i] = true;
             
         }

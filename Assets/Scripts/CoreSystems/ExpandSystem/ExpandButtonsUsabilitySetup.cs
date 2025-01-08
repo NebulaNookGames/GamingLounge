@@ -40,18 +40,18 @@ public class ExpandButtonsUsabilitySetup : MonoBehaviour
             if (expandHandler.costs[i] <= moneyManager.MoneyAmount)
             {
                 buttons[i].interactable = true;
-                buttons[i].image.color = validColor;
+                //buttons[i].image.color = validColor;
             }
             else
             {
                 buttons[i].interactable = false;
-                buttons[i].image.color = invalidColor;
+                //buttons[i].image.color = invalidColor;
             }
 
             if (expandHandler.boughtLand[i])
             {
                 buttons[i].interactable = false;
-                buttons[i].image.color = alreadyUnlockedColor;
+                //buttons[i].image.color = alreadyUnlockedColor;
             }
         }
     }

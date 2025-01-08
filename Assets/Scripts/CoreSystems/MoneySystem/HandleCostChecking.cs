@@ -34,20 +34,20 @@ public class HandleCostChecking : MonoBehaviour
             if (dataBase.objectsData[indexes[i]].cost <= amount)
             {
                 buttons[i].GetComponent<Button>().interactable = true;
-                buttons[i].GetComponent<Button>().image.color = validColor;
+                //buttons[i].GetComponent<Image>().color = validColor;
 
             }
 
             else
             {
                 buttons[i].GetComponent<Button>().interactable = false;
-                buttons[i].GetComponent<Button>().image.color = invalidColor;
+                //buttons[i].GetComponent<Image>().color = invalidColor;
             }
             
             if (i == 8 && objectPlacer.upgradePCIsPlaced)
             {
                 buttons[i].GetComponent<Button>().interactable = false;
-                buttons[i].GetComponent<Button>().image.color = invalidColor;
+                //buttons[i].GetComponent<Image>().color = invalidColor;
             }
         }
     }

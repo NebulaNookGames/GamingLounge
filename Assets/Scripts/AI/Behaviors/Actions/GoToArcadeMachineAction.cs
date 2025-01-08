@@ -53,7 +53,7 @@ public partial class GoToArcadeMachineAction : Action
         {
             Agent.Value.GetComponent<NavMeshAgent>().enabled = false;
             Vector3 aimPos = OccupiedArcadeMachine.Value.GetComponent<UsagePositionStorage>().usagePosition.position;
-            Agent.Value.transform.position = new Vector3(aimPos.x, Agent.Value.transform.position.y, aimPos.z);
+            Agent.Value.transform.position = new Vector3(aimPos.x, aimPos.y, aimPos.z);
             Agent.Value.transform.rotation = Quaternion.LookRotation(OccupiedArcadeMachine.Value.GetComponent<RotatePlacementObject>().objectToRotate.transform.forward, Vector3.up);            
 
             if (HeadTracker.Value != null)

@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: -7940882060318916119}
   - component: {fileID: 5972486721985983121}
   - component: {fileID: 6259610476080371505}
+  - component: {fileID: 4999238735240362234}
   m_Layer: 10
   m_Name: UpgradePC
   m_TagString: UpgradePC
@@ -214,6 +215,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inDistanceProof: {fileID: 9177806059535039234}
+--- !u!208 &4999238735240362234
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5767364422584940774}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.6, y: 0, z: 0.73}
+  m_TimeToStationary: 0.5
 --- !u!1 &7225890426856399354
 GameObject:
   m_ObjectHideFlags: 0

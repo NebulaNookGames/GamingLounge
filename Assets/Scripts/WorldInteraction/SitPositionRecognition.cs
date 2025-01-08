@@ -11,11 +11,13 @@ public class SitPositionRecognition : MonoBehaviour
 
     private void Awake()
     {
+        if (!PlacementSystem.Instance) return; 
         PlacementSystem.Instance.OnPlaced += FillValidObjectList;
     }
 
     private void OnDestroy()
     {
+        if (!PlacementSystem.Instance) return; 
         PlacementSystem.Instance.OnPlaced -= FillValidObjectList;
     }
 

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Unity.Behavior;
+using UnityEngine.Animations.Rigging;
 
 public class HeadTracking : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class HeadTracking : MonoBehaviour
     public bool noTracking;
     public Vector3 originalPos;
     public Vector3 beginPosOffset = Vector3.zero;
+    public Rig rig; 
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,6 +23,13 @@ public class HeadTracking : MonoBehaviour
 
     private void Update()
     {
+        if (noTracking)
+        {
+            rig.weight = 0;
+            return;
+        } 
+        rig.weight = 1;
+        
         originalPos = transform.position + beginPosOffset + (transform.forward * 2f);
         
         // Default target position in world space

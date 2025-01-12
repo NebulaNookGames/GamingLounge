@@ -34,6 +34,8 @@ public class GameInput : MonoBehaviour
             
             if (inputAction.activeControl.device is Gamepad)
             {
+                if (inputAction.activeControl.magnitude < .2f) return; 
+                
                 if (activeGameDevice != GameDevice.Gamepad)
                     ChangeActiveGameDevice(GameDevice.Gamepad);
             }

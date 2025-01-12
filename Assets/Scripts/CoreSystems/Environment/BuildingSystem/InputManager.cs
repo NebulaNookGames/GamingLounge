@@ -22,7 +22,7 @@ public class InputManager : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Joystick1Button1))
             OnPlacementToggle?.Invoke();
-        else if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Joystick1Button0))
+        else if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Joystick1Button3))
             OnClicked?.Invoke();
         else if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.Joystick1Button9))
             OnRotate?.Invoke();

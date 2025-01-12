@@ -30,7 +30,8 @@ public class InviteToLounge : MonoBehaviour
     {
         if (interactedWith) return; 
         
-        if (objectToCheckActiveState.activeSelf && Input.GetKeyDown(KeyCode.F))
+        if (objectToCheckActiveState.activeSelf && Input.GetKeyDown(KeyCode.F)
+            || objectToCheckActiveState.activeSelf && Input.GetKeyDown(KeyCode.Joystick1Button4))
         {
             interactedWith = true;
             GetComponent<BehaviorGraphAgent>().BlackboardReference.SetVariableValue("InvitedToLounge", true);

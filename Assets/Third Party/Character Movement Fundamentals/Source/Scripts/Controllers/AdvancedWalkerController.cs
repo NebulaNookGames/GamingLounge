@@ -208,7 +208,7 @@ namespace CMF
 			if (reader == null)
 				return false;
 
-			return Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.Joystick1Button0);
+			return Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.Joystick1Button8);
 		}
 
 		//Determine current controller state based on current momentum and whether the controller is grounded (or not);

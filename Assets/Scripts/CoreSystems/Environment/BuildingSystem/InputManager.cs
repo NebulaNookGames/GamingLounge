@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 /// <summary>
 /// Manages player input for placing objects, toggling placement mode, and rotating objects.
@@ -13,15 +14,17 @@ public class InputManager : MonoBehaviour
     public event Action OnPlacementToggle; // Event triggered when placement mode is toggled
     public event Action OnRotate; // Event triggered when the player rotates an object
 
+    public RectTransform virtualCursorTransform; 
+    
     private void LateUpdate()
     {
         if (Time.timeScale == 0) return; 
         
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Joystick1Button1))
             OnPlacementToggle?.Invoke();
-        else if (Input.GetMouseButtonDown(0))
+        else if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Joystick1Button0))
             OnClicked?.Invoke();
-        else if (Input.GetKeyDown(KeyCode.R))
+        else if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.Joystick1Button9))
             OnRotate?.Invoke();
     }
 
@@ -44,7 +47,12 @@ public class InputManager : MonoBehaviour
     /// <returns>The world position of the selected map point.</returns>
     public Vector3 GetSelectedMapPosition()
     {
-        Vector3 mousePos = Input.mousePosition; // Get the current mouse position
+        Vector3 mousePos = Vector3.zero; 
+        if(GameInput.Instance.activeGameDevice == GameInput.GameDevice.KeyboardMouse)
+            mousePos = Input.mousePosition; // Get the current mouse position
+        else 
+            mousePos = virtualCursorTransform.position;
+        
         mousePos.z = sceneCamera.nearClipPlane; // Set z to the near clip plane of the camera
         Ray ray = sceneCamera.ScreenPointToRay(mousePos); // Create a ray from the camera to the mouse position
         RaycastHit hit; // Variable to store raycast hit information

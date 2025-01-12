@@ -30,7 +30,7 @@ public class MoneyGrabber : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && canGrabMoney)
+        if (Input.GetKeyDown(KeyCode.F) && canGrabMoney || Input.GetKeyDown(KeyCode.Joystick1Button4) && canGrabMoney)
         {
             moneyManager.ChangeMoney(moneyHolder.moneyBeingHeld);
             moneyHolder.ChangeMoney(-moneyHolder.moneyBeingHeld);

@@ -14,7 +14,8 @@ public class UpgradePCHandler : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && inDistanceProof.activeSelf && !GameObject.FindWithTag("MenuUI").GetComponent<PauseHandler>().IsPaused)
+        if (Input.GetKeyDown(KeyCode.F) && inDistanceProof.activeSelf && !GameObject.FindWithTag("MenuUI").GetComponent<PauseHandler>().IsPaused
+            || Input.GetKeyDown(KeyCode.Joystick1Button4) && inDistanceProof.activeSelf && !GameObject.FindWithTag("MenuUI").GetComponent<PauseHandler>().IsPaused)
             ChangeActiveState();
     }
 

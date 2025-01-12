@@ -77,6 +77,9 @@ public class PlacementState : IBuildingState
         {
             throw new System.Exception($"No object with ID {iD}");
         }
+
+        if (GameInput.Instance.activeGameDevice == GameInput.GameDevice.Gamepad)
+            placementSystem.virtualMouse.gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -85,6 +88,7 @@ public class PlacementState : IBuildingState
     public void EndState()
     {
         previewSystem.StopShowingPreview();
+        placementSystem.virtualMouse.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -100,8 +104,13 @@ public class PlacementState : IBuildingState
         if (database.objectsData[selectedObjectIndex].cost > MoneyManager.instance.MoneyAmount) return false;
 
         Vector3 newPosition = Vector3.zero;
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = placementSystem.cam.nearClipPlane;
+        
+        Vector3 mousePos = Vector3.zero; 
+        if(GameInput.Instance.activeGameDevice == GameInput.GameDevice.KeyboardMouse)
+            mousePos = Input.mousePosition; // Get the current mouse position
+        else 
+            mousePos = placementSystem.virtualCursorTransform.position;
+        
         Ray ray = placementSystem.cam.ScreenPointToRay(mousePos);
         RaycastHit hit;
 
@@ -155,10 +164,6 @@ public class PlacementState : IBuildingState
                 }
             }
         }
-        else
-        {
-            Debug.LogWarning("No MeshFilter found on the preview object.");
-        }
         
         if (skinnedMeshRenderer != null)
         {
@@ -196,10 +201,6 @@ public class PlacementState : IBuildingState
                     }
                 }
             }
-        }
-        else
-        {
-            Debug.LogWarning("No MeshFilter found on the preview object.");
         }
 
         if (database.objectsData[selectedObjectIndex].shouldCheckForDatabase)

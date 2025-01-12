@@ -16,9 +16,6 @@ public class PauseHandler : MonoBehaviour
    [Tooltip("How long until the game can be paused.")]
    [SerializeField] float pauseLockedTime;
    
-   // Can the game currently be paused.
-   bool canPause;
-   
    // Is the game currently paused.
    bool isPaused;
 
@@ -36,7 +33,6 @@ public class PauseHandler : MonoBehaviour
    void Awake()
    {
       Cursor.visible = false;
-      StartCoroutine(UnlockPause());
    }
 
    /// <summary>
@@ -44,7 +40,8 @@ public class PauseHandler : MonoBehaviour
    /// </summary>
    void Update()
    {
-      if(Input.GetKeyDown(KeyCode.Escape) && !pausedByOtherSystem)
+      if(Input.GetKeyDown(KeyCode.Escape) && !pausedByOtherSystem 
+         || Input.GetKeyDown(KeyCode.Joystick1Button7) && !pausedByOtherSystem)
       {
          HandlePause();
       }
@@ -73,16 +70,6 @@ public class PauseHandler : MonoBehaviour
          pauseMenu.SetActive(false);
          gameUI.SetActive(true);
       }
-   }
-   
-   /// <summary>
-   /// Changes the canPause boolean to true after the duration of pauseLockedTime.
-   /// </summary>
-   /// <returns></returns> Waits for seconds represented as the pauseLockedTime variable.
-   IEnumerator UnlockPause()
-   {
-      yield return new WaitForSeconds(pauseLockedTime);
-      canPause = true;
    }
    #endregion
 }

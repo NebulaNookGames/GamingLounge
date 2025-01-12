@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneCamera: {fileID: 0}
+  virtualCursorTransform: {fileID: 0}
   placementLayermask:
     serializedVersion: 2
     m_Bits: 8
@@ -133,6 +134,51 @@ Transform:
   - {fileID: 4537697709309335220}
   m_Father: {fileID: 4594702622329265874}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2263841118857926605
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5347462251061605972}
+  - component: {fileID: 2110496737474468994}
+  m_Layer: 0
+  m_Name: InputDeviceManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5347462251061605972
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2263841118857926605}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1322.1597, y: 206.08336, z: 0.1554203}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4594702622329265874}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2110496737474468994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2263841118857926605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80f68a1c01934b140ba4c9caace2f7d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeGameDevice: 0
 --- !u!1 &2297493823412940249
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,6 +512,7 @@ Transform:
   - {fileID: 2215569925159122102}
   - {fileID: 6800436106085909054}
   - {fileID: 6802812968687873020}
+  - {fileID: 5347462251061605972}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6635253733516099191
@@ -673,6 +720,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   placementCanvas: {fileID: 0}
+  virtualMouse: {fileID: 0}
+  virtualCursorTransform: {fileID: 0}
 --- !u!1 &7682266896809262669
 GameObject:
   m_ObjectHideFlags: 0

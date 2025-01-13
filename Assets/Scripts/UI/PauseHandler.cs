@@ -60,7 +60,8 @@ public class PauseHandler : MonoBehaviour
          Time.timeScale = 0;
          pauseMenu.SetActive(true);
          gameUI.SetActive(false);
-         Cursor.visible = true; 
+         if(GameInput.Instance.activeGameDevice == GameInput.GameDevice.KeyboardMouse)
+            Cursor.visible = true; 
       }
       else
       {

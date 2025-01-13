@@ -1,5 +1,6 @@
-using System.Collections;
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem; 
 
 /// <summary>
 /// Pauses/Unpauses the game and opens the Character Selection.
@@ -15,9 +16,8 @@ public class PauseHandler : MonoBehaviour
    [Header("")]
    [Tooltip("How long until the game can be paused.")]
    [SerializeField] float pauseLockedTime;
-   
-   // Can the game currently be paused.
-   bool canPause;
+
+   public InputActionProperty pauseAction; 
    
    // Is the game currently paused.
    bool isPaused;
@@ -30,24 +30,22 @@ public class PauseHandler : MonoBehaviour
    }
    
    #region Methods
-   /// <summary>
-   /// Hides the cursor and calls the UnlockPause coroutine.
-   /// </summary>
-   void Awake()
+
+   private void OnEnable()
    {
-      Cursor.visible = false;
-      StartCoroutine(UnlockPause());
+      pauseAction.action.performed += Pause; 
    }
 
-   /// <summary>
-   /// Calls the HandlePause method if the conditions for pausing are met.
-   /// </summary>
-   void Update()
+   private void OnDisable()
    {
-      if(Input.GetKeyDown(KeyCode.Escape) && !pausedByOtherSystem)
-      {
-         HandlePause();
-      }
+      pauseAction.action.performed -= Pause;
+   }
+
+   void Pause(InputAction.CallbackContext context)
+   {
+      if (pausedByOtherSystem) return; 
+      
+      HandlePause(); 
    }
    
    /// <summary>
@@ -60,29 +58,17 @@ public class PauseHandler : MonoBehaviour
       if (isPaused)
       {
          Time.timeScale = 0;
-         Cursor.visible = true;
-         Cursor.lockState = CursorLockMode.None;
          pauseMenu.SetActive(true);
          gameUI.SetActive(false);
+         Cursor.visible = true; 
       }
       else
       {
          Time.timeScale = 1;
-         Cursor.visible = false;
-         Cursor.lockState = CursorLockMode.Locked;
          pauseMenu.SetActive(false);
          gameUI.SetActive(true);
+         Cursor.visible = false; 
       }
-   }
-   
-   /// <summary>
-   /// Changes the canPause boolean to true after the duration of pauseLockedTime.
-   /// </summary>
-   /// <returns></returns> Waits for seconds represented as the pauseLockedTime variable.
-   IEnumerator UnlockPause()
-   {
-      yield return new WaitForSeconds(pauseLockedTime);
-      canPause = true;
    }
    #endregion
 }

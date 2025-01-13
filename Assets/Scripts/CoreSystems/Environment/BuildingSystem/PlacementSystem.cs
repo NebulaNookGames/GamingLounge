@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI; 
 
 /// <summary>
 /// Manages the placement and removal of objects in the game world.
@@ -43,12 +44,15 @@ public class PlacementSystem : MonoBehaviour
 
     public LayerMask placementMask; // Layer mask used for placement detection.
 
-    private bool placementOn = true; // Indicates whether placement mode is active.
+    public bool placementOn = true; // Indicates whether placement mode is active.
 
     public GameObject placementCanvas; // UI canvas for placement mode.
     
     public Action OnPlaced;
 
+    public GameObject virtualMouse;
+    public RectTransform virtualCursorTransform;
+    
     private void Awake()
     {
         Instance = this; 
@@ -89,6 +93,7 @@ public class PlacementSystem : MonoBehaviour
         
         Vector3 mousePosition = inputManager.GetSelectedMapPosition();
         Vector3Int gridPosition = grid.WorldToCell(mousePosition);
+
         buildingState.UpdateState(gridPosition);
         lastDetectedPosition = gridPosition;
     }
@@ -102,16 +107,15 @@ public class PlacementSystem : MonoBehaviour
         {
             placementOn = false;
             placementCanvas.SetActive(false);
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
+            virtualMouse.SetActive(false);
+            Cursor.visible = false; 
             StopPlacement();
         }
         else
         {
             placementOn = true;
-            placementCanvas.SetActive(true);
             Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
+            placementCanvas.SetActive(true);
         }
     }
 

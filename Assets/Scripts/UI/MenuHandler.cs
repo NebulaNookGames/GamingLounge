@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
+using UnityEngine.InputSystem.UI;
 
 /// <summary>
 /// Entails essential logic for loading scenes and quitting the application. 
@@ -21,12 +23,13 @@ public class MenuHandler : MonoBehaviour
 
     [SerializeField] GameObject transitionCanvas;
 
+    private GameInput gameInput; 
+    
     #region Methods
 
     private void Awake()
     {
         Time.timeScale = 1.0f;
-        Cursor.visible = true;
     }
 
     /// <summary>

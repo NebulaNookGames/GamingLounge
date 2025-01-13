@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem; 
 
 /// <summary>
 /// Manages player input for placing objects, toggling placement mode, and rotating objects.
@@ -13,16 +14,42 @@ public class InputManager : MonoBehaviour
     public event Action OnPlacementToggle; // Event triggered when placement mode is toggled
     public event Action OnRotate; // Event triggered when the player rotates an object
 
-    private void LateUpdate()
+    public RectTransform virtualCursorTransform;
+
+    public InputActionProperty toggleBuildMenuAction;
+    public InputActionProperty validateSelectionAction;
+    public InputActionProperty rotateAction;
+
+    private void OnEnable()
+    {
+        toggleBuildMenuAction.action.performed += PlacementToggle;
+        validateSelectionAction.action.performed += Clicked;
+        rotateAction.action.performed += Rotate;
+    }
+
+    private void OnDisable()
+    {
+        toggleBuildMenuAction.action.performed -= PlacementToggle;
+        validateSelectionAction.action.performed -= Clicked;
+        rotateAction.action.performed -= Rotate; 
+    }
+
+    void PlacementToggle(InputAction.CallbackContext context)
     {
         if (Time.timeScale == 0) return; 
-        
-        if (Input.GetKeyDown(KeyCode.E))
-            OnPlacementToggle?.Invoke();
-        else if (Input.GetMouseButtonDown(0))
-            OnClicked?.Invoke();
-        else if (Input.GetKeyDown(KeyCode.R))
-            OnRotate?.Invoke();
+        OnPlacementToggle?.Invoke();
+    }
+
+    void Clicked(InputAction.CallbackContext context)
+    {
+        if (Time.timeScale == 0) return; 
+        OnClicked?.Invoke();
+    }
+
+    void Rotate(InputAction.CallbackContext context)
+    {
+        if (Time.timeScale == 0) return; 
+        OnRotate?.Invoke(); 
     }
 
     /// <summary>
@@ -44,7 +71,12 @@ public class InputManager : MonoBehaviour
     /// <returns>The world position of the selected map point.</returns>
     public Vector3 GetSelectedMapPosition()
     {
-        Vector3 mousePos = Input.mousePosition; // Get the current mouse position
+        Vector3 mousePos = Vector3.zero; 
+        if(GameInput.Instance.activeGameDevice == GameInput.GameDevice.KeyboardMouse)
+            mousePos = Input.mousePosition; // Get the current mouse position
+        else 
+            mousePos = virtualCursorTransform.position;
+        
         mousePos.z = sceneCamera.nearClipPlane; // Set z to the near clip plane of the camera
         Ray ray = sceneCamera.ScreenPointToRay(mousePos); // Create a ray from the camera to the mouse position
         RaycastHit hit; // Variable to store raycast hit information

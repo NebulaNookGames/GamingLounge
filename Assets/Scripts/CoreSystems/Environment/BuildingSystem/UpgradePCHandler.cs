@@ -1,5 +1,7 @@
 using System;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
+using UnityEngine.InputSystem; 
 
 public class UpgradePCHandler : MonoBehaviour
 {
@@ -7,14 +9,22 @@ public class UpgradePCHandler : MonoBehaviour
     public GameObject inDistanceProof;
     GameObject UpgradePCCanvas;
 
+    public InputActionProperty worldObjectUsageAction; 
+    
     private void OnEnable()
     {
         UpgradePCCanvas = GameObject.FindWithTag("UpgradeCanvas");
+        worldObjectUsageAction.action.performed += UseObject;
     }
 
-    private void Update()
+    private void OnDisable()
     {
-        if (Input.GetKeyDown(KeyCode.F) && inDistanceProof.activeSelf && !GameObject.FindWithTag("MenuUI").GetComponent<PauseHandler>().IsPaused)
+        worldObjectUsageAction.action.performed -= UseObject;
+    }
+
+    void UseObject(InputAction.CallbackContext context)
+    {
+        if(inDistanceProof.activeSelf && !GameObject.FindWithTag("MenuUI").GetComponent<PauseHandler>().IsPaused)
             ChangeActiveState();
     }
 
@@ -23,7 +33,6 @@ public class UpgradePCHandler : MonoBehaviour
         if (isActive)
         {
             GameObject.FindWithTag("MenuUI").GetComponent<PauseHandler>().pausedByOtherSystem = false;
-            Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             UpgradePCCanvas.GetComponent<UpgradeCanvasHandler>().SetUpgradePanelState(false);
             Time.timeScale = 1;
@@ -31,7 +40,6 @@ public class UpgradePCHandler : MonoBehaviour
         else
         {
             GameObject.FindWithTag("MenuUI").GetComponent<PauseHandler>().pausedByOtherSystem = true;
-            Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None; 
             UpgradePCCanvas.GetComponent<UpgradeCanvasHandler>().SetUpgradePanelState(true);
             Time.timeScale = 0;

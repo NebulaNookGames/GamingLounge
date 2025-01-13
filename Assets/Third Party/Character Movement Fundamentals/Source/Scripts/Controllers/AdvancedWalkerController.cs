@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.InputSystem; 
 
 namespace CMF
 {
@@ -12,7 +11,7 @@ namespace CMF
 		//References to attached components;
 		protected Transform tr;
 		protected Mover mover;
-		protected CharacterInput characterInput;
+		public InputReader reader;
 		protected CeilingDetector ceilingDetector;
 
         //Jump key variables;
@@ -60,6 +59,8 @@ namespace CMF
 		[Tooltip("Whether to calculate and apply momentum relative to the controller's transform.")]
 		public bool useLocalMomentum = false;
 
+		public InputActionProperty runInputAction;
+		
 		//Enum describing basic controller states; 
 		public enum ControllerState
 		{
@@ -79,12 +80,8 @@ namespace CMF
 		void Awake () {
 			mover = GetComponent<Mover>();
 			tr = transform;
-			characterInput = GetComponent<CharacterInput>();
 			ceilingDetector = GetComponent<CeilingDetector>();
-
-			if(characterInput == null)
-				Debug.LogWarning("No character input script has been attached to this gameobject", this.gameObject);
-
+			
 			Setup();
 		}
 
@@ -95,26 +92,8 @@ namespace CMF
 
 		void Update()
 		{
-			HandleJumpKeyInput();
 			HandleRunKeyInput();
 		}
-
-        //Handle jump booleans for later use in FixedUpdate;
-        void HandleJumpKeyInput()
-        {
-            bool _newJumpKeyPressedState = IsJumpKeyPressed();
-
-            if (jumpKeyIsPressed == false && _newJumpKeyPressedState == true)
-                jumpKeyWasPressed = true;
-
-            if (jumpKeyIsPressed == true && _newJumpKeyPressedState == false)
-            {
-                jumpKeyWasLetGo = true;
-                jumpInputIsLocked = false;
-            }
-
-            jumpKeyIsPressed = _newJumpKeyPressedState;
-        }
 
         void HandleRunKeyInput()
         {
@@ -187,7 +166,7 @@ namespace CMF
 		protected virtual Vector3 CalculateMovementDirection()
 		{
 			//If no character input script is attached to this object, return;
-			if(characterInput == null)
+			if(reader == null)
 				return Vector3.zero;
 
 			Vector3 _velocity = Vector3.zero;
@@ -195,15 +174,15 @@ namespace CMF
 			//If no camera transform has been assigned, use the character's transform axes to calculate the movement direction;
 			if(cameraTransform == null)
 			{
-				_velocity += tr.right * characterInput.GetHorizontalMovementInput();
-				_velocity += tr.forward * characterInput.GetVerticalMovementInput();
+				_velocity += tr.right * reader.GetVerticalAxis();
+				_velocity += tr.forward * reader.GetHorizontalAxis();
 			}
 			else
 			{
 				//If a camera transform has been assigned, use the assigned transform's axes for movement direction;
 				//Project movement direction so movement stays parallel to the ground;
-				_velocity += Vector3.ProjectOnPlane(cameraTransform.right, tr.up).normalized * characterInput.GetHorizontalMovementInput();
-				_velocity += Vector3.ProjectOnPlane(cameraTransform.forward, tr.up).normalized * characterInput.GetVerticalMovementInput();
+				_velocity += Vector3.ProjectOnPlane(cameraTransform.right, tr.up).normalized * reader.GetHorizontalAxis();
+				_velocity += Vector3.ProjectOnPlane(cameraTransform.forward, tr.up).normalized * reader.GetVerticalAxis();
 			}
 
 			//If necessary, clamp movement vector to magnitude of 1f;
@@ -225,22 +204,12 @@ namespace CMF
 			return _velocity;
 		}
 
-		//Returns 'true' if the player presses the jump key;
-		protected virtual bool IsJumpKeyPressed()
-		{
-			//If no character input script is attached to this object, return;
-			if(characterInput == null)
-				return false;
-
-			return characterInput.IsJumpKeyPressed();
-		}
-
 		protected virtual bool IsRunKeyPressed()
 		{
-			if (characterInput == null)
+			if (reader == null)
 				return false;
 
-			return characterInput.IsRunKeyPressed();
+			return runInputAction.action.IsPressed();
 		}
 
 		//Determine current controller state based on current momentum and whether the controller is grounded (or not);

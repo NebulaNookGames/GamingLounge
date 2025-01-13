@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 /// <summary>
 /// Manages the activation and deactivation of objects in the scene.
@@ -16,7 +18,7 @@ public class ObjectActivator : MonoBehaviour
     /// Array of objects that can be activated or deactivated.
     /// </summary>
     [SerializeField] private GameObject[] objects;
-
+    
     /// <summary>
     /// Activates a specific object by index and hides the overview panel.
     /// </summary>

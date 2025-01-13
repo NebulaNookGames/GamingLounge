@@ -44,6 +44,9 @@ public class RemovingState : IBuildingState
         this.objectPlacer = objectPlacer;
 
         previewSystem.StartShowingRemovePreview();
+        
+        if (GameInput.Instance.activeGameDevice == GameInput.GameDevice.Gamepad)
+            placementSystem.virtualMouse.gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -56,7 +59,8 @@ public class RemovingState : IBuildingState
             previewSystem.ResetFeedbackToRemovalPreview(gameObjectToColor);
             gameObjectToColor = null;
         }
-
+        
+        placementSystem.virtualMouse.gameObject.SetActive(false);
         previewSystem.StopShowingPreview();
     }
 
@@ -169,7 +173,13 @@ public class RemovingState : IBuildingState
     Vector3 GetMousePosition()
     {
         Vector3 newPosition = Vector3.zero;
-        Vector3 mousePos = Input.mousePosition;
+        Vector3 mousePos = Vector3.zero; 
+        
+        if(GameInput.Instance.activeGameDevice == GameInput.GameDevice.KeyboardMouse) 
+            mousePos = Input.mousePosition;
+        else if (GameInput.Instance.activeGameDevice == GameInput.GameDevice.Gamepad)
+            mousePos = placementSystem.virtualCursorTransform.transform.position;
+        
         mousePos.z = placementSystem.cam.nearClipPlane;
         Ray ray = placementSystem.cam.ScreenPointToRay(mousePos);
         RaycastHit hit;
@@ -179,7 +189,6 @@ public class RemovingState : IBuildingState
             newPosition = hit.point;
             return newPosition;
         }
-
         Debug.DrawLine(placementSystem.player.transform.position, newPosition, Color.green, 5f);
         return newPosition;
     }

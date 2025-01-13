@@ -143,10 +143,10 @@ GameObject:
   - component: {fileID: 114808892733143080}
   - component: {fileID: 54247263789400272}
   - component: {fileID: 114854587450894338}
-  - component: {fileID: 114092038815198868}
   - component: {fileID: 114842684940577594}
   - component: {fileID: 114611966454256686}
   - component: {fileID: 892794083737628922}
+  - component: {fileID: 5029213667080725161}
   m_Layer: 6
   m_Name: ThirdPersonWalker_A_Animated
   m_TagString: Player
@@ -261,6 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f5e44db14072ea4c964da3b192181c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reader: {fileID: 5029213667080725161}
   movementSpeed: 3
   airControlRate: 2
   jumpSpeed: 10
@@ -272,23 +273,6 @@ MonoBehaviour:
   slopeLimit: 80
   useLocalMomentum: 1
   cameraTransform: {fileID: 0}
---- !u!114 &114092038815198868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1189618843407812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9819db9f56d8ad4c83e05807a209fc8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  horizontalInputAxis: Horizontal
-  verticalInputAxis: Vertical
-  jumpKey: 32
-  runKey: 304
-  useRawInput: 1
 --- !u!114 &114842684940577594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,6 +323,107 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moneyManager: {fileID: 0}
+--- !u!114 &5029213667080725161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189618843407812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 667a6bee69c5dc7499aef7c447c7e082, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  locomotionInputAction:
+    m_Name: Locomotion Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 3b69211d-bbcb-4e16-98ee-76e7e7305e7a
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: Keyboard
+      m_Id: 08262bf8-d902-400f-be14-aad4c93de56c
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Locomotion Input
+      m_Flags: 4
+    - m_Name: up
+      m_Id: fb8a2e75-8995-4938-b4f4-10a52fcb9bc1
+      m_Path: <Keyboard>/w
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Locomotion Input
+      m_Flags: 8
+    - m_Name: down
+      m_Id: e3c480bf-1acb-44d3-a0a8-1ebefafcef4a
+      m_Path: <Keyboard>/s
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Locomotion Input
+      m_Flags: 8
+    - m_Name: left
+      m_Id: 99a0990b-6ead-4a9d-88bf-d69b7df776de
+      m_Path: <Keyboard>/a
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Locomotion Input
+      m_Flags: 8
+    - m_Name: right
+      m_Id: 9cce86c7-93da-4bde-8875-6a7190706fec
+      m_Path: <Keyboard>/d
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Locomotion Input
+      m_Flags: 8
+    - m_Name: Gamepad
+      m_Id: 3a793224-b824-4fd3-acef-bc7d6dd20620
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Locomotion Input
+      m_Flags: 4
+    - m_Name: up
+      m_Id: c167c036-0a23-4b6e-8ac2-b1ab2dfdb28d
+      m_Path: <Gamepad>/leftStick/up
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Locomotion Input
+      m_Flags: 8
+    - m_Name: down
+      m_Id: 48d3c1df-66a2-4868-a81f-fe4aacd993eb
+      m_Path: <Gamepad>/leftStick/down
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Locomotion Input
+      m_Flags: 8
+    - m_Name: left
+      m_Id: f992155e-e72a-4c56-8672-fd5bf1889ebc
+      m_Path: <Gamepad>/leftStick/left
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Locomotion Input
+      m_Flags: 8
+    - m_Name: right
+      m_Id: f26501d9-91b0-42ba-ac58-bc4088d598df
+      m_Path: <Gamepad>/leftStick/right
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Locomotion Input
+      m_Flags: 8
+    m_Flags: 0
 --- !u!1 &1234082977098520
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,7 +898,7 @@ GameObject:
   - component: {fileID: 5970218356188293973}
   m_Layer: 6
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

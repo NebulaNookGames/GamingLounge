@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6744332405788911358}
   - component: {fileID: 1670628741338153556}
   - component: {fileID: 4607248619552960227}
+  - component: {fileID: 8124933310339240456}
   m_Layer: 10
   m_Name: Image
   m_TagString: Untagged
@@ -65,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9b65749096209014cb2f9d2189bd0729, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 151f19e2dd2bc024c8ce1d760d5e6c9e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -75,6 +76,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8124933310339240456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464994614870878276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f08f56226db8e984aa45e26e488cfe6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyboardIcon: {fileID: 21300000, guid: 151f19e2dd2bc024c8ce1d760d5e6c9e, type: 3}
+  gamepadIcon: {fileID: 21300000, guid: 3390e8024ec7eed409c5b9a4250aae7a, type: 3}
 --- !u!1 &4949345436200944956
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,6 +230,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inDistanceProof: {fileID: 9177806059535039234}
+  worldObjectUsageAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: World Object Usage
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: dde7c4f2-403b-4137-890a-807a1c15eeb5
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -8901194519769889497, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!208 &4999238735240362234
 NavMeshObstacle:
   m_ObjectHideFlags: 0

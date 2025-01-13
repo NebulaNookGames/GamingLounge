@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /// <summary>
 /// This class allows the player to grab money from machines when the player is in range and presses a key.
@@ -12,6 +13,14 @@ public class MoneyGrabber : MonoBehaviour
 
     private bool canGrabMoney = false; 
     MoneyHolder moneyHolder;
+    
+    public InputActionProperty grabMoneyAction;
+
+    private void OnEnable()
+    {
+        grabMoneyAction.action.performed += GrabMoney;
+    }
+
     /// <summary>
     /// Checks if the player is in range of a machine and presses the interaction key to grab money.
     /// </summary>
@@ -28,14 +37,13 @@ public class MoneyGrabber : MonoBehaviour
         }
     }
 
-    private void Update()
+    void GrabMoney(InputAction.CallbackContext context)
     {
-        if (Input.GetKeyDown(KeyCode.F) && canGrabMoney)
-        {
-            moneyManager.ChangeMoney(moneyHolder.moneyBeingHeld);
-            moneyHolder.ChangeMoney(-moneyHolder.moneyBeingHeld);
-            moneyHolder = null;
-            canGrabMoney = false;
-        }
+        if (!canGrabMoney) return;
+        
+        moneyManager.ChangeMoney(moneyHolder.moneyBeingHeld);
+        moneyHolder.ChangeMoney(-moneyHolder.moneyBeingHeld);
+        moneyHolder = null;
+        canGrabMoney = false;
     }
 }

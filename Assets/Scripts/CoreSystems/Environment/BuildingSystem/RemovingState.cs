@@ -173,7 +173,13 @@ public class RemovingState : IBuildingState
     Vector3 GetMousePosition()
     {
         Vector3 newPosition = Vector3.zero;
-        Vector3 mousePos = Input.mousePosition;
+        Vector3 mousePos = Vector3.zero; 
+        
+        if(GameInput.Instance.activeGameDevice == GameInput.GameDevice.KeyboardMouse) 
+            mousePos = Input.mousePosition;
+        else if (GameInput.Instance.activeGameDevice == GameInput.GameDevice.Gamepad)
+            mousePos = placementSystem.virtualCursorTransform.transform.position;
+        
         mousePos.z = placementSystem.cam.nearClipPlane;
         Ray ray = placementSystem.cam.ScreenPointToRay(mousePos);
         RaycastHit hit;

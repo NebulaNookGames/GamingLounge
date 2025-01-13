@@ -181,6 +181,37 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2116085759848097578, guid: 002abc1d47ab9814d82121938908f686, type: 3}
   m_PrefabInstance: {fileID: 1373312153135360395}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &644198442
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 644198443}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &644198443
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644198442}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3379.265, y: 273.51462, z: -1.8061564}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &706445726 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1108066789797438342, guid: d39efdd88c4cd5a4789462e17674cee6, type: 3}
@@ -423,6 +454,42 @@ PrefabInstance:
       propertyPath: moneyManager
       value: 
       objectReference: {fileID: 422037091}
+    - target: {fileID: 1242399784661857906, guid: 002abc1d47ab9814d82121938908f686, type: 3}
+      propertyPath: grabMoneyAction.m_Reference
+      value: 
+      objectReference: {fileID: -8901194519769889497, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    - target: {fileID: 1242399784661857906, guid: 002abc1d47ab9814d82121938908f686, type: 3}
+      propertyPath: grabMoneyAction.m_UseReference
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1242399784661857906, guid: 002abc1d47ab9814d82121938908f686, type: 3}
+      propertyPath: grabMoneyAction.m_Action.m_Name
+      value: Grab Money
+      objectReference: {fileID: 0}
+    - target: {fileID: 1242399784661857906, guid: 002abc1d47ab9814d82121938908f686, type: 3}
+      propertyPath: grabMoneyAction.m_Action.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1242399784661857906, guid: 002abc1d47ab9814d82121938908f686, type: 3}
+      propertyPath: grabMoneyAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Id
+      value: f139dd04-5fa4-42e8-b7b6-d8aff073caf8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1242399784661857906, guid: 002abc1d47ab9814d82121938908f686, type: 3}
+      propertyPath: grabMoneyAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Grab Money
+      objectReference: {fileID: 0}
+    - target: {fileID: 2073407192351862410, guid: 002abc1d47ab9814d82121938908f686, type: 3}
+      propertyPath: runInputAction.m_Reference
+      value: 
+      objectReference: {fileID: -7471211009204490832, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    - target: {fileID: 2073407192351862410, guid: 002abc1d47ab9814d82121938908f686, type: 3}
+      propertyPath: runInputAction.m_UseReference
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2073407192351862410, guid: 002abc1d47ab9814d82121938908f686, type: 3}
+      propertyPath: runInputAction.m_Action.m_Name
+      value: Run Input
+      objectReference: {fileID: 0}
     - target: {fileID: 7998036406574434201, guid: 002abc1d47ab9814d82121938908f686, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.37605757
@@ -667,9 +734,73 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 78298435}
     - target: {fileID: 4545473335892827781, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
+      propertyPath: inputAction.m_Name
+      value: Input
+      objectReference: {fileID: 0}
+    - target: {fileID: 4545473335892827781, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
+      propertyPath: rotateAction.m_Name
+      value: Rotate
+      objectReference: {fileID: 0}
+    - target: {fileID: 4545473335892827781, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
       propertyPath: virtualCursorTransform
       value: 
       objectReference: {fileID: 508993350}
+    - target: {fileID: 4545473335892827781, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
+      propertyPath: rotateAction.m_Reference
+      value: 
+      objectReference: {fileID: -4765289641036171178, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    - target: {fileID: 4545473335892827781, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
+      propertyPath: rotateAction.m_UseReference
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4545473335892827781, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
+      propertyPath: rotateAction.m_Action.m_Name
+      value: Rotate
+      objectReference: {fileID: 0}
+    - target: {fileID: 4545473335892827781, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
+      propertyPath: toggleBuildMenuAction.m_Name
+      value: Toggle Build Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4545473335892827781, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
+      propertyPath: validateSelectionAction.m_Name
+      value: Validate Selection
+      objectReference: {fileID: 0}
+    - target: {fileID: 4545473335892827781, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
+      propertyPath: toggleBuildMenuAction.m_Reference
+      value: 
+      objectReference: {fileID: 698042728478235044, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    - target: {fileID: 4545473335892827781, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
+      propertyPath: validateSelectionAction.m_Reference
+      value: 
+      objectReference: {fileID: 3001919216989983466, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    - target: {fileID: 4545473335892827781, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
+      propertyPath: toggleBuildMenuAction.m_UseReference
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4545473335892827781, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
+      propertyPath: toggleBuildMenuAction.m_Action.m_Name
+      value: Toggle Build Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4545473335892827781, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
+      propertyPath: validateSelectionAction.m_UseReference
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4545473335892827781, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
+      propertyPath: validateSelectionAction.m_Action.m_Name
+      value: Validate Selection
+      objectReference: {fileID: 0}
+    - target: {fileID: 4545473335892827781, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
+      propertyPath: toggleBuildMenuAction.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4545473335892827781, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
+      propertyPath: toggleBuildMenuAction.m_SingletonActionBindings.Array.data[0].m_Id
+      value: 7fc73786-ed50-4e33-b6a0-510f6d8ae3c0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4545473335892827781, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
+      propertyPath: toggleBuildMenuAction.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Toggle Build Menu
+      objectReference: {fileID: 0}
     - target: {fileID: 4594702622329265874, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.37605757
@@ -840,7 +971,7 @@ PrefabInstance:
       objectReference: {fileID: 228993047}
     - target: {fileID: 1769485082720335250, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -12.800171
+      value: -12.800293
       objectReference: {fileID: 0}
     - target: {fileID: 1769485082720335250, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -900,7 +1031,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2188484011091302087, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -13.299927
+      value: -13.299805
       objectReference: {fileID: 0}
     - target: {fileID: 2188484011091302087, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1483,3 +1614,4 @@ SceneRoots:
   - {fileID: 7695823206617050383}
   - {fileID: 5169720153162518692}
   - {fileID: 8446446829056921443}
+  - {fileID: 644198443}

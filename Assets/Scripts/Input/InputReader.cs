@@ -1,10 +1,11 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class InputReader : MonoBehaviour
 {
     public InputAction locomotionInputAction;
+
+    public bool runPressed; 
     
     private void OnEnable()
     {

@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.InputSystem; 
 
 namespace CMF
 {
@@ -60,6 +59,8 @@ namespace CMF
 		[Tooltip("Whether to calculate and apply momentum relative to the controller's transform.")]
 		public bool useLocalMomentum = false;
 
+		public InputActionProperty runInputAction;
+		
 		//Enum describing basic controller states; 
 		public enum ControllerState
 		{
@@ -208,7 +209,7 @@ namespace CMF
 			if (reader == null)
 				return false;
 
-			return Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.Joystick1Button8);
+			return runInputAction.action.IsPressed();
 		}
 
 		//Determine current controller state based on current momentum and whether the controller is grounded (or not);

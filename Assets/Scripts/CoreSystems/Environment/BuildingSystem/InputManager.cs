@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
+using UnityEngine.InputSystem; 
 
 /// <summary>
 /// Manages player input for placing objects, toggling placement mode, and rotating objects.
@@ -14,18 +14,42 @@ public class InputManager : MonoBehaviour
     public event Action OnPlacementToggle; // Event triggered when placement mode is toggled
     public event Action OnRotate; // Event triggered when the player rotates an object
 
-    public RectTransform virtualCursorTransform; 
-    
-    private void LateUpdate()
+    public RectTransform virtualCursorTransform;
+
+    public InputActionProperty toggleBuildMenuAction;
+    public InputActionProperty validateSelectionAction;
+    public InputActionProperty rotateAction;
+
+    private void OnEnable()
+    {
+        toggleBuildMenuAction.action.performed += PlacementToggle;
+        validateSelectionAction.action.performed += Clicked;
+        rotateAction.action.performed += Rotate;
+    }
+
+    private void OnDisable()
+    {
+        toggleBuildMenuAction.action.performed -= PlacementToggle;
+        validateSelectionAction.action.performed -= Clicked;
+        rotateAction.action.performed -= Rotate; 
+    }
+
+    void PlacementToggle(InputAction.CallbackContext context)
     {
         if (Time.timeScale == 0) return; 
-        
-        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Joystick1Button1))
-            OnPlacementToggle?.Invoke();
-        else if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Joystick1Button3))
-            OnClicked?.Invoke();
-        else if (Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.Joystick1Button9))
-            OnRotate?.Invoke();
+        OnPlacementToggle?.Invoke();
+    }
+
+    void Clicked(InputAction.CallbackContext context)
+    {
+        if (Time.timeScale == 0) return; 
+        OnClicked?.Invoke();
+    }
+
+    void Rotate(InputAction.CallbackContext context)
+    {
+        if (Time.timeScale == 0) return; 
+        OnRotate?.Invoke(); 
     }
 
     /// <summary>

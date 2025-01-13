@@ -46,6 +46,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneCamera: {fileID: 0}
   virtualCursorTransform: {fileID: 0}
+  toggleBuildMenuAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Toggle Build Menu
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: fa0b152e-89e2-4f4c-a8ad-33598061f73e
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 698042728478235044, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  validateSelectionAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Validate Selection
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: e1664c48-2da6-485c-b3a3-662790c4a692
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 3001919216989983466, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  rotateAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Rotate
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: c06b0db1-6904-4c14-a19a-b5cda72b8f51
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -4765289641036171178, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   placementLayermask:
     serializedVersion: 2
     m_Bits: 8
@@ -560,7 +596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9806a79a7c280da4e9e905f2be44bbce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyAmount: 1000
+  moneyAmount: 555555
 --- !u!1 &6726497533703822204
 GameObject:
   m_ObjectHideFlags: 0
@@ -719,6 +755,7 @@ MonoBehaviour:
   placementMask:
     serializedVersion: 2
     m_Bits: 8
+  placementOn: 1
   placementCanvas: {fileID: 0}
   virtualMouse: {fileID: 0}
   virtualCursorTransform: {fileID: 0}

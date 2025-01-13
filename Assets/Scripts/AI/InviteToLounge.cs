@@ -1,18 +1,44 @@
 using System;
 using Unity.Behavior;
 using UnityEngine;
+using UnityEngine.InputSystem; 
 
 public class InviteToLounge : MonoBehaviour
 {
     public GameObject objectToCheckActiveState;
 
-    private bool interactedWith = false; 
-    
+    private bool interactedWith = false;
+
+
+    public InputActionProperty objectInteractionAction;
+
+    private void OnEnable()
+    {
+        objectInteractionAction.action.performed += Invite;
+    }
+
+    private void OnDisable()
+    {
+        objectInteractionAction.action.performed -= Invite;
+    }
+
     private void Start()
     {
        Invoke(nameof(InitialCheck), .5f);
     }
 
+    void Invite(InputAction.CallbackContext context)
+    {
+        if (interactedWith || !objectToCheckActiveState.activeSelf) return; 
+        
+        interactedWith = true;
+        GetComponent<BehaviorGraphAgent>().BlackboardReference.SetVariableValue("InvitedToLounge", true);
+        GameObject thisInList = EntityManager.instance.currentNPCs.Find(obj => obj == gameObject);
+        int index = EntityManager.instance.currentNPCs.IndexOf(thisInList);
+        EntityManager.instance.npcValues[index].invitedToLounge = true;
+        Invoke(nameof(DestroyObjects), .5f);
+    }
+    
     void InitialCheck()
     {
         GameObject thisInList = EntityManager.instance.currentNPCs.Find(obj => obj == gameObject);
@@ -21,23 +47,6 @@ public class InviteToLounge : MonoBehaviour
         if (EntityManager.instance.npcValues[index].invitedToLounge)
         {
             GetComponent<BehaviorGraphAgent>().BlackboardReference.SetVariableValue("InvitedToLounge", true);
-            Invoke(nameof(DestroyObjects), .5f);
-        }
-    }
-    
-    // Update is called once per frame
-    void Update()
-    {
-        if (interactedWith) return; 
-        
-        if (objectToCheckActiveState.activeSelf && Input.GetKeyDown(KeyCode.F)
-            || objectToCheckActiveState.activeSelf && Input.GetKeyDown(KeyCode.Joystick1Button4))
-        {
-            interactedWith = true;
-            GetComponent<BehaviorGraphAgent>().BlackboardReference.SetVariableValue("InvitedToLounge", true);
-            GameObject thisInList = EntityManager.instance.currentNPCs.Find(obj => obj == gameObject);
-            int index = EntityManager.instance.currentNPCs.IndexOf(thisInList);
-            EntityManager.instance.npcValues[index].invitedToLounge = true;
             Invoke(nameof(DestroyObjects), .5f);
         }
     }

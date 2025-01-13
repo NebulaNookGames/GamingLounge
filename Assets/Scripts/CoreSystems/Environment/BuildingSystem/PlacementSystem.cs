@@ -44,7 +44,7 @@ public class PlacementSystem : MonoBehaviour
 
     public LayerMask placementMask; // Layer mask used for placement detection.
 
-    private bool placementOn = true; // Indicates whether placement mode is active.
+    public bool placementOn = true; // Indicates whether placement mode is active.
 
     public GameObject placementCanvas; // UI canvas for placement mode.
     
@@ -107,19 +107,14 @@ public class PlacementSystem : MonoBehaviour
         {
             placementOn = false;
             placementCanvas.SetActive(false);
-
-            Cursor.visible = false;
             virtualMouse.SetActive(false);
-            
+            Cursor.visible = false; 
             StopPlacement();
         }
         else
         {
             placementOn = true;
-            
-            if (GameInput.Instance.activeGameDevice == GameInput.GameDevice.KeyboardMouse)
-                Cursor.visible = true;
-            
+            Cursor.visible = true;
             placementCanvas.SetActive(true);
         }
     }

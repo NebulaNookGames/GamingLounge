@@ -30,12 +30,6 @@ public class MenuHandler : MonoBehaviour
     private void Awake()
     {
         Time.timeScale = 1.0f;
-        Cursor.visible = false; 
-    }
-
-    private void Update()
-    {
-        Cursor.visible = GameInput.Instance.activeGameDevice == GameInput.GameDevice.KeyboardMouse;
     }
 
     /// <summary>

@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keyboardIcon: {fileID: 21300000, guid: 151f19e2dd2bc024c8ce1d760d5e6c9e, type: 3}
-  gamepadIcon: {fileID: 21300000, guid: 1af24ebfbc6614741b5506eef66052d0, type: 3}
+  gamepadIcon: {fileID: 21300000, guid: 3390e8024ec7eed409c5b9a4250aae7a, type: 3}
 --- !u!1 &4949345436200944956
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,6 +230,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inDistanceProof: {fileID: 9177806059535039234}
+  worldObjectUsageAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: World Object Usage
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: dde7c4f2-403b-4137-890a-807a1c15eeb5
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -8901194519769889497, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!208 &4999238735240362234
 NavMeshObstacle:
   m_ObjectHideFlags: 0

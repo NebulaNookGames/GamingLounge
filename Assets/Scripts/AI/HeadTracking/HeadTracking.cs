@@ -28,7 +28,6 @@ public class HeadTracking : MonoBehaviour
             rig.weight = 0;
             return;
         } 
-        rig.weight = 1;
         
         originalPos = transform.position + beginPosOffset + (transform.forward * 2f);
         
@@ -52,19 +51,30 @@ public class HeadTracking : MonoBehaviour
 
             if (closestTracking != null)
             {
+                rig.weight = 1;
                 // Update the desired target position to POI position
                 targetPos = closestTracking.position;
+            }
+            else
+            {
+                rig.weight = 0;
             }
         }
 
         if (closestTracking != null)
         {
             if (Vector3.Distance(closestTracking.position, transform.position) > radius)
+            {
+                rig.weight = 0;
                 targetPos = originalPos;
+            }
         }
         else
+        {
+            rig.weight = 0;
             targetPos = originalPos;
-     
+        }
+
         target.position = Vector3.Lerp(target.position, targetPos, Time.deltaTime * retargetSpeed);
     }
 }

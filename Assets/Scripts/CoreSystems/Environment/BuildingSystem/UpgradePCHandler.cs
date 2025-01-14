@@ -8,7 +8,11 @@ public class UpgradePCHandler : MonoBehaviour
     private bool isActive = false;
     public GameObject inDistanceProof;
     GameObject UpgradePCCanvas;
-
+    
+    public AudioSource audioS;
+    public AudioClip onAudioclip;
+    public AudioClip offAudioclip;
+    
     public InputActionProperty worldObjectUsageAction; 
     
     private void OnEnable()
@@ -36,6 +40,7 @@ public class UpgradePCHandler : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             UpgradePCCanvas.GetComponent<UpgradeCanvasHandler>().SetUpgradePanelState(false);
             Time.timeScale = 1;
+            audioS.PlayOneShot(offAudioclip);
         }
         else
         {
@@ -43,6 +48,7 @@ public class UpgradePCHandler : MonoBehaviour
             Cursor.lockState = CursorLockMode.None; 
             UpgradePCCanvas.GetComponent<UpgradeCanvasHandler>().SetUpgradePanelState(true);
             Time.timeScale = 0;
+            audioS.PlayOneShot(onAudioclip);
         }
         isActive = !isActive;
     }

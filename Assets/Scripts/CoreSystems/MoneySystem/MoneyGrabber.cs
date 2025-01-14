@@ -16,6 +16,8 @@ public class MoneyGrabber : MonoBehaviour
     
     public InputActionProperty grabMoneyAction;
 
+    public AudioSource audioS;
+    public AudioClip grabClip;
     private void OnEnable()
     {
         grabMoneyAction.action.performed += GrabMoney;
@@ -45,5 +47,6 @@ public class MoneyGrabber : MonoBehaviour
         moneyHolder.ChangeMoney(-moneyHolder.moneyBeingHeld);
         moneyHolder = null;
         canGrabMoney = false;
+        audioS.PlayOneShot(grabClip);
     }
 }

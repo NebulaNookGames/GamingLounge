@@ -20,6 +20,10 @@ public class InputManager : MonoBehaviour
     public InputActionProperty validateSelectionAction;
     public InputActionProperty rotateAction;
 
+    private bool toggleOn;
+    private bool validateOn;
+    private bool rotateOn;
+    
     private void OnEnable()
     {
         toggleBuildMenuAction.action.performed += PlacementToggle;
@@ -34,22 +38,52 @@ public class InputManager : MonoBehaviour
         rotateAction.action.performed -= Rotate; 
     }
 
+    private bool toggleHandled;
+    private bool validateHandled;
+    private bool rotateHandled;
+
     void PlacementToggle(InputAction.CallbackContext context)
     {
-        if (Time.timeScale == 0) return; 
+        if (Time.timeScale == 0 || toggleHandled)
+            return;
+
+        toggleHandled = true;
         OnPlacementToggle?.Invoke();
     }
 
     void Clicked(InputAction.CallbackContext context)
     {
-        if (Time.timeScale == 0) return; 
+        if (Time.timeScale == 0 || validateHandled)
+            return;
+
+        validateHandled = true;
+        Debug.Log("Clicked");
         OnClicked?.Invoke();
     }
 
     void Rotate(InputAction.CallbackContext context)
     {
-        if (Time.timeScale == 0) return; 
-        OnRotate?.Invoke(); 
+        if (Time.timeScale == 0 || rotateHandled)
+            return;
+
+        rotateHandled = true;
+        OnRotate?.Invoke();
+    }
+
+    private void Update()
+    {
+        // Reset the flags when the actions are released
+        if (!toggleBuildMenuAction.action.IsPressed())
+            toggleHandled = false;
+
+        if (!validateSelectionAction.action.IsPressed())
+        {
+            Debug.Log("Flag reset");
+            validateHandled = false;
+        }
+
+        if (!rotateAction.action.IsPressed())
+            rotateHandled = false;
     }
 
     /// <summary>

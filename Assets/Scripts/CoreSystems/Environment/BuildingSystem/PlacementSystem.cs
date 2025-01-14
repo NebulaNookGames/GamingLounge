@@ -1,3 +1,4 @@
+
 using System;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -52,7 +53,9 @@ public class PlacementSystem : MonoBehaviour
 
     public GameObject virtualMouse;
     public RectTransform virtualCursorTransform;
-    
+
+    public AudioClip validPlacementInteractionAudioclip;
+    public AudioClip invalidPlacementInteractionAudioclip;
     private void Awake()
     {
         Instance = this; 

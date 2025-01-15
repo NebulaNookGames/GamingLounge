@@ -249,7 +249,7 @@ public class PlacementState : IBuildingState
 
         int index = objectPlacer.PlaceObject(database.objectsData[selectedObjectIndex],
                                              grid.CellToWorld(gridPosition),
-                                             previewSystem.previewObject.GetComponent<RotatePlacementObject>().objectToRotate.transform.rotation);
+                                             previewSystem.previewObject.GetComponent<RotatePlacementObject>().objectToRotate.transform.rotation, true);
         
         GridData selectedData = GetUsedGridData();
         selectedData.AddObjectAt(gridPosition, previewSystem.sizeToUse, index);

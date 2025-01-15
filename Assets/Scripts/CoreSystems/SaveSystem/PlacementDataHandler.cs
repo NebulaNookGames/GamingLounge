@@ -41,7 +41,7 @@ public class PlacementDataHandler : DataHandler
                     index = objectPlacer.PlaceObject(
                         objData,
                         saveData.positions[i],
-                        saveData.rotations[i]);
+                        saveData.rotations[i], false);
                 }
             }
        

@@ -18,7 +18,7 @@ public class ActivatePlacedObject : MonoBehaviour
         addMoneyOnDestroy = GetComponent<AddMoneyOnDestroy>();
     }
 
-    public void Enable()
+    public void Enable(bool callEvent)
     {
         foreach (Collider col in colliders)
         { 
@@ -26,6 +26,8 @@ public class ActivatePlacedObject : MonoBehaviour
         }
         
         addMoneyOnDestroy.enabled = true; 
-        OnActivatePlacedObject?.Invoke();
+        
+        if(callEvent)
+            OnActivatePlacedObject?.Invoke();
     }
 }

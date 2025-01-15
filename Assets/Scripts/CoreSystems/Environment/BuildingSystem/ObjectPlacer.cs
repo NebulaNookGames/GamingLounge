@@ -27,7 +27,7 @@ public class ObjectPlacer : MonoBehaviour
     /// <param name="position">The position to place the object.</param>
     /// <param name="rotation">The rotation to apply to the object.</param>
     /// <returns>The index of the newly placed object in the list.</returns>
-    public int PlaceObject(ObjectData objectData, Vector3 position, Quaternion rotation)
+    public int PlaceObject(ObjectData objectData, Vector3 position, Quaternion rotation, bool callPlacementEvent)
     {
         if(objectData.ID == 25) upgradePCIsPlaced = true;
         
@@ -37,7 +37,7 @@ public class ObjectPlacer : MonoBehaviour
             newObject.GetComponent<RotatePlacementObject>().objectToRotate.transform.rotation = rotation;
         
         if(newObject.GetComponent<ActivatePlacedObject>()) 
-            newObject.GetComponent<ActivatePlacedObject>().Enable();
+            newObject.GetComponent<ActivatePlacedObject>().Enable(callPlacementEvent);
 
         if (newObject.GetComponent<AddMoneyOnDestroy>())
             newObject.GetComponent<AddMoneyOnDestroy>().SetAmount(objectData.cost);

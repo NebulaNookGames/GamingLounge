@@ -23,9 +23,10 @@ public class GameInput : MonoBehaviour
         Instance = this;
 
         InputSystem.onActionChange += InputSystem_OnActionChange;
+        
         DontDestroyOnLoad(gameObject);
     }
-
+    
     private void InputSystem_OnActionChange(object arg1, InputActionChange inputActionChange)
     {
         if (inputActionChange == InputActionChange.ActionPerformed && arg1 is InputAction)
@@ -51,5 +52,26 @@ public class GameInput : MonoBehaviour
     {
         this.activeGameDevice = activeGameDevice;
         OnGameDeviceChanged?.Invoke(this.activeGameDevice);
+        if(activeGameDevice == GameDevice.Gamepad)
+            SetMouseVisibility(false);
+    }
+
+    public void SetMouseVisibility(bool value)
+    {
+        if (value && activeGameDevice != GameDevice.Gamepad)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else if (!value && activeGameDevice != GameDevice.Gamepad)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 }

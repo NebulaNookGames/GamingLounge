@@ -119,7 +119,9 @@ public class PlacementSystem : MonoBehaviour
             moneyTextBackground.SetActive(false);
             placementCanvas.SetActive(false);
             virtualMouse.SetActive(false);
-            Cursor.visible = false; 
+            
+            GameInput.Instance.SetMouseVisibility(false);
+
             StopPlacement();
         }
         else
@@ -129,7 +131,8 @@ public class PlacementSystem : MonoBehaviour
             moneyText.color = Color.white;
             moneyTextBackground.SetActive(true);
             
-            Cursor.visible = true;
+            GameInput.Instance.SetMouseVisibility(true);
+            
             placementCanvas.SetActive(true);
         }
     }

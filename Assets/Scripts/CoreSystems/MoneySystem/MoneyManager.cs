@@ -27,6 +27,10 @@ public class MoneyManager : MonoBehaviour
     public void SetMoney(int amount)
     {
         moneyAmount = amount;
+        
+        if (moneyAmount > 99999999)
+            moneyAmount = 99999999;
+        
         OnMoneyChanged?.Invoke(moneyAmount);
     }
 
@@ -37,6 +41,10 @@ public class MoneyManager : MonoBehaviour
     public void ChangeMoney(int amount)
     {
         moneyAmount += amount; // Update the money amount.
+        
+        if (moneyAmount > 99999999)
+            moneyAmount = 99999999;
+        
         OnMoneyChanged?.Invoke(moneyAmount); // Trigger the OnMoneyChanged event.
     }
 }

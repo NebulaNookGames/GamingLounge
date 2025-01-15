@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine.UI; 
 
 /// <summary>
@@ -56,6 +57,10 @@ public class PlacementSystem : MonoBehaviour
 
     public AudioClip validPlacementInteractionAudioclip;
     public AudioClip invalidPlacementInteractionAudioclip;
+
+    public TextMeshProUGUI moneyText;
+    public GameObject moneyTextBackground;
+    
     private void Awake()
     {
         Instance = this; 
@@ -109,6 +114,9 @@ public class PlacementSystem : MonoBehaviour
         if (placementOn)
         {
             placementOn = false;
+            
+            moneyText.color = new Color(0, 0, 0, 0);
+            moneyTextBackground.SetActive(false);
             placementCanvas.SetActive(false);
             virtualMouse.SetActive(false);
             Cursor.visible = false; 
@@ -117,6 +125,10 @@ public class PlacementSystem : MonoBehaviour
         else
         {
             placementOn = true;
+            
+            moneyText.color = Color.white;
+            moneyTextBackground.SetActive(true);
+            
             Cursor.visible = true;
             placementCanvas.SetActive(true);
         }

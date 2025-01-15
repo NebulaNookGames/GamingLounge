@@ -57,7 +57,6 @@ public class InputManager : MonoBehaviour
             return;
 
         validateHandled = true;
-        Debug.Log("Clicked");
         OnClicked?.Invoke();
     }
 
@@ -78,7 +77,6 @@ public class InputManager : MonoBehaviour
 
         if (!validateSelectionAction.action.IsPressed())
         {
-            Debug.Log("Flag reset");
             validateHandled = false;
         }
 

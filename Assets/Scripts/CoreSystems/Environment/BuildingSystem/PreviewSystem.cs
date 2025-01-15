@@ -17,6 +17,8 @@ public class PreviewSystem : MonoBehaviour
     private SpriteRenderer cellIndicatorRenderer; // Renderer for the cell indicator
     public Vector2Int sizeToUse;
 
+    public AudioClip rotateClip; 
+    
     private void Start()
     {
         // Initialize the preview material and set the cell indicator to inactive
@@ -58,6 +60,8 @@ public class PreviewSystem : MonoBehaviour
             PrepareCursor(sizeToUse); // Adjust the cell indicator to match the size of the object
             previewObject.GetComponent<RotatePlacementObject>().RotateOnce();
         }
+        
+        PlacementSystem.Instance.gameObject.GetComponent<AudioPlayer>().PlayAudioOneShot(rotateClip);
     }
 
     /// <summary>

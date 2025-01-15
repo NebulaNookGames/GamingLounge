@@ -1,11 +1,12 @@
-using System;
-using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ActivatePlacedObject : MonoBehaviour
 {
     [SerializeField] private Collider[] colliders;
     private AddMoneyOnDestroy addMoneyOnDestroy;
+
+    public UnityEvent OnActivatePlacedObject; 
     
     private void OnEnable()
     {
@@ -25,5 +26,6 @@ public class ActivatePlacedObject : MonoBehaviour
         }
         
         addMoneyOnDestroy.enabled = true; 
+        OnActivatePlacedObject?.Invoke();
     }
 }

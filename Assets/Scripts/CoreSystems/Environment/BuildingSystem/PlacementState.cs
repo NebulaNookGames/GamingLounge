@@ -241,7 +241,11 @@ public class PlacementState : IBuildingState
     public void OnAction(Vector3Int gridPosition)
     {
         bool placementValidity = CheckPlacementValidity(gridPosition, selectedObjectIndex);
-        if (!placementValidity) return;
+        if (!placementValidity)
+        {
+            placementSystem.gameObject.GetComponent<AudioPlayer>().PlayAudioOneShot(placementSystem.invalidPlacementInteractionAudioclip);
+            return;
+        }
 
         int index = objectPlacer.PlaceObject(database.objectsData[selectedObjectIndex],
                                              grid.CellToWorld(gridPosition),

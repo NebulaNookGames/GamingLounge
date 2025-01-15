@@ -12,8 +12,11 @@ public class HandleCostChecking : MonoBehaviour
     
     private void OnEnable()
     {
-        MoneyManager.instance.OnMoneyChanged += UpdateButtonInteractable;
-        UpdateButtonInteractable(MoneyManager.instance.MoneyAmount);
+        if (MoneyManager.instance != null)
+        {
+            MoneyManager.instance.OnMoneyChanged += UpdateButtonInteractable;
+            UpdateButtonInteractable(MoneyManager.instance.MoneyAmount);
+        }
 
         for (int i = 0; i < buttons.Length; i++)
         {

@@ -57,18 +57,17 @@ public class PauseHandler : MonoBehaviour
 
       if (isPaused)
       {
+         GameInput.Instance.SetMouseVisibility(true);
          Time.timeScale = 0;
          pauseMenu.SetActive(true);
          gameUI.SetActive(false);
-         if(GameInput.Instance.activeGameDevice == GameInput.GameDevice.KeyboardMouse)
-            Cursor.visible = true; 
       }
       else
       {
+         GameInput.Instance.SetMouseVisibility(false);
          Time.timeScale = 1;
          pauseMenu.SetActive(false);
          gameUI.SetActive(true);
-         Cursor.visible = false; 
       }
    }
    #endregion

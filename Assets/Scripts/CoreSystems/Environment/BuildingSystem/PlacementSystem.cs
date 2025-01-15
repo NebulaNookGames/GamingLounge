@@ -1,8 +1,10 @@
+
 using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine.UI; 
 
 /// <summary>
@@ -52,6 +54,12 @@ public class PlacementSystem : MonoBehaviour
 
     public GameObject virtualMouse;
     public RectTransform virtualCursorTransform;
+
+    public AudioClip validPlacementInteractionAudioclip;
+    public AudioClip invalidPlacementInteractionAudioclip;
+
+    public TextMeshProUGUI moneyText;
+    public GameObject moneyTextBackground;
     
     private void Awake()
     {
@@ -106,15 +114,25 @@ public class PlacementSystem : MonoBehaviour
         if (placementOn)
         {
             placementOn = false;
+            
+            moneyText.color = new Color(0, 0, 0, 0);
+            moneyTextBackground.SetActive(false);
             placementCanvas.SetActive(false);
             virtualMouse.SetActive(false);
-            Cursor.visible = false; 
+            
+            GameInput.Instance.SetMouseVisibility(false);
+
             StopPlacement();
         }
         else
         {
             placementOn = true;
-            Cursor.visible = true;
+            
+            moneyText.color = Color.white;
+            moneyTextBackground.SetActive(true);
+            
+            GameInput.Instance.SetMouseVisibility(true);
+            
             placementCanvas.SetActive(true);
         }
     }

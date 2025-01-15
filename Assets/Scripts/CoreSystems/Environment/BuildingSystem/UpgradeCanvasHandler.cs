@@ -10,7 +10,6 @@ public class UpgradeCanvasHandler : MonoBehaviour
     public List<GameObject> panelsToEnableOnEnable; 
     
     public List<GameObject> panelsToDisableOnDisable;
-    private bool currentActiveState = false; 
     
     public void SetUpgradePanelState(bool activeState)
     {
@@ -26,8 +25,8 @@ public class UpgradeCanvasHandler : MonoBehaviour
             {
                 panel.SetActive(true);
             }
-
-            Cursor.visible = true; 
+            
+            GameInput.Instance.SetMouseVisibility(true);
         }
         
         if (!activeState)
@@ -36,15 +35,7 @@ public class UpgradeCanvasHandler : MonoBehaviour
             {
                 panel.SetActive(false);
             }
-            Cursor.visible = false; 
+            GameInput.Instance.SetMouseVisibility(false);
         }
-        
-        currentActiveState = activeState;
-    }
-
-    private void Update()
-    {
-        if(currentActiveState)
-            Cursor.visible = true; 
     }
 }

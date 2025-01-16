@@ -21,8 +21,12 @@ namespace CMF
 		bool jumpKeyIsPressed = false;
 
 		//Movement speed;
-		public float movementSpeed = 7f;
-
+		public float movementSpeed = 4f;
+		private float initialMovementSpeed = 4f; 
+		
+		//Run speed 
+		public float runSpeed = 7f;
+		
 		//How fast the controller can change direction while in the air;
 		//Higher values result in more air control;
 		public float airControlRate = 2f;
@@ -81,7 +85,7 @@ namespace CMF
 			mover = GetComponent<Mover>();
 			tr = transform;
 			ceilingDetector = GetComponent<CeilingDetector>();
-			
+			initialMovementSpeed = movementSpeed; 
 			Setup();
 		}
 
@@ -100,9 +104,9 @@ namespace CMF
 	        bool _newRunKeyPressedState = IsRunKeyPressed();
 
 	        if (_newRunKeyPressedState)
-		        movementSpeed = 7;
+		        movementSpeed = runSpeed;
 	        else
-		        movementSpeed = 3; 
+		        movementSpeed = initialMovementSpeed; 
         }
 
         void FixedUpdate()

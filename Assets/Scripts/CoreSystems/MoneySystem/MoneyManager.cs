@@ -31,6 +31,9 @@ public class MoneyManager : MonoBehaviour
         if (moneyAmount > 99999999)
             moneyAmount = 99999999;
         
+        if (moneyAmount < 0)
+            moneyAmount = 0; 
+        
         OnMoneyChanged?.Invoke(moneyAmount);
     }
 
@@ -44,6 +47,9 @@ public class MoneyManager : MonoBehaviour
         
         if (moneyAmount > 99999999)
             moneyAmount = 99999999;
+
+        if (moneyAmount < 0)
+            moneyAmount = 0; 
         
         OnMoneyChanged?.Invoke(moneyAmount); // Trigger the OnMoneyChanged event.
     }

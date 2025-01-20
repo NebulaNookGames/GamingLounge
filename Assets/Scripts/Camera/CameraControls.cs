@@ -30,8 +30,6 @@ public class CameraControls : MonoBehaviour
         canChange = false; 
         if (context.ReadValue<Vector2>().y == 0) return; 
         
-        Debug.Log(context.ReadValue<Vector2>().y);
-        
         if (context.ReadValue<Vector2>().y == 1)
         {
             if (closeCam.gameObject.activeSelf) return;

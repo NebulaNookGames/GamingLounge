@@ -22,6 +22,8 @@ public class GameInput : MonoBehaviour
 
         Instance = this;
 
+        transform.parent = null; 
+        
         InputSystem.onActionChange += InputSystem_OnActionChange;
         
         DontDestroyOnLoad(gameObject);

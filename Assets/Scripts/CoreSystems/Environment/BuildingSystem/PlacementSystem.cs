@@ -28,8 +28,11 @@ public class PlacementSystem : MonoBehaviour
     private ObjectsDatabaseSO database; // Database containing the objects available for placement.
 
     [SerializeField]
-    public List<GameObject> unlockedGridParts; // Visual representation of the grid.
-
+    public List<GameObject> unlockedGridParts; // Visual representation of the grids
+    
+    [SerializeField]
+    public List<GameObject> lockedGridVisualizations; // Visual representation of the locked grids
+    
     public GridData floorData, wallData, wallDecorData, furnitureData; // Grid data for various object types.
 
     [SerializeField]
@@ -144,8 +147,15 @@ public class PlacementSystem : MonoBehaviour
     public void StartPlacement(int ID)
     {
         StopPlacement();
+        
+        foreach (GameObject lockedGridVisualization in lockedGridVisualizations) 
+            lockedGridVisualization.SetActive(true);
+        
         foreach (GameObject gridPart in unlockedGridParts)
+        {
             gridPart.SetActive(true);
+            gridPart.GetComponent<GameObjectStorage>().storedGameObject.SetActive(false);
+        }
         
         buildingState = new PlacementState(ID, grid, preview, this, database, floorData, wallData, wallDecorData,furnitureData, objectPlacer);
         inputManager.OnClicked += PlaceStructure;
@@ -159,8 +169,14 @@ public class PlacementSystem : MonoBehaviour
     {
         StopPlacement();
         
+        foreach (GameObject lockedGridVisualization in lockedGridVisualizations)
+            lockedGridVisualization.SetActive(true);
+        
         foreach (GameObject gridPart in unlockedGridParts)
+        {
             gridPart.SetActive(true);
+            gridPart.GetComponent<GameObjectStorage>().storedGameObject.SetActive(false);
+        }
         
         buildingState = new RemovingState(grid, preview, this, floorData, wallData, wallDecorData, furnitureData, objectPlacer);
         inputManager.OnClicked += PlaceStructure;
@@ -189,6 +205,9 @@ public class PlacementSystem : MonoBehaviour
             if(gridPart)
                 gridPart.SetActive(false);
         }
+        
+        foreach (GameObject lockedGridVisualization in lockedGridVisualizations)
+            lockedGridVisualization.SetActive(false);
 
         if (buildingState == null) return;
 

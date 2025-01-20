@@ -11,20 +11,26 @@ public class ValidIconOnDeviceChange : MonoBehaviour
 
     private void Start()
     {
-        gameInput = GameInput.Instance;
-        gameInput.OnGameDeviceChanged += GameInput_DeviceChanged;
-        imageToChange = GetComponent<Image>();
+        if (GameInput.Instance != null)
+        {
+            gameInput = GameInput.Instance;
+            gameInput.OnGameDeviceChanged += GameInput_DeviceChanged;
+            imageToChange = GetComponent<Image>();
+        }
     }
 
     private void OnEnable()
     {
-        gameInput = GameInput.Instance;
-        gameInput.OnGameDeviceChanged += GameInput_DeviceChanged;
-        imageToChange = GetComponent<Image>();
-        
-        GameInput_DeviceChanged(gameInput.activeGameDevice);
-    }
+        if (GameInput.Instance != null)
+        {
+            gameInput = GameInput.Instance;
+            gameInput.OnGameDeviceChanged += GameInput_DeviceChanged;
+            imageToChange = GetComponent<Image>();
 
+            GameInput_DeviceChanged(gameInput.activeGameDevice);
+        }
+    }
+    
     private void OnDisable()
     {
         gameInput.OnGameDeviceChanged -= GameInput_DeviceChanged;

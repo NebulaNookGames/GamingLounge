@@ -8,7 +8,6 @@ public class OptionsHandler : MonoBehaviour
     public GameObject settingsUIObjects;
     public GameObject mainUIObjects; 
     public AudioMixer audioMixer;
-    private float initialVolume = -20f;
     public Toggle fullscreenToggle;
     [FormerlySerializedAs("volumeToggle")] public Toggle musicVolumeToggle; 
     

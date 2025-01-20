@@ -19,6 +19,9 @@ public class SaveInitializer : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        
+        transform.parent = null; 
+        
         // Ensure this object persists across scenes
         DontDestroyOnLoad(this.gameObject);
 

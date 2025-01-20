@@ -11,7 +11,9 @@ public class PauseHandler : MonoBehaviour
    [Tooltip("The gameObject that the pause Canvas is on.")]
    [SerializeField] GameObject pauseMenu;
 
-   [SerializeField] private GameObject gameUI; 
+   [SerializeField] private GameObject gameUI;
+
+   [SerializeField] private GameObject controlsUI;
    
    [Header("")]
    [Tooltip("How long until the game can be paused.")]
@@ -67,6 +69,7 @@ public class PauseHandler : MonoBehaviour
          GameInput.Instance.SetMouseVisibility(false);
          Time.timeScale = 1;
          pauseMenu.SetActive(false);
+         controlsUI.SetActive(false);
          gameUI.SetActive(true);
       }
    }

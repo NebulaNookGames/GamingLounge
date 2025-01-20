@@ -20,6 +20,8 @@ public class SaveAndLoad : MonoBehaviour
 
     private SaveData loadedSaveData; 
     
+    public bool saveDataLoaded = false;
+    
     void Awake()
     {
         if (instance == null) { instance = this; }
@@ -100,6 +102,6 @@ public class SaveAndLoad : MonoBehaviour
             }
 
             onDataLoaded?.Invoke();
-        
+            saveDataLoaded = true; 
     }
 }

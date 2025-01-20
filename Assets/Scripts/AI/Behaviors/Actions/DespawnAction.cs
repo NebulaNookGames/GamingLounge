@@ -1,34 +1,30 @@
 using System;
 using Unity.Behavior;
+using Unity.Cinemachine;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
 using Unity.Properties;
-using UnityEngine.AI;
+using UnityEngine.AI; 
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "Move Randomly", story: "Moves randomly", category: "Action", id: "59441a200545ce120d3f314b617192a5")]
-public partial class MoveRandomlyAction : Action
+[NodeDescription(name: "Despawn", story: "Agent Despawns", category: "Action", id: "e214aba943bc083ffa0e8166024e8c3e")]
+public partial class DespawnAction : Action
 {
-    // Blackboard variable for the agent (the GameObject that will move randomly).
+    // Blackboard variable for the agent (the GameObject representing the character).
     [SerializeReference] public BlackboardVariable<GameObject> agent;
-
-    // Blackboard variable for the agent (the GameObject that will move randomly).
-    [SerializeReference] public BlackboardVariable<bool> moveOnlyInBuilding;
     
+    // Blackboard variable for the agent (the GameObject representing the character).
+    [SerializeReference] public BlackboardVariable<GameObject> OccupiedArcadeMachine;
+    
+    // Blackboard variable for the agent (the GameObject representing the character).
+    [SerializeReference] public BlackboardVariable<GameObject> buildingChecker;
+
     // Blackboard variable for the radius within which the agent can move randomly.
     [SerializeReference] public BlackboardVariable<float> radius;
-
-    // Blackboard variable for the radius within which the agent can move randomly.
-    [SerializeReference] public BlackboardVariable<GameObject> buildingChecker;
     
     // The random position the agent will move to.
     private Vector3 randomPosition = Vector3.zero;
-
-    /// <summary>
-    /// Starts the action by calculating a random position within the specified radius
-    /// and sets the agent's destination to that position.
-    /// </summary>
-    /// <returns>Status of the action (Running, Failure, etc.)</returns>
+    
     protected override Status OnStart()
     {
         agent.Value.GetComponent<NavMeshAgent>().enabled = true; 
@@ -49,8 +45,7 @@ public partial class MoveRandomlyAction : Action
                 buildingChecker.Value.transform.position = hit.position;
             }
 
-            if (buildingChecker.Value.GetComponent<CheckIfInBuilding>().IsInBuilding() && moveOnlyInBuilding.Value ||
-                !buildingChecker.Value.GetComponent<CheckIfInBuilding>().IsInBuilding() && !moveOnlyInBuilding.Value)
+            if (!buildingChecker.Value.GetComponent<CheckIfInBuilding>().IsInBuilding())
             {
                 positionFound = true;
                 randomPosition = hit.position;
@@ -60,18 +55,15 @@ public partial class MoveRandomlyAction : Action
             tries++;
             if (tries >= 50)
             {
-                    positionFound = true;
-                    randomPosition = hit.position;
-                    agent.Value.GetComponent<NavMeshAgent>().SetDestination(randomPosition);
+                positionFound = true;
+                randomPosition = hit.position;
+                agent.Value.GetComponent<NavMeshAgent>().SetDestination(randomPosition);
             }
         }
+        
         return Status.Running;
     }
-    
-    /// <summary>
-    /// Updates the action by checking if the agent has reached the random position.
-    /// </summary>
-    /// <returns>Status of the action (Running, Success, Failure)</returns>
+
     protected override Status OnUpdate()
     {
         if (agent.Value.GetComponent<NavMeshAgent>().pathStatus == NavMeshPathStatus.PathInvalid)
@@ -86,10 +78,17 @@ public partial class MoveRandomlyAction : Action
         return Status.Running;
     }
 
-    /// <summary>
-    /// Called when the action ends. This implementation is empty but can be overridden for cleanup.
-    /// </summary>
     protected override void OnEnd()
     {
+        EntityManager.instance.DestroyNPC(this.GameObject);
+        EntitySpawner.instance.amount--; 
+        if (OccupiedArcadeMachine.Value != null)
+        {
+            if(WorldInteractables.instance.allAracadeMachines.Contains(OccupiedArcadeMachine.Value)) 
+                WorldInteractables.instance.allAracadeMachines.Remove(OccupiedArcadeMachine.Value);
+            
+            if(WorldInteractables.instance.availableArcadeMachines.Contains(OccupiedArcadeMachine.Value))
+                WorldInteractables.instance.availableArcadeMachines.Remove(OccupiedArcadeMachine.Value);
+        }
     }
 }

@@ -3,11 +3,13 @@ using System.Collections;
 
 public class EntitySpawner : MonoBehaviour
 {
+    public static EntitySpawner instance; 
+    
     public GameObject entityPrefab; // The prefab to spawn
     public float spawnInterval = 10f; // Time between spawns in seconds
     private float timer;
-    private int maxAmount = 0;
-    private int amount;
+    public int maxAmount = 0;
+    public int amount;
 
     [SerializeField] private float spawnDistance = 30;
     [SerializeField] GameObject buildingChecker;
@@ -17,6 +19,8 @@ public class EntitySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        instance = this; 
+        
         timer = spawnInterval; // Set the timer to the spawn interval initially
         Invoke("UnblockSpawning", 10f);
     }

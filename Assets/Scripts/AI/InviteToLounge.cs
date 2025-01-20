@@ -11,6 +11,8 @@ public class InviteToLounge : MonoBehaviour
 
 
     public InputActionProperty objectInteractionAction;
+    
+    public ChangeBehaviorParameterAfterDuration changeBehaviorParameterAfterDuration;
 
     private void OnEnable()
     {
@@ -36,6 +38,7 @@ public class InviteToLounge : MonoBehaviour
         GameObject thisInList = EntityManager.instance.currentNPCs.Find(obj => obj == gameObject);
         int index = EntityManager.instance.currentNPCs.IndexOf(thisInList);
         EntityManager.instance.npcValues[index].invitedToLounge = true;
+        changeBehaviorParameterAfterDuration.enabled = true;
         Invoke(nameof(DestroyObjects), .5f);
     }
     
@@ -47,6 +50,7 @@ public class InviteToLounge : MonoBehaviour
         if (EntityManager.instance.npcValues[index].invitedToLounge)
         {
             GetComponent<BehaviorGraphAgent>().BlackboardReference.SetVariableValue("InvitedToLounge", true);
+            changeBehaviorParameterAfterDuration.enabled = true;
             Invoke(nameof(DestroyObjects), .5f);
         }
     }

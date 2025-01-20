@@ -8,13 +8,20 @@ public class EntityManager : MonoBehaviour
     public List<NPCValues> npcValues;
     public List<GameObject> currentNPCs;
     public EntitySpawner spawner; 
-    
     private void Awake()
     {
         if(instance == null)
             instance = this;
     }
+    
+    public void DestroyNPC(GameObject npc)
+    {
+        currentNPCs.Remove(npc);
+        Destroy(npc);
+    }
 }
+
+
 
 [System.Serializable]
 public class NPCValues

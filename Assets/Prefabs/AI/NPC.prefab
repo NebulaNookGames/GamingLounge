@@ -619,6 +619,7 @@ GameObject:
   - component: {fileID: 5636949403010624384}
   - component: {fileID: 1514855779039162388}
   - component: {fileID: 2222829269972902575}
+  - component: {fileID: 3844374138180979299}
   m_Layer: 4
   m_Name: NPC
   m_TagString: Entity
@@ -765,6 +766,24 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: -8901194519769889497, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  changeBehaviorParameterAfterDuration: {fileID: 3844374138180979299}
+--- !u!114 &3844374138180979299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5967203068415554604}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9bf168d11bf18a45b4aa065bd7bec2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 360
+  randomDuration: 1
+  minDuration: 60
+  maxDuration: 360
+  parameterName: LeaveLounge
 --- !u!1 &7185641531941887131
 GameObject:
   m_ObjectHideFlags: 0

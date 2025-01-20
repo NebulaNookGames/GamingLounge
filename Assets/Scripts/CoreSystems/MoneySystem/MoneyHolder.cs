@@ -23,4 +23,9 @@ public class MoneyHolder : MonoBehaviour
         moneyBeingHeld += amount; // Update the money amount.
         OnMoneyChanged?.Invoke(moneyBeingHeld); // Trigger the OnMoneyChanged event.
     }
+
+    private void OnDestroy()
+    {
+        MoneyManager.instance.ChangeMoney(moneyBeingHeld);
+    }
 }

@@ -8,6 +8,8 @@ using UnityEngine.InputSystem;
 /// </summary>
 public class InputManager : MonoBehaviour
 {
+    public static InputManager instance;
+    
     [SerializeField] private Camera sceneCamera; // The camera used to determine the position of objects in the scene
 
     public event Action OnClicked; // Event triggered when the player clicks
@@ -23,7 +25,12 @@ public class InputManager : MonoBehaviour
     private bool toggleOn;
     private bool validateOn;
     private bool rotateOn;
-    
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void OnEnable()
     {
         toggleBuildMenuAction.action.performed += PlacementToggle;

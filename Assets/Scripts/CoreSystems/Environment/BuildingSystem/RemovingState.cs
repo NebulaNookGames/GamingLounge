@@ -152,26 +152,16 @@ public class RemovingState : IBuildingState
     /// <returns>The appropriate GridData for removal, or null if none is valid.</returns>
     private GridData GetGridDataForRemoval(Vector3Int gridPosition, Vector3 newPosition)
     {
-        if (!wallDecorData.CanPlaceObjectAt(gridPosition, Vector2Int.one) && IsWithinRemovalRange(newPosition))
+        if (!wallDecorData.CanPlaceObjectAt(gridPosition, Vector2Int.one))
             return wallDecorData;
-        if (!furnitureData.CanPlaceObjectAt(gridPosition, Vector2Int.one) && IsWithinRemovalRange(newPosition))
+        if (!furnitureData.CanPlaceObjectAt(gridPosition, Vector2Int.one))
             return furnitureData;
-        if (!wallData.CanPlaceObjectAt(gridPosition, Vector2Int.one) && IsWithinRemovalRange(newPosition))
+        if (!wallData.CanPlaceObjectAt(gridPosition, Vector2Int.one))
             return wallData;
-        if (!floorData.CanPlaceObjectAt(gridPosition, Vector2Int.one) && IsWithinRemovalRange(newPosition))
+        if (!floorData.CanPlaceObjectAt(gridPosition, Vector2Int.one))
             return floorData;
         
         return null;
-    }
-
-    /// <summary>
-    /// Checks if the new position is within the valid range for removal.
-    /// </summary>
-    /// <param name="newPosition">The position to check.</param>
-    /// <returns>True if within range; otherwise, false.</returns>
-    private bool IsWithinRemovalRange(Vector3 newPosition)
-    {
-        return Vector3.Distance(placementSystem.player.transform.position, newPosition) < 3;
     }
 
     Vector3 GetMousePosition()

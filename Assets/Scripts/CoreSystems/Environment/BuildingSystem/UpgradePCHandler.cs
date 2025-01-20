@@ -1,5 +1,3 @@
-using System;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.InputSystem; 
 
@@ -12,7 +10,7 @@ public class UpgradePCHandler : MonoBehaviour
     public AudioSource audioS;
     public AudioClip onAudioclip;
     public AudioClip offAudioclip;
-    
+
     public InputActionProperty worldObjectUsageAction; 
     
     private void OnEnable()
@@ -39,16 +37,18 @@ public class UpgradePCHandler : MonoBehaviour
             GameObject.FindWithTag("MenuUI").GetComponent<PauseHandler>().pausedByOtherSystem = false;
             Cursor.lockState = CursorLockMode.Locked;
             UpgradePCCanvas.GetComponent<UpgradeCanvasHandler>().SetUpgradePanelState(false);
-            Time.timeScale = 1;
             audioS.PlayOneShot(offAudioclip);
+            InputReader.instance.enabled = true;
+            InputManager.instance.enabled = true;
         }
         else
         {
             GameObject.FindWithTag("MenuUI").GetComponent<PauseHandler>().pausedByOtherSystem = true;
-            Cursor.lockState = CursorLockMode.None; 
+            Cursor.lockState = CursorLockMode.None;
             UpgradePCCanvas.GetComponent<UpgradeCanvasHandler>().SetUpgradePanelState(true);
-            Time.timeScale = 0;
             audioS.PlayOneShot(onAudioclip);
+            InputReader.instance.enabled = false;
+            InputManager.instance.enabled = false;
         }
         isActive = !isActive;
     }

@@ -1,12 +1,19 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class InputReader : MonoBehaviour
 {
+    public static InputReader instance;
     public InputAction locomotionInputAction;
-
-    public bool runPressed; 
     
+    public bool runPressed;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void OnEnable()
     {
         locomotionInputAction.Enable();

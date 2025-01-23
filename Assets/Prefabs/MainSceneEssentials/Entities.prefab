@@ -218,7 +218,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2536269457001556600, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7355384697714788893}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8800953548274488340, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5944348577744911703}
   m_SourcePrefab: {fileID: 100100000, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
 --- !u!4 &2112398913111881622 stripped
 Transform:
@@ -230,6 +233,38 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2536269457001556600, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
   m_PrefabInstance: {fileID: 2116185468135196296}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &4673555511418945833 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6739072248561846177, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
+  m_PrefabInstance: {fileID: 2116185468135196296}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7457248395415491228 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8800953548274488340, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
+  m_PrefabInstance: {fileID: 2116185468135196296}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5944348577744911703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7457248395415491228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e77836f74cb3b24686bd625736899a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClips:
+  - {fileID: 8300000, guid: b993df4a93c1d304ab19d8b2eb88c9a5, type: 3}
+  - {fileID: 8300000, guid: 5c9bdbce37b06a24fa6ea793bcfd1907, type: 3}
+  - {fileID: 8300000, guid: 0909de896e9029541b92ae05fe15e4b6, type: 3}
+  - {fileID: 8300000, guid: 6ad0cf00f050bee41a2dee098475dc78, type: 3}
+  - {fileID: 8300000, guid: 7ca5a9710db4327439c9f8cb8204615e, type: 3}
+  - {fileID: 8300000, guid: 14ae706fef2303e4cb71112dbd5d250b, type: 3}
+  - {fileID: 8300000, guid: b995bc1775ea83b4b8f861763e9a1424, type: 3}
+  - {fileID: 8300000, guid: d15f7338d693f0343843a6b9096d27f6, type: 3}
+  audioSource: {fileID: 4673555511418945833}
 --- !u!1001 &6522020259535021666
 PrefabInstance:
   m_ObjectHideFlags: 0

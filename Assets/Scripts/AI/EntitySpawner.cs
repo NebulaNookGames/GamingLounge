@@ -74,8 +74,9 @@ public class EntitySpawner : MonoBehaviour
 
         if (entityPrefab != null && buildingChecker != null)
         {
+            Quaternion randomRotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
             // Instantiate the entityPrefab at the spawner's position with no rotation
-            GameObject newEntity = Instantiate(entityPrefab, buildingChecker.transform.position, Quaternion.identity);
+            GameObject newEntity = Instantiate(entityPrefab, buildingChecker.transform.position, randomRotation);
             newEntity.GetComponentInChildren<RandomizeCharacter>().GenerateNew();
             newEntity.transform.parent = transform; 
             amount++;

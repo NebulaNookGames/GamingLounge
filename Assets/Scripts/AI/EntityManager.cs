@@ -16,7 +16,9 @@ public class EntityManager : MonoBehaviour
     
     public void DestroyNPC(GameObject npc)
     {
+        npc.GetComponent<EffectSpawner>().SpawnEffect();
         currentNPCs.Remove(npc);
+        npcValues.Remove(npc.GetComponent<NPCValueHolder>().values);
         Destroy(npc);
     }
 }

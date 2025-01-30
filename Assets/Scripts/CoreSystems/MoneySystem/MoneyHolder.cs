@@ -26,6 +26,7 @@ public class MoneyHolder : MonoBehaviour
 
     private void OnDestroy()
     {
-        MoneyManager.instance.ChangeMoney(moneyBeingHeld);
+        if(MoneyManager.instance != null)
+            MoneyManager.instance.ChangeMoney(moneyBeingHeld);
     }
 }

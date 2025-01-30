@@ -9,7 +9,7 @@ public class RandomizeCharacter : MonoBehaviour
     [SerializeField] private int[] headIndexes;
     [SerializeField] private int[] clothIndexes;
     [SerializeField] private BehaviorGraphAgent graphAgent;
- 
+    [SerializeField] private NPCValueHolder npcValueHolder;
     private void Awake()
     {
         foreach (GameObject character in characters)
@@ -29,6 +29,7 @@ public class RandomizeCharacter : MonoBehaviour
         characterMeshes[randomIndex].GetComponent<SkinnedMeshRenderer>().materials[clothIndexes[randomIndex]].SetFloat("_Hue", randomColor);
         NPCValues npcValues = new NPCValues(randomIndex, randomColor, false);
         EntityManager.instance.npcValues.Add(npcValues);
+        npcValueHolder.values = npcValues;
     }
 
     public void LoadExisting(NPCValues npcValues)
@@ -38,5 +39,6 @@ public class RandomizeCharacter : MonoBehaviour
         graphAgent.BlackboardReference.SetVariableValue("Anim", characters[npcValues.randomIndex].GetComponent<Animator>());
         characterMeshes[npcValues.randomIndex].GetComponent<SkinnedMeshRenderer>().materials[headIndexes[npcValues.randomIndex]].SetFloat("_Hue", npcValues.colorIndex);
         characterMeshes[npcValues.randomIndex].GetComponent<SkinnedMeshRenderer>().materials[clothIndexes[npcValues.randomIndex]].SetFloat("_Hue", npcValues.colorIndex);
+        npcValueHolder.values = npcValues;
     }
 }

@@ -66,9 +66,12 @@ public partial class DespawnAction : Action
 
     protected override Status OnUpdate()
     {
-        if (agent.Value.GetComponent<NavMeshAgent>().pathStatus == NavMeshPathStatus.PathInvalid)
-            return Status.Failure;
-        
+        if (!agent.Value.GetComponent<NavMeshAgent>().hasPath)
+        {
+            agent.Value.GetComponent<NavMeshAgent>().isStopped = true;
+            return Status.Success;
+        }
+
         if (Vector3.Distance(randomPosition, agent.Value.transform.position) < 1f)
         {
             agent.Value.GetComponent<NavMeshAgent>().isStopped = true;

@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using Unity.Cinemachine;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine.InputSystem;
 
 public class CameraControls : MonoBehaviour

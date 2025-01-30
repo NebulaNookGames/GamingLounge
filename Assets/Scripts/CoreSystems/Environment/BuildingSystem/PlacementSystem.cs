@@ -81,6 +81,15 @@ public class PlacementSystem : MonoBehaviour
         furnitureData = new GridData();
         inputManager.OnPlacementToggle += TogglePlacement;
         TogglePlacement();
+        
+        foreach (GameObject lockedGridVisualization in lockedGridVisualizations) 
+            lockedGridVisualization.SetActive(true);
+        
+        foreach (GameObject gridPart in unlockedGridParts)
+        {
+            gridPart.SetActive(true);
+            gridPart.GetComponent<GameObjectStorage>().storedGameObject.SetActive(false);
+        }
     }
 
     public void ShowDetails()

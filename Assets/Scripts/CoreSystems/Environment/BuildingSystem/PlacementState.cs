@@ -103,9 +103,9 @@ public class PlacementState : IBuildingState
 
         if (database.objectsData[selectedObjectIndex].cost > MoneyManager.instance.MoneyAmount) return false;
 
-        Vector3 newPosition = Vector3.zero;
+        Vector3 newPosition = new Vector3(500,500,500);
+        Vector3 mousePos = new Vector3(500, 500, 500); 
         
-        Vector3 mousePos = Vector3.zero; 
         if(GameInput.Instance.activeGameDevice == GameInput.GameDevice.KeyboardMouse)
             mousePos = Input.mousePosition; // Get the current mouse position
         else 

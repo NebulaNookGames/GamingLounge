@@ -4,6 +4,7 @@ using UnityEngine;
 using Action = Unity.Behavior.Action;
 using Unity.Properties;
 using Unity.VisualScripting;
+using UnityEditor.Analytics;
 using UnityEngine.AI;
 
 [Serializable, GeneratePropertyBag]
@@ -21,6 +22,9 @@ public partial class GoToArcadeMachineAction : Action
     // Blackboard variable that indicates whether the agent has arrived at the machine.
     [SerializeReference] public BlackboardVariable<bool> atMachine;
 
+    
+    NavMeshAgent navMeshAgent;
+    
     /// <summary>
     /// Starts the action of going to an arcade machine. It checks if there are any available machines,
     /// selects one, and sets the agent's destination to that machine.
@@ -28,12 +32,13 @@ public partial class GoToArcadeMachineAction : Action
     /// <returns>Status of the action (Running, Failure, etc.)</returns>
     protected override Status OnStart()
     {
-        Agent.Value.GetComponent<NavMeshAgent>().enabled = true;
-        Agent.Value.GetComponent<NavMeshAgent>().isStopped = false; 
+        navMeshAgent = Agent.Value.GetComponent<NavMeshAgent>();
+        navMeshAgent.enabled = true;
+        navMeshAgent.isStopped = false; 
         
         if (OccupiedArcadeMachine.Value == null) return Status.Failure;
         
-        Agent.Value.GetComponent<NavMeshAgent>().SetDestination(OccupiedArcadeMachine.Value.GetComponent<UsagePositionStorage>().usagePosition.position);
+        navMeshAgent.SetDestination(OccupiedArcadeMachine.Value.GetComponent<UsagePositionStorage>().usagePosition.position);
         atMachine.Value = true;
         return Status.Running;
     }
@@ -44,14 +49,26 @@ public partial class GoToArcadeMachineAction : Action
     /// <returns>Status of the action (Running, Success, Failure)</returns>
     protected override Status OnUpdate()
     {
-        if (Agent.Value.GetComponent<NavMeshAgent>().pathStatus == NavMeshPathStatus.PathInvalid)
+        // Check if path is still valid
+        if (!navMeshAgent.hasPath || OccupiedArcadeMachine.Value == null)
+        {
+            navMeshAgent.ResetPath();
+            navMeshAgent.isStopped = true;
+      
+            // Add the arcade machine back to the list of available machines
+            WorldInteractables.instance.EndArcadeMachineOccupation(OccupiedArcadeMachine.Value);
+            // Set the status to indicate the agent is no longer at the machine
+            atMachine.Value = false;
+            // Reset the arcade machine reference
+            OccupiedArcadeMachine.Value = null;
             return Status.Failure;
-        if (OccupiedArcadeMachine.Value == null)
-            return Status.Failure;
+        }
+
+        // Continue going to path
         if (Vector3.Distance(Agent.Value.transform.position,
                 OccupiedArcadeMachine.Value.GetComponent<UsagePositionStorage>().usagePosition.position) < 1f)
         {
-            Agent.Value.GetComponent<NavMeshAgent>().enabled = false;
+            navMeshAgent.enabled = false;
             Vector3 aimPos = OccupiedArcadeMachine.Value.GetComponent<UsagePositionStorage>().usagePosition.position;
             Agent.Value.transform.position = new Vector3(aimPos.x, aimPos.y, aimPos.z);
             Agent.Value.transform.rotation = Quaternion.LookRotation(OccupiedArcadeMachine.Value.GetComponent<RotatePlacementObject>().objectToRotate.transform.forward, Vector3.up);            

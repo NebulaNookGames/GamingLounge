@@ -10,7 +10,7 @@ public class EffectSpawner : MonoBehaviour
         Instantiate(effect, transform.position, transform.rotation);
     }
 
-    private void OnDestroy()
+    public void SpawnEffect()
     {
         Instantiate(effect, transform.position, transform.rotation);
     }

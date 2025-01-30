@@ -13,15 +13,20 @@ public partial class GoToSitPositionAction : Action
     [SerializeReference] public BlackboardVariable<GameObject> Machine;
     [SerializeReference] public BlackboardVariable<GameObject> SitPosition;
     [SerializeReference] public BlackboardVariable<GameObject> HeadTracker;
+   
+    NavMeshAgent navMeshAgent;
+    
     protected override Status OnStart()
     {
-        Agent.Value.GetComponent<NavMeshAgent>().isStopped = false; 
+        navMeshAgent = Agent.Value.GetComponent<NavMeshAgent>();
+        
+        navMeshAgent.isStopped = false; 
         
         if (Machine.Value == null) return Status.Failure;
         SitPosition.Value = Machine.Value.GetComponentInChildren<SitPositionRecognition>().GetSitPosition();
         
         if(SitPosition.Value == null) return Status.Failure;
-        Agent.Value.GetComponent<NavMeshAgent>().SetDestination(
+        navMeshAgent.SetDestination(
             SitPosition.Value.transform.position - SitPosition.Value.transform.forward.normalized * 0.7f);
        
         return Status.Running;
@@ -29,18 +34,25 @@ public partial class GoToSitPositionAction : Action
     
      protected override Status OnUpdate()
     {
-        if (Agent.Value.GetComponent<NavMeshAgent>().pathStatus == NavMeshPathStatus.PathInvalid)
+        // Check if path is still valid
+        if (!navMeshAgent.hasPath || Machine.Value == null || SitPosition.Value == null)
+        {
+            navMeshAgent.ResetPath();
+            navMeshAgent.isStopped = true;
+              // Add the arcade machine back to the list of available machines
+            WorldInteractables.instance.EndArcadeMachineOccupation(Machine.Value);
+            // Reset the arcade machine reference
+            Machine.Value = null;
             return Status.Failure;
-        if (Machine.Value == null)
-            return Status.Failure;
-        if(SitPosition.Value == null)
-            return Status.Failure;
+        }
+
+        // Continue going to path
         if (Vector3.Distance(Agent.Value.transform.position,
                 SitPosition.Value.transform.position - SitPosition.Value.transform.forward) < 1f)
         {
-            Vector3 aimPos = Agent.Value.GetComponent<NavMeshAgent>().destination;
+            Vector3 aimPos = navMeshAgent.destination;
             Agent.Value.transform.position = new Vector3(aimPos.x, Agent.Value.transform.position.y, aimPos.z);
-            Agent.Value.GetComponent<NavMeshAgent>().enabled = false;
+            navMeshAgent.enabled = false;
             Agent.Value.transform.rotation = Quaternion.LookRotation(-SitPosition.Value.transform.forward, Vector3.up);            
             if (HeadTracker.Value != null)
                 HeadTracker.Value.GetComponent<HeadTracking>().noTracking = true; 

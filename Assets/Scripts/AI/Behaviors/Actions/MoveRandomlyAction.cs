@@ -24,6 +24,9 @@ public partial class MoveRandomlyAction : Action
     // The random position the agent will move to.
     private Vector3 randomPosition = Vector3.zero;
 
+    
+    NavMeshAgent navMeshAgent;
+    
     /// <summary>
     /// Starts the action by calculating a random position within the specified radius
     /// and sets the agent's destination to that position.
@@ -31,8 +34,10 @@ public partial class MoveRandomlyAction : Action
     /// <returns>Status of the action (Running, Failure, etc.)</returns>
     protected override Status OnStart()
     {
-        agent.Value.GetComponent<NavMeshAgent>().enabled = true; 
-        agent.Value.GetComponent<NavMeshAgent>().isStopped = false;
+        navMeshAgent = agent.Value.GetComponent<NavMeshAgent>();
+        
+        navMeshAgent.enabled = true; 
+        navMeshAgent.isStopped = false;
 
         bool positionFound = false;
         int tries = 0; 
@@ -54,7 +59,7 @@ public partial class MoveRandomlyAction : Action
             {
                 positionFound = true;
                 randomPosition = hit.position;
-                agent.Value.GetComponent<NavMeshAgent>().SetDestination(randomPosition);
+                navMeshAgent.SetDestination(randomPosition);
             }
            
             tries++;
@@ -62,7 +67,7 @@ public partial class MoveRandomlyAction : Action
             {
                     positionFound = true;
                     randomPosition = hit.position;
-                    agent.Value.GetComponent<NavMeshAgent>().SetDestination(randomPosition);
+                    navMeshAgent.SetDestination(randomPosition);
             }
         }
         return Status.Running;
@@ -74,12 +79,16 @@ public partial class MoveRandomlyAction : Action
     /// <returns>Status of the action (Running, Success, Failure)</returns>
     protected override Status OnUpdate()
     {
-        if (agent.Value.GetComponent<NavMeshAgent>().pathStatus == NavMeshPathStatus.PathInvalid)
+        if (!navMeshAgent.hasPath)
+        {
+            navMeshAgent.ResetPath();
+            navMeshAgent.isStopped = true; 
             return Status.Failure;
-        
+        }
+
         if (Vector3.Distance(randomPosition, agent.Value.transform.position) < 1f)
         {
-            agent.Value.GetComponent<NavMeshAgent>().isStopped = true;
+            navMeshAgent.isStopped = true;
             return Status.Success;
         }
         

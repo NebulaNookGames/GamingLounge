@@ -729,6 +729,7 @@ MonoBehaviour:
   headIndexes: 030000000300000003000000
   clothIndexes: 040000000600000004000000
   graphAgent: {fileID: 5636949403010624384}
+  npcValueHolder: {fileID: 7147916121032389513}
 --- !u!1 &5843771794364412361
 GameObject:
   m_ObjectHideFlags: 0
@@ -776,6 +777,7 @@ GameObject:
   - component: {fileID: 2222829269972902575}
   - component: {fileID: 3844374138180979299}
   - component: {fileID: 4813508868003629094}
+  - component: {fileID: 7147916121032389513}
   m_Layer: 4
   m_Name: NPC
   m_TagString: Entity
@@ -953,6 +955,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effect: {fileID: 8232282737463271678, guid: 6d3bbd27e7f2ff140be70c5702f6c267, type: 3}
+--- !u!114 &7147916121032389513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5967203068415554604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0f0c17a6e9d164aa5ff7dbe0c21ab3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  values:
+    randomIndex: 0
+    colorIndex: 0
+    invitedToLounge: 0
+    lastLocation: {x: 0, y: 0, z: 0}
 --- !u!1 &6829738851141436762
 GameObject:
   m_ObjectHideFlags: 0

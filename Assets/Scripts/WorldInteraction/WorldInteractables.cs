@@ -1,7 +1,6 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 /// <summary>
 /// Manages interactable objects in the world, specifically arcade machines.
@@ -23,6 +22,9 @@ public class WorldInteractables : MonoBehaviour
     public List<GameObject> availableArcadeMachines;
     
     public List<PointOfInterest> pointOfInterests;
+
+    public GameObject winEffect;
+    
     /// <summary>
     /// Initializes the singleton instance on Awake.
     /// </summary>
@@ -33,6 +35,7 @@ public class WorldInteractables : MonoBehaviour
 
     public void EndArcadeMachineOccupation(GameObject obj)
     {
+        Instantiate(winEffect, obj.transform.position, Quaternion.identity);
         availableArcadeMachines.Add(obj);
     }
 

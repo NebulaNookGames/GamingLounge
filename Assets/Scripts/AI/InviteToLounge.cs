@@ -9,7 +9,10 @@ public class InviteToLounge : MonoBehaviour
 
     private bool interactedWith = false;
 
-
+    public GameObject invitedParticleEffect;
+    public GameObject notInvitedIndicator;
+    
+    
     public InputActionProperty objectInteractionAction;
     
     public ChangeBehaviorParameterAfterDuration changeBehaviorParameterAfterDuration;
@@ -35,6 +38,8 @@ public class InviteToLounge : MonoBehaviour
         
         interactedWith = true;
         GetComponent<BehaviorGraphAgent>().BlackboardReference.SetVariableValue("InvitedToLounge", true);
+        Instantiate(invitedParticleEffect, transform.position, Quaternion.identity);
+        Destroy(notInvitedIndicator);
         GameObject thisInList = EntityManager.instance.currentNPCs.Find(obj => obj == gameObject);
         int index = EntityManager.instance.currentNPCs.IndexOf(thisInList);
         EntityManager.instance.npcValues[index].invitedToLounge = true;

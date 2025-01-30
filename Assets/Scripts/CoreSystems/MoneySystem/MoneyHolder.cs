@@ -14,6 +14,9 @@ public class MoneyHolder : MonoBehaviour
     // Event triggered when the money amount changes.
     public event Action<int> OnMoneyChanged;
 
+    public GameObject effectSpawnPos; 
+    public GameObject moneyEffect; 
+    
     /// <summary>
     /// Changes the money amount by a specified amount and triggers the OnMoneyChanged event.
     /// </summary>
@@ -21,6 +24,7 @@ public class MoneyHolder : MonoBehaviour
     public void ChangeMoney(int amount)
     {
         moneyBeingHeld += amount; // Update the money amount.
+        Instantiate(moneyEffect, effectSpawnPos.transform.position, Quaternion.identity);
         OnMoneyChanged?.Invoke(moneyBeingHeld); // Trigger the OnMoneyChanged event.
     }
 

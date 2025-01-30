@@ -748,6 +748,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4292c5dd63479549b5d3197a72bccc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  effectSpawnPos: {fileID: 3046105635932401455}
+  moneyEffect: {fileID: 219834491187561578, guid: df123906fac6c1a4eb45ab2e9fc41417, type: 3}
 --- !u!114 &3423836063309542442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -789,6 +791,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  OnActivatePlacedObjectCallAlways:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2523462624664329234
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -61,13 +61,6 @@ public class SitPositionRecognition : MonoBehaviour
             if (dotProduct > -0.7f) continue;
 
             if (!collidedObject.GetComponent<SitPositionAvailability>().available) continue;
-
-            RaycastHit hit;
-            Vector3 rayOrigin = collidedObject.transform.position;
-            Vector3 rayDirection = directionToThis;
-            float rayDistance = Vector3.Distance(transform.parent.position, rayDirection);
-
-            if (Physics.Raycast(rayOrigin, rayDirection, out hit, rayDistance, layerMaskToMakeThisInvalid)) return; 
             
             validObjects.Add(collidedObject);
         }

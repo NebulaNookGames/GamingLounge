@@ -464,8 +464,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  costs: dc050000dc050000dc050000881300008813000088130000983a0000983a0000983a0000
-  boughtLand: 000100000000000000
+  costs: d0070000d0070000d0070000d0070000d0070000d0070000d0070000d0070000d0070000
+  boughtLand: 000000000100000000
   expandButtonsUsabilitySetup: {fileID: 0}
 --- !u!1 &4786901294392449682
 GameObject:
@@ -511,9 +511,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5da23bf01dc13fc43878e587f5fb18f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  machineCount: 0
   allAracadeMachines: []
   availableArcadeMachines: []
   pointOfInterests: []
+  winEffect: {fileID: 219834491187561578, guid: 4a10067f1e1da964d9b316e0b2fa9ba8, type: 3}
 --- !u!1 &5203011168251112991
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,7 +599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9806a79a7c280da4e9e905f2be44bbce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyAmount: 4444444
+  moneyAmount: 500
 --- !u!1 &6783079368421790276
 GameObject:
   m_ObjectHideFlags: 0
@@ -651,7 +653,6 @@ MonoBehaviour:
   unlockedGridParts:
   - {fileID: 0}
   lockedGridVisualizations:
-  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -827,8 +828,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -5254478903257536788, guid: 19722645180ae284398685e04ebb2f28, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 8747a50c13e210549b7a037c587ed285, type: 3}
-  m_Resource: {fileID: 8300000, guid: 8747a50c13e210549b7a037c587ed285, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 2d795e295dd973547aba6e23d1d40f7a, type: 3}
+  m_Resource: {fileID: 8300000, guid: 2d795e295dd973547aba6e23d1d40f7a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

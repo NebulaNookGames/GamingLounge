@@ -56,6 +56,7 @@ public class InviteToLounge : MonoBehaviour
         {
             GetComponent<BehaviorGraphAgent>().BlackboardReference.SetVariableValue("InvitedToLounge", true);
             changeBehaviorParameterAfterDuration.enabled = true;
+            notInvitedIndicator.active = false;
             Invoke(nameof(DestroyObjects), .5f);
         }
     }

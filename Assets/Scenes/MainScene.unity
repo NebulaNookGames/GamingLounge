@@ -124,11 +124,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7797603746747762726, guid: 002abc1d47ab9814d82121938908f686, type: 3}
   m_PrefabInstance: {fileID: 1373312153135360395}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &12800192 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6657748264025494114, guid: d39efdd88c4cd5a4789462e17674cee6, type: 3}
-  m_PrefabInstance: {fileID: 5169720153162518692}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &50092470 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6234622732805940824, guid: d39efdd88c4cd5a4789462e17674cee6, type: 3}
@@ -227,6 +222,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2116085759848097578, guid: 002abc1d47ab9814d82121938908f686, type: 3}
   m_PrefabInstance: {fileID: 1373312153135360395}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &644860935 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9038077143833479780, guid: c7c1f84b7808fc643ab2932d4806ec8c, type: 3}
+  m_PrefabInstance: {fileID: 3018904736190460154}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &706445726 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1108066789797438342, guid: d39efdd88c4cd5a4789462e17674cee6, type: 3}
@@ -424,6 +430,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1057053124}
     - target: {fileID: 8577911792373170273, guid: 002abc1d47ab9814d82121938908f686, type: 3}
+      propertyPath: mapViewCam
+      value: 
+      objectReference: {fileID: 644860935}
+    - target: {fileID: 8577911792373170273, guid: 002abc1d47ab9814d82121938908f686, type: 3}
       propertyPath: standardCam
       value: 
       objectReference: {fileID: 1834921501}
@@ -570,10 +580,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1484132383461302401, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
-      propertyPath: winEffect
-      value: 
-      objectReference: {fileID: 219834491187561578, guid: 4a10067f1e1da964d9b316e0b2fa9ba8, type: 3}
     - target: {fileID: 1665858944717480726, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
       propertyPath: 'lands.Array.data[0]'
       value: 
@@ -645,51 +651,39 @@ PrefabInstance:
     - target: {fileID: 3198550151841903184, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
       propertyPath: 'unlockedGridParts.Array.data[0]'
       value: 
-      objectReference: {fileID: 1873430091}
+      objectReference: {fileID: 2017150954}
     - target: {fileID: 3198550151841903184, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
       propertyPath: 'lockedGridVisualizations.Array.data[0]'
       value: 
-      objectReference: {fileID: 12800192}
+      objectReference: {fileID: 594667741}
     - target: {fileID: 3198550151841903184, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
       propertyPath: 'lockedGridVisualizations.Array.data[1]'
       value: 
-      objectReference: {fileID: 594667741}
+      objectReference: {fileID: 784976935}
     - target: {fileID: 3198550151841903184, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
       propertyPath: 'lockedGridVisualizations.Array.data[2]'
       value: 
-      objectReference: {fileID: 784976935}
+      objectReference: {fileID: 469428672}
     - target: {fileID: 3198550151841903184, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
       propertyPath: 'lockedGridVisualizations.Array.data[3]'
       value: 
-      objectReference: {fileID: 469428672}
+      objectReference: {fileID: 367072952}
     - target: {fileID: 3198550151841903184, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
       propertyPath: 'lockedGridVisualizations.Array.data[4]'
       value: 
-      objectReference: {fileID: 367072952}
+      objectReference: {fileID: 1119425873}
     - target: {fileID: 3198550151841903184, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
       propertyPath: 'lockedGridVisualizations.Array.data[5]'
       value: 
-      objectReference: {fileID: 1119425873}
+      objectReference: {fileID: 506950255}
     - target: {fileID: 3198550151841903184, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
       propertyPath: 'lockedGridVisualizations.Array.data[6]'
       value: 
-      objectReference: {fileID: 506950255}
+      objectReference: {fileID: 1618401542}
     - target: {fileID: 3198550151841903184, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
       propertyPath: 'lockedGridVisualizations.Array.data[7]'
       value: 
-      objectReference: {fileID: 1618401542}
-    - target: {fileID: 3198550151841903184, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
-      propertyPath: 'lockedGridVisualizations.Array.data[8]'
-      value: 
       objectReference: {fileID: 1508321666}
-    - target: {fileID: 3775005968317075848, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
-      propertyPath: m_Resource
-      value: 
-      objectReference: {fileID: 8300000, guid: 2d795e295dd973547aba6e23d1d40f7a, type: 3}
-    - target: {fileID: 3775005968317075848, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 2d795e295dd973547aba6e23d1d40f7a, type: 3}
     - target: {fileID: 4073301231100301480, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
       propertyPath: spawner
       value: 
@@ -741,10 +735,6 @@ PrefabInstance:
     - target: {fileID: 4594702622329265874, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4655447370032368341, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
-      propertyPath: moneyAmount
-      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 4849770310243556309, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
       propertyPath: unlockPanelHandler

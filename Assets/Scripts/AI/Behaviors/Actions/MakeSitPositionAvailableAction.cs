@@ -12,8 +12,12 @@ public partial class MakeSitPositionAvailableAction : Action
 
     protected override Status OnStart()
     {
-        SitPosition.Value.GetComponent<SitPositionAvailability>().available = true;
-        SitPosition.Value = null; 
+        if (SitPosition.Value != null)
+        {
+            SitPosition.Value.GetComponent<SitPositionAvailability>().available = true;
+            SitPosition.Value = null;
+        }
+
         return Status.Running;
     }
 

@@ -13,6 +13,9 @@ public class WorldInteractables : MonoBehaviour
     /// </summary>
     public static WorldInteractables instance;
 
+    public int machineCount = 0; 
+    
+    
     public List<GameObject> allAracadeMachines; 
     
     /// <summary>
@@ -35,7 +38,6 @@ public class WorldInteractables : MonoBehaviour
 
     public void EndArcadeMachineOccupation(GameObject obj)
     {
-        Instantiate(winEffect, obj.transform.position, Quaternion.identity);
         availableArcadeMachines.Add(obj);
     }
 
@@ -48,11 +50,14 @@ public class WorldInteractables : MonoBehaviour
     {
         availableArcadeMachines.Add(obj);
         allAracadeMachines.Add(obj);
+        machineCount++;
     }
 
     public void DeleteArcadeMachine(GameObject obj)
     {
+        Debug.Log("Machine removed");
         allAracadeMachines.Remove(obj);
         availableArcadeMachines.Remove(obj);
+        machineCount--;
     }
 }

@@ -40,7 +40,10 @@ public partial class GoToSitPositionAction : Action
             navMeshAgent.ResetPath();
             navMeshAgent.isStopped = true;
               // Add the arcade machine back to the list of available machines
-            WorldInteractables.instance.EndArcadeMachineOccupation(Machine.Value);
+              
+            if(Machine.Value != null)
+                WorldInteractables.instance.EndArcadeMachineOccupation(Machine.Value);
+            
             // Reset the arcade machine reference
             Machine.Value = null;
             return Status.Failure;

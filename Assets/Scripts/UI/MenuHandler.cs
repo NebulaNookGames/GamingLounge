@@ -38,9 +38,18 @@ public class MenuHandler : MonoBehaviour
     /// <param name="sceneIndex"></param> The index of the scene which should be opened.
     public void OpenScene(int sceneIndex)
     {
-        SceneManager.LoadScene(sceneIndex);
+        StartCoroutine(LoadSceneCoroutine(sceneIndex));
     }
 
+    IEnumerator LoadSceneCoroutine(int sceneIndex)
+    {
+        transitionCanvas.SetActive(true);
+        transitionAnimator.SetTrigger(transitionInTrigger);
+        yield return new WaitForSecondsRealtime(transitionInTime);
+        SceneManager.LoadScene(sceneIndex);
+    }
+    
+    
     /// <summary>
     /// Quits to the desktop if called in build.
     /// Exits play mode if called in editor.

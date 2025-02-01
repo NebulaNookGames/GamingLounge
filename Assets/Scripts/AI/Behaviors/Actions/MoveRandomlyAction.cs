@@ -59,6 +59,11 @@ public partial class MoveRandomlyAction : Action
             {
                 positionFound = true;
                 randomPosition = hit.position;
+                
+                NavMeshPath testPath = new NavMeshPath();
+                agent.Value.GetComponent<NavMeshAgent>().CalculatePath(randomPosition, testPath);
+                if (testPath.status == NavMeshPathStatus.PathPartial) positionFound = false;
+                
                 navMeshAgent.SetDestination(randomPosition);
             }
            
@@ -67,9 +72,15 @@ public partial class MoveRandomlyAction : Action
             {
                     positionFound = true;
                     randomPosition = hit.position;
+                    
+                    NavMeshPath testPath = new NavMeshPath();
+                    agent.Value.GetComponent<NavMeshAgent>().CalculatePath(randomPosition, testPath);
+                    if (testPath.status == NavMeshPathStatus.PathPartial) positionFound = false;
+                    
                     navMeshAgent.SetDestination(randomPosition);
             }
         }
+        
         return Status.Running;
     }
     
@@ -79,13 +90,11 @@ public partial class MoveRandomlyAction : Action
     /// <returns>Status of the action (Running, Success, Failure)</returns>
     protected override Status OnUpdate()
     {
-        if (!navMeshAgent.hasPath)
+        if (navMeshAgent.pathStatus == NavMeshPathStatus.PathPartial)
         {
-            navMeshAgent.ResetPath();
-            navMeshAgent.isStopped = true; 
             return Status.Failure;
         }
-
+        
         if (Vector3.Distance(randomPosition, agent.Value.transform.position) < 1f)
         {
             navMeshAgent.isStopped = true;

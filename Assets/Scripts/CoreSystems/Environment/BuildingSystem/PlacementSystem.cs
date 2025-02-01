@@ -52,6 +52,9 @@ public class PlacementSystem : MonoBehaviour
     public bool placementOn = true; // Indicates whether placement mode is active.
 
     public GameObject placementCanvas; // UI canvas for placement mode.
+
+    public AudioClip placementMenuOn;
+    public AudioClip placementMenuOff;
     
     public Action OnPlaced;
 
@@ -126,7 +129,7 @@ public class PlacementSystem : MonoBehaviour
         if (placementOn)
         {
             placementOn = false;
-            
+            GetComponent<AudioPlayer>().PlayAudioOneShot(placementMenuOff, .5f);
             moneyText.color = new Color(0, 0, 0, 0);
             moneyTextBackground.SetActive(false);
             placementCanvas.SetActive(false);
@@ -139,7 +142,7 @@ public class PlacementSystem : MonoBehaviour
         else
         {
             placementOn = true;
-            
+            GetComponent<AudioPlayer>().PlayAudioOneShot(placementMenuOn, .5f);
             moneyText.color = Color.white;
             moneyTextBackground.SetActive(true);
             

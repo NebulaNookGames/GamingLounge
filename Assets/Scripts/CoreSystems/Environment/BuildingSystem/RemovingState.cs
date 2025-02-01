@@ -74,19 +74,19 @@ public class RemovingState : IBuildingState
         GridData selectedData = GetGridDataForRemoval(gridPosition, GetMousePosition());
         
         if (selectedData == null)
-            placementSystem.gameObject.GetComponent<AudioPlayer>().PlayAudioOneShot(placementSystem.invalidPlacementInteractionAudioclip);
+            placementSystem.gameObject.GetComponent<AudioPlayer>().PlayAudioOneShot(placementSystem.invalidPlacementInteractionAudioclip, 1);
         else
         {
             gameObjectIndex = selectedData.GetRepresentationIndex(gridPosition);
             if (gameObjectIndex == -1)
             {
-                placementSystem.gameObject.GetComponent<AudioPlayer>().PlayAudioOneShot(placementSystem.invalidPlacementInteractionAudioclip);
+                placementSystem.gameObject.GetComponent<AudioPlayer>().PlayAudioOneShot(placementSystem.invalidPlacementInteractionAudioclip, 1);
                 return;
             }
 
             selectedData.RemoveObjectAt(gridPosition);
             objectPlacer.RemoveObjectAt(gameObjectIndex);
-            placementSystem.gameObject.GetComponent<AudioPlayer>().PlayAudioOneShot(placementSystem.validPlacementInteractionAudioclip);
+            placementSystem.gameObject.GetComponent<AudioPlayer>().PlayAudioOneShot(placementSystem.validPlacementInteractionAudioclip, 1);
 
         }
 

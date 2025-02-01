@@ -44,7 +44,7 @@ public class MoneyGrabber : MonoBehaviour
         if (!canGrabMoney) return;
         
         moneyManager.ChangeMoney(moneyHolder.moneyBeingHeld);
-        moneyHolder.ChangeMoney(-moneyHolder.moneyBeingHeld);
+        moneyHolder.ChangeMoney(-moneyHolder.moneyBeingHeld, false, false);
         moneyHolder = null;
         canGrabMoney = false;
         audioS.PlayOneShot(grabClip);

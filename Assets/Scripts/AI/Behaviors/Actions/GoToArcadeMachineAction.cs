@@ -49,25 +49,11 @@ public partial class GoToArcadeMachineAction : Action
     /// <returns>Status of the action (Running, Success, Failure)</returns>
     protected override Status OnUpdate()
     {
-        // Check if path is still valid
-        if (!navMeshAgent.hasPath || OccupiedArcadeMachine.Value == null)
+        if (navMeshAgent.pathStatus == NavMeshPathStatus.PathPartial)
         {
-            navMeshAgent.ResetPath();
-            navMeshAgent.isStopped = true;
-      
-            // Add the arcade machine back to the list of available machines
-            if (OccupiedArcadeMachine.Value != null)
-            {
-                WorldInteractables.instance.EndArcadeMachineOccupation(OccupiedArcadeMachine.Value);
-            }
-
-            // Set the status to indicate the agent is no longer at the machine
-            atMachine.Value = false;
-            // Reset the arcade machine reference
-            OccupiedArcadeMachine.Value = null;
             return Status.Failure;
         }
-
+        
         // Continue going to path
         if (Vector3.Distance(Agent.Value.transform.position,
                 OccupiedArcadeMachine.Value.GetComponent<UsagePositionStorage>().usagePosition.position) < 1f)

@@ -13,8 +13,8 @@ public class AudioPlayer : MonoBehaviour
         audioS.outputAudioMixerGroup = audioMixerGroup;
     }
 
-    public void PlayAudioOneShot(AudioClip clip)
+    public void PlayAudioOneShot(AudioClip clip, float volume)
     {
-        audioS.PlayOneShot(clip);
+        audioS.PlayOneShot(clip, volume);
     }
 }

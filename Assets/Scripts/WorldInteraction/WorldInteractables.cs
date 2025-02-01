@@ -38,6 +38,7 @@ public class WorldInteractables : MonoBehaviour
 
     public void EndArcadeMachineOccupation(GameObject obj)
     {
+        obj.GetComponent<MoneyHolder>().beginVideoPlayer.HandlePlay(false);
         availableArcadeMachines.Add(obj);
     }
 

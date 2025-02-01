@@ -34,7 +34,7 @@ public class SaveInitializer : MonoBehaviour
         // Do something if the last scene matches your condition
         if (lastSceneName == "MainMenu")
         {
-            Invoke("LoadSaveFile", 1f);
+            Invoke("LoadSaveFile", .2f);
         }
 
         // Update the lastSceneName to the current scene's name

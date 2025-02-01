@@ -243,7 +243,7 @@ public class PlacementState : IBuildingState
         bool placementValidity = CheckPlacementValidity(gridPosition, selectedObjectIndex);
         if (!placementValidity)
         {
-            placementSystem.gameObject.GetComponent<AudioPlayer>().PlayAudioOneShot(placementSystem.invalidPlacementInteractionAudioclip);
+            placementSystem.gameObject.GetComponent<AudioPlayer>().PlayAudioOneShot(placementSystem.invalidPlacementInteractionAudioclip, 1);
             return;
         }
 

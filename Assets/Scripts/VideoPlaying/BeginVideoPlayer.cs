@@ -50,8 +50,23 @@ public class BeginVideoPlayer : MonoBehaviour
             Debug.LogError("No video clip assigned to the VideoPlayer.");
             return;
         }
+        
+        videoPlayer.frame = -10;
+        videoPlayer.Pause();
+    }
 
-        // Optionally, set the VideoPlayer to automatically play
-        videoPlayer.Play();
+    public void HandlePlay(bool play)
+    {
+        if (play)
+        {
+            videoPlayer.frame = Random.Range(0, 1000);
+            videoPlayer.Play();
+        }
+        else
+        {
+            videoPlayer.frame = -10;
+            videoPlayer.Pause();
+        }
+
     }
 }

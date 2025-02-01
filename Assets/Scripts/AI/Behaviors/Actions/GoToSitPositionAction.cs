@@ -34,21 +34,11 @@ public partial class GoToSitPositionAction : Action
     
      protected override Status OnUpdate()
     {
-        // Check if path is still valid
-        if (!navMeshAgent.hasPath || Machine.Value == null || SitPosition.Value == null)
+        if (navMeshAgent.pathStatus == NavMeshPathStatus.PathPartial || SitPosition.Value == null)
         {
-            navMeshAgent.ResetPath();
-            navMeshAgent.isStopped = true;
-              // Add the arcade machine back to the list of available machines
-              
-            if(Machine.Value != null)
-                WorldInteractables.instance.EndArcadeMachineOccupation(Machine.Value);
-            
-            // Reset the arcade machine reference
-            Machine.Value = null;
             return Status.Failure;
         }
-
+        
         // Continue going to path
         if (Vector3.Distance(Agent.Value.transform.position,
                 SitPosition.Value.transform.position - SitPosition.Value.transform.forward) < 1f)

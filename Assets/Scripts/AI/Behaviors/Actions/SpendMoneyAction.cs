@@ -42,6 +42,6 @@ public partial class SpendMoneyAction : Action
     {
         if (machineInUse.Value != null)
             machineInUse.Value.GetComponent<MoneyHolder>()
-                .ChangeMoney(machineInUse.Value.GetComponent<Cost>().GetCost());
+                .ChangeMoney(machineInUse.Value.GetComponent<Cost>().GetCost(), true, true);
     }
 }

@@ -61,7 +61,7 @@ public class PreviewSystem : MonoBehaviour
             previewObject.GetComponent<RotatePlacementObject>().RotateOnce();
         }
         
-        PlacementSystem.Instance.gameObject.GetComponent<AudioPlayer>().PlayAudioOneShot(rotateClip);
+        PlacementSystem.Instance.gameObject.GetComponent<AudioPlayer>().PlayAudioOneShot(rotateClip, 1f);
     }
 
     /// <summary>

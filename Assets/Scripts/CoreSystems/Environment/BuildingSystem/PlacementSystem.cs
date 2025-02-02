@@ -66,6 +66,9 @@ public class PlacementSystem : MonoBehaviour
 
     public TextMeshProUGUI moneyText;
     public GameObject moneyTextBackground;
+
+    private bool firstTimeToggle = true; 
+    
     
     private void Awake()
     {
@@ -129,7 +132,11 @@ public class PlacementSystem : MonoBehaviour
         if (placementOn)
         {
             placementOn = false;
-            GetComponent<AudioPlayer>().PlayAudioOneShot(placementMenuOff, .5f);
+            if (firstTimeToggle)
+                firstTimeToggle = false;
+            else 
+                GetComponent<AudioPlayer>().PlayAudioOneShot(placementMenuOff, .5f);
+            
             moneyText.color = new Color(0, 0, 0, 0);
             moneyTextBackground.SetActive(false);
             placementCanvas.SetActive(false);
@@ -142,7 +149,11 @@ public class PlacementSystem : MonoBehaviour
         else
         {
             placementOn = true;
-            GetComponent<AudioPlayer>().PlayAudioOneShot(placementMenuOn, .5f);
+            if (firstTimeToggle)
+                firstTimeToggle = false;
+            else 
+                GetComponent<AudioPlayer>().PlayAudioOneShot(placementMenuOn, .5f);
+            
             moneyText.color = Color.white;
             moneyTextBackground.SetActive(true);
             

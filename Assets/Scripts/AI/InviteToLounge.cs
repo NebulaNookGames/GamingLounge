@@ -11,12 +11,10 @@ public class InviteToLounge : MonoBehaviour
 
     public GameObject invitedParticleEffect;
     public GameObject notInvitedIndicator;
-    
-    
+
+    public VisitorEntity entity; 
     public InputActionProperty objectInteractionAction;
     
-    public ChangeBehaviorParameterAfterDuration changeBehaviorParameterAfterDuration;
-
     private void OnEnable()
     {
         objectInteractionAction.action.performed += Invite;
@@ -37,13 +35,12 @@ public class InviteToLounge : MonoBehaviour
         if (interactedWith || !objectToCheckActiveState.activeSelf) return; 
         
         interactedWith = true;
-        GetComponent<BehaviorGraphAgent>().BlackboardReference.SetVariableValue("InvitedToLounge", true);
+        entity.invitedToLounge = true;
         Instantiate(invitedParticleEffect, transform.position, Quaternion.identity);
         Destroy(notInvitedIndicator);
         GameObject thisInList = EntityManager.instance.currentNPCs.Find(obj => obj == gameObject);
         int index = EntityManager.instance.currentNPCs.IndexOf(thisInList);
         EntityManager.instance.npcValues[index].invitedToLounge = true;
-        changeBehaviorParameterAfterDuration.enabled = true;
         Invoke(nameof(DestroyObjects), .5f);
     }
     
@@ -54,8 +51,7 @@ public class InviteToLounge : MonoBehaviour
         int index = EntityManager.instance.currentNPCs.IndexOf(thisInList);
         if (EntityManager.instance.npcValues[index].invitedToLounge)
         {
-            GetComponent<BehaviorGraphAgent>().BlackboardReference.SetVariableValue("InvitedToLounge", true);
-            changeBehaviorParameterAfterDuration.enabled = true;
+            GetComponent<VisitorEntity>().invitedToLounge = true; 
             notInvitedIndicator.active = false;
             Invoke(nameof(DestroyObjects), .5f);
         }

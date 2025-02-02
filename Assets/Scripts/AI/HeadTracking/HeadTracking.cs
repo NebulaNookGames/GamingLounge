@@ -8,7 +8,7 @@ public class HeadTracking : MonoBehaviour
     private List<PointOfInterest> POIs;
     public float radius = 4f;
     public Transform target; 
-    public BehaviorGraphAgent graph;
+    public VisitorEntity entity;
     public float retargetSpeed = 4;
     public bool noTracking;
     public Vector3 originalPos;
@@ -18,7 +18,7 @@ public class HeadTracking : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        graph.BlackboardReference.SetVariableValue("HeadTracker", this.gameObject);
+        entity.headTracking = this;
     }
 
     private void Update()

@@ -9,9 +9,4 @@ public class TransitionHandler : MonoBehaviour
     [Tooltip("The name of the trigger parameter inside of the transitionAnimator that starts the transition.")]
     [SerializeField]
     string transitionInTrigger;
-    
-    private void Awake()
-    {
-        transitionAnimator.SetTrigger(transitionInTrigger);
-    }
 }

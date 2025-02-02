@@ -319,7 +319,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 2
   target: {fileID: 6756272645340861396}
-  graph: {fileID: 5636949403010624384}
+  entity: {fileID: 7758114119972819665}
   retargetSpeed: 4
   noTracking: 0
   originalPos: {x: 0, y: 0, z: 0}
@@ -458,7 +458,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 2
   target: {fileID: 5718932565059186893}
-  graph: {fileID: 5636949403010624384}
+  entity: {fileID: 7758114119972819665}
   retargetSpeed: 4
   noTracking: 0
   originalPos: {x: 0, y: 0, z: 0}
@@ -814,8 +814,8 @@ MonoBehaviour:
   - {fileID: 5073057241033553521}
   headIndexes: 030000000300000003000000
   clothIndexes: 040000000600000004000000
-  graphAgent: {fileID: 5636949403010624384}
   npcValueHolder: {fileID: 7147916121032389513}
+  entity: {fileID: 7758114119972819665}
 --- !u!1 &5843771794364412361
 GameObject:
   m_ObjectHideFlags: 0
@@ -858,12 +858,11 @@ GameObject:
   - component: {fileID: 415966748435750202}
   - component: {fileID: 7682170294919524997}
   - component: {fileID: 3185540774354890790}
-  - component: {fileID: 5636949403010624384}
   - component: {fileID: 1514855779039162388}
   - component: {fileID: 2222829269972902575}
-  - component: {fileID: 3844374138180979299}
   - component: {fileID: 4813508868003629094}
   - component: {fileID: 7147916121032389513}
+  - component: {fileID: 7758114119972819665}
   m_Layer: 4
   m_Name: NPC
   m_TagString: Entity
@@ -936,41 +935,6 @@ CapsuleCollider:
   m_Height: 1.12
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5636949403010624384
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5967203068415554604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Graph: {fileID: -7527666575546583865, guid: 4e2f3f26948fe8149b51e5177a7022b7, type: 2}
-  m_BlackboardVariableOverridesList:
-  - rid: 2954982708619510010
-  - rid: 377930238501585473
-  references:
-    version: 2
-    RefIds:
-    - rid: 377930238501585473
-      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 12266099286197283340
-          m_Value1: 14833889124503454489
-        Name: BuildingChecker
-        m_Value: {fileID: 1683523321674692970}
-    - rid: 2954982708619510010
-      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        GUID:
-          m_Value0: 1
-          m_Value1: 0
-        Name: Self
-        m_Value: {fileID: 5967203068415554604}
 --- !u!114 &1514855779039162388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1001,6 +965,7 @@ MonoBehaviour:
   objectToCheckActiveState: {fileID: 8370765022909834422}
   invitedParticleEffect: {fileID: 219834491187561578, guid: f92d7a9001d84f24ebf70f3e33dae5fd, type: 3}
   notInvitedIndicator: {fileID: 340709599684236767}
+  entity: {fileID: 7758114119972819665}
   objectInteractionAction:
     m_UseReference: 1
     m_Action:
@@ -1013,24 +978,6 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: -8901194519769889497, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  changeBehaviorParameterAfterDuration: {fileID: 3844374138180979299}
---- !u!114 &3844374138180979299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5967203068415554604}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9bf168d11bf18a45b4aa065bd7bec2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  duration: 480
-  randomDuration: 1
-  minDuration: 300
-  maxDuration: 480
-  parameterName: LeaveLounge
 --- !u!114 &4813508868003629094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1061,6 +1008,28 @@ MonoBehaviour:
     colorIndex: 0
     invitedToLounge: 0
     lastLocation: {x: 0, y: 0, z: 0}
+--- !u!114 &7758114119972819665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5967203068415554604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ee3b812d5ed92c429b79a80f4368ae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityAnimator: {fileID: 0}
+  maxWalkRadius: 10
+  invitedToLounge: 0
+  machineInUse: {fileID: 0}
+  seatInUse: {fileID: 0}
+  shouldUseSeat: 0
+  headTracking: {fileID: 0}
+  walkAmount: 10
+  currentWalkAmount: 0
+  checkIfInBuilding: {fileID: 3454477744193945143}
 --- !u!1 &6829738851141436762
 GameObject:
   m_ObjectHideFlags: 0
@@ -1495,7 +1464,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 2
   target: {fileID: 1120307504418017767}
-  graph: {fileID: 5636949403010624384}
+  entity: {fileID: 7758114119972819665}
   retargetSpeed: 4
   noTracking: 0
   originalPos: {x: 0, y: 0, z: 0}
@@ -3576,11 +3545,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 732783a6ac458944fb28c90fe3bda5b6, type: 3}
---- !u!1 &1683523321674692970 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4879693883299658296, guid: 732783a6ac458944fb28c90fe3bda5b6, type: 3}
+--- !u!114 &3454477744193945143 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8869260047404088677, guid: 732783a6ac458944fb28c90fe3bda5b6, type: 3}
   m_PrefabInstance: {fileID: 6117353054870799186}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31d36aeb127bd624491729c173877971, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7924858744082204465 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4116278220223054947, guid: 732783a6ac458944fb28c90fe3bda5b6, type: 3}

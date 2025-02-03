@@ -9,11 +9,13 @@ public class EntitySpawner : MonoBehaviour
     public float spawnInterval = 10f; // Time between spawns in seconds
     private float timer;
     public int maxAmount = 0;
+    public int amountPerLand = 10; 
+    public int maxAmountFromLand;
     public int amount;
-
+    public ExpandHandler expandHandler;
     [SerializeField] private float spawnDistance = 30;
     [SerializeField] GameObject buildingChecker;
-
+    
     private bool spawningBlocked = true; 
     
     // Start is called before the first frame update
@@ -41,7 +43,18 @@ public class EntitySpawner : MonoBehaviour
         // Check if it's time to spawn
         if (timer <= 0f)
         {
-            maxAmount = WorldInteractables.instance.machineCount;
+            int boughtLandAmount = 0;
+            for (int i = 0; i < expandHandler.boughtLand.Length; i++)
+            {
+                if(expandHandler.boughtLand[i])
+                    boughtLandAmount++;
+            }
+
+            maxAmountFromLand = boughtLandAmount * amountPerLand;
+            maxAmount = WorldInteractables.instance.machineCount; 
+            if(maxAmount >= maxAmountFromLand)
+                maxAmount = maxAmountFromLand; 
+            
             if (amount >= maxAmount || maxAmount == 0) return; 
             StartCoroutine(SpawnNewEntity()); // Call the spawn method
             timer = spawnInterval; // Reset the timer

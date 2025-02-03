@@ -10,21 +10,27 @@ public class ActivatePlacedObject : MonoBehaviour
     public UnityEvent OnActivatePlacedObjectCallAlways; 
     private void OnEnable()
     {
-        foreach (Collider col in colliders)
-        { 
-            col.enabled = false;
+        if (colliders.Length > 0 && colliders != null)
+        {
+            foreach (Collider col in colliders)
+            {
+                col.enabled = false;
+            }
         }
-        
+
         addMoneyOnDestroy = GetComponent<AddMoneyOnDestroy>();
     }
 
     public void Enable(bool callEvent)
     {
-        foreach (Collider col in colliders)
-        { 
-            col.enabled = true;
+        if (colliders.Length > 0 && colliders != null)
+        {
+            foreach (Collider col in colliders)
+            {
+                col.enabled = true;
+            }
         }
-        
+
         addMoneyOnDestroy.enabled = true; 
         
         if(callEvent)

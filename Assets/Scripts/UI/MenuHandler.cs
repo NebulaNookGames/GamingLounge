@@ -21,8 +21,6 @@ public class MenuHandler : MonoBehaviour
     [SerializeField]
     string transitionInTrigger;
 
-    [SerializeField] GameObject transitionCanvas;
-
     private GameInput gameInput; 
     
     #region Methods
@@ -32,6 +30,22 @@ public class MenuHandler : MonoBehaviour
         Time.timeScale = 1.0f;
     }
 
+    private void Start()
+    {
+        if (GameObject.FindWithTag("TransitionAnimator"))
+        {
+            transitionAnimator = GameObject.FindWithTag("TransitionAnimator").GetComponent<Animator>();
+            Invoke(nameof(StartTransition), transitionInTime);
+        }
+    }
+
+
+    void StartTransition()
+    {
+        if(transitionAnimator)
+            transitionAnimator.SetTrigger(transitionInTrigger);
+    }
+    
     /// <summary>
     /// Opens a scene with the index of the "sceneIndex" parameter. 
     /// </summary>
@@ -43,8 +57,9 @@ public class MenuHandler : MonoBehaviour
 
     IEnumerator LoadSceneCoroutine(int sceneIndex)
     {
-        transitionCanvas.SetActive(true);
-        transitionAnimator.SetTrigger(transitionInTrigger);
+        if(transitionAnimator)
+            transitionAnimator.SetTrigger(transitionInTrigger);
+        
         yield return new WaitForSecondsRealtime(transitionInTime);
         SceneManager.LoadScene(sceneIndex);
     }

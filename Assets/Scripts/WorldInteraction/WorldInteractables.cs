@@ -27,6 +27,8 @@ public class WorldInteractables : MonoBehaviour
     public List<PointOfInterest> pointOfInterests;
 
     public GameObject winEffect;
+
+    public List<GameObject> openToChatEntities; 
     
     /// <summary>
     /// Initializes the singleton instance on Awake.

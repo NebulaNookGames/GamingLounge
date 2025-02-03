@@ -228,9 +228,12 @@ public class PlacementSystem : MonoBehaviour
             if(gridPart)
                 gridPart.SetActive(false);
         }
-        
+
         foreach (GameObject lockedGridVisualization in lockedGridVisualizations)
-            lockedGridVisualization.SetActive(false);
+        {
+            if (lockedGridVisualization != null)
+                lockedGridVisualization.SetActive(false);
+        }
 
         if (buildingState == null) return;
 

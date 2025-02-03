@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.Serialization;
+using System;
 
 public class Cost : MonoBehaviour
 {
@@ -29,19 +29,53 @@ public class Cost : MonoBehaviour
         (Vector3.back + Vector3.right * 0.35f).normalized     // Midpoint: Backward-right and Backward
     };
 
+    public int multiplier = 0;
+    public int maxMultiplier = 5;
+
+    public Action onMultiplierUpdated; 
+    
+    
+    public void ChangeMultiplier(bool addToMultiplier)
+    {
+        if (addToMultiplier)
+        {
+            multiplier++;
+        }
+        else
+        {
+            multiplier--;
+            if(multiplier < 0)
+                multiplier = 0;
+        }
+        
+        onMultiplierUpdated?.Invoke();
+    }
+
     public int GetCost()
     {
+        bool inBuilding = true; 
+        int cost = 0; 
         foreach (var direction in directions)
         {
             if (!IsWallInDirection(direction))
-            {
-                // If any raycast fails to hit a wall, return base cost
-                return minimumAmount;
-            }
+                inBuilding = false;
         }
 
-        // If all raycasts hit a wall, double the cost
-        return maximumAmount;
+        if (inBuilding)
+            cost = maximumAmount;
+        else
+            cost = minimumAmount;
+        
+        int tenPercent = Mathf.RoundToInt(cost * 0.1f);
+        int tempMulti = 0; 
+        
+        if (multiplier > maxMultiplier)
+            tempMulti = maxMultiplier;
+        else 
+            tempMulti = multiplier;
+
+        cost += tenPercent * tempMulti;
+        return cost;
     }
 
     private bool IsWallInDirection(Vector3 direction)

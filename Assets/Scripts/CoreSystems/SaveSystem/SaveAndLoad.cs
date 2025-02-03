@@ -63,8 +63,8 @@ public class SaveAndLoad : MonoBehaviour
     /// </summary>
     public void Save()
     {
-        try
-        {
+        // try
+        // {
             File.Delete(Application.persistentDataPath + "/saveFile.json");
             SaveData saveData = new SaveData();
 
@@ -77,11 +77,11 @@ public class SaveAndLoad : MonoBehaviour
 
             File.WriteAllText(Application.persistentDataPath + "/saveFile.json",
                 jsonString); // Save the string in a JSON file.
-        }
-        catch
-        {
-            Debug.Log("Failed saving File.");
-        }
+        // }
+        // catch
+        // {
+        //     Debug.Log("Failed saving File.");
+        // }
     }
 
     /// <summary>
@@ -89,6 +89,8 @@ public class SaveAndLoad : MonoBehaviour
     /// </summary>
     public void Load()
     {
+        try
+        {
             string jsonString =
                 File.ReadAllText(Application.persistentDataPath + "/saveFile.json"); // Save the data into a string.
 
@@ -102,6 +104,11 @@ public class SaveAndLoad : MonoBehaviour
             }
 
             onDataLoaded?.Invoke();
-            saveDataLoaded = true; 
+            saveDataLoaded = true;
+        }
+        catch
+        {
+            Debug.Log("Failed loading File.");
+        }
     }
 }

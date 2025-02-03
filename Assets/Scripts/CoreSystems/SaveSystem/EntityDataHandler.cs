@@ -10,8 +10,8 @@ public class EntityDataHandler : DataHandler
 
     public override void SendData(SaveData saveData)
     {
-        for (int i = 0; i < EntityManager.instance.npcValues.Count; i++)
-        {
+        for (int i = 0; i < EntityManager.instance.currentNPCs.Count; i++)
+        { 
             EntityManager.instance.npcValues[i].lastLocation = EntityManager.instance.currentNPCs[i].transform.position;
         }
         

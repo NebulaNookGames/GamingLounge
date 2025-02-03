@@ -159,25 +159,33 @@ public class PreviewSystem : MonoBehaviour
         Color c = Color.red; // Choose color based on validity
         c.a = 0.5f; // Set transparency
         previewMaterialInstance.color = c;
-        Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>(); // Get all renderers in the preview object
+
+        Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>(); // Get all renderers
         foreach (Renderer renderer in renderers)
         {
-            Material[] materials = renderer.materials; // Get the current materials
-            for (int i = 0; i < materials.Length; i++)
+            Material[] originalMaterials = renderer.sharedMaterials; // Use sharedMaterials to avoid duplicating materials
+            standardMaterials.AddRange(originalMaterials); // Store original materials
+
+            Material[] newMaterials = new Material[originalMaterials.Length];
+            for (int i = 0; i < originalMaterials.Length; i++)
             {
-                standardMaterials.Add(renderer.materials[i]);
-                materials[i] = previewMaterialInstance; // Replace with the preview material instance
+                newMaterials[i] = previewMaterialInstance; // Replace all with preview material
             }
-            renderer.materials = materials; // Assign updated materials
+            renderer.materials = newMaterials; // Assign new material array
         }
     }
 
     public void ResetFeedbackToRemovalPreview(GameObject gameObject)
     {
-        Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>(); // Get all renderers in the preview object
+        Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>();
+        int index = 0;
         foreach (Renderer renderer in renderers)
         {
-                renderer.materials = standardMaterials.ToArray();
+            if (index + renderer.sharedMaterials.Length <= standardMaterials.Count)
+            {
+                renderer.materials = standardMaterials.GetRange(index, renderer.sharedMaterials.Length).ToArray();
+                index += renderer.sharedMaterials.Length;
+            }
         }
         standardMaterials.Clear();
     }

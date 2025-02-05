@@ -27,4 +27,6 @@ public class SaveData
     public bool[] boughtLand;
     
     public List<NPCValues> npcValues;
+
+    public int[] materialIndexes; 
 }

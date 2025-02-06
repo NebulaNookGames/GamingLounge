@@ -144,6 +144,9 @@ MonoBehaviour:
           m_StringArgument: Play
           m_BoolArgument: 0
         m_CallState: 2
+  OnActivatePlacedObjectCallAlways:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &-5283505357383976339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,11 +323,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9e1bf3716e50a0448a6bc31bb34d7228, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9e1bf3716e50a0448a6bc31bb34d7228, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9e1bf3716e50a0448a6bc31bb34d7228, type: 3}
       propertyPath: m_LocalRotation.y
@@ -336,7 +339,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9e1bf3716e50a0448a6bc31bb34d7228, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9e1bf3716e50a0448a6bc31bb34d7228, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y

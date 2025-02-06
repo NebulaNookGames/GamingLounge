@@ -27,7 +27,7 @@ public class ObjectPlacer : MonoBehaviour
     /// <param name="position">The position to place the object.</param>
     /// <param name="rotation">The rotation to apply to the object.</param>
     /// <returns>The index of the newly placed object in the list.</returns>
-    public int PlaceObject(ObjectData objectData, Vector3 position, Quaternion rotation, bool callPlacementEvent)
+    public int PlaceObject(ObjectData objectData, Vector3 position, Quaternion rotation, bool callPlacementEvent, bool reduceMoney)
     {
         if(objectData.ID == 25) upgradePCIsPlaced = true;
         
@@ -69,7 +69,9 @@ public class ObjectPlacer : MonoBehaviour
             }
         }
         
-        MoneyManager.instance.ChangeMoney(-objectData.cost);
+        if(reduceMoney)
+            MoneyManager.instance.ChangeMoney(-objectData.cost);
+        
         placedGameObjects.Add(newObject);
         PlacementDataHandler.instance.AddData(objectData, position, rotation);
         placementSystem.OnPlaced?.Invoke();

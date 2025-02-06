@@ -26,6 +26,8 @@ public class InputManager : MonoBehaviour
     private bool validateOn;
     private bool rotateOn;
 
+    public bool placementInputUnlocked = false; 
+    
     private void Awake()
     {
         instance = this;
@@ -51,7 +53,7 @@ public class InputManager : MonoBehaviour
 
     void PlacementToggle(InputAction.CallbackContext context)
     {
-        if (Time.timeScale == 0 || toggleHandled)
+        if (Time.timeScale == 0 || toggleHandled || !placementInputUnlocked)
             return;
 
         toggleHandled = true;

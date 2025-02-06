@@ -9060,7 +9060,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80f68a1c01934b140ba4c9caace2f7d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeGameDevice: 1
+  activeGameDevice: 0
 --- !u!4 &1059356895
 Transform:
   m_ObjectHideFlags: 0
@@ -9484,6 +9484,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1445785897}
     m_Modifications:
+    - target: {fileID: 791790361386115188, guid: 17bb547bb80c92e4aa0c36417b33a99a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359442940457139862, guid: 17bb547bb80c92e4aa0c36417b33a99a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5767364422584940774, guid: 17bb547bb80c92e4aa0c36417b33a99a, type: 3}
       propertyPath: m_Name
       value: Couch
@@ -9526,6 +9534,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8261431243125015676, guid: 17bb547bb80c92e4aa0c36417b33a99a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8327035979615637092, guid: 17bb547bb80c92e4aa0c36417b33a99a, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

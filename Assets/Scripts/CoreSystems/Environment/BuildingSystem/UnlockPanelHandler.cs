@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class UnlockPanelHandler : MonoBehaviour
 {
@@ -7,6 +8,9 @@ public class UnlockPanelHandler : MonoBehaviour
     [SerializeField] private int[] cost;
     [SerializeField] public bool[] bought;
     [SerializeField] private GameObject[] unlockables;
+    public UnityEvent onUpgradePCUnlocked;
+    private bool firstBuy = true; 
+    
     private void OnEnable()
     {
         MoneyManager.instance.OnMoneyChanged += UpdateButtonInteractable;
@@ -43,7 +47,14 @@ public class UnlockPanelHandler : MonoBehaviour
     public void UnlockItem(int index)
     {
         if (cost[index] > MoneyManager.instance.MoneyAmount) return;
-       
+
+
+        if (firstBuy && !SaveAndLoad.instance.saveDataLoaded)
+        {
+            InputManager.instance.placementInputUnlocked = true;
+            onUpgradePCUnlocked?.Invoke();
+        }
+        firstBuy = false;  
         bought[index] = true;
         unlockables[index].SetActive(true);
         buttons[index].GetComponent<Button>().interactable = false;

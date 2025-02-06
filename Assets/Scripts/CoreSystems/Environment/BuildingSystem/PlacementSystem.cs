@@ -16,7 +16,7 @@ public class PlacementSystem : MonoBehaviour
     public static PlacementSystem Instance;
     
     [SerializeField]
-    private Grid grid; // The grid used for object placement.
+    public Grid grid; // The grid used for object placement.
 
     [SerializeField]
     private InputManager inputManager; // Handles user input for placement actions.
@@ -73,6 +73,10 @@ public class PlacementSystem : MonoBehaviour
     private void Awake()
     {
         Instance = this; 
+        floorData = new GridData();
+        wallData = new GridData();
+        wallDecorData = new GridData();
+        furnitureData = new GridData();
     }
 
     /// <summary>
@@ -81,10 +85,7 @@ public class PlacementSystem : MonoBehaviour
     private void Start()
     {
         StopPlacement();
-        floorData = new GridData();
-        wallData = new GridData();
-        wallDecorData = new GridData();
-        furnitureData = new GridData();
+      
         inputManager.OnPlacementToggle += TogglePlacement;
         TogglePlacement();
         

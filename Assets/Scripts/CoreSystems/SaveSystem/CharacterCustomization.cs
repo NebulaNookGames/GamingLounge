@@ -11,7 +11,8 @@ public class CharacterCustomization : MonoBehaviour
         Hand,
         Suit,
         SuitDetail,
-        Hair
+        Hair,
+        Skin
     };
     
     [SerializeField] private SkinnedMeshRenderer playerMeshRenderer;
@@ -21,18 +22,21 @@ public class CharacterCustomization : MonoBehaviour
     private Material originalSuitMaterial;
     private Material originalSuitDetailMaterial;
     private Material originalHairMaterial; 
+    private Material originalSkinMaterial;
     
     [SerializeField] private Material[] shoeMaterials;
     [SerializeField] private Material[] handMaterials;
     [SerializeField] private Material[] suitMaterials;
     [SerializeField] private Material[] suitDetailMaterials;
     [SerializeField] private Material[] hairMaterials;
+    [SerializeField] private Material[] skinMaterials;
     
     private int currentShoeIndex = 0;
     private int currentHandIndex = 0;
     private int currentSuitIndex = 0;
     private int currentSuitDetailIndex = 0;
     private int currentHairIndex = 0;
+    private int currentSkinIndex = 0;
     
     private void Awake()
     {
@@ -41,6 +45,7 @@ public class CharacterCustomization : MonoBehaviour
         originalSuitMaterial = playerMeshRenderer.sharedMaterials[2];
         originalSuitDetailMaterial = playerMeshRenderer.sharedMaterials[3];
         originalHairMaterial = playerMeshRenderer.sharedMaterials[4];
+        originalSkinMaterial = playerMeshRenderer.sharedMaterials[5];
     }
     
     public void CustomizeShoeNext() => CustomizeToNext(CharacterPart.Shoe);
@@ -49,11 +54,15 @@ public class CharacterCustomization : MonoBehaviour
     public void CustomizeSuitDetailNext() => CustomizeToNext(CharacterPart.SuitDetail);
     public void CustomizeHairNext() => CustomizeToNext(CharacterPart.Hair);
     
+    public void CustomizeSkinNext() => CustomizeToNext(CharacterPart.Skin);
+    
     public void CustomizeShoePrevious() => CustomizeToPrevious(CharacterPart.Shoe);
     public void CustomizeHandPrevious() => CustomizeToPrevious(CharacterPart.Hand);
     public void CustomizeSuitPrevious() => CustomizeToPrevious(CharacterPart.Suit);
     public void CustomizeSuitDetailPrevious() => CustomizeToPrevious(CharacterPart.SuitDetail);
     public void CustomizeHairPrevious() => CustomizeToPrevious(CharacterPart.Hair);
+    
+    public void CustomizeSkinPrevious() => CustomizeToPrevious(CharacterPart.Skin);
 
     [Button]
 public void CustomizeToNext(CharacterPart characterPart)
@@ -85,6 +94,11 @@ public void CustomizeToNext(CharacterPart characterPart)
         case CharacterPart.Hair:
             currentHairIndex = (currentHairIndex + 1) % hairMaterials.Length;
             materials[4] = hairMaterials[currentHairIndex];
+            break;
+        
+        case CharacterPart.Skin:
+            currentSkinIndex = (currentSkinIndex + 1) % skinMaterials.Length;
+            materials[5] = skinMaterials[currentSkinIndex];
             break;
     }
 
@@ -122,6 +136,11 @@ public void CustomizeToPrevious(CharacterPart characterPart)
             currentHairIndex = (currentHairIndex - 1 + hairMaterials.Length) % hairMaterials.Length;
             materials[4] = hairMaterials[currentHairIndex];
             break;
+        
+        case CharacterPart.Skin:
+            currentSkinIndex = (currentSkinIndex - 1 + skinMaterials.Length) % skinMaterials.Length;
+            materials[5] = skinMaterials[currentSkinIndex];
+            break;
     }
 
     playerMeshRenderer.materials = materials; // Assign the modified materials array back to the renderer
@@ -138,6 +157,7 @@ public void Reset()
     materials[2] = originalSuitMaterial;
     materials[3] = originalSuitDetailMaterial;
     materials[4] = originalHairMaterial;
+    materials[5] = originalSkinMaterial;
 
     // Assign the modified materials array back to the renderer
     playerMeshRenderer.materials = materials;
@@ -148,6 +168,7 @@ public void Reset()
     currentSuitIndex = 0;
     currentSuitDetailIndex = 0;
     currentHairIndex = 0;
+    currentSkinIndex = 0;
 }
 
 }

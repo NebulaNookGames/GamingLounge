@@ -1,13 +1,17 @@
 using UnityEngine;
 using System.Collections.Generic;
+using CMF;
 
-public class PlayerCustomizationDataHandler : DataHandler
+public class PlayerDataHandler : DataHandler
 {
+    public GameObject player; 
     public Material[] possibleMaterials;
     public SkinnedMeshRenderer skinnedMeshRenderer;
-
+    
     public override void ReceiveData(SaveData saveData)
     {
+        player.transform.position = saveData.playerPosition;
+        
         if (saveData.materialIndexes == null || saveData.materialIndexes.Length == 0)
             return; // No saved data
 
@@ -28,6 +32,10 @@ public class PlayerCustomizationDataHandler : DataHandler
 
     public override void SendData(SaveData saveData)
     {
+        player.GetComponent<AdvancedWalkerController>().enabled = false;
+        saveData.playerPosition = player.transform.position;
+        player.GetComponent<AdvancedWalkerController>().enabled = true;
+        
         if (skinnedMeshRenderer == null)
         {
             Debug.LogError("SkinnedMeshRenderer is null! Cannot send material data.");

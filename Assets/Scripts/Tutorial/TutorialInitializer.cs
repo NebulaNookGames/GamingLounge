@@ -21,7 +21,7 @@ public class TutorialInitializer : MonoBehaviour
         else
         {
             InputManager.instance.placementInputUnlocked = true; 
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 

@@ -17,16 +17,15 @@ public class SaveData
     public List<Vector3> positions;
     public List<Quaternion> rotations;
     
-    
     public int savedMoney;
     public List<int> moneyInArcadeMachines;
     public List<Vector3> arcadeMachinePositions;
-    
     
     public bool[] boughtObjects;
     public bool[] boughtLand;
     
     public List<NPCValues> npcValues;
 
-    public int[] materialIndexes; 
+    public Vector3 playerPosition;
+    public int[] materialIndexes;
 }

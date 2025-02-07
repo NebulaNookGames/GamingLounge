@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-
+using System; 
 public class EntitySpawner : MonoBehaviour
 {
     public static EntitySpawner instance; 
@@ -16,7 +16,9 @@ public class EntitySpawner : MonoBehaviour
     [SerializeField] private float spawnDistance = 30;
     [SerializeField] GameObject buildingChecker;
     
-    private bool spawningBlocked = true; 
+    private bool spawningBlocked = true;
+
+    public Action onAmountUpdated; 
     
     // Start is called before the first frame update
     void Start()
@@ -46,15 +48,20 @@ public class EntitySpawner : MonoBehaviour
             int boughtLandAmount = 0;
             for (int i = 0; i < expandHandler.boughtLand.Length; i++)
             {
-                if(expandHandler.boughtLand[i])
+                if (expandHandler.boughtLand[i])
+                {
                     boughtLandAmount++;
+                }
             }
 
             maxAmountFromLand = boughtLandAmount * amountPerLand;
-            maxAmount = WorldInteractables.instance.machineCount; 
-            if(maxAmount >= maxAmountFromLand)
-                maxAmount = maxAmountFromLand; 
-            
+            maxAmount = WorldInteractables.instance.machineCount;
+            if (maxAmount >= maxAmountFromLand)
+            {
+                maxAmount = maxAmountFromLand;
+                onAmountUpdated?.Invoke();
+            }
+
             if (amount >= maxAmount || maxAmount == 0) return; 
             StartCoroutine(SpawnNewEntity()); // Call the spawn method
             timer = spawnInterval; // Reset the timer
@@ -72,9 +79,9 @@ public class EntitySpawner : MonoBehaviour
             Vector3 randomPos = transform.position;
             
             randomPos = new Vector3(
-                Random.Range(transform.position.x - spawnDistance, transform.position.x + spawnDistance),
+                UnityEngine.Random.Range(transform.position.x - spawnDistance, transform.position.x + spawnDistance),
                 transform.position.y,
-                Random.Range(transform.position.z - spawnDistance, transform.position.x + spawnDistance));
+                UnityEngine.Random.Range(transform.position.z - spawnDistance, transform.position.x + spawnDistance));
 
             buildingChecker.transform.position = new Vector3(randomPos.x, buildingChecker.transform.position.y, randomPos.z);
 
@@ -87,7 +94,7 @@ public class EntitySpawner : MonoBehaviour
 
         if (entityPrefab != null && buildingChecker != null)
         {
-            Quaternion randomRotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
+            Quaternion randomRotation = Quaternion.Euler(0, UnityEngine.Random.Range(0f, 360f), 0);
             // Instantiate the entityPrefab at the spawner's position with no rotation
             GameObject newEntity = Instantiate(entityPrefab, buildingChecker.transform.position, randomRotation);
             newEntity.GetComponentInChildren<RandomizeCharacter>().GenerateNew();
@@ -95,6 +102,7 @@ public class EntitySpawner : MonoBehaviour
             amount++;
             spawningBlocked = false;
             EntityManager.instance.currentNPCs.Add(newEntity);
+            onAmountUpdated?.Invoke();
         }
     }
 
@@ -113,9 +121,9 @@ public class EntitySpawner : MonoBehaviour
                     Vector3 randomPos = transform.position;
             
                     randomPos = new Vector3(
-                        Random.Range(transform.position.x - spawnDistance, transform.position.x + spawnDistance),
+                        UnityEngine.Random.Range(transform.position.x - spawnDistance, transform.position.x + spawnDistance),
                         transform.position.y,
-                        Random.Range(transform.position.z - spawnDistance, transform.position.x + spawnDistance));
+                        UnityEngine.Random.Range(transform.position.z - spawnDistance, transform.position.x + spawnDistance));
 
                     buildingChecker.transform.position = new Vector3(randomPos.x, buildingChecker.transform.position.y, randomPos.z);
 
@@ -147,5 +155,6 @@ public class EntitySpawner : MonoBehaviour
         }
         maxAmount = WorldInteractables.instance.machineCount;
         spawningBlocked = false; 
+        onAmountUpdated?.Invoke();
     }
 }

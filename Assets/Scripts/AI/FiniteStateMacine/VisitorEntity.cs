@@ -71,7 +71,7 @@ public class VisitorEntity : Entity
     {
         CreateStates();
         CreateTransitions();
-        initialState = idleState;
+        initialState = randomWalkState;
         walkAmount = Random.Range(30, 60);
     }
 

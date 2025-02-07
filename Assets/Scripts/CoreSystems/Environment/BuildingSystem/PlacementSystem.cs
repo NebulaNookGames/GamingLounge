@@ -139,11 +139,15 @@ public class PlacementSystem : MonoBehaviour
                 GetComponent<AudioPlayer>().PlayAudioOneShot(placementMenuOff, .5f);
             
             moneyText.color = new Color(0, 0, 0, 0);
-            moneyTextBackground.SetActive(false);
-            placementCanvas.SetActive(false);
-            virtualMouse.SetActive(false);
+            if(moneyText != null)
+                moneyTextBackground.SetActive(false);
+            if(placementCanvas)
+                placementCanvas.SetActive(false);
+            if(virtualMouse)
+                virtualMouse.SetActive(false);
             
-            GameInput.Instance.SetMouseVisibility(false);
+            if(GameInput.Instance)
+                GameInput.Instance.SetMouseVisibility(false);
 
             StopPlacement();
         }

@@ -88,7 +88,8 @@ public class PlacementState : IBuildingState
     public void EndState()
     {
         previewSystem.StopShowingPreview();
-        placementSystem.virtualMouse.gameObject.SetActive(false);
+        if(placementSystem && placementSystem.virtualMouse)
+            placementSystem.virtualMouse.gameObject.SetActive(false);
     }
 
     /// <summary>

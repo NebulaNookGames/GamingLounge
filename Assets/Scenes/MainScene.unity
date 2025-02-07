@@ -243,6 +243,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5186265485317012857, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
   m_PrefabInstance: {fileID: 8446446829056921443}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &564612457 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 512503617806466713, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
+  m_PrefabInstance: {fileID: 8446446829056921443}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &587609475 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8253543621443580215, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
@@ -269,6 +274,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &689912998 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7914587798451404354, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
+  m_PrefabInstance: {fileID: 8446446829056921443}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &693846368 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5475436456620739127, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
+  m_PrefabInstance: {fileID: 8446446829056921443}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &706445726 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1108066789797438342, guid: d39efdd88c4cd5a4789462e17674cee6, type: 3}
@@ -325,6 +340,11 @@ MonoBehaviour:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7208595460783984992, guid: d39efdd88c4cd5a4789462e17674cee6, type: 3}
   m_PrefabInstance: {fileID: 5169720153162518692}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1437709623 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1150223487200324294, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
+  m_PrefabInstance: {fileID: 8446446829056921443}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1508321666 stripped
 GameObject:
@@ -404,6 +424,11 @@ GameObject:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3660842861385074292, guid: d39efdd88c4cd5a4789462e17674cee6, type: 3}
   m_PrefabInstance: {fileID: 5169720153162518692}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2036811647 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 660801623651860175, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
+  m_PrefabInstance: {fileID: 8446446829056921443}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &2045217185 stripped
 MonoBehaviour:
@@ -496,6 +521,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1057053124}
     - target: {fileID: 8577911792373170273, guid: 002abc1d47ab9814d82121938908f686, type: 3}
+      propertyPath: propPanel
+      value: 
+      objectReference: {fileID: 693846368}
+    - target: {fileID: 8577911792373170273, guid: 002abc1d47ab9814d82121938908f686, type: 3}
+      propertyPath: buildPanel
+      value: 
+      objectReference: {fileID: 564612457}
+    - target: {fileID: 8577911792373170273, guid: 002abc1d47ab9814d82121938908f686, type: 3}
       propertyPath: mapViewCam
       value: 
       objectReference: {fileID: 644860935}
@@ -503,6 +536,18 @@ PrefabInstance:
       propertyPath: standardCam
       value: 
       objectReference: {fileID: 1834921501}
+    - target: {fileID: 8577911792373170273, guid: 002abc1d47ab9814d82121938908f686, type: 3}
+      propertyPath: machinePanel
+      value: 
+      objectReference: {fileID: 1437709623}
+    - target: {fileID: 8577911792373170273, guid: 002abc1d47ab9814d82121938908f686, type: 3}
+      propertyPath: upgradePanel
+      value: 
+      objectReference: {fileID: 689912998}
+    - target: {fileID: 8577911792373170273, guid: 002abc1d47ab9814d82121938908f686, type: 3}
+      propertyPath: structurePanel
+      value: 
+      objectReference: {fileID: 2036811647}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -902,10 +947,6 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 228993047}
-    - target: {fileID: 512503617806466713, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 610569261403813037, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -922,10 +963,6 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 228993047}
-    - target: {fileID: 660801623651860175, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1019223117316704090, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1166,10 +1203,6 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 228993047}
-    - target: {fileID: 4359190179654420260, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4402844463692161252, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1178,10 +1211,6 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 228993047}
-    - target: {fileID: 4645663991022952276, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4647029442830355795, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.37605757

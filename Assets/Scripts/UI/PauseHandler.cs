@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem; 
+using UnityEngine.UI;
 
 /// <summary>
 /// Pauses/Unpauses the game and opens the Character Selection.
@@ -20,6 +22,10 @@ public class PauseHandler : MonoBehaviour
    [SerializeField] float pauseLockedTime;
 
    public InputActionProperty pauseAction; 
+   
+   public EventSystem eventSystem;
+   public Button topUIButton;
+   
    
    // Is the game currently paused.
    bool isPaused;
@@ -63,6 +69,8 @@ public class PauseHandler : MonoBehaviour
          Time.timeScale = 0;
          pauseMenu.SetActive(true);
          gameUI.SetActive(false);
+         if(eventSystem != null)
+            eventSystem.SetSelectedGameObject(topUIButton.gameObject);
       }
       else
       {

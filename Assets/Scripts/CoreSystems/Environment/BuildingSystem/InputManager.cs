@@ -62,7 +62,7 @@ public class InputManager : MonoBehaviour
 
     void Clicked(InputAction.CallbackContext context)
     {
-        if (Time.timeScale == 0 || validateHandled)
+        if (Time.timeScale == 0 || validateHandled || context.canceled || context.started) 
             return;
 
         validateHandled = true;

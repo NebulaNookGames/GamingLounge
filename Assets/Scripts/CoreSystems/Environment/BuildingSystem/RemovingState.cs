@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.UI;
 
 /// <summary>
 /// Handles the state for removing objects from the grid in the placement system.
@@ -59,8 +60,11 @@ public class RemovingState : IBuildingState
             previewSystem.ResetFeedbackToRemovalPreview(gameObjectToColor);
             gameObjectToColor = null;
         }
+
+
+        if (placementSystem.virtualMouse.gameObject.activeSelf)
+            placementSystem.virtualMouse.gameObject.SetActive(false);
         
-        placementSystem.virtualMouse.gameObject.SetActive(false);
         previewSystem.StopShowingPreview();
     }
 

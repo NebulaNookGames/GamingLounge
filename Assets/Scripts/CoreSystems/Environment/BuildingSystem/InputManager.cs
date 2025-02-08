@@ -53,7 +53,7 @@ public class InputManager : MonoBehaviour
 
     void PlacementToggle(InputAction.CallbackContext context)
     {
-        if (Time.timeScale == 0 || toggleHandled || !placementInputUnlocked)
+        if (Time.timeScale == 0 || toggleHandled || !placementInputUnlocked || context.canceled)
             return;
 
         toggleHandled = true;
@@ -71,7 +71,7 @@ public class InputManager : MonoBehaviour
 
     void Rotate(InputAction.CallbackContext context)
     {
-        if (Time.timeScale == 0 || rotateHandled)
+        if (Time.timeScale == 0 || rotateHandled  || context.canceled)
             return;
 
         rotateHandled = true;

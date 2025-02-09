@@ -16,7 +16,6 @@ public class TutorialInitializer : MonoBehaviour
         if (!saveAndLoad.saveDataLoaded)
         {
             tutorialPlacement.enabled = true;
-           Invoke(nameof(StartInputTutorial), 4f);
         }
         else
         {
@@ -25,7 +24,7 @@ public class TutorialInitializer : MonoBehaviour
         }
     }
 
-    void StartInputTutorial()
+    public void StartInputTutorial()
     {
         moveTutorial.SetActive(true);
     }

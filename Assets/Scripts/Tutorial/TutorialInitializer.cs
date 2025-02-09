@@ -5,7 +5,8 @@ public class TutorialInitializer : MonoBehaviour
 {
     [SerializeField] private SaveAndLoad saveAndLoad;
     [SerializeField] private TutorialPlacement tutorialPlacement;
-    [SerializeField] private GameObject moveTutorial; 
+    [SerializeField] private GameObject moveTutorial;
+    [SerializeField] private GameObject tutorialBackground;
     private void Awake()
     {
         Invoke(nameof(CheckForTutorialActivation), 2f);
@@ -27,6 +28,7 @@ public class TutorialInitializer : MonoBehaviour
     public void StartInputTutorial()
     {
         moveTutorial.SetActive(true);
+        tutorialBackground.SetActive(true);
     }
 
     public void StopInvoke()

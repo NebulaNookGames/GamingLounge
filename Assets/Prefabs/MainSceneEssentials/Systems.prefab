@@ -273,6 +273,21 @@ MonoBehaviour:
   - {fileID: 1612809246803606906}
   autoSaveEnabled: 1
   autoSaveInterval: 300
+  loadedSaveData:
+    gridPositions: []
+    objectSizes: []
+    placedObjectiDs: 
+    objectDatas: []
+    positions: []
+    rotations: []
+    savedMoney: 0
+    moneyInArcadeMachines: 
+    arcadeMachinePositions: []
+    boughtObjects: 
+    boughtLand: 
+    npcValues: []
+    playerPosition: {x: 0, y: 0, z: 0}
+    materialIndexes: 
   saveDataLoaded: 0
 --- !u!114 &2350028146598359098
 MonoBehaviour:
@@ -345,6 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d837b2526a1f9a84c8c9eb305b086101, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   possibleMaterials:
   - {fileID: 2100000, guid: 0e51c0c80e764b7448d76816ac16a7ae, type: 2}
   - {fileID: 2100000, guid: a13fa183a8fc90d47add675d97543715, type: 2}

@@ -11,14 +11,16 @@ public class Typewriter : MonoBehaviour
 
     [Header("Sound Settings")]
     public AudioClip typeSound;                     // Typing sound effect
-    public float soundPitchVariation = 0.1f;        // Random pitch variation for more natural feel
+    public float soundPitchVariation = 0.2f;        // Increased pitch variation
+    public float soundVolume = 1f;                // Lowered volume for less annoyance
+    public float soundPlayChance = 0.7f;            // 70% chance to play the sound
     public AudioSource audioSource;                // AudioSource to play sounds
 
     private float timer;                            // Countdown timer for character delay
     private float delayTimer;                       // Countdown timer for initial delay
     private int textIndex = 0;                      // Current character index
     private bool isTyping = false;                  // Flag to start typing after delay
-    
+
     private void OnEnable()
     {
         text = GetComponent<TextMeshProUGUI>();
@@ -47,7 +49,12 @@ public class Typewriter : MonoBehaviour
             {
                 timer = speed;
                 text.text += textToWrite[textIndex]; // Add next character
-                PlayTypingSound();                  // Play typing sound effect
+
+                if (Random.value < soundPlayChance) // Random chance to play sound
+                {
+                    PlayTypingSound();              // Play typing sound effect
+                }
+
                 textIndex++;
             }
         }
@@ -62,6 +69,7 @@ public class Typewriter : MonoBehaviour
         if (typeSound != null && audioSource != null)
         {
             audioSource.pitch = 1f + Random.Range(-soundPitchVariation, soundPitchVariation);
+            audioSource.volume = soundVolume;       // Adjust volume
             audioSource.PlayOneShot(typeSound);
         }
     }

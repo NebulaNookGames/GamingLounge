@@ -1,25 +1,48 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ActivationTogglerOfOtherGameObject : MonoBehaviour
 {
     public GameObject gameObjectToActivate;
-    public float waitDuration;
+    public GameObject background; 
+    
+    public InputActionProperty continueAction;
 
     private void OnEnable()
     {
-        Invoke(nameof(DisableThisAndActivateOther), waitDuration);
+        continueAction.action.performed += Continue;
+        if(background)
+            background.SetActive(true);
     }
+    
+    private void OnDisable()
+    {
+        continueAction.action.performed -= Continue;
+
+        if(IsInvoking(nameof(DisableThisAndActivateOther)))
+            CancelInvoke(nameof(DisableThisAndActivateOther));
+    }
+    
+    void Continue(InputAction.CallbackContext context)
+    {
+        if (Time.timeScale == 0)
+            return;
+        
+        Debug.Log("Continuing");
+        DisableThisAndActivateOther();
+    }
+    
 
     void DisableThisAndActivateOther()
     {
-        gameObjectToActivate.SetActive(true);
+        if(background)
+            background.SetActive(false);
+        
+        if(gameObjectToActivate != null)
+            gameObjectToActivate.SetActive(true);
+        
         gameObject.SetActive(false);
-    }
-
-    private void OnDisable()
-    {
-        if(IsInvoking(nameof(DisableThisAndActivateOther)))
-            CancelInvoke(nameof(DisableThisAndActivateOther));
     }
 }

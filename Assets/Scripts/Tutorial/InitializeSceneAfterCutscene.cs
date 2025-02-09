@@ -5,6 +5,7 @@ public class InitializeSceneAfterCutscene : MonoBehaviour
     public GameObject player;
     public TutorialInitializer tutorialInitializer;
     public SaveAndLoad saveAndLoad;
+    
     private void Awake()
     {
         Invoke(nameof(CheckForCutsceneStopping), 2f);
@@ -13,9 +14,16 @@ public class InitializeSceneAfterCutscene : MonoBehaviour
     public void Initialize()
     {
         player.SetActive(true);
-        tutorialInitializer.StartInputTutorial();
+        
+        Invoke(nameof(StartTutorial), 8f);
     }
 
+    void StartTutorial()
+    {
+        tutorialInitializer.StartInputTutorial();
+    }
+       
+            
     void CheckForCutsceneStopping()
     {
         if (saveAndLoad.saveDataLoaded)

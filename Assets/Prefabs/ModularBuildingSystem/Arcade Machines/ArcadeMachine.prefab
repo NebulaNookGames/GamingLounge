@@ -708,7 +708,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectSpawnPos: {fileID: 3046105635932401455}
-  moneyEffect: {fileID: 219834491187561578, guid: df123906fac6c1a4eb45ab2e9fc41417, type: 3}
   beginVideoPlayer: {fileID: 6040780714507191482}
 --- !u!114 &3423836063309542442
 MonoBehaviour:
@@ -1376,12 +1375,17 @@ PrefabInstance:
       propertyPath: cameraShake.enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5161904656840288084, guid: 6718dc24203da53468af9ada8fef7d6d, type: 3}
+      propertyPath: animatedLights.Array.data[0].light
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 9064642272069432822, guid: 6718dc24203da53468af9ada8fef7d6d, type: 3}
       propertyPath: m_Materials.Array.size
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5920737141672433187, guid: 6718dc24203da53468af9ada8fef7d6d, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6718dc24203da53468af9ada8fef7d6d, type: 3}

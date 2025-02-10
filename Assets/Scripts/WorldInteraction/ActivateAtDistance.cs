@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ActivateAtDistance : MonoBehaviour
@@ -7,22 +8,19 @@ public class ActivateAtDistance : MonoBehaviour
     public GameObject objectToCheckDistanceFrom;
     public float distanceToActivate = 1;
     
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        if(target == null && GameObject.FindGameObjectWithTag("Player"))
-            target = GameObject.FindGameObjectWithTag("Player");
-        else if (target != null)
-        {
-            float dist = Vector3.Distance(objectToCheckDistanceFrom.transform.position, target.transform.position);
-            if (dist <= distanceToActivate)
-            {
-                objectToActivate.SetActive(true);
-            }
-            else
-            {
-                objectToActivate.SetActive(false);
-            }
-        }
+       ActivationManager.instance.objectsToCheck.Add(this);
+    }
+
+    private void OnDisable()
+    {
+        ActivationManager.instance.objectsToCheck.Remove(this);
+    }
+
+    public void CheckDistance(GameObject target)
+    {
+        float sqrDist = (objectToCheckDistanceFrom.transform.position - target.transform.position).sqrMagnitude;
+        objectToActivate.SetActive(sqrDist <= distanceToActivate * distanceToActivate);
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8494915183294724489}
   - component: {fileID: 7742851620307156673}
   - component: {fileID: 3261766450291834270}
-  - component: {fileID: 91013168663390683}
+  - component: {fileID: 3162229788018028656}
   m_Layer: 6
   m_Name: ShoeParticle
   m_TagString: Untagged
@@ -4892,7 +4892,7 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &91013168663390683
+--- !u!114 &3162229788018028656
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4901,7 +4901,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4969962493793915192}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88d91509eba5aa043b723dbf7854a67c, type: 3}
+  m_Script: {fileID: 11500000, guid: eb9bda4333b8081498024a5e3b1f6c77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seconds: 10
+  isFootprintEffect: 1
+  isMoneyEffect: 0
+  waitTime: 5.5

@@ -30,6 +30,8 @@ public class Typewriter : MonoBehaviour
 
     private void Update()
     {
+        if (textIndex > textToWrite.Length) return;
+            
         // Handle initial delay before typing starts
         if (!isTyping)
         {

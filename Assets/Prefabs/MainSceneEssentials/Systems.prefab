@@ -134,6 +134,53 @@ MonoBehaviour:
   placedGameObjects: []
   placementSystem: {fileID: 3198550151841903184}
   upgradePCIsPlaced: 0
+--- !u!1 &1146770111759119705
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4933519985889078400}
+  - component: {fileID: 1561385868817580797}
+  m_Layer: 0
+  m_Name: Objectpool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4933519985889078400
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146770111759119705}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.0140343, y: 7.2728934, z: -12.994575}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4594702622329265874}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1561385868817580797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1146770111759119705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9722f7e386d643948af44ff97b89fe88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footprintEffectPrefab: {fileID: 4969962493793915192, guid: 376e7c61ba68d0b489ab630c762fc4e9, type: 3}
+  moneyEffectPrefab: {fileID: 219834491187561578, guid: df123906fac6c1a4eb45ab2e9fc41417, type: 3}
+  fillAmountPerQueue: 250
 --- !u!1 &1900513808730223103
 GameObject:
   m_ObjectHideFlags: 0
@@ -717,6 +764,7 @@ Transform:
   - {fileID: 1659588558185984425}
   - {fileID: 115566572852683787}
   - {fileID: 2400753081229253296}
+  - {fileID: 4933519985889078400}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6635253733516099191

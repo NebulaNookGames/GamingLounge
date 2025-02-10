@@ -9,7 +9,8 @@ public class ActivationTogglerOfOtherGameObject : MonoBehaviour
     public GameObject background; 
     
     public InputActionProperty continueAction;
-
+    public bool isLastTutorial;
+    public GameObject playerCam; 
     private void OnEnable()
     {
         continueAction.action.performed += Continue;
@@ -37,6 +38,9 @@ public class ActivationTogglerOfOtherGameObject : MonoBehaviour
 
     void DisableThisAndActivateOther()
     {
+        if(isLastTutorial)
+            Destroy(playerCam);
+            
         if(background)
             background.SetActive(false);
         

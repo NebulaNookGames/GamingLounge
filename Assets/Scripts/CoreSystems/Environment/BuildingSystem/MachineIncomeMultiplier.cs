@@ -11,7 +11,11 @@ public class MachineIncomeMultiplier : MonoBehaviour
     public bool canAddToMultiplier = false;
     public Transform centerofObject; 
     public GameObject scanAreaPrefab;
-    public GameObject scanAreaInstance; 
+    public GameObject scanAreaInstance;
+
+    private float updateDuration = .05f; 
+    private float timer; 
+    
     public void ChangeCanAddToMultiplier()
     {
         canAddToMultiplier = true;
@@ -19,6 +23,8 @@ public class MachineIncomeMultiplier : MonoBehaviour
     
     private void Start()
     {
+        timer = updateDuration;
+        
         if (!canAddToMultiplier)
         {
             if (scanAreaPrefab != null)
@@ -36,8 +42,15 @@ public class MachineIncomeMultiplier : MonoBehaviour
 
     private void Update()
     {
-        if(scanAreaInstance != null)
-            scanAreaInstance.transform.position = new Vector3(centerofObject.transform.position.x, scanAreaInstance.transform.position.y, centerofObject.transform.position.z);
+        timer -= Time.deltaTime;
+        if (timer <= 0)
+        {
+            timer = updateDuration;
+            
+            if (scanAreaInstance != null)
+                scanAreaInstance.transform.position = new Vector3(centerofObject.transform.position.x,
+                    scanAreaInstance.transform.position.y, centerofObject.transform.position.z);
+        }
     }
 
     private void OnDestroy()

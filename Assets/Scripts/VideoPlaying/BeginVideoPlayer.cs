@@ -64,8 +64,7 @@ public class BeginVideoPlayer : MonoBehaviour
         }
         else
         {
-            videoPlayer.frame = -10;
-            videoPlayer.Pause();
+            videoPlayer.Stop();
         }
 
     }

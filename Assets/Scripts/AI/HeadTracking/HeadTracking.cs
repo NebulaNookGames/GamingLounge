@@ -13,68 +13,77 @@ public class HeadTracking : MonoBehaviour
     public bool noTracking;
     public Vector3 originalPos;
     public Vector3 beginPosOffset = Vector3.zero;
-    public Rig rig; 
-    
+    public Rig rig;
+
+    public float updateInterval = .5f;
+    private float updateTimer; 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         entity.headTracking = this;
+        updateTimer = updateInterval;
     }
 
     private void Update()
     {
-        if (noTracking)
+        updateTimer -= Time.deltaTime;
+        if (updateTimer <= 0)
         {
-            rig.weight = 0;
-            return;
-        } 
-        
-        originalPos = transform.position + beginPosOffset + (transform.forward * 2f);
-        
-        // Default target position in world space
-        Vector3 targetPos = transform.position + beginPosOffset + (transform.forward * 2f);
-        Transform closestTracking = null;
-        if (!noTracking)
-        {
-            float closestDistance = float.MaxValue;
+            updateTimer = updateInterval;
 
-            foreach (PointOfInterest poi in WorldInteractables.instance.pointOfInterests)
+            if (noTracking)
             {
-                float delta = Vector3.Distance(poi.transform.position, target.position);
+                rig.weight = 0;
+                return;
+            }
 
-                if (delta < radius && delta < closestDistance)
+            originalPos = transform.position + beginPosOffset + (transform.forward * 2f);
+
+            // Default target position in world space
+            Vector3 targetPos = transform.position + beginPosOffset + (transform.forward * 2f);
+            Transform closestTracking = null;
+            if (!noTracking)
+            {
+                float closestDistance = float.MaxValue;
+
+                foreach (PointOfInterest poi in WorldInteractables.instance.pointOfInterests)
                 {
-                    closestTracking = poi.transform;
-                    closestDistance = delta;
+                    float delta = Vector3.Distance(poi.transform.position, target.position);
+
+                    if (delta < radius && delta < closestDistance)
+                    {
+                        closestTracking = poi.transform;
+                        closestDistance = delta;
+                    }
+                }
+
+                if (closestTracking != null)
+                {
+                    rig.weight = 1;
+                    // Update the desired target position to POI position
+                    targetPos = closestTracking.position;
+                }
+                else
+                {
+                    rig.weight = 0;
                 }
             }
 
             if (closestTracking != null)
             {
-                rig.weight = 1;
-                // Update the desired target position to POI position
-                targetPos = closestTracking.position;
+                if (Vector3.Distance(closestTracking.position, transform.position) > radius)
+                {
+                    rig.weight = 0;
+                    targetPos = originalPos;
+                }
             }
             else
             {
                 rig.weight = 0;
-            }
-        }
-
-        if (closestTracking != null)
-        {
-            if (Vector3.Distance(closestTracking.position, transform.position) > radius)
-            {
-                rig.weight = 0;
                 targetPos = originalPos;
             }
-        }
-        else
-        {
-            rig.weight = 0;
-            targetPos = originalPos;
-        }
 
-        target.position = Vector3.Lerp(target.position, targetPos, Time.deltaTime * retargetSpeed);
+            target.position = Vector3.Lerp(target.position, targetPos, Time.deltaTime * retargetSpeed);
+        }
     }
 }

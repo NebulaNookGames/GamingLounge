@@ -28,7 +28,13 @@ public class RandomWalkState : State
 
     private bool leaveEffectSpawned = false; 
     
-    private VisitorEntity visitorEntity; 
+    private VisitorEntity visitorEntity;
+
+    private float updateInterval = .5f;
+    private float updateTimer = 0;
+
+    private EffectSpawner effectSpawner; 
+    
     #endregion Variables
 
     #region Constructor
@@ -49,38 +55,46 @@ public class RandomWalkState : State
             entity.Agent.isStopped = false;
 
         entity.EntityAnimator.SetFloat("HorizontalSpeed", 1);
-        
+        effectSpawner = entity.GetComponent<EffectSpawner>();
+        updateTimer = updateInterval;
         
         Initialize();
     }
 
+    // ReSharper disable Unity.PerformanceAnalysis
     public override void UpdateState()
     {
-        if (Vector3.Distance(entity.transform.position, walkPosition) <= DistanceWhenDestinationReached)
+        updateTimer -= Time.deltaTime;
+        if (updateTimer <= 0)
         {
-            if (visitorEntity.currentWalkAmount >= visitorEntity.walkAmount)
-            {
-                if (visitorEntity.machineInUse != null)
-                {
-                    if(WorldInteractables.instance.allAracadeMachines.Contains(visitorEntity.machineInUse)) 
-                        WorldInteractables.instance.allAracadeMachines.Remove(visitorEntity.machineInUse);
+            updateTimer = updateInterval; 
             
-                    if(WorldInteractables.instance.availableArcadeMachines.Contains(visitorEntity.machineInUse))
-                        WorldInteractables.instance.availableArcadeMachines.Remove(visitorEntity.machineInUse);
-                }
-                
-                entity.GetComponent<NavMeshAgent>().isStopped = true;
-                EntityManager.instance.DestroyNPC(entity.gameObject);
-                EntitySpawner.instance.amount--;
-
-                if (!leaveEffectSpawned)
+            if (Vector3.Distance(entity.transform.position, walkPosition) <= DistanceWhenDestinationReached)
+            {
+                if (visitorEntity.currentWalkAmount >= visitorEntity.walkAmount)
                 {
-                    leaveEffectSpawned = true; 
-                    entity.GetComponent<EffectSpawner>().SpawnEffect();
+                    if (visitorEntity.machineInUse != null)
+                    {
+                        if (WorldInteractables.instance.allAracadeMachines.Contains(visitorEntity.machineInUse))
+                            WorldInteractables.instance.allAracadeMachines.Remove(visitorEntity.machineInUse);
+
+                        if (WorldInteractables.instance.availableArcadeMachines.Contains(visitorEntity.machineInUse))
+                            WorldInteractables.instance.availableArcadeMachines.Remove(visitorEntity.machineInUse);
+                    }
+
+                    entity.GetComponent<NavMeshAgent>().isStopped = true;
+                    EntityManager.instance.DestroyNPC(entity.gameObject);
+                    EntitySpawner.instance.amount--;
+
+                    if (!leaveEffectSpawned)
+                    {
+                        leaveEffectSpawned = true;
+                        effectSpawner.SpawnEffect();
+                    }
                 }
+                else
+                    CheckSwitchState();
             }
-            else
-                CheckSwitchState();
         }
     }
 

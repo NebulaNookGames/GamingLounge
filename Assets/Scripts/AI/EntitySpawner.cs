@@ -16,7 +16,6 @@ public class EntitySpawner : MonoBehaviour
     [SerializeField] private float spawnDistance = 30;
     [SerializeField] GameObject buildingChecker;
     
-    private bool spawningBlocked = true;
 
     public Action onAmountUpdated; 
     
@@ -26,19 +25,11 @@ public class EntitySpawner : MonoBehaviour
         instance = this; 
         
         timer = spawnInterval; // Set the timer to the spawn interval initially
-        Invoke("UnblockSpawning", 10f);
-    }
-
-    void UnblockSpawning()
-    {
-        spawningBlocked = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (spawningBlocked) return; 
-        
         // Update the timer
         timer -= Time.deltaTime;
 
@@ -71,7 +62,6 @@ public class EntitySpawner : MonoBehaviour
     // Method to spawn the entity
     IEnumerator SpawnNewEntity()
     {
-        spawningBlocked = true; 
         bool foundSpawnPos = false;
         
         while (!foundSpawnPos)
@@ -100,7 +90,6 @@ public class EntitySpawner : MonoBehaviour
             newEntity.GetComponentInChildren<RandomizeCharacter>().GenerateNew();
             newEntity.transform.parent = transform; 
             amount++;
-            spawningBlocked = false;
             EntityManager.instance.currentNPCs.Add(newEntity);
             onAmountUpdated?.Invoke();
         }
@@ -154,7 +143,6 @@ public class EntitySpawner : MonoBehaviour
             yield return new WaitForSeconds(.2f);
         }
         maxAmount = WorldInteractables.instance.machineCount;
-        spawningBlocked = false; 
         onAmountUpdated?.Invoke();
     }
 }

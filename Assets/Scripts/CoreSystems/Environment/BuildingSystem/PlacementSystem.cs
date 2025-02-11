@@ -55,7 +55,7 @@ public class PlacementSystem : MonoBehaviour
 
     public AudioClip placementMenuOn;
     public AudioClip placementMenuOff;
-    
+   
     public Action OnPlaced;
 
     public GameObject virtualMouse;
@@ -63,6 +63,7 @@ public class PlacementSystem : MonoBehaviour
 
     public AudioClip validPlacementInteractionAudioclip;
     public AudioClip invalidPlacementInteractionAudioclip;
+    public AudioClip validRemoveInteractionAudioclip; 
 
     public TextMeshProUGUI moneyText;
     public GameObject moneyTextBackground;

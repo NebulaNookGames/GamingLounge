@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 public class InviteToLounge : MonoBehaviour
 {
     public GameObject objectToCheckActiveState;
-
+    public AudioSource audioS;
+    public AudioClip inviteClip; 
     private bool interactedWith = false;
 
     public GameObject invitedParticleEffect;
@@ -27,6 +28,7 @@ public class InviteToLounge : MonoBehaviour
 
     private void Start()
     {
+        audioS = GetComponent<AudioSource>();
        Invoke(nameof(InitialCheck), .5f);
     }
 
@@ -41,6 +43,7 @@ public class InviteToLounge : MonoBehaviour
         GameObject thisInList = EntityManager.instance.currentNPCs.Find(obj => obj == gameObject);
         int index = EntityManager.instance.currentNPCs.IndexOf(thisInList);
         EntityManager.instance.npcValues[index].invitedToLounge = true;
+        audioS.PlayOneShot(inviteClip);
         Invoke(nameof(DestroyObjects), .5f);
     }
     

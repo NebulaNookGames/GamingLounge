@@ -348,6 +348,7 @@ MonoBehaviour:
   originalPos: {x: 0, y: 0, z: 0}
   beginPosOffset: {x: 0, y: 0.5, z: 0}
   rig: {fileID: 2603652409119803655}
+  updateInterval: 0.5
 --- !u!1 &1149125459714092912
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,6 +488,7 @@ MonoBehaviour:
   originalPos: {x: 0, y: 0, z: 0}
   beginPosOffset: {x: 0, y: 0.5, z: 0}
   rig: {fileID: 7491718999012799844}
+  updateInterval: 0.5
 --- !u!1 &2357813668109895262
 GameObject:
   m_ObjectHideFlags: 0
@@ -887,6 +889,7 @@ GameObject:
   - component: {fileID: 4813508868003629094}
   - component: {fileID: 7147916121032389513}
   - component: {fileID: 7758114119972819665}
+  - component: {fileID: 1266662112398527627}
   m_Layer: 4
   m_Name: NPC
   m_TagString: Entity
@@ -986,6 +989,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToCheckActiveState: {fileID: 8370765022909834422}
+  audioS: {fileID: 0}
+  inviteClip: {fileID: 8300000, guid: 785303cd6fcf3b4479c2f25f1c2ddb58, type: 3}
   invitedParticleEffect: {fileID: 219834491187561578, guid: f92d7a9001d84f24ebf70f3e33dae5fd, type: 3}
   notInvitedIndicator: {fileID: 340709599684236767}
   entity: {fileID: 7758114119972819665}
@@ -1058,6 +1063,103 @@ MonoBehaviour:
   checkIfInBuilding: {fileID: 3454477744193945143}
   heartEffect: {fileID: 219834491187561578, guid: f92d7a9001d84f24ebf70f3e33dae5fd, type: 3}
   randomStateIndex: 0
+--- !u!82 &1266662112398527627
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5967203068415554604}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -3223684364351016380, guid: 19722645180ae284398685e04ebb2f28, type: 2}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &6829738851141436762
 GameObject:
   m_ObjectHideFlags: 0
@@ -1498,6 +1600,7 @@ MonoBehaviour:
   originalPos: {x: 0, y: 0, z: 0}
   beginPosOffset: {x: 0, y: 0.5, z: 0}
   rig: {fileID: 1652029507495900889}
+  updateInterval: 0.5
 --- !u!1 &8847187857247313223
 GameObject:
   m_ObjectHideFlags: 0
@@ -2191,8 +2294,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7edccd74a2ccaba4d9267c6a75062baf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkingParticleSystem: {fileID: 0}
-  shoeSoleParticleSystem: {fileID: 7742851620307156673, guid: 376e7c61ba68d0b489ab630c762fc4e9, type: 3}
   leftFoot: {fileID: 5376581714582878095}
   rightFoot: {fileID: 2357813668109895262}
 --- !u!4 &1062962661599745135 stripped
@@ -2945,8 +3046,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7edccd74a2ccaba4d9267c6a75062baf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkingParticleSystem: {fileID: 0}
-  shoeSoleParticleSystem: {fileID: 7742851620307156673, guid: 376e7c61ba68d0b489ab630c762fc4e9, type: 3}
   leftFoot: {fileID: 334727247673386915}
   rightFoot: {fileID: 5843771794364412361}
 --- !u!4 &2142490544122820198 stripped
@@ -3488,8 +3587,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7edccd74a2ccaba4d9267c6a75062baf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkingParticleSystem: {fileID: 0}
-  shoeSoleParticleSystem: {fileID: 7742851620307156673, guid: 376e7c61ba68d0b489ab630c762fc4e9, type: 3}
   leftFoot: {fileID: 2868872354989255126}
   rightFoot: {fileID: 6829738851141436762}
 --- !u!4 &6351579640058323285 stripped

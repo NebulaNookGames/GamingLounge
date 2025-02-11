@@ -24,7 +24,7 @@ public class MoneyHolder : MonoBehaviour
     public void ChangeMoney(int amount, bool changePlay, bool play)
     {
         moneyBeingHeld += amount; // Update the money amount.
-        ObjectPool.instance.SpawnFootprintEffect(effectSpawnPos.transform.position, effectSpawnPos.transform.rotation);
+        ObjectPool.instance.SpawnMoneyEffect(effectSpawnPos.transform.position, effectSpawnPos.transform.rotation);
         OnMoneyChanged?.Invoke(moneyBeingHeld); // Trigger the OnMoneyChanged event.
         
         if(changePlay)

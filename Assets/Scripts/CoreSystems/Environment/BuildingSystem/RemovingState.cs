@@ -90,7 +90,7 @@ public class RemovingState : IBuildingState
 
             selectedData.RemoveObjectAt(gridPosition);
             objectPlacer.RemoveObjectAt(gameObjectIndex);
-            placementSystem.gameObject.GetComponent<AudioPlayer>().PlayAudioOneShot(placementSystem.validPlacementInteractionAudioclip, 1);
+            placementSystem.gameObject.GetComponent<AudioPlayer>().PlayAudioOneShot(placementSystem.validRemoveInteractionAudioclip, 1);
 
         }
 

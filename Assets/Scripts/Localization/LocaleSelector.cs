@@ -6,9 +6,17 @@ using TMPro;
 
 public class LocaleSelector : MonoBehaviour
 {
+    public static LocaleSelector Instance; 
+    
     private bool active = false;
     public TMP_Dropdown languageDropdown;
-    
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this; 
+    }
+
     IEnumerator SetLocale(int localeID)
     {
         active = true; 

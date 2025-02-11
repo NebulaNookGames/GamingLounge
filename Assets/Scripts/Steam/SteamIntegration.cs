@@ -17,6 +17,21 @@ public class SteamIntegration : MonoBehaviour
         {
             Steamworks.SteamClient.Init(3426730);
             PrintYourName();
+
+            if (LocaleSelector.Instance)
+            {
+                switch (Steamworks.SteamApps.GameLanguage)
+                {
+                    case "german":
+                        LocaleSelector.Instance.ChangeLocale(1);
+                        break;
+
+                    default:
+                        LocaleSelector.Instance.ChangeLocale(0);
+                        break;
+                }
+            }
+
             DontDestroyOnLoad(this);
         }
         catch (System.Exception e)

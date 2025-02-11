@@ -68,9 +68,6 @@ public class PlacementSystem : MonoBehaviour
     public GameObject moneyTextBackground;
 
     private bool firstTimeToggle = true;
-
-    private float updateTime = .05f; 
-    private float timer; 
     
     private void Awake()
     {
@@ -79,7 +76,6 @@ public class PlacementSystem : MonoBehaviour
         wallData = new GridData();
         wallDecorData = new GridData();
         furnitureData = new GridData();
-        timer = updateTime;
     }
 
     /// <summary>
@@ -120,20 +116,13 @@ public class PlacementSystem : MonoBehaviour
     private void Update()
     {
         if (buildingState == null)
-        {
             return;
-        }
+        
+        Vector3 mousePosition = inputManager.GetSelectedMapPosition();
+        Vector3Int gridPosition = grid.WorldToCell(mousePosition);
 
-        timer -= Time.deltaTime;
-        if (timer <= 0)
-        {
-            timer = updateTime;
-            Vector3 mousePosition = inputManager.GetSelectedMapPosition();
-            Vector3Int gridPosition = grid.WorldToCell(mousePosition);
-
-            buildingState.UpdateState(gridPosition);
-            lastDetectedPosition = gridPosition;
-        }
+        buildingState.UpdateState(gridPosition);
+        lastDetectedPosition = gridPosition;
     }
 
     /// <summary>

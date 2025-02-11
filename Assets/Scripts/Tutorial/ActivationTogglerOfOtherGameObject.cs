@@ -10,7 +10,10 @@ public class ActivationTogglerOfOtherGameObject : MonoBehaviour
     
     public InputActionProperty continueAction;
     public bool isLastTutorial;
-    public GameObject playerCam; 
+    public GameObject playerCam;
+    public AudioSource audioS;
+    public AudioClip audioC; 
+    
     private void OnEnable()
     {
         continueAction.action.performed += Continue;
@@ -31,7 +34,7 @@ public class ActivationTogglerOfOtherGameObject : MonoBehaviour
         if (Time.timeScale == 0)
             return;
         
-        Debug.Log("Continuing");
+        audioS.PlayOneShot(audioC);
         DisableThisAndActivateOther();
     }
     

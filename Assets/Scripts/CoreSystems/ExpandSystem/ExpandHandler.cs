@@ -8,7 +8,6 @@ public class ExpandHandler : MonoBehaviour
     [SerializeField] private GameObject[] lands;
     [SerializeField] public int[] costs;
     [SerializeField] public bool[] boughtLand;
-
     [SerializeField] private ExpandButtonsUsabilitySetup expandButtonsUsabilitySetup;
     MoneyManager moneyManager; 
 
@@ -21,6 +20,11 @@ public class ExpandHandler : MonoBehaviour
             placementSystem.unlockedGridParts.Add(lands[landIndex]);
             boughtLand[landIndex] = true;
             moneyManager.ChangeMoney(-costs[landIndex]);
+        }
+
+        for(int i = 0; i < costs.Length; i++)
+        {
+            costs[i] += 1125; 
         }
         
         expandButtonsUsabilitySetup.Refresh();

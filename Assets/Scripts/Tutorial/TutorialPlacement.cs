@@ -1,14 +1,39 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting.Dependencies.NCalc;
+using UnityEngine.Serialization;
 
 public class TutorialPlacement : MonoBehaviour
 {
+    [Header("Tutorial spawning")]
     public ObjectPlacer objectPlacer;
     public List<int> objectIndexes;
     public List<Vector3Int> objectPositions;
     public List<Quaternion> objectRotations;
     public ObjectsDatabaseSO objectsDatabase;
-    Grid grid; 
+    Grid grid;
+    
+    public int treeIndex;
+    public int treeAmount;
+    
+    public int rockIndex;
+    public int rockAmount;
+    
+    public int plantIndex;
+    public int plantAmount;
+    
+    public int fallPlantIndex;
+    public int fallPlantAmount;
+
+    public int rockTwoIndex;
+    public int rockTwoAmount;
+    
+    public int xBounds;
+    public int zBounds;
+
+    public int xIgnoreRange;
+    public int zIgnoreRange;
+    
     public void Start()
     {
         grid = PlacementSystem.Instance.grid;
@@ -30,7 +55,13 @@ public class TutorialPlacement : MonoBehaviour
                 selectedData.AddObjectAt(objectPositions[i], newSize, index);
             }
         }
-
+        
+        // Calling the method for different objects
+        PlaceObjects(treeAmount, treeIndex);
+        PlaceObjects(plantAmount, plantIndex);
+        PlaceObjects(rockAmount, rockIndex);
+        PlaceObjects(fallPlantAmount, fallPlantIndex);
+        PlaceObjects(rockTwoAmount, rockTwoIndex);
     }
     
     /// <summary>
@@ -51,6 +82,44 @@ public class TutorialPlacement : MonoBehaviour
                 return PlacementSystem.Instance.furnitureData;
             default:
                 return PlacementSystem.Instance.floorData;
+        }
+    }
+    
+    void PlaceObjects(int amount, int objectIndex)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            Quaternion rot = new Quaternion();
+            int randomRot = Random.Range(0, 5);
+            if (randomRot == 0)
+                rot = Quaternion.Euler(0, 0, 0);
+            else if(randomRot == 1)
+                rot = Quaternion.Euler(0, 90, 0);
+            else if (randomRot == 2)
+                rot = Quaternion.Euler(0, 180, 0);
+            else if (randomRot == 3)
+                rot = Quaternion.Euler(0, 270, 0);
+            
+            int xPos = Random.Range(-xBounds, xBounds);
+            int zPos = Random.Range(-zBounds, zBounds);
+            Vector3Int pos = new Vector3Int(xPos, zPos, 0);
+
+            if (pos.x > -xIgnoreRange && pos.x < xIgnoreRange && pos.y > -zIgnoreRange && pos.y < zIgnoreRange)
+            {
+                i--;
+                continue;
+            }
+            
+            if (!PlacementSystem.Instance.furnitureData.CanPlaceObjectAt(pos, objectsDatabase.objectsData[objectIndex].Size))
+            {
+                i--;
+                continue;
+            }
+            
+            int index = objectPlacer.PlaceObject(objectsDatabase.objectsData[objectIndex], grid.CellToWorld(pos),
+                rot, false, false);
+            PlacementSystem.Instance.furnitureData.AddObjectAt(pos, objectsDatabase.objectsData[objectIndex].Size,
+                index);
         }
     }
 }

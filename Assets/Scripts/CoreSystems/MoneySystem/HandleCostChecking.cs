@@ -42,7 +42,7 @@ public class HandleCostChecking : MonoBehaviour
             {
                 buttons[i].GetComponent<Button>().interactable = false; }
             
-            if (i == 8 && objectPlacer.upgradePCIsPlaced && checkForUpgradePC)
+            if (i == 25 && objectPlacer.upgradePCIsPlaced && checkForUpgradePC)
             {
                 buttons[i].GetComponent<Button>().interactable = false;
             }

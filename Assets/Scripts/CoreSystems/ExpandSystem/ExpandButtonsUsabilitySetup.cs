@@ -44,5 +44,11 @@ public class ExpandButtonsUsabilitySetup : MonoBehaviour
                 buttons[i].interactable = false;
             }
         }
+        
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = expandHandler.costs[i].ToString();
+        }
     }
+    
 }

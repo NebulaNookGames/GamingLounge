@@ -17,8 +17,8 @@ public class CameraControls : MonoBehaviour
     public bool canChange = true;
     public float waitDuration = 1f;
     public GameObject ambientEffect;
-    public GameObject upgradePanel;
-
+    public GameObject buildPanel;
+    public GameObject upgradePanel; 
     private void Awake()
     {
         scrollAction.action.performed += ChangeActiveCam; 
@@ -27,7 +27,7 @@ public class CameraControls : MonoBehaviour
 
     void ChangeActiveCam(InputAction.CallbackContext context)
     {
-        if (!canChange || Time.timeScale == 0 || upgradePanel.activeSelf) return;
+        if (!canChange || Time.timeScale == 0 || buildPanel.activeSelf || upgradePanel.activeSelf) return;
 
         Invoke("SetCanChange", waitDuration);
         canChange = false; 

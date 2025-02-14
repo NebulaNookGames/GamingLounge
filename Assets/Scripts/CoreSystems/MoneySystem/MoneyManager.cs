@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using UnityEditor.Timeline.Actions;
 
 /// <summary>
 /// This class manages the player's money and triggers events when the money changes.
@@ -8,7 +9,6 @@ using System;
 public class MoneyManager : MonoBehaviour
 {
     public static MoneyManager instance;
-
     [SerializeField] private int moneyAmount = 5000;
     // The current amount of money the player has.
     public int MoneyAmount
@@ -18,7 +18,7 @@ public class MoneyManager : MonoBehaviour
 
     // Event triggered when the money amount changes.
     public event Action<int> OnMoneyChanged;
-
+    
     private void Awake()
     {
         instance = this; 

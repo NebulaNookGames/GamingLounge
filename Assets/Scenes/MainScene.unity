@@ -325,11 +325,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7439320403084742528, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
   m_PrefabInstance: {fileID: 8446446829056921443}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &987469335 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7597069577545749482, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
-  m_PrefabInstance: {fileID: 8446446829056921443}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1057053124 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2878636578222042802, guid: c7c1f84b7808fc643ab2932d4806ec8c, type: 3}
@@ -354,6 +349,11 @@ GameObject:
 --- !u!1 &1529253605 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2826745006578215831, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
+  m_PrefabInstance: {fileID: 8446446829056921443}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1562824358 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7914587798451404354, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
   m_PrefabInstance: {fileID: 8446446829056921443}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1618401542 stripped
@@ -526,6 +526,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1057053124}
     - target: {fileID: 8577911792373170273, guid: 002abc1d47ab9814d82121938908f686, type: 3}
+      propertyPath: buildPanel
+      value: 
+      objectReference: {fileID: 263245891}
+    - target: {fileID: 8577911792373170273, guid: 002abc1d47ab9814d82121938908f686, type: 3}
       propertyPath: mapViewCam
       value: 
       objectReference: {fileID: 644860935}
@@ -536,7 +540,7 @@ PrefabInstance:
     - target: {fileID: 8577911792373170273, guid: 002abc1d47ab9814d82121938908f686, type: 3}
       propertyPath: upgradePanel
       value: 
-      objectReference: {fileID: 263245891}
+      objectReference: {fileID: 1562824358}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -804,10 +808,6 @@ PrefabInstance:
       propertyPath: placementCanvas
       value: 
       objectReference: {fileID: 263245891}
-    - target: {fileID: 3198550151841903184, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
-      propertyPath: moneyTextBackground
-      value: 
-      objectReference: {fileID: 987469335}
     - target: {fileID: 3198550151841903184, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
       propertyPath: virtualCursorTransform
       value: 

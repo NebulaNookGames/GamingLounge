@@ -1,6 +1,5 @@
 using UnityEngine;
 using System;
-using UnityEditor.Timeline.Actions;
 
 /// <summary>
 /// This class manages the player's money and triggers events when the money changes.

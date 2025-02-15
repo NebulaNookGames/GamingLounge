@@ -64,10 +64,13 @@ public class PlayState : State
         
         visitorEntity.shouldUseSeat = false;
         visitorEntity.seatInUse = null;
-        
-        if(visitorEntity.machineInUse != null)
+
+        if (visitorEntity.machineInUse != null)
+        {
+            visitorEntity.machineInUse.GetComponentInChildren<BeginVideoPlayer>().HandlePlay(false);
             WorldInteractables.instance.availableArcadeMachines.Add(visitorEntity.machineInUse);
-        
+        }
+
         visitorEntity.machineInUse = null; 
         visitorEntity.headTracking.noTracking = false;
     }
@@ -107,7 +110,7 @@ public class PlayState : State
         }
         
         visitorEntity.machineInUse.GetComponent<MoneyHolder>().ChangeMoney(visitorEntity.machineInUse.GetComponent<Cost>().GetCost(), true, true);
-        
+        visitorEntity.machineInUse.GetComponentInChildren<BeginVideoPlayer>().HandlePlay(true);
         playDuration = Random.Range(10, 30);
         currentPlayDuration = 0;
     }

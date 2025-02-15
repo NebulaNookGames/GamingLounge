@@ -6,8 +6,10 @@ public class BeginVideoPlayer : MonoBehaviour
     public Material objectMaterial; // Assign your object's material
     public VideoPlayer videoPlayer; // Assign your VideoPlayer component
     public RenderTexture renderTexture; // Default render texture (if any)
-    public int materialIndex = 0; 
-        
+    public int materialIndex = 0;
+    public int pauseFrame = 0;
+    private bool currentPlay; 
+    
     void Awake()
     {
         // Check if the necessary components are assigned
@@ -50,22 +52,28 @@ public class BeginVideoPlayer : MonoBehaviour
             Debug.LogError("No video clip assigned to the VideoPlayer.");
             return;
         }
-        
-        videoPlayer.frame = -10;
-        videoPlayer.Pause();
+
+        HandlePlay(false);
     }
 
     public void HandlePlay(bool play)
     {
-        if (play)
+        currentPlay = play; 
+        videoPlayer.Prepare();
+        Invoke(nameof(StartOrPause), .2f);
+    }
+
+    void StartOrPause()
+    {
+        if (currentPlay)
         {
             videoPlayer.frame = Random.Range(0, 1000);
             videoPlayer.Play();
         }
         else
         {
-            videoPlayer.Stop();
+            videoPlayer.frame = pauseFrame; 
+            videoPlayer.Pause();
         }
-
     }
 }

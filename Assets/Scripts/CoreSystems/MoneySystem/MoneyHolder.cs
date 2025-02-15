@@ -26,10 +26,6 @@ public class MoneyHolder : MonoBehaviour
         moneyBeingHeld += amount; // Update the money amount.
         ObjectPool.instance.SpawnMoneyEffect(effectSpawnPos.transform.position, effectSpawnPos.transform.rotation);
         OnMoneyChanged?.Invoke(moneyBeingHeld); // Trigger the OnMoneyChanged event.
-        
-        if(changePlay)
-            beginVideoPlayer.HandlePlay(play);
-            
     }
 
     private void OnDestroy()

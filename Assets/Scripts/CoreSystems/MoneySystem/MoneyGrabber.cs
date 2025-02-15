@@ -38,6 +38,18 @@ public class MoneyGrabber : MonoBehaviour
             }
         }
     }
+    
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Machine"))
+        {
+            if (other.transform.root.GetComponent<MoneyHolder>() == moneyHolder)
+            {
+                canGrabMoney = false;
+                moneyHolder = null; 
+            }
+        }
+    }
 
     void GrabMoney(InputAction.CallbackContext context)
     {

@@ -50,5 +50,4 @@ public class ExpandButtonsUsabilitySetup : MonoBehaviour
             buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = expandHandler.costs[i].ToString();
         }
     }
-    
 }

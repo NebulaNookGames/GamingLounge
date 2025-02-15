@@ -92,6 +92,11 @@ public class RandomWalkState : State
                         effectSpawner.SpawnEffect();
                     }
                 }
+                else if (entity.Agent.pathStatus == NavMeshPathStatus.PathPartial ||
+                         entity.Agent.pathStatus == NavMeshPathStatus.PathInvalid)
+                {
+                    CheckSwitchState();
+                }
                 else
                     CheckSwitchState();
             }

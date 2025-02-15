@@ -332,7 +332,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.5, y: 1, z: 0.77058506}
   m_Center: {x: 0, y: 0, z: 0.36159307}
@@ -706,7 +706,19 @@ MonoBehaviour:
         m_CallState: 2
   OnActivatePlacedObjectCallAlways:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3834932102010652497}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &2523462624664329234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1316,6 +1328,7 @@ MonoBehaviour:
   videoPlayer: {fileID: 8569082238224199597}
   renderTexture: {fileID: 8400000, guid: aa6fda22856e0f24697038ec37a39d32, type: 2}
   materialIndex: 1
+  pauseFrame: 0
 --- !u!208 &3834932102010652497
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -1323,7 +1336,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 407996367194186144}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.005, y: 0.008, z: 0.009000001}

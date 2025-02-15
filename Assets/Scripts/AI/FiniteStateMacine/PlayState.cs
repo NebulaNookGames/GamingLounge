@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// Plays a animation on enter and calls the CheckStateSwitch method on the base class once the animation has played atleast once.
@@ -7,6 +9,10 @@ public class PlayState : State
 {
     #region Variables
 
+    private bool doBikeAnim;
+    private bool didBikePosChange;
+    private float currentBikeWaitTime;
+    private Vector3 bikeOffset = new Vector3(.76f, .05f, 0);
     /// <summary>
     /// The time until the idle state will end.
     /// </summary>
@@ -41,6 +47,17 @@ public class PlayState : State
 
     public override void UpdateState()
     {
+        if (doBikeAnim && !didBikePosChange)
+        {
+            currentBikeWaitTime-= Time.deltaTime;
+            if (currentBikeWaitTime <= 0)
+            {
+                visitorEntity.mesh.transform.localPosition += bikeOffset;
+                didBikePosChange = true; 
+            }
+        }
+        
+        
         if (currentPlayDuration < playDuration)
             currentPlayDuration += Time.deltaTime;
         else // Animation has run at least once
@@ -61,7 +78,15 @@ public class PlayState : State
         
         if(visitorEntity.seatInUse != null)
             visitorEntity.seatInUse.GetComponent<SitPositionAvailability>().available = true;      
-        
+
+        if (doBikeAnim)
+        {
+            visitorEntity.machineInUse.GetComponentInChildren<HandleAnimationStarting>().StopAnimation("Play");
+            visitorEntity.mesh.transform.localPosition -= bikeOffset;
+            doBikeAnim = false;
+            didBikePosChange = false; 
+        }
+
         visitorEntity.shouldUseSeat = false;
         visitorEntity.seatInUse = null;
 
@@ -73,6 +98,7 @@ public class PlayState : State
 
         visitorEntity.machineInUse = null; 
         visitorEntity.headTracking.noTracking = false;
+        entity.Agent.isStopped = false; 
     }
 
     #endregion State Methods
@@ -84,6 +110,7 @@ public class PlayState : State
     /// </summary>
     private void Initialization()
     {
+        entity.Agent.isStopped = true; 
         entity.Agent.velocity = Vector3.zero;
         Vector3 aimPos = Vector3.zero;
         aimPos = entity.Agent.destination;
@@ -96,7 +123,10 @@ public class PlayState : State
                 entity.EntityAnimator.SetBool("InteractArcadeMachine", true);
                 break;
             case MachineType.Bike:
+                visitorEntity.machineInUse.GetComponentInChildren<HandleAnimationStarting>().PlayAnimation(visitorEntity.bikeWaitTime, "Play");
                 entity.EntityAnimator.SetBool("SitBike", true);
+                currentBikeWaitTime = visitorEntity.bikeWaitTime;
+                doBikeAnim = true;
                 break;
             case MachineType.Race:
                 entity.EntityAnimator.SetBool("SitRace", true);
@@ -114,6 +144,5 @@ public class PlayState : State
         playDuration = Random.Range(10, 30);
         currentPlayDuration = 0;
     }
-
     #endregion Methods
 }

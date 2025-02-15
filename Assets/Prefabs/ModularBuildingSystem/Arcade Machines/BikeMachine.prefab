@@ -483,7 +483,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.5, y: 1, z: 0.9968856}
   m_Center: {x: 0, y: 0, z: 0.2484428}
@@ -596,6 +596,7 @@ GameObject:
   - component: {fileID: 7167315472496305636}
   - component: {fileID: 180641587676590156}
   - component: {fileID: 2363224367446801577}
+  - component: {fileID: 1839603276994471611}
   m_Layer: 10
   m_Name: BikeMachine
   m_TagString: Machine
@@ -706,7 +707,19 @@ MonoBehaviour:
         m_CallState: 2
   OnActivatePlacedObjectCallAlways:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7229797986372175440}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &2523462624664329234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -867,6 +880,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1839603276994471611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5767364422584940774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63072a0c5f0f3324ba88136ca669e9db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 1144548803949828678}
 --- !u!1 &7634329582049825025
 GameObject:
   m_ObjectHideFlags: 0
@@ -1284,7 +1310,7 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: bdcef21c77b2b66499c87071dd8645ed, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 429f317c414ef1e41a5126aefa96e491, type: 2}
+      objectReference: {fileID: 9100000, guid: 4d1cfb2fa2115104097259dfd8380180, type: 2}
     - target: {fileID: 6170528828252911718, guid: bdcef21c77b2b66499c87071dd8645ed, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -1323,6 +1349,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2025260631827147485}
   m_SourcePrefab: {fileID: 100100000, guid: bdcef21c77b2b66499c87071dd8645ed, type: 3}
+--- !u!95 &1144548803949828678 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: bdcef21c77b2b66499c87071dd8645ed, type: 3}
+  m_PrefabInstance: {fileID: 6811928337301612503}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5929478650197613190 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: bdcef21c77b2b66499c87071dd8645ed, type: 3}
@@ -1335,7 +1366,7 @@ NavMeshObstacle:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5929478650197613190}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Shape: 1
   m_Extents: {x: 0.45, y: 0.81, z: 0.9}
@@ -1406,3 +1437,4 @@ MonoBehaviour:
   videoPlayer: {fileID: 3550220914892143138}
   renderTexture: {fileID: 8400000, guid: aa6fda22856e0f24697038ec37a39d32, type: 2}
   materialIndex: 1
+  pauseFrame: 0

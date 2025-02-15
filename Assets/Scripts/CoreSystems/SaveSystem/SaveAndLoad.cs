@@ -21,6 +21,8 @@ public class SaveAndLoad : MonoBehaviour
     public SaveData loadedSaveData; 
     
     public bool saveDataLoaded = false;
+    public GameObject autoSaveCanvas; 
+    
     
     void Awake()
     {
@@ -55,6 +57,8 @@ public class SaveAndLoad : MonoBehaviour
     private void AutoSave()
     {
         Debug.Log("Auto-Saving...");
+        autoSaveCanvas.SetActive(true);
+        Invoke(nameof(DisableAutoSaveCanvas), 7f);
         Save();
     }
 
@@ -110,5 +114,10 @@ public class SaveAndLoad : MonoBehaviour
         {
             Debug.Log("Failed loading File.");
         }
+    }
+
+    void DisableAutoSaveCanvas()
+    {
+        autoSaveCanvas.SetActive(false);
     }
 }

@@ -85,6 +85,7 @@ public class MenuHandler : MonoBehaviour
         try
         {
             File.Delete(Application.persistentDataPath + "/saveFile.json");
+            Debug.Log("Save deleted");
         }
         catch
         {

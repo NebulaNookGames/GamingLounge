@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Serialization;
 
 /// <summary>
@@ -42,8 +43,9 @@ public class VisitorEntity : Entity
     public GameObject conversationPartner; 
     public CheckIfInBuilding checkIfInBuilding;
     public GameObject heartEffect;
-    public int randomStateIndex = 0; 
-    
+    public int randomStateIndex = 0;
+    public GameObject mesh;
+    public float bikeWaitTime = 1;
     #endregion State Variables
 
     #endregion Variables
@@ -72,7 +74,8 @@ public class VisitorEntity : Entity
         CreateStates();
         CreateTransitions();
         initialState = randomWalkState;
-        walkAmount = Random.Range(30, 60);
+        walkAmount = Random.Range(20, 40);
+        GetComponent<NavMeshAgent>().avoidancePriority = Random.Range(20, 80);
     }
 
     /// <summary>
@@ -117,7 +120,14 @@ public class VisitorEntity : Entity
         // GoToMachineState transition
         List<Transition> findMachineTransitions = new List<Transition>
         {
-            new Transition(() => { return machineInUse == null || shouldUseSeat && seatInUse == null; }, idleState),
+            new Transition(() => 
+                { 
+                    return machineInUse == null || shouldUseSeat && seatInUse == null 
+                                                  || agent.pathStatus == NavMeshPathStatus.PathInvalid 
+                                                  || agent.pathStatus == NavMeshPathStatus.PathPartial; 
+                }, 
+                idleState),
+            
             new Transition(() => { return Vector3.Distance(agent.destination, transform.position) < 1.5f; }, playState),
         };
         findMachineState.Transitions = findMachineTransitions;

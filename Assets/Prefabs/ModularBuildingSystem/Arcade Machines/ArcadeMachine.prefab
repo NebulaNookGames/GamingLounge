@@ -727,8 +727,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16764137e6164d3469b918bd7013043e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumAmount: 7
-  maximumAmount: 15
+  minimumAmount: 30
+  maximumAmount: 60
   layerMask:
     serializedVersion: 2
     m_Bits: 2304
@@ -1116,11 +1116,11 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 92b17af75e479c54a9977d8100d9de38, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
-      objectReference: {fileID: 2100000, guid: 2ce29e750d459854a9d8ecbcf62a0b7c, type: 2}
+      objectReference: {fileID: 2100000, guid: 5ab4abb9cdbbd58439e8acc867db7caf, type: 2}
     - target: {fileID: -7511558181221131132, guid: 92b17af75e479c54a9977d8100d9de38, type: 3}
       propertyPath: 'm_Materials.Array.data[2]'
       value: 
-      objectReference: {fileID: 2100000, guid: 5ab4abb9cdbbd58439e8acc867db7caf, type: 2}
+      objectReference: {fileID: 2100000, guid: abb5b0f3ca624da47801a74592586597, type: 2}
     - target: {fileID: 919132149155446097, guid: 92b17af75e479c54a9977d8100d9de38, type: 3}
       propertyPath: m_Name
       value: Arcade_machine_1
@@ -1156,11 +1156,11 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8095450041207110592}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 9b0087d49e032b241a5ec9bf2afd9a42, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 5b9092885a84ab94db8a134e12754ab8, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
-  m_TargetTexture: {fileID: 8400000, guid: aa6fda22856e0f24697038ec37a39d32, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: 982684d474866c64d92a485da2ac9e23, type: 2}
   m_TimeReference: 0
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: _BaseMap
@@ -1170,12 +1170,14 @@ VideoPlayer:
   m_TimeUpdateMode: 1
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 0
-  m_TargetAudioSources: []
-  m_DirectAudioVolumes: []
+  m_TargetAudioSources:
+  - {fileID: 0}
+  m_DirectAudioVolumes:
+  - 1
   m_Url: 
-  m_EnabledAudioTracks: 
-  m_DirectAudioMutes: 
-  m_ControlledAudioTrackCount: 0
+  m_EnabledAudioTracks: 01
+  m_DirectAudioMutes: 00
+  m_ControlledAudioTrackCount: 1
   m_PlayOnAwake: 0
   m_SkipOnDrop: 1
   m_Looping: 1
@@ -1195,10 +1197,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectMaterial: {fileID: 2100000, guid: 2ce29e750d459854a9d8ecbcf62a0b7c, type: 2}
+  logoMaterial: {fileID: 2100000, guid: 5ab4abb9cdbbd58439e8acc867db7caf, type: 2}
   videoPlayer: {fileID: 6594708235583038762}
-  renderTexture: {fileID: 8400000, guid: aa6fda22856e0f24697038ec37a39d32, type: 2}
+  renderTexture: {fileID: 8400000, guid: 982684d474866c64d92a485da2ac9e23, type: 2}
+  uniqueMaterial: {fileID: 0}
   materialIndex: 1
-  pauseFrame: 0
+  minStartFrame: 400
+  maxStartFrame: 1000
 --- !u!208 &1812058034838379513
 NavMeshObstacle:
   m_ObjectHideFlags: 0

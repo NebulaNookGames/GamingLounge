@@ -1,16 +1,56 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Video;
 
 public class BeginVideoPlayer : MonoBehaviour
 {
     public Material objectMaterial; // Assign your object's material
+    public Material logoMaterial;  
     public VideoPlayer videoPlayer; // Assign your VideoPlayer component
     public RenderTexture renderTexture; // Default render texture (if any)
+    public Material uniqueMaterial; 
     public int materialIndex = 0;
-    public int pauseFrame = 0;
-    private bool currentPlay; 
-    
-    void Awake()
+    private bool currentPlay;
+    public int minStartFrame = 400;
+    public int maxStartFrame = 600;
+    private bool initialPlay = true; 
+  
+
+    public void HandlePlay(bool play)
+    {
+        currentPlay = play; 
+        videoPlayer.Prepare();
+        Invoke(nameof(StartOrPause), .2f);
+    }
+
+    void StartOrPause()
+    {
+        if (initialPlay)
+        {
+            initialPlay = false;
+            InitializeVideo();
+        }
+        
+        if (currentPlay)
+        {
+            videoPlayer.frame = Random.Range(minStartFrame, maxStartFrame); 
+            Renderer renderer = GetComponent<Renderer>();
+            Material[] materials = renderer.materials;
+            materials[materialIndex] = uniqueMaterial;
+            renderer.materials = materials; 
+            videoPlayer.Play();
+        }
+        else
+        {
+            videoPlayer.Pause();
+            Renderer renderer = GetComponent<Renderer>();
+            Material[] materials = renderer.materials;
+            materials[materialIndex] = logoMaterial;
+            renderer.materials = materials; 
+        }
+    }
+
+    void InitializeVideo()
     {
         // Check if the necessary components are assigned
         if (objectMaterial == null || videoPlayer == null)
@@ -23,7 +63,7 @@ public class BeginVideoPlayer : MonoBehaviour
         RenderTexture uniqueTexture = new RenderTexture(renderTexture.width, renderTexture.height, renderTexture.depth);
     
         // Create a unique material instance by duplicating the original material
-        Material uniqueMaterial = new Material(objectMaterial);
+        uniqueMaterial = new Material(objectMaterial);
 
         // Assign the unique RenderTexture to the unique material
         uniqueMaterial.SetTexture("_Base", uniqueTexture);
@@ -50,30 +90,6 @@ public class BeginVideoPlayer : MonoBehaviour
         if (videoPlayer.clip == null)
         {
             Debug.LogError("No video clip assigned to the VideoPlayer.");
-            return;
-        }
-
-        HandlePlay(false);
-    }
-
-    public void HandlePlay(bool play)
-    {
-        currentPlay = play; 
-        videoPlayer.Prepare();
-        Invoke(nameof(StartOrPause), .2f);
-    }
-
-    void StartOrPause()
-    {
-        if (currentPlay)
-        {
-            videoPlayer.frame = Random.Range(0, 1000);
-            videoPlayer.Play();
-        }
-        else
-        {
-            videoPlayer.frame = pauseFrame; 
-            videoPlayer.Pause();
         }
     }
 }

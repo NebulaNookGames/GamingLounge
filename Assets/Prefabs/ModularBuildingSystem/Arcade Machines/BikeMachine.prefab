@@ -1393,7 +1393,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7537905008495707312}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 5684dd70cef23fa44a32c7957b25d02d, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 76e89d62a128f084d818a84be7a59366, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -1433,8 +1433,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2071b599ea93b9a428f2752ac893657c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectMaterial: {fileID: 2100000, guid: 2ce29e750d459854a9d8ecbcf62a0b7c, type: 2}
+  objectMaterial: {fileID: 2100000, guid: 88d4db040879efa4e9347b1f6b700ebe, type: 2}
+  logoMaterial: {fileID: 2100000, guid: 355535b029e686d4f8b7765001b42490, type: 2}
   videoPlayer: {fileID: 3550220914892143138}
   renderTexture: {fileID: 8400000, guid: aa6fda22856e0f24697038ec37a39d32, type: 2}
+  uniqueMaterial: {fileID: 0}
   materialIndex: 1
-  pauseFrame: 0
+  minStartFrame: 1000
+  maxStartFrame: 3000

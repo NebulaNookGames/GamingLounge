@@ -1244,7 +1244,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 0171a66b7b84dd14085634ad8881dcd2, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
-      objectReference: {fileID: 2100000, guid: 2ce29e750d459854a9d8ecbcf62a0b7c, type: 2}
+      objectReference: {fileID: 2100000, guid: 652341104b5ac4f4498e085024521edb, type: 2}
     - target: {fileID: -5754084199372789682, guid: 0171a66b7b84dd14085634ad8881dcd2, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1284,11 +1284,11 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 407996367194186144}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 45a3c515b893c7a4093f3bdf2fbbc2f1, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: eb40dbefa7784284092f21f9e31fb9be, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
-  m_TargetTexture: {fileID: 8400000, guid: aa6fda22856e0f24697038ec37a39d32, type: 2}
+  m_TargetTexture: {fileID: 8400000, guid: 3fe7649a8c0f9e04db151c79be6a3ac1, type: 2}
   m_TimeReference: 0
   m_TargetMaterialRenderer: {fileID: 0}
   m_TargetMaterialProperty: _BaseMap
@@ -1324,11 +1324,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2071b599ea93b9a428f2752ac893657c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectMaterial: {fileID: 2100000, guid: 2ce29e750d459854a9d8ecbcf62a0b7c, type: 2}
+  objectMaterial: {fileID: 2100000, guid: 59f7dacb814969640ad7a6a58abc67b4, type: 2}
+  logoMaterial: {fileID: 2100000, guid: 652341104b5ac4f4498e085024521edb, type: 2}
   videoPlayer: {fileID: 8569082238224199597}
-  renderTexture: {fileID: 8400000, guid: aa6fda22856e0f24697038ec37a39d32, type: 2}
+  renderTexture: {fileID: 8400000, guid: 3fe7649a8c0f9e04db151c79be6a3ac1, type: 2}
+  uniqueMaterial: {fileID: 0}
   materialIndex: 1
-  pauseFrame: 0
+  minStartFrame: 1000
+  maxStartFrame: 2000
 --- !u!208 &3834932102010652497
 NavMeshObstacle:
   m_ObjectHideFlags: 0

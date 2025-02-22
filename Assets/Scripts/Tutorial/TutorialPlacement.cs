@@ -13,8 +13,11 @@ public class TutorialPlacement : MonoBehaviour
     public ObjectsDatabaseSO objectsDatabase;
     Grid grid;
     
-    public int treeIndex;
-    public int treeAmount;
+    public int treeOneIndex;
+    public int treeOneAmount;
+
+    public int treeTwoIndex;
+    public int treeTwoAmount; 
     
     public int rockIndex;
     public int rockAmount;
@@ -27,6 +30,15 @@ public class TutorialPlacement : MonoBehaviour
 
     public int rockTwoIndex;
     public int rockTwoAmount;
+
+    public int rockThreeIndex;
+    public int rockThreeAmount;
+
+    public int bushOneIndex;
+    public int bushOneAmount;
+
+    public int bushTwoIndex;
+    public int bushTwoAmount;
     
     public int xBounds;
     public int zBounds;
@@ -57,11 +69,17 @@ public class TutorialPlacement : MonoBehaviour
         }
         
         // Calling the method for different objects
-        PlaceObjects(treeAmount, treeIndex);
+        PlaceObjects(treeOneAmount, treeOneIndex);
+        PlaceObjects(treeTwoAmount, treeTwoIndex);
         PlaceObjects(plantAmount, plantIndex);
         PlaceObjects(rockAmount, rockIndex);
         PlaceObjects(fallPlantAmount, fallPlantIndex);
         PlaceObjects(rockTwoAmount, rockTwoIndex);
+        PlaceObjects(rockThreeAmount, rockThreeIndex);
+        PlaceObjects(bushOneAmount, bushOneIndex);
+        PlaceObjects(bushTwoAmount, bushTwoIndex);
+
+
     }
     
     /// <summary>
@@ -103,7 +121,15 @@ public class TutorialPlacement : MonoBehaviour
             int xPos = Random.Range(-xBounds, xBounds);
             int zPos = Random.Range(-zBounds, zBounds);
             Vector3Int pos = new Vector3Int(xPos, zPos, 0);
-
+            for (int j = 0; j < objectPositions.Count; j++)
+            {
+                if (pos == objectPositions[j])
+                {
+                    return; 
+                }
+            }
+            
+            
             if (pos.x > -xIgnoreRange && pos.x < xIgnoreRange && pos.y > -zIgnoreRange && pos.y < zIgnoreRange)
             {
                 i--;

@@ -12,7 +12,7 @@ public class TutorialInitializer : MonoBehaviour
     public GameObject playerCam; 
     private void Awake()
     {
-        Invoke(nameof(CheckForTutorialActivation), 2f);
+        Invoke(nameof(CheckForTutorialActivation), 5f);
     }
 
     private void CheckForTutorialActivation()

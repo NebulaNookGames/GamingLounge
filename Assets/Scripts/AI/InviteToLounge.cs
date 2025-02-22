@@ -1,5 +1,3 @@
-using System;
-using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.InputSystem; 
 
@@ -55,7 +53,7 @@ public class InviteToLounge : MonoBehaviour
         if (EntityManager.instance.npcValues[index].invitedToLounge)
         {
             GetComponent<VisitorEntity>().invitedToLounge = true; 
-            notInvitedIndicator.active = false;
+            notInvitedIndicator.SetActive(false);
             Invoke(nameof(DestroyObjects), .5f);
         }
     }

@@ -35,9 +35,16 @@ public class ExpandHandler : MonoBehaviour
         this.boughtLand = boughtLand;
         for (int i = 0; i < lands.Length; i++)
         {
-            if(this.boughtLand[i])
+            if (this.boughtLand[i])
+            {
                 placementSystem.unlockedGridParts.Add(lands[i]);
+                for(int j = 0; j < costs.Length; j++)
+                {
+                    costs[j] += 1125; 
+                }
+            }
         }
+      
         expandButtonsUsabilitySetup.Refresh();
     }
 }

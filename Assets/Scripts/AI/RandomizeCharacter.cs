@@ -1,6 +1,4 @@
 using UnityEngine;
-using Unity.Behavior; 
-using UnityEngine.Animations.Rigging;
 
 public class RandomizeCharacter : MonoBehaviour
 {

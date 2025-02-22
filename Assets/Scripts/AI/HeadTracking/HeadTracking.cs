@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using Unity.Behavior;
 using UnityEngine.Animations.Rigging;
 
 public class HeadTracking : MonoBehaviour

@@ -1,9 +1,10 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class OnEnableChangeLocationToTag : MonoBehaviour
 {
-    public string tag;
+    [FormerlySerializedAs("tag")] public string tagToFind;
     public Vector3 offset; 
     private void OnEnable()
     {
@@ -12,6 +13,7 @@ public class OnEnableChangeLocationToTag : MonoBehaviour
 
     void ChangeLocation()
     {
-        gameObject.transform.position = GameObject.FindGameObjectWithTag(tag).transform.position + offset;
+        if(GameObject.FindGameObjectWithTag(tagToFind))
+            gameObject.transform.position = GameObject.FindGameObjectWithTag(tagToFind).transform.position + offset;
     }
 }

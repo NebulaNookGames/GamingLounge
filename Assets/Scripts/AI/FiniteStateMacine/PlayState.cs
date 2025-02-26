@@ -13,6 +13,7 @@ public class PlayState : State
     private bool didBikePosChange;
     private float currentBikeWaitTime;
     private Vector3 bikeOffset = new Vector3(.76f, .05f, 0);
+    private int initialAvoidancePriority; 
     /// <summary>
     /// The time until the idle state will end.
     /// </summary>
@@ -57,7 +58,6 @@ public class PlayState : State
             }
         }
         
-        
         if (currentPlayDuration < playDuration)
             currentPlayDuration += Time.deltaTime;
         else // Animation has run at least once
@@ -69,6 +69,12 @@ public class PlayState : State
 
     public override void ExitState()
     {
+        if (visitorEntity.machineInUse != null)
+        {
+            WorldInteractables.instance.availableArcadeMachines.Add(visitorEntity.machineInUse);
+            visitorEntity.machineInUse.GetComponentInChildren<BeginVideoPlayer>().HandlePlay(false);
+        }
+        
         entity.Agent.isStopped = false;
         entity.EntityAnimator.SetBool("InteractArcadeMachine", false);
         entity.EntityAnimator.SetBool("SitChair", false);
@@ -90,15 +96,10 @@ public class PlayState : State
         visitorEntity.shouldUseSeat = false;
         visitorEntity.seatInUse = null;
 
-        if (visitorEntity.machineInUse != null)
-        {
-            visitorEntity.machineInUse.GetComponentInChildren<BeginVideoPlayer>().HandlePlay(false);
-            WorldInteractables.instance.availableArcadeMachines.Add(visitorEntity.machineInUse);
-        }
-
         visitorEntity.machineInUse = null; 
         visitorEntity.headTracking.noTracking = false;
         entity.Agent.isStopped = false; 
+        entity.Agent.avoidancePriority = initialAvoidancePriority; 
     }
 
     #endregion State Methods
@@ -132,17 +133,21 @@ public class PlayState : State
                 entity.EntityAnimator.SetBool("SitRace", true);
                 break;
             default:
-                if(visitorEntity.seatInUse && visitorEntity.shouldUseSeat)
+                if (visitorEntity.seatInUse && visitorEntity.shouldUseSeat)
+                {
                     entity.EntityAnimator.SetBool("SitChair", true);
+                }
                 else
                     entity.EntityAnimator.SetBool("Interact", true);
                 break;
         }
         
-        visitorEntity.machineInUse.GetComponent<MoneyHolder>().ChangeMoney(visitorEntity.machineInUse.GetComponent<Cost>().GetCost(), true, true);
+        visitorEntity.machineInUse.GetComponent<MoneyHolder>().ChangeMoney(visitorEntity.machineInUse.GetComponent<Cost>().GetCost(), true, true, true);
         visitorEntity.machineInUse.GetComponentInChildren<BeginVideoPlayer>().HandlePlay(true);
         playDuration = Random.Range(10, 30);
         currentPlayDuration = 0;
+        initialAvoidancePriority = entity.Agent.avoidancePriority;
+        entity.Agent.avoidancePriority = 0;
     }
     #endregion Methods
 }

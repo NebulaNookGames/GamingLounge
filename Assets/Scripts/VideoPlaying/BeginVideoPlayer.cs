@@ -1,9 +1,14 @@
+using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Video;
+using Random = UnityEngine.Random;
 
 public class BeginVideoPlayer : MonoBehaviour
 {
+    public VideoClip linuxClip;
+    public VideoClip windowsClip; 
+    
     public Material objectMaterial; // Assign your object's material
     public Material logoMaterial;  
     public VideoPlayer videoPlayer; // Assign your VideoPlayer component
@@ -13,8 +18,13 @@ public class BeginVideoPlayer : MonoBehaviour
     private bool currentPlay;
     public int minStartFrame = 400;
     public int maxStartFrame = 600;
-    private bool initialPlay = true; 
-  
+    private bool initialPlay = true;
+
+
+    private void Awake()
+    {
+        videoPlayer.clip = null; 
+    }
 
     public void HandlePlay(bool play)
     {
@@ -33,6 +43,11 @@ public class BeginVideoPlayer : MonoBehaviour
         
         if (currentPlay)
         {
+            if (Application.platform == RuntimePlatform.LinuxPlayer)
+                videoPlayer.clip = linuxClip;
+            else
+                videoPlayer.clip = windowsClip;
+            
             videoPlayer.frame = Random.Range(minStartFrame, maxStartFrame); 
             Renderer renderer = GetComponent<Renderer>();
             Material[] materials = renderer.materials;
@@ -42,7 +57,7 @@ public class BeginVideoPlayer : MonoBehaviour
         }
         else
         {
-            videoPlayer.Pause();
+            videoPlayer.clip = null; 
             Renderer renderer = GetComponent<Renderer>();
             Material[] materials = renderer.materials;
             materials[materialIndex] = logoMaterial;
@@ -79,17 +94,10 @@ public class BeginVideoPlayer : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Renderer or materials not found.");
             return;
         }
 
         // Assign the RenderTexture to the VideoPlayer
         videoPlayer.targetTexture = uniqueTexture;
-
-        // Ensure the VideoPlayer is set up properly (e.g., a valid video clip is assigned)
-        if (videoPlayer.clip == null)
-        {
-            Debug.LogError("No video clip assigned to the VideoPlayer.");
-        }
     }
 }

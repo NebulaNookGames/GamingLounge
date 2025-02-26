@@ -166,7 +166,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0.11372549, g: 1, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -758,8 +758,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16764137e6164d3469b918bd7013043e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumAmount: 30
-  maximumAmount: 60
+  minimumAmount: 40
+  maximumAmount: 3200
   layerMask:
     serializedVersion: 2
     m_Bits: 2304
@@ -1000,7 +1000,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 1, g: 0.93333334, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1393,7 +1393,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7537905008495707312}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 76e89d62a128f084d818a84be7a59366, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: da7a85f8794cca942b26086b3673458a, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -1433,6 +1433,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2071b599ea93b9a428f2752ac893657c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  linuxClip: {fileID: 32900000, guid: 40ac735c3428cbb4e8b85d05d607968f, type: 3}
+  windowsClip: {fileID: 32900000, guid: 46348c69781dcf44bae4f2d5e0b18b9e, type: 3}
   objectMaterial: {fileID: 2100000, guid: 88d4db040879efa4e9347b1f6b700ebe, type: 2}
   logoMaterial: {fileID: 2100000, guid: 355535b029e686d4f8b7765001b42490, type: 2}
   videoPlayer: {fileID: 3550220914892143138}

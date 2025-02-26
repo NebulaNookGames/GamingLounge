@@ -4,7 +4,7 @@ using UnityEngine;
 public class FindConversationState : State
 {
     private VisitorEntity visitorEntity;
-    private float chatFindDuration = 1f;
+    private float chatFindDuration = 3f;
     private float currentChatFindDuration = 0; 
     #region Constructor
 

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4855763683598863534}
-  - component: {fileID: 6612956177066037569}
+  - component: {fileID: 5246263338079253597}
   m_Layer: 0
   m_Name: WinParticleEffect
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 3400897959706644888}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6612956177066037569
+--- !u!114 &5246263338079253597
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,10 +42,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 219834491187561578}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88d91509eba5aa043b723dbf7854a67c, type: 3}
+  m_Script: {fileID: 11500000, guid: eb9bda4333b8081498024a5e3b1f6c77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seconds: 5
+  isFootprintEffect: 0
+  isMoneyEffect: 0
+  isMultiplierEffect: 0
+  isSubtractMultiplierEffect: 0
+  isTalkEffect: 0
+  isWinEffect: 1
+  waitTime: 5.5
 --- !u!1 &672019129448892098
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,7 +169,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -5054,7 +5060,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2

@@ -21,7 +21,7 @@ public class MoneyDataHandler : DataHandler
             if (worldinteractables.allAracadeMachines[i] != null &&
                 worldinteractables.allAracadeMachines[i].transform.position == saveData.arcadeMachinePositions[i])
             {
-                worldinteractables.allAracadeMachines[i].GetComponent<MoneyHolder>().ChangeMoney(saveData.moneyInArcadeMachines[i], false, false);
+                worldinteractables.allAracadeMachines[i].GetComponent<MoneyHolder>().ChangeMoney(saveData.moneyInArcadeMachines[i], false, false, false);
             }
         }
     }

@@ -31,7 +31,7 @@ public class Cost : MonoBehaviour
 
     public int multiplier = 0;
     public int maxMultiplier = 5;
-
+     
     public Action onMultiplierUpdated; 
     
     
@@ -39,13 +39,23 @@ public class Cost : MonoBehaviour
     {
         if (addToMultiplier)
         {
+            if (multiplier <= maxMultiplier)
+                ObjectPool.instance.SpawnMultiplierAddEffect(transformToCheckFrom.position, transform.rotation);
+            
             multiplier++;
         }
         else
         {
             multiplier--;
-            if(multiplier < 0)
+            if (multiplier < 0)
+            {
                 multiplier = 0;
+            }
+            
+            if (multiplier <= maxMultiplier && multiplier >= 0)
+            {
+                ObjectPool.instance.SpawnMultiplierSubtractEffect(transformToCheckFrom.position, transform.rotation);
+            }
         }
         
         onMultiplierUpdated?.Invoke();

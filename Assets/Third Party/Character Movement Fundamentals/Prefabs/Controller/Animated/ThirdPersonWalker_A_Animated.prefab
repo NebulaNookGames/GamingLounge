@@ -1081,7 +1081,7 @@ Transform:
   m_GameObject: {fileID: 4843929681822332993}
   serializedVersion: 2
   m_LocalRotation: {x: 0.40009508, y: -0.000000044268933, z: 0.000000019326016, w: 0.9164736}
-  m_LocalPosition: {x: 0, y: 5.52, z: -5}
+  m_LocalPosition: {x: 10.376058, y: 5.0221996, z: -6.3854947}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1251,6 +1251,7 @@ MonoBehaviour:
   closeCam: {fileID: 0}
   standardCam: {fileID: 0}
   farCam: {fileID: 0}
+  mapViewCam: {fileID: 0}
   scrollAction:
     m_UseReference: 1
     m_Action:
@@ -1265,7 +1266,11 @@ MonoBehaviour:
     m_Reference: {fileID: -4776750478211930988, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   camHigh: {fileID: 8300000, guid: fbe99428b2f86b045a6094d3f9897c0a, type: 3}
   camLow: {fileID: 8300000, guid: 082c58df4b85de448986fbcd58c5145d, type: 3}
+  canChange: 1
   waitDuration: 1
+  ambientEffect: {fileID: 0}
+  buildPanel: {fileID: 0}
+  upgradePanel: {fileID: 0}
 --- !u!82 &4029165488687065266
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9193,7 +9198,39 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8a54f53a444568b4ba340870989e7624, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7127445880773242864}
+    - targetCorrespondingSourceObject: {fileID: 2035582688616703362, guid: 8a54f53a444568b4ba340870989e7624, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2539314851943574492}
   m_SourcePrefab: {fileID: 100100000, guid: 8a54f53a444568b4ba340870989e7624, type: 3}
+--- !u!137 &1744283145792785036 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7986814019933463497, guid: 8a54f53a444568b4ba340870989e7624, type: 3}
+  m_PrefabInstance: {fileID: 8566459256617855301}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7700586799671708871 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2035582688616703362, guid: 8a54f53a444568b4ba340870989e7624, type: 3}
+  m_PrefabInstance: {fileID: 8566459256617855301}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2539314851943574492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7700586799671708871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ae7f68c35120f64ea0ea8eda8b5bba6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  faceRenderer: {fileID: 1744283145792785036}
+  slotIndex: 7
+  normalMaterial: {fileID: 2100000, guid: 4020b7fee8c38094cb821476c62a2646, type: 2}
+  blinkMaterial: {fileID: 2100000, guid: a6a1e5ec0fa34544d9da28f1a23f37c7, type: 2}
+  blinkInterval: 5
+  blinkRandomRange: 1.5
+  blinkDuration: 0.1
 --- !u!4 &8171944474707824302 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8a54f53a444568b4ba340870989e7624, type: 3}
@@ -9349,8 +9386,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7edccd74a2ccaba4d9267c6a75062baf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkingParticleSystem: {fileID: 7492000538844334952, guid: 9501810691d89004c8d5f1ef8801c7a8, type: 3}
-  shoeSoleParticleSystem: {fileID: 7742851620307156673, guid: 376e7c61ba68d0b489ab630c762fc4e9, type: 3}
   leftFoot: {fileID: 1492116987317400384}
   rightFoot: {fileID: 5279836154817375833}
 --- !u!114 &7127445880773242864

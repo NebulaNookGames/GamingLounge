@@ -11,6 +11,9 @@ public class RandomWalkState : State
 {
     #region Variables
 
+    private float waitTimeUntilAutoEnd = 10f;
+    private float currentWaitTimeUntilAutoEnd = 0; 
+    
     /// <summary>
     /// Distance to destination when reached.
     /// </summary>
@@ -64,6 +67,15 @@ public class RandomWalkState : State
     // ReSharper disable Unity.PerformanceAnalysis
     public override void UpdateState()
     {
+        if (currentWaitTimeUntilAutoEnd > 0)
+        {
+            currentWaitTimeUntilAutoEnd -= Time.deltaTime;
+        }
+        else
+        {
+            CheckSwitchState();
+        }
+
         updateTimer -= Time.deltaTime;
         if (updateTimer <= 0)
         {
@@ -126,6 +138,8 @@ public class RandomWalkState : State
         
         if (entity.Agent.isOnNavMesh)
             entity.Agent.SetDestination(walkPosition);
+        
+        currentWaitTimeUntilAutoEnd = waitTimeUntilAutoEnd;
     }
     
     /// <summary>
@@ -137,7 +151,7 @@ public class RandomWalkState : State
     /// <returns></returns> A position on the navmesh, if one is found. If not Vector3.zero is returned.
     public Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask, bool onlyInBuilding)
     {
-        Vector3 lastPosition = Vector3.zero; 
+        Vector3 lastPosition = visitorEntity.transform.position;
         
         int maxTries = 50;
 
@@ -170,8 +184,6 @@ public class RandomWalkState : State
                 
             }
         }
-
-        Debug.LogWarning("RandomNavSphere failed to find a valid position.");
         return lastPosition; // Return origin instead of Vector3.zero to indicate failure.
     }
 

@@ -65,7 +65,7 @@ public class PlacementSystem : MonoBehaviour
     public AudioClip invalidPlacementInteractionAudioclip;
     public AudioClip validRemoveInteractionAudioclip; 
 
-    public TextMeshProUGUI moneyText;
+    // public TextMeshProUGUI moneyText;
 
     private bool firstTimeToggle = true;
     
@@ -138,7 +138,7 @@ public class PlacementSystem : MonoBehaviour
             else 
                 GetComponent<AudioPlayer>().PlayAudioOneShot(placementMenuOff, .5f);
             
-            moneyText.color = new Color(0, 0, 0, 0);
+            //moneyText.color = new Color(0, 0, 0, 0);
      
             if(placementCanvas)
                 placementCanvas.SetActive(false);
@@ -158,7 +158,7 @@ public class PlacementSystem : MonoBehaviour
             else 
                 GetComponent<AudioPlayer>().PlayAudioOneShot(placementMenuOn, .5f);
             
-            moneyText.color = Color.white;
+            //moneyText.color = Color.white;
             
             GameInput.Instance.SetMouseVisibility(true);
             

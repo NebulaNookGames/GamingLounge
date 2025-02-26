@@ -18,7 +18,7 @@ public class AddMoneyOnDestroy : MonoBehaviour
     
     private void OnDestroy()
     {
-        if(shouldAddMoney)
-            MoneyManager.instance.ChangeMoney(amount);
+        // if(shouldAddMoney)
+        //     MoneyManager.instance.ChangeMoney(amount);
     }
 }

@@ -75,7 +75,6 @@ public class VisitorEntity : Entity
         CreateTransitions();
         initialState = randomWalkState;
         walkAmount = Random.Range(20, 40);
-        GetComponent<NavMeshAgent>().avoidancePriority = Random.Range(20, 80);
     }
 
     /// <summary>
@@ -151,6 +150,7 @@ public class VisitorEntity : Entity
             new Transition(() => { return gameObjectToWalkTo != null &&
                                           Vector3.Distance(gameObjectToWalkTo.transform.position, gameObject.transform.position) < 1f; }, lookAtInteractableState),
             new Transition(() => { return gameObjectToWalkTo == null;}, idleState),
+            new Transition(() => { return true; }, idleState),
         };
         walkToDestinationState.Transitions = walkToDestinationTransitions;
         
@@ -159,6 +159,7 @@ public class VisitorEntity : Entity
         {
             new Transition(() => { return conversationPartner != null; }, walkToDestinationState),
             new Transition(() => { return conversationPartner == null; }, randomWalkState),
+            new Transition(() => { return true; }, idleState),
         };
         
         findConversationState.Transitions = findConversationTransitions;
@@ -167,6 +168,7 @@ public class VisitorEntity : Entity
         List<Transition> talkTransitions = new List<Transition>
         {
             new Transition(() => { return conversationPartner == null; }, randomWalkState),
+            new Transition(() => { return true; }, idleState),
         };
         talkState.Transitions = talkTransitions;
         
@@ -175,6 +177,7 @@ public class VisitorEntity : Entity
         {
             new Transition(() => { return gameObjectToWalkTo != null; }, walkToDestinationState),
             new Transition(() => { return gameObjectToWalkTo == null; }, idleState),
+            new Transition(() => { return true; }, idleState),
         };
         findInteractableState.Transitions = findInteractableTransitions;
         
@@ -190,8 +193,10 @@ public class VisitorEntity : Entity
         {
             new Transition(() => { return randomStateIndex == 0; }, findInteractableState),
             new Transition(() => { return randomStateIndex == 1; }, findConversationState),
-            new Transition(() => { return randomStateIndex == 2; }, randomWalkState),
-            new Transition(() => { return randomStateIndex == 3; }, idleState),
+            new Transition(() => { return randomStateIndex == 2; }, findConversationState),
+            new Transition(() => { return randomStateIndex == 3; }, findConversationState),
+            new Transition(() => { return randomStateIndex == 4; }, randomWalkState),
+            new Transition(() => { return randomStateIndex == 5; }, idleState),
             new Transition(() => { return true; }, randomWalkState),
         };
         behaviorRandomizationState.Transitions = behaviorRandomizationTransitions;

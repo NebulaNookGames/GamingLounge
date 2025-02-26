@@ -21,10 +21,18 @@ public class MoneyHolder : MonoBehaviour
     /// Changes the money amount by a specified amount and triggers the OnMoneyChanged event.
     /// </summary>
     /// <param name="amount">The amount to change the money by.</param>
-    public void ChangeMoney(int amount, bool changePlay, bool play)
+    public void ChangeMoney(int amount, bool changePlay, bool play, bool adding)
     {
         moneyBeingHeld += amount; // Update the money amount.
-        ObjectPool.instance.SpawnMoneyEffect(effectSpawnPos.transform.position, effectSpawnPos.transform.rotation);
+        if (adding)
+        {
+            ObjectPool.instance.SpawnWinEffect(effectSpawnPos.transform.position, effectSpawnPos.transform.rotation);
+        }
+        else
+        {
+            ObjectPool.instance.SpawnMoneyEffect(effectSpawnPos.transform.position, effectSpawnPos.transform.rotation);
+        }
+
         OnMoneyChanged?.Invoke(moneyBeingHeld); // Trigger the OnMoneyChanged event.
     }
 

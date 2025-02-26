@@ -35,6 +35,6 @@ public class MultiplierTextUpdater : MonoBehaviour
         if(multiplier > 5)
             multiplier = 5;
         
-        text.text = "x" + multiplier.ToString();
+        text.text = "+" + multiplier.ToString();
     }
 }

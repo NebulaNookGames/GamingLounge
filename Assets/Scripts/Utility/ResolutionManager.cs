@@ -19,18 +19,9 @@ public class ResolutionManager : MonoBehaviour
         // Only change resolution if needed
         if (currentWidth != deckWidth || currentHeight != deckHeight)
         {
-            Debug.Log($"Current Resolution: {currentWidth}x{currentHeight}");
-
             // Set resolution only if it's Steam Deck's dimensions
             if (currentWidth == deckWidth && currentHeight == deckHeight)
-            {
                 Screen.SetResolution(deckWidth, deckHeight, true);
-                Debug.Log("Resolution adjusted for Steam Deck.");
-            }
-            else
-            {
-                Debug.Log("Running on a different device. Resolution unchanged.");
-            }
         }
     }
 }

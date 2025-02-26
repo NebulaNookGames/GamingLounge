@@ -76,7 +76,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0.11372549, g: 1, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -785,8 +785,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16764137e6164d3469b918bd7013043e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumAmount: 3
-  maximumAmount: 8
+  minimumAmount: 10
+  maximumAmount: 50
   layerMask:
     serializedVersion: 2
     m_Bits: 2304
@@ -1104,7 +1104,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 1, g: 0.93333334, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1395,7 +1395,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4279099505001604424}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: cc6fceb157b08dd46a0c8dcd53a14032, type: 3}
+  m_VideoClip: {fileID: 0}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -1409,14 +1409,12 @@ VideoPlayer:
   m_TimeUpdateMode: 1
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 0
-  m_TargetAudioSources:
-  - {fileID: 0}
-  m_DirectAudioVolumes:
-  - 1
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
   m_Url: 
-  m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 00
-  m_ControlledAudioTrackCount: 1
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
   m_PlayOnAwake: 0
   m_SkipOnDrop: 1
   m_Looping: 1
@@ -1435,13 +1433,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2071b599ea93b9a428f2752ac893657c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  linuxClip: {fileID: 32900000, guid: 011be785ab38a8b438fbcf5ac46635e4, type: 3}
+  windowsClip: {fileID: 32900000, guid: cc6fceb157b08dd46a0c8dcd53a14032, type: 3}
   objectMaterial: {fileID: 2100000, guid: 5efd0c2341e2a364ba318ecc9c4e9f23, type: 2}
   logoMaterial: {fileID: 2100000, guid: 1addb4a919147384a901017b726f2b85, type: 2}
   videoPlayer: {fileID: 4308810279655234116}
   renderTexture: {fileID: 8400000, guid: 87adbf9e100fc194a8f0b6011a3100f8, type: 2}
   uniqueMaterial: {fileID: 0}
   materialIndex: 2
-  pauseFrame: 1200
   minStartFrame: 0
   maxStartFrame: 0
 --- !u!208 &5325665869288191143

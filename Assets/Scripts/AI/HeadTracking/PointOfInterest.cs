@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class PointOfInterest : MonoBehaviour
 {
-    private void Awake()
+    private void OnEnable()
     {
         WorldInteractables.instance.pointOfInterests.Add(this);
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         WorldInteractables.instance.pointOfInterests.Remove(this);
     }

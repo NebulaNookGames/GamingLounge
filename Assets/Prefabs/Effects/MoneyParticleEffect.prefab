@@ -45,7 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb9bda4333b8081498024a5e3b1f6c77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolType: 1
+  isFootprintEffect: 0
+  isMoneyEffect: 1
+  isMultiplierEffect: 0
+  isSubtractMultiplierEffect: 0
+  isTalkEffect: 0
+  isWinEffect: 0
   waitTime: 5.5
 --- !u!1 &672019129448892098
 GameObject:
@@ -164,7 +169,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -5055,7 +5060,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2

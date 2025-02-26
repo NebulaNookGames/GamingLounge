@@ -412,7 +412,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0.11372549, g: 1, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -757,8 +757,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16764137e6164d3469b918bd7013043e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumAmount: 15
-  maximumAmount: 30
+  minimumAmount: 30
+  maximumAmount: 800
   layerMask:
     serializedVersion: 2
     m_Bits: 2304
@@ -955,7 +955,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 1, g: 0.93333334, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1324,6 +1324,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2071b599ea93b9a428f2752ac893657c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  linuxClip: {fileID: 32900000, guid: 40ac735c3428cbb4e8b85d05d607968f, type: 3}
+  windowsClip: {fileID: 32900000, guid: 46348c69781dcf44bae4f2d5e0b18b9e, type: 3}
   objectMaterial: {fileID: 2100000, guid: 59f7dacb814969640ad7a6a58abc67b4, type: 2}
   logoMaterial: {fileID: 2100000, guid: 652341104b5ac4f4498e085024521edb, type: 2}
   videoPlayer: {fileID: 8569082238224199597}

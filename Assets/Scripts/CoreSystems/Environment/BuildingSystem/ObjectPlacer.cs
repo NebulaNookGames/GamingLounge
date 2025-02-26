@@ -69,8 +69,8 @@ public class ObjectPlacer : MonoBehaviour
             }
         }
         
-        if(reduceMoney)
-            MoneyManager.instance.ChangeMoney(-objectData.cost);
+        // if(reduceMoney)
+        //     MoneyManager.instance.ChangeMoney(-objectData.cost);
         
         placedGameObjects.Add(newObject);
         PlacementDataHandler.instance.AddData(objectData, position, rotation);

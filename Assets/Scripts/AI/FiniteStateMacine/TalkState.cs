@@ -76,6 +76,7 @@ public class TalkState : State
 
         idleDuration = 13;
         currentIdleTime = 0;
+        ObjectPool.instance.SpawnTalkEffect(visitorEntity.transform.position, visitorEntity.transform.rotation);
     }
 
     #endregion Methods

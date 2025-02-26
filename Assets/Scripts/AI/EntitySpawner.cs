@@ -6,7 +6,7 @@ public class EntitySpawner : MonoBehaviour
     public static EntitySpawner instance; 
     
     public GameObject entityPrefab; // The prefab to spawn
-    public float spawnInterval = 10f; // Time between spawns in seconds
+    public float spawnInterval = 1f; // Time between spawns in seconds
     private float timer;
     public int maxAmount = 0;
     public int amountPerLand = 10; 
@@ -15,7 +15,7 @@ public class EntitySpawner : MonoBehaviour
     public ExpandHandler expandHandler;
     [SerializeField] private float spawnDistance = 30;
     [SerializeField] GameObject buildingChecker;
-    
+    private float initialTimer = 10f; 
 
     public Action onAmountUpdated; 
     
@@ -30,6 +30,12 @@ public class EntitySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (initialTimer > 0)
+        {
+            initialTimer -= Time.deltaTime;
+            return;
+        }
+        
         // Update the timer
         timer -= Time.deltaTime;
 
@@ -55,7 +61,8 @@ public class EntitySpawner : MonoBehaviour
 
             if (amount >= maxAmount || maxAmount == 0) return; 
             StartCoroutine(SpawnNewEntity()); // Call the spawn method
-            timer = spawnInterval; // Reset the timer
+            
+            timer = spawnInterval;
         }
     }
 
@@ -139,10 +146,8 @@ public class EntitySpawner : MonoBehaviour
                 EntityManager.instance.currentNPCs.Add(newEntity);
                 amount++;
             }
-
-            yield return new WaitForSeconds(.2f);
         }
-        maxAmount = WorldInteractables.instance.machineCount;
         onAmountUpdated?.Invoke();
+        maxAmount = WorldInteractables.instance.machineCount;
     }
 }

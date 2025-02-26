@@ -24,27 +24,44 @@ public class FindConversationState : State
 
     public override void UpdateState()
     {
+        VisitorEntity closestVisitor = null; 
+        float currentDistance = float.MaxValue;
+        
         if (WorldInteractables.instance.openToChatEntities.Count > 1 && visitorEntity.conversationPartner == null)
         {
             for (int i = 0; i < WorldInteractables.instance.openToChatEntities.Count; i++)
             {
                 if (WorldInteractables.instance.openToChatEntities[i] != entity.gameObject)
                 {
-                    VisitorEntity otherEntity = WorldInteractables.instance.openToChatEntities[i].GetComponent<VisitorEntity>();
-                    
-                    if (otherEntity.conversationPartner != null)
-                        continue; 
-                    
-                    visitorEntity.conversationPartner = otherEntity.gameObject;
-                    otherEntity.conversationPartner = entity.gameObject;
-                    WorldInteractables.instance.openToChatEntities.Remove(entity.gameObject);
-                    WorldInteractables.instance.openToChatEntities.Remove(otherEntity.gameObject);
-                    otherEntity.gameObjectToWalkTo = entity.gameObject;
-                    visitorEntity.gameObjectToWalkTo = otherEntity.gameObject;
-                    visitorEntity.talkIndex = 0;
-                    otherEntity.talkIndex = 1; 
-                    break; 
+                    float tempDistance = Vector3.Distance(visitorEntity.transform.position,
+                        WorldInteractables.instance.openToChatEntities[i].transform.position);
+                    if (tempDistance < currentDistance)
+                    {
+                        currentDistance = tempDistance;
+                        closestVisitor = WorldInteractables.instance.openToChatEntities[i]
+                            .GetComponent<VisitorEntity>();
+                    }
                 }
+            }
+
+            if (closestVisitor != null)
+            {
+                if (closestVisitor.conversationPartner != null)
+                {
+                    if(WorldInteractables.instance.openToChatEntities.Contains(entity.gameObject))
+                        WorldInteractables.instance.openToChatEntities.Remove(entity.gameObject);
+                    CheckSwitchState();
+                }
+                
+                visitorEntity.conversationPartner = closestVisitor.gameObject;
+                closestVisitor.conversationPartner = entity.gameObject;
+                WorldInteractables.instance.openToChatEntities.Remove(entity.gameObject);
+                WorldInteractables.instance.openToChatEntities.Remove(closestVisitor.gameObject);
+                closestVisitor.gameObjectToWalkTo = entity.gameObject;
+                visitorEntity.gameObjectToWalkTo = closestVisitor.gameObject;
+                visitorEntity.talkIndex = 0;
+                closestVisitor.talkIndex = 1;
+                Debug.Log("Talk partner set and found");
             }
         }
         

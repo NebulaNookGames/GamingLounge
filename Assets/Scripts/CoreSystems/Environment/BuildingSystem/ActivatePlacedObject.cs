@@ -7,7 +7,9 @@ public class ActivatePlacedObject : MonoBehaviour
     private AddMoneyOnDestroy addMoneyOnDestroy;
 
     public UnityEvent OnActivatePlacedObject;
-    public UnityEvent OnActivatePlacedObjectCallAlways; 
+    public UnityEvent OnActivatePlacedObjectCallAlways;
+    public UnityEvent OnDeactivatePlaceObject; 
+    
     private void OnEnable()
     {
         if (colliders.Length > 0 && colliders != null)
@@ -38,5 +40,9 @@ public class ActivatePlacedObject : MonoBehaviour
         
         OnActivatePlacedObjectCallAlways?.Invoke();
     }
-    
+
+    public void Deactivate()
+    {
+        OnDeactivatePlaceObject?.Invoke();
+    }
 }

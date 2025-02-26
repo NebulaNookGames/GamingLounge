@@ -98,7 +98,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 3
   field of view: 60
   orthographic: 1
   orthographic size: 0.44
@@ -226,7 +226,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 3
   field of view: 60
   orthographic: 1
   orthographic size: 0.66
@@ -335,7 +335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityPrefab: {fileID: 5967203068415554604, guid: 280496cb4852ec043964c29cd12716ae, type: 3}
-  spawnInterval: 1
+  spawnInterval: 5
   maxAmount: 0
   amountPerLand: 20
   maxAmountFromLand: 0
@@ -414,6 +414,22 @@ PrefabInstance:
     - target: {fileID: 2536269457001556600, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.000000012849747
+      objectReference: {fileID: 0}
+    - target: {fileID: 2539314851943574492, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
+      propertyPath: eyeIndex
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2539314851943574492, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
+      propertyPath: skinIndex
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2539314851943574492, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
+      propertyPath: blinkInterval
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5970218356188293973, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
+      propertyPath: m_Antialiasing
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7662010736394323689, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
       propertyPath: ambientEffect

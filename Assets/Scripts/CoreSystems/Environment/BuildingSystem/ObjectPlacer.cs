@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -84,6 +84,9 @@ public class ObjectPlacer : MonoBehaviour
     /// <param name="gameObjectIndex">The index of the object to remove.</param>
     internal void RemoveObjectAt(int gameObjectIndex)
     {
+        if(placedGameObjects[gameObjectIndex].GetComponent<ActivatePlacedObject>()) 
+            placedGameObjects[gameObjectIndex].GetComponent<ActivatePlacedObject>().Deactivate();
+        
         if(placedGameObjects[gameObjectIndex].CompareTag("UpgradePC"))
             upgradePCIsPlaced = false;
         
@@ -94,11 +97,18 @@ public class ObjectPlacer : MonoBehaviour
             WorldInteractables.instance.DeleteArcadeMachine(placedGameObjects[gameObjectIndex]);
 
         PlacementDataHandler.instance.RemovePlacedObject(placedGameObjects[gameObjectIndex]);
-        Destroy(placedGameObjects[gameObjectIndex]);
-        placedGameObjects[gameObjectIndex] = null;
-        Invoke("ActionInvocation", .2f);
+        
+        StartCoroutine(DestroyObject(placedGameObjects[gameObjectIndex], gameObjectIndex));
     }
 
+    IEnumerator DestroyObject(GameObject objectToDestroy, int gameObjectIndex)
+    {
+        yield return new WaitForSeconds(0.2f);
+        placedGameObjects[gameObjectIndex] = null;
+        Destroy(objectToDestroy);
+        Invoke("ActionInvocation", .2f);
+    }
+  
     void ActionInvocation()
     {
         placementSystem.OnPlaced?.Invoke();

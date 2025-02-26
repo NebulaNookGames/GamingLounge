@@ -21,7 +21,7 @@ public class ObjectPool : MonoBehaviour
     public Queue<GameObject> winEffectQueue = new Queue<GameObject>();
     
     public int fillAmountPerQueue = 50;
-
+    public int footprintAmount = 500; 
     private void Awake()
     {
         if(instance == null)
@@ -34,12 +34,15 @@ public class ObjectPool : MonoBehaviour
 
     public void FillPool()
     {
-        for (int i = 0; i < fillAmountPerQueue; i++)
+        for (int i = 0; i < footprintAmount; i++)
         {
             GameObject footprintEffect = Instantiate(footprintEffectPrefab, transform, true);
             footprintEffectQueue.Enqueue(footprintEffect);
             footprintEffect.SetActive(false);
-            
+        }
+        
+        for (int i = 0; i < fillAmountPerQueue; i++)
+        {
             GameObject moneyEffect = Instantiate(moneyEffectPrefab, transform, true);
             moneyEffectQueue.Enqueue(moneyEffect);
             moneyEffect.SetActive(false);

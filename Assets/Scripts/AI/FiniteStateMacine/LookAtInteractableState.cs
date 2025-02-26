@@ -35,10 +35,7 @@ public class LookAtInteractableState : State
 
     public override void EnterState()
     {
-        Debug.Log("Enter LookAtInteractableState");
-
         entity.Agent.isStopped = true;
-
         Initialization();
     }
 
@@ -68,7 +65,7 @@ public class LookAtInteractableState : State
         entity.EntityAnimator.SetFloat("HorizontalSpeed", 0);
         entity.Agent.velocity = Vector3.zero;
 
-        idleDuration = Random.Range(2, 8);
+        idleDuration = 2;
         currentIdleTime = 0;
     }
 

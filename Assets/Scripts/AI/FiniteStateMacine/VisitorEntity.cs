@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
@@ -46,6 +47,7 @@ public class VisitorEntity : Entity
     public int randomStateIndex = 0;
     public GameObject mesh;
     public float bikeWaitTime = 1;
+    public bool walkToDestinationIsOver = false; 
     #endregion State Variables
 
     #endregion Variables
@@ -149,8 +151,9 @@ public class VisitorEntity : Entity
                 talkState),
             new Transition(() => { return gameObjectToWalkTo != null &&
                                           Vector3.Distance(gameObjectToWalkTo.transform.position, gameObject.transform.position) < 1f; }, lookAtInteractableState),
-            new Transition(() => { return gameObjectToWalkTo == null;}, idleState),
-            new Transition(() => { return true; }, idleState),
+            new Transition(() => { return gameObjectToWalkTo == null && conversationPartner == null;}, idleState),
+            new Transition(() => { return walkToDestinationIsOver;}, idleState),
+            
         };
         walkToDestinationState.Transitions = walkToDestinationTransitions;
         
@@ -193,10 +196,8 @@ public class VisitorEntity : Entity
         {
             new Transition(() => { return randomStateIndex == 0; }, findInteractableState),
             new Transition(() => { return randomStateIndex == 1; }, findConversationState),
-            new Transition(() => { return randomStateIndex == 2; }, findConversationState),
-            new Transition(() => { return randomStateIndex == 3; }, findConversationState),
-            new Transition(() => { return randomStateIndex == 4; }, randomWalkState),
-            new Transition(() => { return randomStateIndex == 5; }, idleState),
+            new Transition(() => { return randomStateIndex == 2; }, randomWalkState),
+            new Transition(() => { return randomStateIndex == 3; }, idleState),
             new Transition(() => { return true; }, randomWalkState),
         };
         behaviorRandomizationState.Transitions = behaviorRandomizationTransitions;

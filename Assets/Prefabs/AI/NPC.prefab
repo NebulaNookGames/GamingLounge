@@ -107,8 +107,8 @@ Transform:
   m_GameObject: {fileID: 340709599684236767}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0.102}
-  m_LocalScale: {x: 20, y: 20, z: 10}
+  m_LocalPosition: {x: 0.024, y: 1.6289, z: -0.056}
+  m_LocalScale: {x: 11.457825, y: 0.32988155, z: 5.7289124}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 9116193349556122205}
@@ -2347,7 +2347,7 @@ MonoBehaviour:
   eyeIndex: 6
   skinIndex: 4
   normalMaterial: {fileID: 2100000, guid: a00f6ab892a62b1459553a0566519286, type: 2}
-  blinkInterval: 5
+  blinkInterval: 3
   blinkRandomRange: 1.5
   blinkDuration: 0.1
 --- !u!1001 &1887323464800375181
@@ -2360,11 +2360,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -9127072559893113593, guid: 81b573bea22964547b2a4ce0641922a6, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.2096485
+      value: 0.20976752
+      objectReference: {fileID: 0}
+    - target: {fileID: -9127072559893113593, guid: 81b573bea22964547b2a4ce0641922a6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.9777503
       objectReference: {fileID: 0}
     - target: {fileID: -9127072559893113593, guid: 81b573bea22964547b2a4ce0641922a6, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.0013770197
+      value: 0.0013778014
+      objectReference: {fileID: 0}
+    - target: {fileID: -9127072559893113593, guid: 81b573bea22964547b2a4ce0641922a6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.00017221557
       objectReference: {fileID: 0}
     - target: {fileID: -9127072559893113593, guid: 81b573bea22964547b2a4ce0641922a6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2917,7 +2925,11 @@ PrefabInstance:
     - target: {fileID: 6266624361702913249, guid: 81b573bea22964547b2a4ce0641922a6, type: 3}
       propertyPath: 'm_Materials.Array.data[7]'
       value: 
-      objectReference: {fileID: 2100000, guid: 37bf7cc1e8737a84d91c226ef73bc970, type: 2}
+      objectReference: {fileID: 2100000, guid: 256ae535a5cce6d46beb8c9b57db9184, type: 2}
+    - target: {fileID: 6266624361702913249, guid: 81b573bea22964547b2a4ce0641922a6, type: 3}
+      propertyPath: 'm_Materials.Array.data[8]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e3ed03c3a8cb7b449902353b7c41c22e, type: 2}
     - target: {fileID: 6360432895406044996, guid: 81b573bea22964547b2a4ce0641922a6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -0.00000438786
@@ -3151,7 +3163,7 @@ MonoBehaviour:
   eyeIndex: 5
   skinIndex: 3
   normalMaterial: {fileID: 2100000, guid: 5eca82568176ea74f8ba7210a24b3007, type: 2}
-  blinkInterval: 5
+  blinkInterval: 3
   blinkRandomRange: 1.5
   blinkDuration: 0.1
 --- !u!137 &5532279714211947884 stripped
@@ -3724,7 +3736,7 @@ MonoBehaviour:
   eyeIndex: 5
   skinIndex: 6
   normalMaterial: {fileID: 2100000, guid: 5506e0724922e7c4eafbbf6893af0ec6, type: 2}
-  blinkInterval: 5
+  blinkInterval: 3
   blinkRandomRange: 1.5
   blinkDuration: 0.1
 --- !u!4 &7748984844577975463 stripped

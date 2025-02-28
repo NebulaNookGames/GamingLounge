@@ -27,8 +27,8 @@ public class CameraControls : MonoBehaviour
 
     void ChangeActiveCam(InputAction.CallbackContext context)
     {
-        if (!canChange || Time.timeScale == 0 || buildPanel.activeSelf || upgradePanel.activeSelf) return;
-
+        if (!canChange || Time.timeScale == 0 || GameInput.Instance.activeGameDevice == GameInput.GameDevice.Gamepad && buildPanel.activeSelf || GameInput.Instance.activeGameDevice == GameInput.GameDevice.Gamepad && upgradePanel.activeSelf) return;
+        
         Invoke("SetCanChange", waitDuration);
         canChange = false; 
         if (context.ReadValue<Vector2>().y == 0) return; 

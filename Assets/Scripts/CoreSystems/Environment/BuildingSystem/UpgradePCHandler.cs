@@ -6,12 +6,13 @@ public class UpgradePCHandler : MonoBehaviour
     private bool isActive = false;
     public GameObject inDistanceProof;
     GameObject UpgradePCCanvas;
-    
+    public GameObject activationCheckObject;
+    public float activationDistance = .7f;
     public AudioSource audioS;
     public AudioClip onAudioclip;
     public AudioClip offAudioclip;
 
-    public InputActionProperty worldObjectUsageAction; 
+    public InputActionProperty worldObjectUsageAction;
     
     private void OnEnable()
     {
@@ -26,7 +27,7 @@ public class UpgradePCHandler : MonoBehaviour
 
     void UseObject(InputAction.CallbackContext context)
     {
-        if(inDistanceProof.activeSelf && !GameObject.FindWithTag("MenuUI").GetComponent<PauseHandler>().IsPaused)
+        if(Vector3.Distance(activationCheckObject.transform.position, GameObject.FindWithTag("Player").transform.position) < activationDistance && !GameObject.FindWithTag("MenuUI").GetComponent<PauseHandler>().IsPaused)
             ChangeActiveState();
     }
 

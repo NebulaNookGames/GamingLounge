@@ -5,7 +5,7 @@ using UnityEngine.Animations.Rigging;
 public class HeadTracking : MonoBehaviour
 {
     private List<PointOfInterest> POIs;
-    public float radius = 4f;
+    public float radius = 6f;
     public Transform target; 
     public VisitorEntity entity;
     public float retargetSpeed = 4;
@@ -13,13 +13,20 @@ public class HeadTracking : MonoBehaviour
     public Vector3 originalPos;
     public Vector3 beginPosOffset = Vector3.zero;
     public Rig rig;
+    public float rigWeight = 0f; 
+    public float updateInterval = 0;
+    private float updateTimer;
+    public float maxAngle = 70; 
+    public PointOfInterest ignorePointOfInterest;
 
-    public float updateInterval = .5f;
-    private float updateTimer; 
+    public PointOfInterest specificTarget; 
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        entity.headTracking = this;
+        if(entity != null)
+            entity.headTracking = this;
+        
         updateTimer = updateInterval;
     }
 
@@ -32,57 +39,74 @@ public class HeadTracking : MonoBehaviour
 
             if (noTracking)
             {
-                rig.weight = 0;
+                rigWeight = 0;
+                target.position = originalPos;
+                rig.weight = Mathf.Lerp(rig.weight, rigWeight, Time.deltaTime);
                 return;
             }
 
             originalPos = transform.position + beginPosOffset + (transform.forward * 2f);
 
+         
             // Default target position in world space
             Vector3 targetPos = transform.position + beginPosOffset + (transform.forward * 2f);
             Transform closestTracking = null;
-            if (!noTracking)
+            if (specificTarget == null)
             {
-                float closestDistance = float.MaxValue;
-
-                foreach (PointOfInterest poi in WorldInteractables.instance.pointOfInterests)
+                if (!noTracking)
                 {
-                    float delta = Vector3.Distance(poi.transform.position, target.position);
+                    float closestDistance = float.MaxValue;
 
-                    if (delta < radius && delta < closestDistance)
+                    foreach (PointOfInterest poi in WorldInteractables.instance.pointOfInterests)
                     {
-                        closestTracking = poi.transform;
-                        closestDistance = delta;
+                        if (poi == ignorePointOfInterest) continue;
+
+                        float delta = Vector3.Distance(poi.transform.position, target.position);
+
+                        if (delta < radius && delta < closestDistance)
+                        {
+                            float angle = Vector3.Angle(transform.forward, poi.transform.position - transform.position);
+                            if (angle < maxAngle)
+                            {
+                                closestTracking = poi.transform;
+                                closestDistance = delta;
+                            }
+                        }
+                    }
+
+                    if (closestTracking != null)
+                    {
+                        rigWeight = 1;
+                        // Update the desired target position to POI position
+                        targetPos = closestTracking.position;
+                    }
+                    else
+                    {
+                        rigWeight = 0;
                     }
                 }
-
-                if (closestTracking != null)
-                {
-                    rig.weight = 1;
-                    // Update the desired target position to POI position
-                    targetPos = closestTracking.position;
-                }
-                else
-                {
-                    rig.weight = 0;
-                }
             }
+            else
+            {
+                closestTracking = specificTarget.transform;
+            }
+
 
             if (closestTracking != null)
             {
                 if (Vector3.Distance(closestTracking.position, transform.position) > radius)
                 {
-                    rig.weight = 0;
+                    rigWeight = 0;
                     targetPos = originalPos;
                 }
             }
             else
             {
-                rig.weight = 0;
                 targetPos = originalPos;
             }
 
             target.position = Vector3.Lerp(target.position, targetPos, Time.deltaTime * retargetSpeed);
+            rig.weight = Mathf.Lerp(rig.weight, rigWeight, Time.deltaTime);
         }
     }
 }

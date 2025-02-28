@@ -10,6 +10,8 @@ public class ActivatePlacedObject : MonoBehaviour
     public UnityEvent OnActivatePlacedObjectCallAlways;
     public UnityEvent OnDeactivatePlaceObject; 
     
+    float colliderInvokeTime = .5f; 
+    
     private void OnEnable()
     {
         if (colliders.Length > 0 && colliders != null)
@@ -19,19 +21,12 @@ public class ActivatePlacedObject : MonoBehaviour
                 col.enabled = false;
             }
         }
-
         addMoneyOnDestroy = GetComponent<AddMoneyOnDestroy>();
     }
 
     public void Enable(bool callEvent)
     {
-        if (colliders.Length > 0 && colliders != null)
-        {
-            foreach (Collider col in colliders)
-            {
-                col.enabled = true;
-            }
-        }
+        Invoke(nameof(ActivateColliders), colliderInvokeTime);
 
         addMoneyOnDestroy.enabled = true; 
         
@@ -45,4 +40,15 @@ public class ActivatePlacedObject : MonoBehaviour
     {
         OnDeactivatePlaceObject?.Invoke();
     }
+    
+    void ActivateColliders()
+    {
+        if (colliders.Length > 0 && colliders != null)
+        {
+            foreach (Collider col in colliders)
+            {
+                col.enabled = true;
+            }
+        }
+    }  
 }

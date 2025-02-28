@@ -47,10 +47,10 @@ public class TalkState : State
         {
             visitorEntity.conversationPartner = null;
             visitorEntity.gameObjectToWalkTo = null; 
+            visitorEntity.headTracking.specificTarget = null;
             CheckSwitchState(); // Contained in Base class.
         }
     }
-
     #endregion State Methods
 
     #region Methods
@@ -77,6 +77,7 @@ public class TalkState : State
         idleDuration = 13;
         currentIdleTime = 0;
         ObjectPool.instance.SpawnTalkEffect(visitorEntity.transform.position, visitorEntity.transform.rotation);
+        visitorEntity.headTracking.specificTarget = visitorEntity.conversationPartner.transform.GetComponentInChildren<PointOfInterest>();
     }
 
     #endregion Methods

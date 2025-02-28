@@ -44,6 +44,8 @@ public class FindInteractableState : State
         
         foreach (PointOfInterest poi in WorldInteractables.instance.pointOfInterests)
         {
+            if (poi.isCharacter || poi == visitorEntity.headTracking.ignorePointOfInterest) continue; 
+            
             float tempDistance = Vector3.Distance(poi.transform.position, visitorEntity.transform.position);
             if (tempDistance <= interactableSearchDistance && tempDistance < lastDistance)
             {

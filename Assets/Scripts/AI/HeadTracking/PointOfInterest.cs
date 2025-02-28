@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PointOfInterest : MonoBehaviour
 {
+    public bool isCharacter; 
+    
     private void OnEnable()
     {
         WorldInteractables.instance.pointOfInterests.Add(this);

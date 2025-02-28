@@ -129,7 +129,7 @@ public class VisitorEntity : Entity
                 }, 
                 idleState),
             
-            new Transition(() => { return Vector3.Distance(agent.destination, transform.position) < 1.5f; }, playState),
+            new Transition(() => { return Vector3.Distance(agent.destination, transform.position) <= .5f; }, playState),
         };
         findMachineState.Transitions = findMachineTransitions;
 

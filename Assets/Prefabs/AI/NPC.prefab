@@ -348,7 +348,11 @@ MonoBehaviour:
   originalPos: {x: 0, y: 0, z: 0}
   beginPosOffset: {x: 0, y: 0.5, z: 0}
   rig: {fileID: 2603652409119803655}
-  updateInterval: 0.5
+  rigWeight: 0
+  updateInterval: 0
+  maxAngle: 70
+  ignorePointOfInterest: {fileID: 5645495433222418673}
+  specificTarget: {fileID: 0}
 --- !u!1 &1149125459714092912
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,7 +492,11 @@ MonoBehaviour:
   originalPos: {x: 0, y: 0, z: 0}
   beginPosOffset: {x: 0, y: 0.5, z: 0}
   rig: {fileID: 7491718999012799844}
-  updateInterval: 0.5
+  rigWeight: 0
+  updateInterval: 0
+  maxAngle: 70
+  ignorePointOfInterest: {fileID: 5645495433222418673}
+  specificTarget: {fileID: 0}
 --- !u!1 &2357813668109895262
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,7 +816,7 @@ Transform:
   m_GameObject: {fileID: 5779548089250926466}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.491, z: 0}
+  m_LocalPosition: {x: 0, y: -0.53, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -816,6 +824,7 @@ Transform:
   - {fileID: 4992665476065037942}
   - {fileID: 2142490544122820198}
   - {fileID: 1339911924668047585}
+  - {fileID: 7937992394913195065}
   m_Father: {fileID: 415966748435750202}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5061600138373113283
@@ -1065,6 +1074,7 @@ MonoBehaviour:
   randomStateIndex: 0
   mesh: {fileID: 5779548089250926466}
   bikeWaitTime: 1.12
+  walkToDestinationIsOver: 0
 --- !u!82 &1266662112398527627
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1193,6 +1203,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4992665476065037942}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7020190397053762796
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7937992394913195065}
+  - component: {fileID: 5645495433222418673}
+  m_Layer: 0
+  m_Name: PointofInterest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7937992394913195065
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7020190397053762796}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.015, y: 1.039, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9116193349556122205}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5645495433222418673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7020190397053762796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 361f5bdbd26774b45a84544c579cca3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCharacter: 1
 --- !u!1 &7185641531941887131
 GameObject:
   m_ObjectHideFlags: 0
@@ -1602,7 +1657,11 @@ MonoBehaviour:
   originalPos: {x: 0, y: 0, z: 0}
   beginPosOffset: {x: 0, y: 0.5, z: 0}
   rig: {fileID: 1652029507495900889}
-  updateInterval: 0.5
+  rigWeight: 0
+  updateInterval: 0
+  maxAngle: 70
+  ignorePointOfInterest: {fileID: 5645495433222418673}
+  specificTarget: {fileID: 0}
 --- !u!1 &8847187857247313223
 GameObject:
   m_ObjectHideFlags: 0

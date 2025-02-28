@@ -95,7 +95,10 @@ public class PlayState : State
 
         visitorEntity.shouldUseSeat = false;
         visitorEntity.seatInUse = null;
-
+        
+        if(visitorEntity.machineInUse)
+            visitorEntity.machineInUse.GetComponent<GameObjectActivation>().Invert();
+        
         visitorEntity.machineInUse = null; 
         visitorEntity.headTracking.noTracking = false;
         entity.Agent.isStopped = false; 
@@ -148,6 +151,8 @@ public class PlayState : State
         currentPlayDuration = 0;
         initialAvoidancePriority = entity.Agent.avoidancePriority;
         entity.Agent.avoidancePriority = 0;
+        
+        visitorEntity.machineInUse.GetComponent<GameObjectActivation>().Invert();
     }
     #endregion Methods
 }

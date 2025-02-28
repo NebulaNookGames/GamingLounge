@@ -9,7 +9,9 @@ using TMPro;
 public class UpdateMoneyText : MonoBehaviour
 {
 
-    public bool makeInvisible = true; 
+    public bool makeInvisible = true;
+
+    public bool updateOnEnable = false; 
     
     // Reference to the MoneyManager that tracks and triggers money changes.
     [SerializeField] private MoneyManager moneyManager;
@@ -27,6 +29,12 @@ public class UpdateMoneyText : MonoBehaviour
     {
         text = GetComponent<TextMeshProUGUI>(); // Get the TextMeshProUGUI component.
         moneyManager.OnMoneyChanged += UpdateText; // Subscribe to money change event.
+    }
+
+    private void OnEnable()
+    {
+        if(updateOnEnable)
+            UpdateText(moneyManager.MoneyAmount);
     }
 
     private void OnDisable()

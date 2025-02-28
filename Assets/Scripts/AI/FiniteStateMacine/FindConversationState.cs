@@ -46,13 +46,6 @@ public class FindConversationState : State
 
             if (closestVisitor != null)
             {
-                if (closestVisitor.conversationPartner != null)
-                {
-                    if(WorldInteractables.instance.openToChatEntities.Contains(entity.gameObject))
-                        WorldInteractables.instance.openToChatEntities.Remove(entity.gameObject);
-                    CheckSwitchState();
-                }
-                
                 visitorEntity.conversationPartner = closestVisitor.gameObject;
                 closestVisitor.conversationPartner = entity.gameObject;
                 WorldInteractables.instance.openToChatEntities.Remove(entity.gameObject);
@@ -66,7 +59,7 @@ public class FindConversationState : State
         }
         
         currentChatFindDuration += Time.deltaTime;
-        if (currentChatFindDuration >= chatFindDuration || visitorEntity.conversationPartner != null)
+        if (currentChatFindDuration >= chatFindDuration)
             CheckSwitchState();
     }
 

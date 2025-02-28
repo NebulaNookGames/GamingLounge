@@ -54,7 +54,6 @@ public class FindConversationState : State
                 visitorEntity.gameObjectToWalkTo = closestVisitor.gameObject;
                 visitorEntity.talkIndex = 0;
                 closestVisitor.talkIndex = 1;
-                Debug.Log("Talk partner set and found");
             }
         }
         

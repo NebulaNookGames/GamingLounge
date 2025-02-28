@@ -12,8 +12,8 @@ public class ActivationTogglerOfOtherGameObject : MonoBehaviour
     public bool isLastTutorial;
     public GameObject playerCam;
     public AudioSource audioS;
-    public AudioClip audioC; 
-    
+    public AudioClip audioC;
+
     private void OnEnable()
     {
         continueAction.action.performed += Continue;
@@ -29,7 +29,7 @@ public class ActivationTogglerOfOtherGameObject : MonoBehaviour
             CancelInvoke(nameof(DisableThisAndActivateOther));
     }
     
-    void Continue(InputAction.CallbackContext context)
+    public void Continue(InputAction.CallbackContext context)
     {
         if (Time.timeScale == 0)
             return;
@@ -41,11 +41,12 @@ public class ActivationTogglerOfOtherGameObject : MonoBehaviour
 
     void DisableThisAndActivateOther()
     {
-        if(isLastTutorial)
+        if (isLastTutorial)
+        {
+            if(background)
+                background.SetActive(false);
             Destroy(playerCam);
-            
-        if(background)
-            background.SetActive(false);
+        }
         
         if(gameObjectToActivate != null)
             gameObjectToActivate.SetActive(true);

@@ -17,7 +17,9 @@ public class PreviewSystem : MonoBehaviour
     private SpriteRenderer cellIndicatorRenderer; // Renderer for the cell indicator
     public Vector2Int sizeToUse;
 
-    public AudioClip rotateClip; 
+    public AudioClip rotateClip;
+    public Color validColor = Color.green;
+    public Color invalidColor = Color.red;
     
     private void Start()
     {
@@ -131,7 +133,7 @@ public class PreviewSystem : MonoBehaviour
     /// <param name="validity">Indicates whether the placement is valid.</param>
     private void ApplyFeedbackToPreview(bool validity)
     {
-        Color c = validity ? Color.green : Color.red; // Choose color based on validity
+        Color c = validity ? validColor : invalidColor; // Choose color based on validity
         c.a = 0.5f; // Set transparency
         previewMaterialInstance.color = c; // Apply color to the preview material
     }
@@ -145,9 +147,9 @@ public class PreviewSystem : MonoBehaviour
         Color c = new Color();
         
         if (inPlacement)
-            c = validity ? Color.green : Color.red; // Choose color based on validity
+            c = validity ? validColor : invalidColor; // Choose color based on validity
         else
-            c = validity ? Color.red : Color.white; // Choose color based on validity
+            c = validity ? invalidColor : Color.white; // Choose color based on validity
 
         c.a = 0.5f; // Set transparency
         cellIndicatorRenderer.color = c; 
@@ -156,7 +158,7 @@ public class PreviewSystem : MonoBehaviour
     public void ApplyFeedbackToRemovalPreview(GameObject gameObject)
     {
         standardMaterials.Clear();
-        Color c = Color.red; // Choose color based on validity
+        Color c = invalidColor; // Choose color based on validity
         c.a = 0.5f; // Set transparency
         previewMaterialInstance.color = c;
 

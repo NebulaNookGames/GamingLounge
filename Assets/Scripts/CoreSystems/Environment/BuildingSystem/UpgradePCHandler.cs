@@ -31,7 +31,7 @@ public class UpgradePCHandler : MonoBehaviour
             ChangeActiveState();
     }
 
-    void ChangeActiveState()
+    public void ChangeActiveState()
     {
         if (isActive)
         {

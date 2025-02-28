@@ -33,6 +33,8 @@ public class UpdateMoneyText : MonoBehaviour
 
     private void OnEnable()
     {
+        moneyManager.OnMoneyChanged += UpdateText;
+        
         if(updateOnEnable)
             UpdateText(moneyManager.MoneyAmount);
     }

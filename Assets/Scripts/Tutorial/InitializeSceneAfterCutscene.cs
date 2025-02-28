@@ -15,7 +15,7 @@ public class InitializeSceneAfterCutscene : MonoBehaviour
     {
         player.SetActive(true);
         
-        Invoke(nameof(StartTutorial), 8f);
+        StartTutorial();
     }
 
     void StartTutorial()

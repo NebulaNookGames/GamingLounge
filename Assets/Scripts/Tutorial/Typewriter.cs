@@ -20,16 +20,33 @@ public class Typewriter : MonoBehaviour
     private float delayTimer;                       // Countdown timer for initial delay
     private int textIndex = 0;                      // Current character index
     private bool isTyping = false;                  // Flag to start typing after delay
-
+    private bool canType = false;
+    public bool isFirstText = false; 
+    public Color transparentColor = new Color(0, 0, 0, 0);
+   
     private void OnEnable()
     {
         text = GetComponent<TextMeshProUGUI>();
-        textToWrite = text.text; 
-        ResetTypewriter();                          // Ensure it's clean when enabled
+        
+        if(isFirstText)
+            text.text = "";
+        
+        text.color = transparentColor;
+        Invoke(nameof(Begin), .3f);
+    }
+
+    void Begin()
+    {
+        text.color = Color.white;
+        textToWrite = text.text;
+        ResetTypewriter();
+        canType = true;
     }
 
     private void Update()
     {
+        if (!canType) return; 
+        
         if (textIndex > textToWrite.Length) return;
             
         // Handle initial delay before typing starts

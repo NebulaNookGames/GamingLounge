@@ -7,7 +7,6 @@ public class TutorialInitializer : MonoBehaviour
     [SerializeField] private TutorialPlacement tutorialPlacement;
     [SerializeField] private GameObject moveTutorial;
     [SerializeField] private GameObject tutorialBackground;
-    public GameObject interactionTutorial; 
     
     public GameObject playerCam; 
     private void Awake()
@@ -30,13 +29,6 @@ public class TutorialInitializer : MonoBehaviour
 
     public void StartInputTutorial()
     {
-        if (interactionTutorial.activeSelf)
-        {
-            tutorialBackground.SetActive(true);
-            playerCam.SetActive(true);
-            return;
-        } 
-        
         moveTutorial.SetActive(true);
         tutorialBackground.SetActive(true);
         playerCam.SetActive(true);

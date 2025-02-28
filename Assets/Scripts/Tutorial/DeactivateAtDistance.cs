@@ -6,7 +6,6 @@ public class DeactivateAtDistance : MonoBehaviour
 {
     public GameObject target;
     public GameObject objectToCheckDistanceFrom;
-    public GameObject objectToActivateOnDeactivation;
     public UnityEvent onDeactivate;
     public float distanceToActivate = 1;
 
@@ -30,7 +29,6 @@ public class DeactivateAtDistance : MonoBehaviour
             if (dist <= distanceToActivate)
             {
                 onDeactivate?.Invoke();
-                objectToActivateOnDeactivation.SetActive(true);
                 gameObject.SetActive(false);
             }
         }

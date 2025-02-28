@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using Unity.VisualScripting.Dependencies.NCalc;
+using UnityEngine.Analytics;
 using UnityEngine.Serialization;
 
 public class TutorialPlacement : MonoBehaviour
@@ -9,6 +10,7 @@ public class TutorialPlacement : MonoBehaviour
     public ObjectPlacer objectPlacer;
     public List<int> objectIndexes;
     public List<Vector3Int> objectPositions;
+    public List<Vector3Int> ignorePositions; 
     public List<Quaternion> objectRotations;
     public ObjectsDatabaseSO objectsDatabase;
     Grid grid;
@@ -135,6 +137,20 @@ public class TutorialPlacement : MonoBehaviour
                 i--;
                 continue;
             }
+
+            bool onIgnorePos = false; 
+            foreach (Vector3Int tempPos in ignorePositions)
+            {
+                if (pos == tempPos)
+                {
+                    i--;
+                    onIgnorePos = true; 
+                    break; 
+                }
+            }
+
+            if (onIgnorePos)
+                continue; 
             
             if (!PlacementSystem.Instance.furnitureData.CanPlaceObjectAt(pos, objectsDatabase.objectsData[objectIndex].Size))
             {

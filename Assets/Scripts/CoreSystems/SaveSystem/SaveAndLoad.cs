@@ -10,7 +10,7 @@ public class SaveAndLoad : MonoBehaviour
     [SerializeField] DataHandler[] dataHandlers;
 
     public Action onDataLoaded;
-
+    
     [Header("Auto-Save Settings")]
     [Tooltip("Enable or disable auto-save.")]
     [SerializeField] private bool autoSaveEnabled = true;

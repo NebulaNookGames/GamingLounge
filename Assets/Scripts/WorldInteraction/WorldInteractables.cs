@@ -58,7 +58,6 @@ public class WorldInteractables : MonoBehaviour
 
     public void DeleteArcadeMachine(GameObject obj)
     {
-        Debug.Log("Machine removed");
         if(allAracadeMachines.Contains(obj))
             allAracadeMachines.Remove(obj);
         if(availableArcadeMachines.Contains(obj))

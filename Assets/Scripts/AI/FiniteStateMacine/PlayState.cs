@@ -10,9 +10,16 @@ public class PlayState : State
     #region Variables
 
     private bool doBikeAnim;
+    private bool doRaceAnim; 
+    
     private bool didBikePosChange;
+    private bool didRacePosChange; 
+    
     private float currentBikeWaitTime;
+    private float currentRaceWaitTime; 
+    
     private Vector3 bikeOffset = new Vector3(.76f, .05f, 0);
+     
     private int initialAvoidancePriority; 
     /// <summary>
     /// The time until the idle state will end.
@@ -57,6 +64,15 @@ public class PlayState : State
                 didBikePosChange = true; 
             }
         }
+        else if (doRaceAnim && !didRacePosChange)
+        {
+            currentRaceWaitTime-= Time.deltaTime;
+            if (currentRaceWaitTime <= 0)
+            {
+                visitorEntity.mesh.transform.localPosition += visitorEntity.raceOffset;
+                didRacePosChange = true;
+            }
+        }
         
         if (currentPlayDuration < playDuration)
             currentPlayDuration += Time.deltaTime;
@@ -91,6 +107,13 @@ public class PlayState : State
             visitorEntity.mesh.transform.localPosition -= bikeOffset;
             doBikeAnim = false;
             didBikePosChange = false; 
+        }
+        else if (doRaceAnim)
+        {
+            visitorEntity.machineInUse.GetComponentInChildren<HandleAnimationStarting>().StopAnimation("Play");
+            visitorEntity.mesh.transform.localPosition -= visitorEntity.raceOffset;
+            doRaceAnim = false;
+            didRacePosChange = false; 
         }
 
         visitorEntity.shouldUseSeat = false;
@@ -133,7 +156,10 @@ public class PlayState : State
                 doBikeAnim = true;
                 break;
             case MachineType.Race:
+                visitorEntity.machineInUse.GetComponentInChildren<HandleAnimationStarting>().PlayAnimation(visitorEntity.raceWaitTime, "Play");
                 entity.EntityAnimator.SetBool("SitRace", true);
+                currentRaceWaitTime = visitorEntity.raceWaitTime;
+                doRaceAnim = true;
                 break;
             default:
                 if (visitorEntity.seatInUse && visitorEntity.shouldUseSeat)

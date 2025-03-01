@@ -46,7 +46,10 @@ public class VisitorEntity : Entity
     public GameObject heartEffect;
     public int randomStateIndex = 0;
     public GameObject mesh;
+    public Vector3 raceOffset = new Vector3(.76f, .05f, 0);
     public float bikeWaitTime = 1;
+    public float raceWaitTime; 
+    
     public bool walkToDestinationIsOver = false; 
     #endregion State Variables
 

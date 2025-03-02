@@ -94,20 +94,20 @@ namespace CMF
 		{
 		}
 
-		void Update()
-		{
-			HandleRunKeyInput();
-		}
-
-        void HandleRunKeyInput()
-        {
-	        bool _newRunKeyPressedState = IsRunKeyPressed();
-
-	        if (_newRunKeyPressedState)
-		        movementSpeed = runSpeed;
-	        else
-		        movementSpeed = initialMovementSpeed; 
-        }
+		// void Update()
+		// {
+		// 	HandleRunKeyInput();
+		// }
+  //
+  //       void HandleRunKeyInput()
+  //       {
+	 //        bool _newRunKeyPressedState = IsRunKeyPressed();
+  //       
+	 //        if (_newRunKeyPressedState)
+		//         movementSpeed = runSpeed;
+	 //        else
+		//         movementSpeed = initialMovementSpeed; 
+  //       }
 
         void FixedUpdate()
 		{

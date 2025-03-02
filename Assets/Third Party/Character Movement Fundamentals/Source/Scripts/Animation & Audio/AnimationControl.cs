@@ -12,6 +12,7 @@ namespace CMF
 		Transform animatorTransform;
 		Transform tr;
 
+		public float locomotionAnimSmoothingFactor = 1; 
 		//Whether the character is using the strafing blend tree;
 		public bool useStrafeAnimations = false;
 
@@ -63,7 +64,8 @@ namespace CMF
 			oldMovementVelocity = _horizontalVelocity;
 
 			animator.SetFloat("VerticalSpeed", _verticalVelocity.magnitude * VectorMath.GetDotProduct(_verticalVelocity.normalized, tr.up));
-			animator.SetFloat("HorizontalSpeed", _horizontalVelocity.magnitude);
+			animator.SetFloat("HorizontalSpeed",
+				Mathf.Lerp(animator.GetFloat("HorizontalSpeed"), _horizontalVelocity.magnitude, Time.deltaTime * locomotionAnimSmoothingFactor));
 
 			//If animator is strafing, split up horizontal velocity;
 			if(useStrafeAnimations)

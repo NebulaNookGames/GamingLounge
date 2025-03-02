@@ -20751,7 +20751,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -62.3, y: 11.2}
+  m_AnchoredPosition: {x: -137.4, y: 11.2}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1895491626
@@ -21494,6 +21494,7 @@ GameObject:
   - component: {fileID: 1933322189}
   - component: {fileID: 1933322192}
   - component: {fileID: 1933322193}
+  - component: {fileID: 1933322194}
   m_Layer: 5
   m_Name: Dropdown
   m_TagString: Untagged
@@ -21689,6 +21690,48 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1933322194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1933322187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29d4e8b789afe1043acf967be0f65ab9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropdown: {fileID: 1933322189}
+  localizedOptions:
+  - m_TableReference:
+      m_TableCollectionName: GUID:c737d35fd43844f47ad6ae07b6374e77
+    m_TableEntryReference:
+      m_KeyId: 5170405376
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  - m_TableReference:
+      m_TableCollectionName: GUID:c737d35fd43844f47ad6ae07b6374e77
+    m_TableEntryReference:
+      m_KeyId: 47671287808
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  loadingText:
+    m_TableReference:
+      m_TableCollectionName: GUID:c737d35fd43844f47ad6ae07b6374e77
+    m_TableEntryReference:
+      m_KeyId: 1430545899520
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &1941918668
 GameObject:
   m_ObjectHideFlags: 0

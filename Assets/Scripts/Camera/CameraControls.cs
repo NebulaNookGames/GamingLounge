@@ -93,6 +93,7 @@ public class CameraControls : MonoBehaviour
             {
                 farCam.gameObject.SetActive(false);
                 mapViewCam.gameObject.SetActive(true);
+                mapViewCam.gameObject.GetComponent<CinemachineCamera>().Lens.OrthographicSize = 12; 
                 StartCoroutine(ChangeProjectionMode(true, 0));
                 audioS.PlayOneShot(camHigh);
             }

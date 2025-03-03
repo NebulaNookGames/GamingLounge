@@ -11615,6 +11615,7 @@ GameObject:
   - component: {fileID: 850459305}
   - component: {fileID: 850459304}
   - component: {fileID: 850459306}
+  - component: {fileID: 850459307}
   m_Layer: 0
   m_Name: -----SYSTEMS-----
   m_TagString: Untagged
@@ -11675,6 +11676,18 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: 19722645180ae284398685e04ebb2f28, type: 2}
   fullscreenToggle: {fileID: 205429873}
   musicVolumeToggle: {fileID: 804137315}
+--- !u!114 &850459307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 850459303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25d598b7ec3c6474e9d19e772c055c11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &868054892 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6294508013172393185, guid: 043176b6a68be2b43b073aaaa4782c7d, type: 3}
@@ -19574,7 +19587,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1840019899
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19629,8 +19642,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0 FPS
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 274f2ab400641314c9be48ec98ffc3a9, type: 2}
+  m_sharedMaterial: {fileID: -7833008144387556700, guid: 274f2ab400641314c9be48ec98ffc3a9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

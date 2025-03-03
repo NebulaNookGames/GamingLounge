@@ -51,7 +51,7 @@ public class EntitySpawner : MonoBehaviour
                 }
             }
 
-            maxAmountFromLand = (boughtLandAmount * amountPerLand) + amountPerLand;
+            maxAmountFromLand = ((boughtLandAmount * amountPerLand) + amountPerLand) + 5;
             maxAmount = WorldInteractables.instance.machineCount;
             if (maxAmount >= maxAmountFromLand)
             {

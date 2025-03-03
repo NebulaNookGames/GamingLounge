@@ -3,6 +3,8 @@ using UnityEngine.Rendering;
 
 public class BendingManager : MonoBehaviour
 {
+    public static float near = 0.001f;
+    public static float far = 99;
     private void OnEnable()
     {
         RenderPipelineManager.beginCameraRendering += OnBeginCameraRendering;
@@ -17,7 +19,7 @@ public class BendingManager : MonoBehaviour
 
     private static void OnBeginCameraRendering(ScriptableRenderContext ctx, Camera cam)
     {
-        cam.cullingMatrix = Matrix4x4.Ortho(-99, 99, -99, 99, 0.001f, 99) * cam.worldToCameraMatrix;           
+        cam.cullingMatrix = Matrix4x4.Ortho(-99, 99, -99, 99, near, far) * cam.worldToCameraMatrix;           
     }
 
     private static void OnEndCameraRendering(ScriptableRenderContext ctx, Camera cam)

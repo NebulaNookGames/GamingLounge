@@ -10,7 +10,7 @@ public class ActivatePlacedObject : MonoBehaviour
     public UnityEvent OnActivatePlacedObjectCallAlways;
     public UnityEvent OnDeactivatePlaceObject; 
     
-    float colliderInvokeTime = .5f; 
+    float colliderInvokeTime = 0; 
     
     private void OnEnable()
     {

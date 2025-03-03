@@ -120,10 +120,10 @@ public class PlacementState : IBuildingState
             newPosition = hit.point;
         }
 
-        if (Vector3.Distance(placementSystem.player.transform.position, newPosition) > 3)
-        {
-            return false;
-        }
+        // if (Vector3.Distance(placementSystem.player.transform.position, newPosition) > 3)
+        // {
+        //     return false;
+        // }
 
         MeshFilter meshFilter = previewSystem.previewObject.GetComponentInChildren<MeshFilter>();
         SkinnedMeshRenderer skinnedMeshRenderer = previewSystem.previewObject.GetComponentInChildren<SkinnedMeshRenderer>();

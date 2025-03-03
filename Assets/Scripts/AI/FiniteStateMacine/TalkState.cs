@@ -61,11 +61,12 @@ public class TalkState : State
     private void Initialization()
     {
         entity.EntityAnimator.SetFloat("HorizontalSpeed", 0);
+        Vector3 directionToPartner = (visitorEntity.conversationPartner.transform.position - entity.transform.position).normalized;
 
+        entity.transform.rotation = Quaternion.LookRotation(directionToPartner, Vector3.up);
         if (visitorEntity.talkIndex == 0)
         {
             entity.EntityAnimator.SetTrigger("Talk01");
-            entity.transform.rotation = Quaternion.LookRotation(-visitorEntity.conversationPartner.transform.forward, Vector3.up);            
         }
         else
         {
@@ -74,7 +75,7 @@ public class TalkState : State
 
         entity.Agent.velocity = Vector3.zero;
 
-        idleDuration = 13;
+        idleDuration = 16;
         currentIdleTime = 0;
         ObjectPool.instance.SpawnTalkEffect(visitorEntity.transform.position, visitorEntity.transform.rotation);
         visitorEntity.headTracking.specificTarget = visitorEntity.conversationPartner.transform.GetComponentInChildren<PointOfInterest>();

@@ -81,7 +81,7 @@ MonoBehaviour:
   entityPrefab: {fileID: 5967203068415554604, guid: 280496cb4852ec043964c29cd12716ae, type: 3}
   spawnInterval: 5
   maxAmount: 0
-  amountPerLand: 20
+  amountPerLand: 5
   maxAmountFromLand: 0
   amount: 0
   expandHandler: {fileID: 0}
@@ -138,6 +138,34 @@ PrefabInstance:
     - target: {fileID: 4095570033422622, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114842684940577594, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
+      propertyPath: locomotionAnimSmoothingFactor
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114854587450894338, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
+      propertyPath: runSpeed
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114854587450894338, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
+      propertyPath: movementSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3220571680816647814, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
+      propertyPath: m_FocalLength
+      value: 13.858139
+      objectReference: {fileID: 0}
+    - target: {fileID: 3220571680816647814, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
+      propertyPath: m_SensorSize.x
+      value: 21.946
+      objectReference: {fileID: 0}
+    - target: {fileID: 3220571680816647814, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
+      propertyPath: m_SensorSize.y
+      value: 16.002
+      objectReference: {fileID: 0}
+    - target: {fileID: 3733589071882107689, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
+      propertyPath: far clip plane
+      value: 1.98
       objectReference: {fileID: 0}
     - target: {fileID: 5029213667080725161, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
       propertyPath: locomotionInputAction.m_SingletonActionBindings.Array.size
@@ -294,11 +322,40 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8800953548274488340, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6518132152878190645}
   m_SourcePrefab: {fileID: 100100000, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
 --- !u!4 &2112398913111881622 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4095570033422622, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
+  m_PrefabInstance: {fileID: 2116185468135196296}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7457248395415491228 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8800953548274488340, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
+  m_PrefabInstance: {fileID: 2116185468135196296}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6518132152878190645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7457248395415491228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d11a09cb4803b147955185cda74bb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerName: IdleSwitch
+  animator: {fileID: 8145641338584674299}
+  duration: 45
+  sitDownWaitDuration: 60
+--- !u!95 &8145641338584674299 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7806166262888360307, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
   m_PrefabInstance: {fileID: 2116185468135196296}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7571366038099007231

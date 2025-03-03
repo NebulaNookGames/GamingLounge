@@ -1,4 +1,5 @@
 using System;
+using NUnit.Framework.Constraints;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,7 +14,8 @@ public class ActivationTogglerOfOtherGameObject : MonoBehaviour
     public GameObject playerCam;
     public AudioSource audioS;
     public AudioClip audioC;
-
+    public bool canContinue = true;
+    
     private void OnEnable()
     {
         continueAction.action.performed += Continue;
@@ -30,6 +32,17 @@ public class ActivationTogglerOfOtherGameObject : MonoBehaviour
     }
     
     public void Continue(InputAction.CallbackContext context)
+    {
+        if (!canContinue) return; 
+        
+        if (Time.timeScale == 0)
+            return;
+        
+        audioS.PlayOneShot(audioC);
+        DisableThisAndActivateOther();
+    }
+
+    public void OpenContinue()
     {
         if (Time.timeScale == 0)
             return;

@@ -1,6 +1,7 @@
 using System; 
 using Unity.AI.Navigation;
 using UnityEngine;
+using UnityEngine.AI;
 
 /// <summary>
 /// This class manages the rebaking of the NavMesh when a placement action occurs in the game.
@@ -29,6 +30,8 @@ public class SurfaceReBake : MonoBehaviour
 
         // If the placement system is not assigned, exit the method.
         if (placementSystem == null) return;
+
+        
 
         // Subscribe to the OnPlaced event to trigger the Rebake method when placement happens.
     }

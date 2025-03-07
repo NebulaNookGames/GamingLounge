@@ -46,7 +46,18 @@ public class WorldInteractables : MonoBehaviour
 
     public void OccupyAradeMachine(GameObject obj)
     {
-        availableArcadeMachines.Remove(obj);
+        if (obj == null) return; 
+        
+        if(availableArcadeMachines.Contains(obj))
+            availableArcadeMachines.Remove(obj);
+    }
+
+    public void EndOccupation(GameObject obj)
+    {
+        if (obj == null) return; 
+        
+        if(!availableArcadeMachines.Contains(obj))
+            availableArcadeMachines.Add(obj);
     }
 
     public void InitializeNewAracadeMachine(GameObject obj)

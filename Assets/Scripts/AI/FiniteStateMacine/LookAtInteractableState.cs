@@ -35,6 +35,7 @@ public class LookAtInteractableState : State
 
     public override void EnterState()
     {
+        entity.Agent.autoRepath = false; 
         entity.Agent.isStopped = true;
         Initialization();
     }

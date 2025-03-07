@@ -20,6 +20,14 @@ public class AnimInteractionOnTrigger : MonoBehaviour
 
     private List<GameObject> objectsInTrigger = new List<GameObject>();
 
+    private float updateTime = 1f; 
+    private float timer;
+
+    private void Awake()
+    {
+        timer = updateTime;
+    }
+
     /// <summary>
     /// Called when another collider enters the trigger area. Sets the Animator parameter to true.
     /// </summary>
@@ -36,6 +44,26 @@ public class AnimInteractionOnTrigger : MonoBehaviour
                 anim.SetBool(parameterName, true);
                 return;
             }
+        }
+    }
+
+    private void Update()
+    {
+        timer -= Time.deltaTime;
+        if (timer <= 0)
+        {
+            foreach (GameObject ob in objectsInTrigger)
+            {
+                if (ob == null)
+                {
+                    objectsInTrigger.Remove(ob);
+                }
+            }
+
+            if (objectsInTrigger.Count <= 0)
+                anim.SetBool(parameterName, false);
+            
+            timer = updateTime;
         }
     }
 

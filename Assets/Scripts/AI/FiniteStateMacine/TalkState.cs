@@ -60,6 +60,7 @@ public class TalkState : State
     /// </summary>
     private void Initialization()
     {
+        
         entity.EntityAnimator.SetFloat("HorizontalSpeed", 0);
         Vector3 directionToPartner = (visitorEntity.conversationPartner.transform.position - entity.transform.position).normalized;
 

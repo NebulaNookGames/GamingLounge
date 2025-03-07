@@ -77,27 +77,32 @@ public class PlayState : State
         if (currentPlayDuration < playDuration)
             currentPlayDuration += Time.deltaTime;
         else // Animation has run at least once
+        {
+            WorldInteractables.instance.EndOccupation(visitorEntity.machineInUse);
             CheckSwitchState(); // Contained in Base class.
-        
-        if(visitorEntity.machineInUse == null || visitorEntity.seatInUse == null && visitorEntity.shouldUseSeat)
+        }
+
+        if (visitorEntity.machineInUse == null || visitorEntity.seatInUse == null && visitorEntity.shouldUseSeat)
+        {
+            WorldInteractables.instance.EndOccupation(visitorEntity.machineInUse);
             CheckSwitchState();
+        }
     }
 
     public override void ExitState()
     {
-        if (visitorEntity.machineInUse != null)
-        {
-            WorldInteractables.instance.availableArcadeMachines.Add(visitorEntity.machineInUse);
-            visitorEntity.machineInUse.GetComponentInChildren<BeginVideoPlayer>().HandlePlay(false);
-        }
+        WorldInteractables.instance.EndOccupation(visitorEntity.machineInUse);
         
+        if(visitorEntity.machineInUse != null)
+            visitorEntity.machineInUse.GetComponentInChildren<BeginVideoPlayer>().HandlePlay(false);
+    
         entity.Agent.isStopped = false;
         entity.EntityAnimator.SetBool("InteractArcadeMachine", false);
         entity.EntityAnimator.SetBool("SitChair", false);
         entity.EntityAnimator.SetBool("SitBike", false);
         entity.EntityAnimator.SetBool("SitRace", false);
         entity.EntityAnimator.SetBool("Interact", false);
-        
+
         if(visitorEntity.seatInUse != null)
             visitorEntity.seatInUse.GetComponent<SitPositionAvailability>().available = true;      
 
@@ -119,14 +124,13 @@ public class PlayState : State
         visitorEntity.shouldUseSeat = false;
         visitorEntity.seatInUse = null;
         
-        if(visitorEntity.machineInUse)
-            visitorEntity.machineInUse.GetComponent<GameObjectActivation>().Invert();
-        
+        // Ensure the machine is set to null AFTER re-adding it to the list
         visitorEntity.machineInUse = null; 
         visitorEntity.headTracking.noTracking = false;
         entity.Agent.isStopped = false; 
         entity.Agent.avoidancePriority = initialAvoidancePriority; 
     }
+
 
     #endregion State Methods
 
@@ -177,8 +181,6 @@ public class PlayState : State
         currentPlayDuration = 0;
         initialAvoidancePriority = entity.Agent.avoidancePriority;
         entity.Agent.avoidancePriority = 0;
-        
-        visitorEntity.machineInUse.GetComponent<GameObjectActivation>().Invert();
     }
     #endregion Methods
 }

@@ -55,7 +55,6 @@ public class IdleState : State
     {
         entity.EntityAnimator.SetFloat("HorizontalSpeed", 0);
         entity.Agent.velocity = Vector3.zero;
-
         idleDuration = Random.Range(2, 8);
         currentIdleTime = 0;
     }

@@ -130,7 +130,7 @@ public class VisitorEntity : Entity
                                                   || agent.pathStatus == NavMeshPathStatus.PathInvalid 
                                                   || agent.pathStatus == NavMeshPathStatus.PathPartial; 
                 }, 
-                idleState),
+                behaviorRandomizationState),
             
             new Transition(() => { return Vector3.Distance(agent.destination, transform.position) <= .5f; }, playState),
         };
@@ -200,7 +200,6 @@ public class VisitorEntity : Entity
             new Transition(() => { return randomStateIndex == 0; }, findInteractableState),
             new Transition(() => { return randomStateIndex == 1; }, findConversationState),
             new Transition(() => { return randomStateIndex == 2; }, randomWalkState),
-            new Transition(() => { return randomStateIndex == 3; }, idleState),
             new Transition(() => { return true; }, randomWalkState),
         };
         behaviorRandomizationState.Transitions = behaviorRandomizationTransitions;

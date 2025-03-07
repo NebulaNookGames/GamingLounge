@@ -9,7 +9,8 @@ public class EntitySpawner : MonoBehaviour
     public float spawnInterval = 1f; // Time between spawns in seconds
     private float timer;
     public int maxAmount = 0;
-    public int amountPerLand = 10; 
+    public int amountPerLand = 10;
+    public int initialAmount = 20; 
     public int maxAmountFromLand;
     public int amount;
     public ExpandHandler expandHandler;
@@ -51,7 +52,7 @@ public class EntitySpawner : MonoBehaviour
                 }
             }
 
-            maxAmountFromLand = ((boughtLandAmount * amountPerLand) + amountPerLand) + 5;
+            maxAmountFromLand = ((boughtLandAmount * amountPerLand) + initialAmount);
             maxAmount = WorldInteractables.instance.machineCount;
             if (maxAmount >= maxAmountFromLand)
             {
@@ -99,6 +100,24 @@ public class EntitySpawner : MonoBehaviour
             amount++;
             EntityManager.instance.currentNPCs.Add(newEntity);
             onAmountUpdated?.Invoke();
+
+            if (SteamIntegration.instance && Steamworks.SteamClient.IsValid)
+            {
+                if (amount >= 30)
+                {
+                    SteamIntegration.instance.UnlockAchievement("THIRTYVISITORS");
+                }
+
+                if (amount >= 50)
+                {
+                    SteamIntegration.instance.UnlockAchievement("FIFTYVISITORS");
+                }
+
+                if (amount >= 100)
+                {
+                    SteamIntegration.instance.UnlockAchievement("ONEHUNDREDVISITORS");
+                }
+            }
         }
     }
 
@@ -145,6 +164,26 @@ public class EntitySpawner : MonoBehaviour
                 newEntity.transform.parent = transform;
                 EntityManager.instance.currentNPCs.Add(newEntity);
                 amount++;
+
+             
+                if (SteamIntegration.instance && Steamworks.SteamClient.IsValid)
+                {
+                    if (amount >= 30)
+                    {
+                        SteamIntegration.instance.UnlockAchievement("THIRTYVISITORS");
+                    }
+
+                    if (amount >= 50)
+                    {
+                        SteamIntegration.instance.UnlockAchievement("FIFTYVISITORS");
+                    }
+
+                    if (amount >= 100)
+                    {
+                        SteamIntegration.instance.UnlockAchievement("ONEHUNDREDVISITORS");
+                    }
+                }
+                
             }
         }
         onAmountUpdated?.Invoke();

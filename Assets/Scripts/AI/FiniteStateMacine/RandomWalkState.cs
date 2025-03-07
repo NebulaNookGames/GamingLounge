@@ -131,6 +131,7 @@ public class RandomWalkState : State
     /// </summary>
     private void Initialize()
     {
+        
         if(visitorEntity.currentWalkAmount >= visitorEntity.walkAmount || !visitorEntity.invitedToLounge)
             walkPosition = RandomNavSphere(entity.transform.position, walkRadius, -1, false);
         else

@@ -101,7 +101,7 @@ public class EntitySpawner : MonoBehaviour
             EntityManager.instance.currentNPCs.Add(newEntity);
             onAmountUpdated?.Invoke();
 
-            if (SteamIntegration.instance && Steamworks.SteamClient.IsValid)
+            try
             {
                 if (amount >= 30)
                 {
@@ -117,6 +117,10 @@ public class EntitySpawner : MonoBehaviour
                 {
                     SteamIntegration.instance.UnlockAchievement("ONEHUNDREDVISITORS");
                 }
+            }
+            catch
+            {
+                Debug.Log("Failed unlocking entity achievement");
             }
         }
     }
@@ -165,8 +169,8 @@ public class EntitySpawner : MonoBehaviour
                 EntityManager.instance.currentNPCs.Add(newEntity);
                 amount++;
 
-             
-                if (SteamIntegration.instance && Steamworks.SteamClient.IsValid)
+
+                try
                 {
                     if (amount >= 30)
                     {
@@ -182,6 +186,10 @@ public class EntitySpawner : MonoBehaviour
                     {
                         SteamIntegration.instance.UnlockAchievement("ONEHUNDREDVISITORS");
                     }
+                }
+                catch
+                {
+                    Debug.Log("Failed unlocking entity achievement");
                 }
                 
             }

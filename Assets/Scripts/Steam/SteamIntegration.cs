@@ -77,4 +77,40 @@ public class SteamIntegration : MonoBehaviour
         ach.Clear();
         Debug.Log("Achievement " + id + " cleared");
     }
+    
+    [Button] // This adds a button in the Unity Editor if you use Odin Inspector
+    public void ClearAllAchievements()
+    {
+        string[] achievementIDs = {
+            "TIER2STRUCTUREUNLOCK",
+            "TIER3STRUCTUREUNLOCK",
+            "CRYSTALUNLOCK",
+            "LIGHTSABERUNLOCK",
+            "FLUXCAPACITORUNLOCK",
+            "TRAFFICCONEUNLOCK",
+            "COUCHUNLOCK",
+            "TROPHYUNLOCK",
+            "ARCADEMACHINEUNLOCK",
+            "BIKEMACHINEUNLOCK",
+            "RACINGMACHINEUNLOCK",
+            "PLANTUNLOCK",
+            "CHAIRUNLOCK",
+            "SPRINGNATUREUNLOCK",
+            "FALLNATUREUNLOCK",
+            "CANDYLANDNATUREUNLOCK",
+            "ROCKUNLOCK",
+            "UPGRADEPCUNLOCK",
+            "THIRTYVISITORS",
+            "FIFTYVISITORS",
+            "ONEHUNDREDVISITORS"
+        };
+        
+        foreach (string id in achievementIDs)
+        {
+            var ach = new Steamworks.Data.Achievement(id);
+            ach.Clear();
+            Debug.Log($"Cleared achievement: {id}");
+        }
+    }
+
 }

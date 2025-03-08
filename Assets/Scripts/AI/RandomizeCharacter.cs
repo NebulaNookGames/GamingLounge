@@ -4,6 +4,8 @@ public class RandomizeCharacter : MonoBehaviour
 {
     [SerializeField] private GameObject[] characters;
     [SerializeField] private GameObject[] characterMeshes;
+    [SerializeField] private GameObject[] lodLevel01CharacterMeshes;
+    [SerializeField] private GameObject[] lodLevel02CharacterMeshes;
     [SerializeField] private int[] headIndexes;
     [SerializeField] private int[] clothIndexes;
     [SerializeField] private NPCValueHolder npcValueHolder;
@@ -25,6 +27,10 @@ public class RandomizeCharacter : MonoBehaviour
         int randomColor = Random.Range(0, 9);
         characterMeshes[randomIndex].GetComponent<SkinnedMeshRenderer>().materials[headIndexes[randomIndex]].SetFloat("_Hue", randomColor);
         characterMeshes[randomIndex].GetComponent<SkinnedMeshRenderer>().materials[clothIndexes[randomIndex]].SetFloat("_Hue", randomColor);
+        lodLevel01CharacterMeshes[randomIndex].GetComponent<SkinnedMeshRenderer>().materials[headIndexes[randomIndex]].SetFloat("_Hue", randomColor);
+        lodLevel01CharacterMeshes[randomIndex].GetComponent<SkinnedMeshRenderer>().materials[clothIndexes[randomIndex]].SetFloat("_Hue", randomColor);
+        lodLevel02CharacterMeshes[randomIndex].GetComponent<SkinnedMeshRenderer>().materials[headIndexes[randomIndex]].SetFloat("_Hue", randomColor);
+        lodLevel02CharacterMeshes[randomIndex].GetComponent<SkinnedMeshRenderer>().materials[clothIndexes[randomIndex]].SetFloat("_Hue", randomColor);
         NPCValues npcValues = new NPCValues(randomIndex, randomColor, false);
         EntityManager.instance.npcValues.Add(npcValues);
         npcValueHolder.values = npcValues;

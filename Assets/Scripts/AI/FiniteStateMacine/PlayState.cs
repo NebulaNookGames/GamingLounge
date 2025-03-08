@@ -108,14 +108,18 @@ public class PlayState : State
 
         if (doBikeAnim)
         {
-            visitorEntity.machineInUse.GetComponentInChildren<HandleAnimationStarting>().StopAnimation("Play");
+            if (visitorEntity.machineInUse)
+                visitorEntity.machineInUse.GetComponentInChildren<HandleAnimationStarting>().StopAnimation("Play");
+            
             visitorEntity.mesh.transform.localPosition -= bikeOffset;
             doBikeAnim = false;
             didBikePosChange = false; 
         }
         else if (doRaceAnim)
         {
-            visitorEntity.machineInUse.GetComponentInChildren<HandleAnimationStarting>().StopAnimation("Play");
+            if (visitorEntity.machineInUse)
+                visitorEntity.machineInUse.GetComponentInChildren<HandleAnimationStarting>().StopAnimation("Play");
+
             visitorEntity.mesh.transform.localPosition -= visitorEntity.raceOffset;
             doRaceAnim = false;
             didRacePosChange = false; 

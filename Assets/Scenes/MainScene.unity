@@ -8,8 +8,8 @@ OcclusionCullingSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
-  m_SceneGUID: 00000000000000000000000000000000
-  m_OcclusionCullingData: {fileID: 0}
+  m_SceneGUID: 99c9720ab356a0642a771bea13969a05
+  m_OcclusionCullingData: {fileID: 36300000, guid: 7b62f7a4e3fa1e94d9560a6f48d05793, type: 2}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -1489,10 +1489,6 @@ PrefabInstance:
       value: -----ENTITIES-----
       objectReference: {fileID: 0}
     - target: {fileID: 1033851909617230040, guid: 002abc1d47ab9814d82121938908f686, type: 3}
-      propertyPath: amountPerLand
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1033851909617230040, guid: 002abc1d47ab9814d82121938908f686, type: 3}
       propertyPath: expandHandler
       value: 
       objectReference: {fileID: 2045217185}
@@ -1500,6 +1496,18 @@ PrefabInstance:
       propertyPath: moneyManager
       value: 
       objectReference: {fileID: 422037091}
+    - target: {fileID: 5627448905209825166, guid: 002abc1d47ab9814d82121938908f686, type: 3}
+      propertyPath: gameObjectsToInterruptSwitch.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5627448905209825166, guid: 002abc1d47ab9814d82121938908f686, type: 3}
+      propertyPath: 'gameObjectsToInterruptSwitch.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2093987100}
+    - target: {fileID: 5627448905209825166, guid: 002abc1d47ab9814d82121938908f686, type: 3}
+      propertyPath: 'gameObjectsToInterruptSwitch.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2057328152}
     - target: {fileID: 7998036406574434201, guid: 002abc1d47ab9814d82121938908f686, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.37605757
@@ -2359,6 +2367,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_Target
       value: 
       objectReference: {fileID: 2093987100}
+    - target: {fileID: 966747665789854443, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
+      propertyPath: m_CursorSpeed
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 966747665789854443, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
+      propertyPath: m_StickAction.m_UseReference
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 983697203040209452, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2475,6 +2491,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 2275089580527446050, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
+      propertyPath: m_text
+      value: Place arcade machines to attract alien visitors. Expand your land to
+        hold more visitors. Invite them to your arcade!
+      objectReference: {fileID: 0}
     - target: {fileID: 2321508257810563931, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2523,6 +2544,22 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 228993047}
+    - target: {fileID: 2873878824366150891, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2873878824366150891, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
+      propertyPath: m_EffectColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2873878824366150891, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
+      propertyPath: m_EffectColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2873878824366150891, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
+      propertyPath: m_EffectColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2881816511886905463, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -2607,6 +2644,10 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 228993047}
+    - target: {fileID: 3176723121909656091, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3245564441054142226, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2971,6 +3012,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 228993047}
+    - target: {fileID: 6010985480982494299, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6284472188374416953, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
       propertyPath: m_Navigation.m_SelectOnUp
       value: 
@@ -3003,6 +3048,18 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 228993047}
+    - target: {fileID: 6792251702100581906, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
+      propertyPath: m_Color.b
+      value: 0.5943396
+      objectReference: {fileID: 0}
+    - target: {fileID: 6792251702100581906, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
+      propertyPath: m_Color.g
+      value: 0.40887132
+      objectReference: {fileID: 0}
+    - target: {fileID: 6792251702100581906, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
+      propertyPath: m_Color.r
+      value: 0.38968495
+      objectReference: {fileID: 0}
     - target: {fileID: 6825928124092679153, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -3047,6 +3104,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 228993047}
+    - target: {fileID: 7240771738444759070, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7284383773381479783, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

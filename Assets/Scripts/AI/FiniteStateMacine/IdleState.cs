@@ -44,6 +44,11 @@ public class IdleState : State
             CheckSwitchState(); // Contained in Base class.
     }
 
+    public override void ExitState()
+    {
+        entity.Agent.enabled = true;
+    }
+
     #endregion State Methods
 
     #region Methods
@@ -55,6 +60,7 @@ public class IdleState : State
     {
         entity.EntityAnimator.SetFloat("HorizontalSpeed", 0);
         entity.Agent.velocity = Vector3.zero;
+        entity.Agent.enabled = false; 
         idleDuration = Random.Range(2, 8);
         currentIdleTime = 0;
     }

@@ -343,6 +343,7 @@ GameObject:
   - component: {fileID: 2637699961291721559}
   - component: {fileID: 7315496823168001546}
   - component: {fileID: 9144752541617123525}
+  - component: {fileID: 6867116901841437344}
   m_Layer: 8
   m_Name: Env1_Wall
   m_TagString: Untagged
@@ -657,15 +658,15 @@ LODGroup:
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.38983417
+  - screenRelativeHeight: 0.2387111
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 3578296110608931112}
-  - screenRelativeHeight: 0.29787764
+  - screenRelativeHeight: 0.19299944
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 1907577431703917892}
-  - screenRelativeHeight: 0.14895771
+  - screenRelativeHeight: 0.168825
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 2225694026042280676}
@@ -684,6 +685,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalRenderers:
   - {fileID: 3578296110608931112}
+--- !u!114 &6867116901841437344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5767364422584940774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f0e9e88f5dd9c94fa903e0f8f77b327, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  component: {fileID: 3564329099704833962}
 --- !u!1 &5943574919932686319
 GameObject:
   m_ObjectHideFlags: 0

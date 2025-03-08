@@ -51,6 +51,7 @@ public class LookAtInteractableState : State
     public override void ExitState()
     {
         visitorEntity.gameObjectToWalkTo = null;
+        entity.Agent.enabled = true; 
     }
 
     #endregion State Methods
@@ -65,7 +66,7 @@ public class LookAtInteractableState : State
         visitorEntity.SpawnObject(visitorEntity.heartEffect);
         entity.EntityAnimator.SetFloat("HorizontalSpeed", 0);
         entity.Agent.velocity = Vector3.zero;
-
+        entity.Agent.enabled = false;
         idleDuration = 2;
         currentIdleTime = 0;
     }

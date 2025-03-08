@@ -67,6 +67,11 @@ public class RandomWalkState : State
     // ReSharper disable Unity.PerformanceAnalysis
     public override void UpdateState()
     {
+        if (entity.Agent.pathStatus == NavMeshPathStatus.PathInvalid || entity.Agent.pathStatus == NavMeshPathStatus.PathPartial)
+        {
+            CheckSwitchState();
+        }
+        
         if (currentWaitTimeUntilAutoEnd > 0)
         {
             currentWaitTimeUntilAutoEnd -= Time.deltaTime;
@@ -141,6 +146,11 @@ public class RandomWalkState : State
             entity.Agent.SetDestination(walkPosition);
         
         currentWaitTimeUntilAutoEnd = waitTimeUntilAutoEnd;
+        
+        if (entity.Agent.pathStatus == NavMeshPathStatus.PathInvalid || entity.Agent.pathStatus == NavMeshPathStatus.PathPartial)
+        {
+            CheckSwitchState();
+        }
     }
     
     /// <summary>

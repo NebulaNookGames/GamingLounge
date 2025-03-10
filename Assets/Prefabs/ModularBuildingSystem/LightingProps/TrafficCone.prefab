@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 8082199740215920629}
   - component: {fileID: 6495306553993743240}
   - component: {fileID: 6247039435702345936}
+  - component: {fileID: 3022062030300801044}
   m_Layer: 10
   m_Name: Point Light
   m_TagString: Untagged
@@ -216,6 +217,22 @@ MonoBehaviour:
   minIntensity: 0.5
   maxIntensity: 1
   dimSpeed: 0.5
+--- !u!114 &3022062030300801044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5184031723656374590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91e6674402f8583448c97847f627f833, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagOfOtherObject: Player
+  distance: 5
+  waitTime: 0.2
+  light: {fileID: 8082199740215920629}
 --- !u!1 &5767364422584940774
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 /// <summary>
@@ -9,18 +7,24 @@ using System.Collections.Generic;
 /// </summary>
 public class AnimInteractionOnTrigger : MonoBehaviour
 {
-    // The tag of the object that will trigger the animation change.
+    [Header("Trigger Settings")]
+    [Tooltip("The tags of objects that will trigger the animation change.")]
     [SerializeField] private string[] tagsToCompare;
 
-    // The name of the Animator parameter to control (e.g., a bool parameter).
+    [Header("Animator Settings")]
+    [Tooltip("The name of the Animator parameter to control (e.g., a bool parameter).")]
     [SerializeField] private string parameterName = "interact";
 
-    // Reference to the Animator that controls the animation.
+    [Tooltip("Reference to the Animator that controls the animation.")]
     [SerializeField] private Animator anim;
 
+    // List to keep track of objects currently in the trigger area
     private List<GameObject> objectsInTrigger = new List<GameObject>();
 
-    private float updateTime = 1f; 
+    [Header("Timing Settings")]
+    [Tooltip("Time interval for checking objects in the trigger zone.")]
+    [SerializeField] private float updateTime = 1f; 
+    
     private float timer;
 
     private void Awake()
@@ -29,7 +33,7 @@ public class AnimInteractionOnTrigger : MonoBehaviour
     }
 
     /// <summary>
-    /// Called when another collider enters the trigger area. Sets the Animator parameter to true.
+    /// Called when another collider enters the trigger area. Adds the object to the list and triggers the animation.
     /// </summary>
     /// <param name="other">The collider of the object entering the trigger.</param>
     private void OnTriggerEnter(Collider other)
@@ -47,19 +51,16 @@ public class AnimInteractionOnTrigger : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Updates the list of objects inside the trigger zone and resets animation state if necessary.
+    /// </summary>
     private void Update()
     {
         timer -= Time.deltaTime;
         if (timer <= 0)
         {
-            foreach (GameObject ob in objectsInTrigger)
-            {
-                if (ob == null)
-                {
-                    objectsInTrigger.Remove(ob);
-                }
-            }
-
+            objectsInTrigger.RemoveAll(ob => ob == null);
+            
             if (objectsInTrigger.Count <= 0)
                 anim.SetBool(parameterName, false);
             
@@ -68,7 +69,7 @@ public class AnimInteractionOnTrigger : MonoBehaviour
     }
 
     /// <summary>
-    /// Called when another collider exits the trigger area. Sets the Animator parameter to false.
+    /// Called when another collider exits the trigger area. Removes the object from the list and updates the animation state.
     /// </summary>
     /// <param name="other">The collider of the object exiting the trigger.</param>
     private void OnTriggerExit(Collider other)

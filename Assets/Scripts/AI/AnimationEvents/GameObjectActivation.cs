@@ -6,7 +6,8 @@ using UnityEngine;
 /// </summary>
 public class GameObjectActivation : MonoBehaviour
 {
-    // Array of GameObjects to activate or deactivate.
+    [Header("GameObjects Settings")]
+    [Tooltip("Array of GameObjects to activate or deactivate.")]
     [SerializeField] private GameObject[] gameObjectsToActivate;
 
     /// <summary>
@@ -27,6 +28,9 @@ public class GameObjectActivation : MonoBehaviour
             go.SetActive(false);
     }
 
+    /// <summary>
+    /// Toggles the active state of all GameObjects in the gameObjectsToActivate array.
+    /// </summary>
     public void Invert()
     {
         foreach (GameObject go in gameObjectsToActivate)

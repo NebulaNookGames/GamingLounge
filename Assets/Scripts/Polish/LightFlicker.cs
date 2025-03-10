@@ -1,31 +1,38 @@
-// Written by Kevin Catlett.
-
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 /// <summary>
 /// Scales the intensity of a 2D light up and down to simulate flickering. 
 /// </summary>
 public class LightFlicker : MonoBehaviour
 {
+    #region Serialized Fields
+
     [Tooltip("The light to control.")]
     [SerializeField] Light myLight;
 
     [Tooltip("The minimum intensity of the light.")]
-    [Range(0,5)]
-    [SerializeField] float minIntensity; 
+    [Range(0, 5)]
+    [SerializeField] float minIntensity;
 
     [Tooltip("The maximum intensity of the light.")]
-    [Range(0,10)]
+    [Range(0, 10)]
     [SerializeField] float maxIntensity;
 
     [Tooltip("How fast the light should change intensity.")]
     [SerializeField] float dimSpeed;
 
+    #endregion
+
+    #region Private Fields
+
     bool dim; // Should the intensity be decreasing or increasing.
-    
+
+    #endregion
+
+    #region Unity Methods
+
     /// <summary>
-    /// Gets a reference to the light2D on this gameObject.
+    /// Gets a reference to the light on this GameObject if not already assigned.
     /// </summary>
     void Start()
     {
@@ -36,12 +43,16 @@ public class LightFlicker : MonoBehaviour
     }
 
     /// <summary>
-    /// Calls the Flicker method.
+    /// Calls the Flicker method to adjust light intensity.
     /// </summary>
     void Update()
     {
         Flicker();
     }
+
+    #endregion
+
+    #region Flicker Logic
 
     /// <summary>
     /// Scales the intensity of a 2D light up and down to simulate flickering. 
@@ -56,8 +67,7 @@ public class LightFlicker : MonoBehaviour
                 dim = false;
             }
         }
-
-        else if (!dim)
+        else
         {
             myLight.intensity += dimSpeed * Time.deltaTime;
             if (myLight.intensity >= maxIntensity)
@@ -66,4 +76,6 @@ public class LightFlicker : MonoBehaviour
             }
         }
     }
+
+    #endregion
 }

@@ -7,9 +7,11 @@ public class MusicManager : MonoBehaviour
     public static MusicManager instance;
 
     public AudioMixer audioMixer;
-    
+
     public float transitionSpeed = 2f; // Adjust for smoothness
     public float intenseDuration = 5f; // Time before switching back to chill
+    public float chillVolume = -20f; // Chill music volume
+    public float intenseVolume = -80f; // Intense music volume
 
     private Coroutine fadeCoroutine;
     private Coroutine countdownCoroutine;
@@ -19,42 +21,45 @@ public class MusicManager : MonoBehaviour
         if (instance == null)
             instance = this;
 
+        if (audioMixer == null)
+        {
+            Debug.LogError("AudioMixer is not assigned in the MusicManager.");
+            return;
+        }
+
         SwitchToChill();
     }
 
     public void BeIntense()
     {
-        // Reset countdown timer
         if (countdownCoroutine != null)
         {
             StopCoroutine(countdownCoroutine);
         }
         countdownCoroutine = StartCoroutine(IntenseCountdown());
 
-        // If we're already transitioning, stop it first
         if (fadeCoroutine != null)
         {
             StopCoroutine(fadeCoroutine);
         }
 
-        fadeCoroutine = StartCoroutine(FadeMusic("IntenseMusicVolume", "ChillMusicVolume", -20f, -80f));
+        fadeCoroutine = StartCoroutine(FadeMusic("IntenseMusicVolume", "ChillMusicVolume", chillVolume, intenseVolume));
     }
 
     private IEnumerator IntenseCountdown()
     {
         yield return new WaitForSeconds(intenseDuration);
-        SwitchToChill(); // Switch back when the timer runs out
+        SwitchToChill();
     }
 
     public void SwitchToChill()
     {
-        // Stop any existing fade coroutine to prevent overlaps
         if (fadeCoroutine != null)
         {
             StopCoroutine(fadeCoroutine);
         }
 
-        fadeCoroutine = StartCoroutine(FadeMusic("ChillMusicVolume", "IntenseMusicVolume", -20f, -80f));
+        fadeCoroutine = StartCoroutine(FadeMusic("ChillMusicVolume", "IntenseMusicVolume", chillVolume, intenseVolume));
     }
 
     private IEnumerator FadeMusic(string fadeInParam, string fadeOutParam, float fadeInTarget, float fadeOutTarget)
@@ -64,16 +69,14 @@ public class MusicManager : MonoBehaviour
         audioMixer.GetFloat(fadeInParam, out currentFadeIn);
         audioMixer.GetFloat(fadeOutParam, out currentFadeOut);
 
-        // Step 1: Fade in the new track
         while (time < 1f)
         {
             time += Time.deltaTime * transitionSpeed;
             audioMixer.SetFloat(fadeInParam, Mathf.Lerp(currentFadeIn, fadeInTarget, time));
             yield return null;
         }
-        audioMixer.SetFloat(fadeInParam, fadeInTarget); // Ensure final value
+        audioMixer.SetFloat(fadeInParam, fadeInTarget);
 
-        // Step 2: Ensure it's fully faded in before fading out the old track
         time = 0f;
         while (time < 1f)
         {
@@ -81,8 +84,8 @@ public class MusicManager : MonoBehaviour
             audioMixer.SetFloat(fadeOutParam, Mathf.Lerp(currentFadeOut, fadeOutTarget, time));
             yield return null;
         }
-        audioMixer.SetFloat(fadeOutParam, fadeOutTarget); // Ensure final value
+        audioMixer.SetFloat(fadeOutParam, fadeOutTarget);
 
-        fadeCoroutine = null; // Mark the fade as completed
+        fadeCoroutine = null;
     }
 }

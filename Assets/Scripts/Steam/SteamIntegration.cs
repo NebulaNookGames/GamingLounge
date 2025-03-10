@@ -1,8 +1,10 @@
-using EditorAttributes; 
+using EditorAttributes;
 using UnityEngine;
 
 public class SteamIntegration : MonoBehaviour
 {
+    #region Singleton
+
     public static SteamIntegration instance;
 
     private void Awake()
@@ -10,41 +12,25 @@ public class SteamIntegration : MonoBehaviour
         instance = this; 
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    #endregion
+
+    #region Unity Lifecycle Methods
+
     void Start()
     {
         try
         {
-            Steamworks.SteamClient.Init(3426730);
-            PrintYourName();
-
-            if (LocaleSelector.Instance)
-            {
-                switch (Steamworks.SteamApps.GameLanguage)
-                {
-                    case "german":
-                        LocaleSelector.Instance.ChangeLocale(1);
-                        break;
-
-                    default:
-                        LocaleSelector.Instance.ChangeLocale(0);
-                        break;
-                }
-            }
-
+            InitializeSteam();
+            SetLocaleBasedOnSteamLanguage();
             DontDestroyOnLoad(this);
         }
         catch (System.Exception e)
         {
+            Debug.LogError($"Error initializing Steam: {e.Message}");
         }
     }
 
-    private void PrintYourName()
-    {
-        Debug.Log(Steamworks.SteamClient.Name);
-    }
-
-    private void Update()
+    void Update()
     {
         Steamworks.SteamClient.RunCallbacks();
     }
@@ -53,6 +39,46 @@ public class SteamIntegration : MonoBehaviour
     {
         Steamworks.SteamClient.Shutdown();
     }
+
+    #endregion
+
+    #region Steam Initialization & Locale
+
+    private void InitializeSteam()
+    {
+        Steamworks.SteamClient.Init(3426730);  // App ID for your game on Steam
+        PrintYourName();
+    }
+
+    private void SetLocaleBasedOnSteamLanguage()
+    {
+        if (LocaleSelector.Instance)
+        {
+            switch (Steamworks.SteamApps.GameLanguage)
+            {
+                case "german":
+                    LocaleSelector.Instance.ChangeLocale(1);
+                    break;
+
+                default:
+                    LocaleSelector.Instance.ChangeLocale(0);
+                    break;
+            }
+        }
+    }
+
+    #endregion
+
+    #region Debugging & Logging
+
+    private void PrintYourName()
+    {
+        Debug.Log(Steamworks.SteamClient.Name);
+    }
+
+    #endregion
+
+    #region Achievement Methods
 
     [Button]
     public void IsThisAchievementUnlocked(string id)
@@ -67,7 +93,6 @@ public class SteamIntegration : MonoBehaviour
         var ach = new Steamworks.Data.Achievement(id);
         ach.Trigger();
         Debug.Log("Achievement " + id + " unlocked");
-
     }
 
     [Button]
@@ -77,34 +102,20 @@ public class SteamIntegration : MonoBehaviour
         ach.Clear();
         Debug.Log("Achievement " + id + " cleared");
     }
-    
+
     [Button] // This adds a button in the Unity Editor if you use Odin Inspector
     public void ClearAllAchievements()
     {
         string[] achievementIDs = {
-            "TIER2STRUCTUREUNLOCK",
-            "TIER3STRUCTUREUNLOCK",
-            "CRYSTALUNLOCK",
-            "LIGHTSABERUNLOCK",
-            "FLUXCAPACITORUNLOCK",
-            "TRAFFICCONEUNLOCK",
-            "COUCHUNLOCK",
-            "TROPHYUNLOCK",
-            "ARCADEMACHINEUNLOCK",
-            "BIKEMACHINEUNLOCK",
-            "RACINGMACHINEUNLOCK",
-            "PLANTUNLOCK",
-            "CHAIRUNLOCK",
-            "SPRINGNATUREUNLOCK",
-            "FALLNATUREUNLOCK",
-            "CANDYLANDNATUREUNLOCK",
-            "ROCKUNLOCK",
-            "UPGRADEPCUNLOCK",
-            "THIRTYVISITORS",
-            "FIFTYVISITORS",
-            "ONEHUNDREDVISITORS"
+            "TIER2STRUCTUREUNLOCK", "TIER3STRUCTUREUNLOCK", "CRYSTALUNLOCK", 
+            "LIGHTSABERUNLOCK", "FLUXCAPACITORUNLOCK", "TRAFFICCONEUNLOCK", 
+            "COUCHUNLOCK", "TROPHYUNLOCK", "ARCADEMACHINEUNLOCK", 
+            "BIKEMACHINEUNLOCK", "RACINGMACHINEUNLOCK", "PLANTUNLOCK", 
+            "CHAIRUNLOCK", "SPRINGNATUREUNLOCK", "FALLNATUREUNLOCK", 
+            "CANDYLANDNATUREUNLOCK", "ROCKUNLOCK", "UPGRADEPCUNLOCK", 
+            "THIRTYVISITORS", "FIFTYVISITORS", "ONEHUNDREDVISITORS"
         };
-        
+
         foreach (string id in achievementIDs)
         {
             var ach = new Steamworks.Data.Achievement(id);
@@ -113,4 +124,5 @@ public class SteamIntegration : MonoBehaviour
         }
     }
 
+    #endregion
 }

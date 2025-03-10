@@ -1,8 +1,5 @@
 using System;
 
-/// <summary>
-/// Holds a Func declaring that returns a boolean declaring if a <see cref="State"/> can transition or not.
-/// </summary>
 public struct Transition
 {
     #region Variables
@@ -23,8 +20,8 @@ public struct Transition
 
     public Transition(Func<bool> transition, State state)
     {
-        this.transition = transition;
-        this.state = state;
+        this.transition = transition ?? throw new ArgumentNullException(nameof(transition), "Transition condition cannot be null.");
+        this.state = state ?? throw new ArgumentNullException(nameof(state), "State cannot be null.");
     }
 
     #endregion Constructor

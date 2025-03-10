@@ -4,152 +4,141 @@ using System.Collections.Generic;
 
 public class ObjectPool : MonoBehaviour
 {
-    public static ObjectPool instance; 
-    
+    #region Singleton
+
+    public static ObjectPool instance;
+
+    #endregion
+
+    #region Prefabs
+
+    // Prefabs for different effect types
     public GameObject footprintEffectPrefab;
     public GameObject moneyEffectPrefab;
     public GameObject multiplierAddEffectPrefab;
     public GameObject multiplierSubtractEffectPrefab;
     public GameObject talkEffectPrefab;
-    public GameObject winEffectPrefab; 
-    
+    public GameObject winEffectPrefab;
+
+    #endregion
+
+    #region Queues
+
+    // Queues for storing pooled effects
     public Queue<GameObject> footprintEffectQueue = new Queue<GameObject>();
     public Queue<GameObject> moneyEffectQueue = new Queue<GameObject>();
     public Queue<GameObject> multiplierAddQueue = new Queue<GameObject>();
     public Queue<GameObject> multiplierSubtractQueue = new Queue<GameObject>();
     public Queue<GameObject> talkEffectQueue = new Queue<GameObject>();
     public Queue<GameObject> winEffectQueue = new Queue<GameObject>();
-    
+
+    #endregion
+
+    #region Pool Settings
+
+    // Amount of items to fill each queue with
     public int fillAmountPerQueue = 50;
-    public int footprintAmount = 500; 
+    // Amount of footprint effects to fill
+    public int footprintAmount = 500;
+
+    #endregion
+
+    #region Unity Methods
+
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
             instance = this;
         else
             Destroy(gameObject);
-        
+
+        // Fill the pool with initial items
         FillPool();
     }
 
+    #endregion
+
+    #region Pooling Methods
+
+    // Fill the pools with the specified number of effects
     public void FillPool()
     {
+        // Fill footprint effect pool
         for (int i = 0; i < footprintAmount; i++)
         {
             GameObject footprintEffect = Instantiate(footprintEffectPrefab, transform, true);
             footprintEffectQueue.Enqueue(footprintEffect);
             footprintEffect.SetActive(false);
         }
-        
+
+        // Fill other effect pools
         for (int i = 0; i < fillAmountPerQueue; i++)
         {
-            GameObject moneyEffect = Instantiate(moneyEffectPrefab, transform, true);
-            moneyEffectQueue.Enqueue(moneyEffect);
-            moneyEffect.SetActive(false);
-            
-            GameObject multiplierEffect = Instantiate(multiplierAddEffectPrefab, transform, true);
-            multiplierAddQueue.Enqueue(multiplierEffect);
-            multiplierEffect.SetActive(false);
-            
-            GameObject multiplierSubtractEffect = Instantiate(multiplierSubtractEffectPrefab, transform, true);
-            multiplierSubtractQueue.Enqueue(multiplierSubtractEffect);
-            multiplierSubtractEffect.SetActive(false);
-            
-            GameObject talkEffect = Instantiate(talkEffectPrefab, transform, true);
-            talkEffectQueue.Enqueue(talkEffect);
-            talkEffect.SetActive(false);
-            
-            GameObject winEffect = Instantiate(winEffectPrefab, transform, true);
-            winEffectQueue.Enqueue(winEffect);
-            winEffect.SetActive(false);
+            AddEffectToQueue(moneyEffectPrefab, moneyEffectQueue);
+            AddEffectToQueue(multiplierAddEffectPrefab, multiplierAddQueue);
+            AddEffectToQueue(multiplierSubtractEffectPrefab, multiplierSubtractQueue);
+            AddEffectToQueue(talkEffectPrefab, talkEffectQueue);
+            AddEffectToQueue(winEffectPrefab, winEffectQueue);
         }
     }
 
+    // Add a single effect to the respective queue
+    private void AddEffectToQueue(GameObject effectPrefab, Queue<GameObject> queue)
+    {
+        GameObject effect = Instantiate(effectPrefab, transform, true);
+        queue.Enqueue(effect);
+        effect.SetActive(false);
+    }
+
+    #endregion
+
+    #region Spawn Methods
+
+    // Spawn effects from their respective queues
     public GameObject SpawnFootprintEffect(Vector3 pos, Quaternion rot)
     {
-        if (footprintEffectQueue.Count > 0)
-        {
-            GameObject tempFootprintEffect = footprintEffectQueue.Dequeue();
-            if(tempFootprintEffect == null) return null;
-            tempFootprintEffect.SetActive(true);
-            tempFootprintEffect.transform.position = pos;
-            tempFootprintEffect.transform.rotation = rot;
-            return tempFootprintEffect;
-        }
-        return null;
+        return SpawnEffectFromQueue(footprintEffectQueue, pos, rot);
     }
-    
+
     public GameObject SpawnMoneyEffect(Vector3 pos, Quaternion rot)
     {
-        if (moneyEffectQueue.Count > 0)
-        {
-            GameObject tempMoneyEffect = moneyEffectQueue.Dequeue();
-            if(tempMoneyEffect == null) return null;
-            tempMoneyEffect.SetActive(true);
-            tempMoneyEffect.transform.position = pos;
-            tempMoneyEffect.transform.rotation = rot;
-            return tempMoneyEffect;
-        }
-        return null;
+        return SpawnEffectFromQueue(moneyEffectQueue, pos, rot);
     }
 
     public GameObject SpawnMultiplierAddEffect(Vector3 pos, Quaternion rot)
     {
-        if (multiplierAddQueue.Count > 0)
-        {
-            GameObject tempMultiplierEffect = multiplierAddQueue.Dequeue();
-            if(tempMultiplierEffect == null) return null;
-            tempMultiplierEffect.SetActive(true);
-            tempMultiplierEffect.transform.position = pos;
-            tempMultiplierEffect.transform.rotation = rot;
-            return tempMultiplierEffect;
-        }
-        return null;
+        return SpawnEffectFromQueue(multiplierAddQueue, pos, rot);
     }
 
     public GameObject SpawnMultiplierSubtractEffect(Vector3 pos, Quaternion rot)
     {
-        if (multiplierSubtractQueue.Count > 0)
-        {
-            GameObject tempMultiplierEffect = multiplierSubtractQueue.Dequeue();
-            if(tempMultiplierEffect == null) return null;
-            
-            tempMultiplierEffect.SetActive(true);
-            tempMultiplierEffect.transform.position = pos;
-            tempMultiplierEffect.transform.rotation = rot;
-            return tempMultiplierEffect;
-        }
-        return null;
+        return SpawnEffectFromQueue(multiplierSubtractQueue, pos, rot);
     }
 
     public GameObject SpawnTalkEffect(Vector3 pos, Quaternion rot)
     {
-        if (talkEffectQueue.Count > 0)
-        {
-            GameObject tempTalkEffect = talkEffectQueue.Dequeue();
-            if(tempTalkEffect == null) return null;
-            
-            tempTalkEffect.SetActive(true);
-            tempTalkEffect.transform.position = pos;
-            tempTalkEffect.transform.rotation = rot;
-            return tempTalkEffect;
-        }
-
-        return null;
+        return SpawnEffectFromQueue(talkEffectQueue, pos, rot);
     }
 
     public GameObject SpawnWinEffect(Vector3 pos, Quaternion rot)
     {
-        if (winEffectQueue.Count > 0)
-        {
-            GameObject tempWinEffect = winEffectQueue.Dequeue();
-            if (tempWinEffect == null) return null;
+        return SpawnEffectFromQueue(winEffectQueue, pos, rot);
+    }
 
-            tempWinEffect.SetActive(true);
-            tempWinEffect.transform.position = pos;
-            tempWinEffect.transform.rotation = rot;
-            return tempWinEffect;
+    // Generic method to spawn an effect from any queue
+    private GameObject SpawnEffectFromQueue(Queue<GameObject> queue, Vector3 pos, Quaternion rot)
+    {
+        if (queue.Count > 0)
+        {
+            GameObject effect = queue.Dequeue();
+            if (effect == null) return null;
+            effect.SetActive(true);
+            effect.transform.position = pos;
+            effect.transform.rotation = rot;
+            return effect;
         }
         return null;
     }
+
+    #endregion
 }

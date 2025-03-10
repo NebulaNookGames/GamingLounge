@@ -3,18 +3,28 @@ using System.Collections;
 
 public class EyeBlink : MonoBehaviour
 {
-    public Renderer faceRenderer;
-    public int eyeIndex;
-    public int skinIndex;
-    public Material normalMaterial;
-    public float blinkInterval = 5f; // Base interval
-    public float blinkRandomRange = 1.5f; // Max random variation (+/-)
-    public float blinkDuration = 0.1f;
+    #region Serialized Fields
+
+    public Renderer faceRenderer;                // The renderer for the face object
+    public int eyeIndex;                         // Index of the eye material in the materials array
+    public int skinIndex;                        // Index of the skin material to swap with during blink
+    public Material normalMaterial;              // The normal material to be used for the eye
+    public float blinkInterval = 5f;             // Base interval for blinking
+    public float blinkRandomRange = 1.5f;        // Random variation in the blink interval (+/-)
+    public float blinkDuration = 0.1f;           // Duration of the blink
+
+    #endregion
+
+    #region Unity Methods
 
     void Start()
     {
         StartCoroutine(BlinkRoutine());
     }
+
+    #endregion
+
+    #region Coroutine Methods
 
     IEnumerator BlinkRoutine()
     {
@@ -37,4 +47,6 @@ public class EyeBlink : MonoBehaviour
             faceRenderer.materials = mats;
         }
     }
+
+    #endregion
 }

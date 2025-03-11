@@ -56,6 +56,9 @@ public class VisitorEntity : Entity
 
     public bool walkToDestinationIsOver = false;  // Flag indicating whether walking is completed
 
+    private float destinationUpdateTime = 1f;
+    private float currentDestinationUpdateTime = 0f; 
+    
     #endregion State Variables
 
     #endregion Variables
@@ -71,6 +74,25 @@ public class VisitorEntity : Entity
         base.Start();  // Start the base Entity class functionality
     }
 
+
+    private new void Update()
+    {
+        base.Update();
+        if (agent && agent.isOnNavMesh && agent.destination != Vector3.zero)
+        {
+            currentDestinationUpdateTime -= Time.deltaTime;
+            
+            if (currentDestinationUpdateTime <= 0)
+            {
+                if (agent.autoRepath)
+                    agent.autoRepath = false;
+
+                currentDestinationUpdateTime = destinationUpdateTime;
+                agent.SetDestination(agent.destination);
+            }
+        }
+    }
+
     #endregion Unity Methods
 
     #region Initialization
@@ -83,7 +105,8 @@ public class VisitorEntity : Entity
         CreateStates();   // Create the states for the entity
         CreateTransitions();  // Set up transitions between the states
         initialState = randomWalkState;  // Set the initial state
-        walkAmount = Random.Range(20, 40);  // Randomly choose how many times the entity will walk
+        walkAmount = Random.Range(20, 40); // Randomly choose how many times the entity will walk
+        currentDestinationUpdateTime = destinationUpdateTime;
     }
 
     /// <summary>

@@ -60,7 +60,7 @@ public class Entity : MonoBehaviour
     /// <summary>
     /// Updates the state machine every frame.
     /// </summary>
-    private void Update()
+    protected void Update()
     {
         stateMachine.Update();
     }

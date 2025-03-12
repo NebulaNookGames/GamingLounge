@@ -59,7 +59,21 @@ public class SteamIntegration : MonoBehaviour
                 case "german":
                     LocaleSelector.Instance.ChangeLocale(1);
                     break;
-
+                case "chinese":
+                    LocaleSelector.Instance.ChangeLocale(2);
+                    break;
+                case "japanese":
+                    LocaleSelector.Instance.ChangeLocale(3);
+                    break;
+                case "portuguese":
+                    LocaleSelector.Instance.ChangeLocale(4);
+                    break;
+                case "russian":
+                    LocaleSelector.Instance.ChangeLocale(5);
+                    break;
+                case "spanish":
+                    LocaleSelector.Instance.ChangeLocale(6);
+                    break;
                 default:
                     LocaleSelector.Instance.ChangeLocale(0);
                     break;

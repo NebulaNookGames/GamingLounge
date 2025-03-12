@@ -879,6 +879,7 @@ GameObject:
   - component: {fileID: 86072025}
   - component: {fileID: 86072024}
   - component: {fileID: 86072023}
+  - component: {fileID: 86072026}
   m_Layer: 5
   m_Name: GetInTouchText
   m_TagString: Untagged
@@ -934,6 +935,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
         m_MethodName: set_text
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 86072026}
+        m_TargetAssemblyTypeName: FontSwitcherTMPro, Assembly-CSharp
+        m_MethodName: PerformFontSwitch
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1044,6 +1057,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 86072021}
   m_CullTransparentMesh: 1
+--- !u!114 &86072026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86072021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7331bead221b0c246ac912a3402cfa18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
+  defaultFont: {fileID: 11400000, guid: 274f2ab400641314c9be48ec98ffc3a9, type: 2}
+  chineseFont: {fileID: 11400000, guid: abf7c7723c113aa449982a2f7daf3e4d, type: 2}
+  japaneseFont: {fileID: 11400000, guid: da6dd765a7de9fc4b9068a014571ed7e, type: 2}
+  russianFont: {fileID: 11400000, guid: 9f9f98de3ddd6d84bbc429c2fb5c671a, type: 2}
 --- !u!1 &112219095
 GameObject:
   m_ObjectHideFlags: 0
@@ -2284,6 +2314,8 @@ GameObject:
   - component: {fileID: 324861852}
   - component: {fileID: 324861855}
   - component: {fileID: 324861854}
+  - component: {fileID: 324861857}
+  - component: {fileID: 324861856}
   m_Layer: 5
   m_Name: CreditsText
   m_TagString: Untagged
@@ -2411,6 +2443,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 324861851}
   m_CullTransparentMesh: 1
+--- !u!114 &324861856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324861851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7331bead221b0c246ac912a3402cfa18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
+  defaultFont: {fileID: 11400000, guid: 274f2ab400641314c9be48ec98ffc3a9, type: 2}
+  chineseFont: {fileID: 11400000, guid: abf7c7723c113aa449982a2f7daf3e4d, type: 2}
+  japaneseFont: {fileID: 11400000, guid: da6dd765a7de9fc4b9068a014571ed7e, type: 2}
+  russianFont: {fileID: 11400000, guid: 9f9f98de3ddd6d84bbc429c2fb5c671a, type: 2}
+--- !u!114 &324861857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 324861851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:d31ced1325aa1c94ab7317e4f3839bc1
+    m_TableEntryReference:
+      m_KeyId: 20669823976349696
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 324861854}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 324861856}
+        m_TargetAssemblyTypeName: FontSwitcherTMPro, Assembly-CSharp
+        m_MethodName: PerformFontSwitch
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &325381964
 GameObject:
   m_ObjectHideFlags: 0
@@ -3357,6 +3458,7 @@ GameObject:
   - component: {fileID: 398988111}
   - component: {fileID: 398988110}
   - component: {fileID: 398988109}
+  - component: {fileID: 398988112}
   m_Layer: 5
   m_Name: SettingsMenuButton
   m_TagString: Untagged
@@ -3408,6 +3510,18 @@ MonoBehaviour:
   m_UpdateString:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 398988112}
+        m_TargetAssemblyTypeName: FontSwitcherTMPro, Assembly-CSharp
+        m_MethodName: PerformFontSwitch
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 398988110}
         m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
         m_MethodName: set_text
@@ -3522,6 +3636,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 398988107}
   m_CullTransparentMesh: 1
+--- !u!114 &398988112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398988107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7331bead221b0c246ac912a3402cfa18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
+  defaultFont: {fileID: 11400000, guid: 274f2ab400641314c9be48ec98ffc3a9, type: 2}
+  chineseFont: {fileID: 11400000, guid: abf7c7723c113aa449982a2f7daf3e4d, type: 2}
+  japaneseFont: {fileID: 11400000, guid: da6dd765a7de9fc4b9068a014571ed7e, type: 2}
+  russianFont: {fileID: 11400000, guid: 9f9f98de3ddd6d84bbc429c2fb5c671a, type: 2}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -3656,6 +3787,7 @@ GameObject:
   - component: {fileID: 419083393}
   - component: {fileID: 419083392}
   - component: {fileID: 419083395}
+  - component: {fileID: 419083396}
   m_Layer: 5
   m_Name: Text (TMP) (2)
   m_TagString: Untagged
@@ -3871,6 +4003,23 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &419083396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419083390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7331bead221b0c246ac912a3402cfa18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
+  defaultFont: {fileID: 11400000, guid: 274f2ab400641314c9be48ec98ffc3a9, type: 2}
+  chineseFont: {fileID: 11400000, guid: abf7c7723c113aa449982a2f7daf3e4d, type: 2}
+  japaneseFont: {fileID: 11400000, guid: da6dd765a7de9fc4b9068a014571ed7e, type: 2}
+  russianFont: {fileID: 11400000, guid: 9f9f98de3ddd6d84bbc429c2fb5c671a, type: 2}
 --- !u!1 &419306470
 GameObject:
   m_ObjectHideFlags: 0
@@ -4146,6 +4295,7 @@ GameObject:
   - component: {fileID: 449166027}
   - component: {fileID: 449166026}
   - component: {fileID: 449166025}
+  - component: {fileID: 449166028}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -4169,8 +4319,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -134.6, y: 11.200012}
-  m_SizeDelta: {x: 209.2839, y: 50}
+  m_AnchoredPosition: {x: -147.86586, y: 11.200012}
+  m_SizeDelta: {x: 252.5728, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &449166025
 MonoBehaviour:
@@ -4197,6 +4347,18 @@ MonoBehaviour:
   m_UpdateString:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 449166028}
+        m_TargetAssemblyTypeName: FontSwitcherTMPro, Assembly-CSharp
+        m_MethodName: PerformFontSwitch
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 449166026}
         m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
         m_MethodName: set_text
@@ -4311,6 +4473,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 449166023}
   m_CullTransparentMesh: 1
+--- !u!114 &449166028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449166023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7331bead221b0c246ac912a3402cfa18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
+  defaultFont: {fileID: 11400000, guid: 274f2ab400641314c9be48ec98ffc3a9, type: 2}
+  chineseFont: {fileID: 11400000, guid: abf7c7723c113aa449982a2f7daf3e4d, type: 2}
+  japaneseFont: {fileID: 11400000, guid: da6dd765a7de9fc4b9068a014571ed7e, type: 2}
+  russianFont: {fileID: 11400000, guid: 9f9f98de3ddd6d84bbc429c2fb5c671a, type: 2}
 --- !u!1 &460319954
 GameObject:
   m_ObjectHideFlags: 0
@@ -9585,6 +9764,7 @@ GameObject:
   - component: {fileID: 553332603}
   - component: {fileID: 553332602}
   - component: {fileID: 553332604}
+  - component: {fileID: 553332605}
   m_Layer: 5
   m_Name: CloseButtonText
   m_TagString: Untagged
@@ -9737,6 +9917,18 @@ MonoBehaviour:
   m_UpdateString:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 553332605}
+        m_TargetAssemblyTypeName: FontSwitcherTMPro, Assembly-CSharp
+        m_MethodName: PerformFontSwitch
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 553332602}
         m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
         m_MethodName: set_text
@@ -9752,6 +9944,23 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &553332605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553332600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7331bead221b0c246ac912a3402cfa18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
+  defaultFont: {fileID: 11400000, guid: 274f2ab400641314c9be48ec98ffc3a9, type: 2}
+  chineseFont: {fileID: 11400000, guid: abf7c7723c113aa449982a2f7daf3e4d, type: 2}
+  japaneseFont: {fileID: 11400000, guid: da6dd765a7de9fc4b9068a014571ed7e, type: 2}
+  russianFont: {fileID: 11400000, guid: 9f9f98de3ddd6d84bbc429c2fb5c671a, type: 2}
 --- !u!1 &567134347
 GameObject:
   m_ObjectHideFlags: 0
@@ -10733,6 +10942,7 @@ GameObject:
   - component: {fileID: 667065439}
   - component: {fileID: 667065441}
   - component: {fileID: 667065442}
+  - component: {fileID: 667065443}
   m_Layer: 5
   m_Name: Text (TMP) (1)
   m_TagString: Untagged
@@ -10916,6 +11126,23 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &667065443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 667065436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7331bead221b0c246ac912a3402cfa18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
+  defaultFont: {fileID: 11400000, guid: 274f2ab400641314c9be48ec98ffc3a9, type: 2}
+  chineseFont: {fileID: 11400000, guid: abf7c7723c113aa449982a2f7daf3e4d, type: 2}
+  japaneseFont: {fileID: 11400000, guid: da6dd765a7de9fc4b9068a014571ed7e, type: 2}
+  russianFont: {fileID: 11400000, guid: 9f9f98de3ddd6d84bbc429c2fb5c671a, type: 2}
 --- !u!1001 &669760906
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11544,6 +11771,7 @@ GameObject:
   - component: {fileID: 766147727}
   - component: {fileID: 766147726}
   - component: {fileID: 766147728}
+  - component: {fileID: 766147729}
   m_Layer: 5
   m_Name: StartGameText
   m_TagString: Untagged
@@ -11696,6 +11924,18 @@ MonoBehaviour:
   m_UpdateString:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 766147729}
+        m_TargetAssemblyTypeName: FontSwitcherTMPro, Assembly-CSharp
+        m_MethodName: PerformFontSwitch
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 766147726}
         m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
         m_MethodName: set_text
@@ -11711,6 +11951,23 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &766147729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766147724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7331bead221b0c246ac912a3402cfa18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
+  defaultFont: {fileID: 11400000, guid: 274f2ab400641314c9be48ec98ffc3a9, type: 2}
+  chineseFont: {fileID: 11400000, guid: abf7c7723c113aa449982a2f7daf3e4d, type: 2}
+  japaneseFont: {fileID: 11400000, guid: da6dd765a7de9fc4b9068a014571ed7e, type: 2}
+  russianFont: {fileID: 11400000, guid: 9f9f98de3ddd6d84bbc429c2fb5c671a, type: 2}
 --- !u!4 &770053125 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6294508013172393185, guid: 043176b6a68be2b43b073aaaa4782c7d, type: 3}
@@ -11951,6 +12208,7 @@ GameObject:
   - component: {fileID: 804425272}
   - component: {fileID: 804425271}
   - component: {fileID: 804425273}
+  - component: {fileID: 804425274}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -11974,8 +12232,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -134.6, y: 11.200012}
-  m_SizeDelta: {x: 209.2839, y: 50}
+  m_AnchoredPosition: {x: -147.5168, y: 11.200012}
+  m_SizeDelta: {x: 250.4781, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &804425271
 MonoBehaviour:
@@ -12101,6 +12359,18 @@ MonoBehaviour:
   m_UpdateString:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 804425274}
+        m_TargetAssemblyTypeName: FontSwitcherTMPro, Assembly-CSharp
+        m_MethodName: PerformFontSwitch
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 804425271}
         m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
         m_MethodName: set_text
@@ -12116,6 +12386,23 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &804425274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 804425269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7331bead221b0c246ac912a3402cfa18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
+  defaultFont: {fileID: 11400000, guid: 274f2ab400641314c9be48ec98ffc3a9, type: 2}
+  chineseFont: {fileID: 11400000, guid: abf7c7723c113aa449982a2f7daf3e4d, type: 2}
+  japaneseFont: {fileID: 11400000, guid: da6dd765a7de9fc4b9068a014571ed7e, type: 2}
+  russianFont: {fileID: 11400000, guid: 9f9f98de3ddd6d84bbc429c2fb5c671a, type: 2}
 --- !u!1 &808478544
 GameObject:
   m_ObjectHideFlags: 0
@@ -12632,7 +12919,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: v 1.0.3
+  m_text: v 1.0.4
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 274f2ab400641314c9be48ec98ffc3a9, type: 2}
   m_sharedMaterial: {fileID: -7833008144387556700, guid: 274f2ab400641314c9be48ec98ffc3a9, type: 2}
@@ -14355,7 +14642,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.40392157, g: 0.41568628, b: 0.49019608, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -14869,6 +15156,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1085544792}
   - component: {fileID: 1085544793}
+  - component: {fileID: 1085544794}
   m_Layer: 5
   m_Name: Item
   m_TagString: Untagged
@@ -14957,7 +15245,36 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1085544794}
+        m_TargetAssemblyTypeName: FontSwitcherTMPro, Assembly-CSharp
+        m_MethodName: PerformFontSwitch
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 1
+--- !u!114 &1085544794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1085544791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7331bead221b0c246ac912a3402cfa18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 1942401176}
+  defaultFont: {fileID: 11400000, guid: 274f2ab400641314c9be48ec98ffc3a9, type: 2}
+  chineseFont: {fileID: 11400000, guid: abf7c7723c113aa449982a2f7daf3e4d, type: 2}
+  japaneseFont: {fileID: 11400000, guid: da6dd765a7de9fc4b9068a014571ed7e, type: 2}
+  russianFont: {fileID: 11400000, guid: 9f9f98de3ddd6d84bbc429c2fb5c671a, type: 2}
 --- !u!1 &1103802633
 GameObject:
   m_ObjectHideFlags: 0
@@ -17557,6 +17874,7 @@ GameObject:
   - component: {fileID: 1393647604}
   - component: {fileID: 1393647603}
   - component: {fileID: 1393647605}
+  - component: {fileID: 1393647606}
   m_Layer: 5
   m_Name: QuitText
   m_TagString: Untagged
@@ -17719,9 +18037,38 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1393647606}
+        m_TargetAssemblyTypeName: FontSwitcherTMPro, Assembly-CSharp
+        m_MethodName: PerformFontSwitch
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   references:
     version: 2
     RefIds: []
+--- !u!114 &1393647606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393647601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7331bead221b0c246ac912a3402cfa18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
+  defaultFont: {fileID: 11400000, guid: 274f2ab400641314c9be48ec98ffc3a9, type: 2}
+  chineseFont: {fileID: 11400000, guid: abf7c7723c113aa449982a2f7daf3e4d, type: 2}
+  japaneseFont: {fileID: 11400000, guid: da6dd765a7de9fc4b9068a014571ed7e, type: 2}
+  russianFont: {fileID: 11400000, guid: 9f9f98de3ddd6d84bbc429c2fb5c671a, type: 2}
 --- !u!4 &1397671723 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8261431243125015676, guid: ac02c7e951a51af428756a9027d38b0d, type: 3}
@@ -20090,6 +20437,7 @@ GameObject:
   - component: {fileID: 1684280965}
   - component: {fileID: 1684280964}
   - component: {fileID: 1684280966}
+  - component: {fileID: 1684280967}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -20113,8 +20461,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -139.24193, y: 11.200012}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -106.42621, y: 11.200012}
+  m_SizeDelta: {x: 339.6413, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1684280964
 MonoBehaviour:
@@ -20242,6 +20590,18 @@ MonoBehaviour:
   m_UpdateString:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1684280967}
+        m_TargetAssemblyTypeName: FontSwitcherTMPro, Assembly-CSharp
+        m_MethodName: PerformFontSwitch
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1684280964}
         m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
         m_MethodName: set_text
@@ -20257,6 +20617,23 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &1684280967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684280962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7331bead221b0c246ac912a3402cfa18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
+  defaultFont: {fileID: 11400000, guid: 274f2ab400641314c9be48ec98ffc3a9, type: 2}
+  chineseFont: {fileID: 11400000, guid: abf7c7723c113aa449982a2f7daf3e4d, type: 2}
+  japaneseFont: {fileID: 11400000, guid: da6dd765a7de9fc4b9068a014571ed7e, type: 2}
+  russianFont: {fileID: 11400000, guid: 9f9f98de3ddd6d84bbc429c2fb5c671a, type: 2}
 --- !u!4 &1689329228 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8261431243125015676, guid: 2098ce72d43b55b46936f9efa1a5c155, type: 3}
@@ -20698,8 +21075,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 15
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -21031,6 +21408,7 @@ GameObject:
   - component: {fileID: 1731228697}
   - component: {fileID: 1731228696}
   - component: {fileID: 1731228698}
+  - component: {fileID: 1731228699}
   m_Layer: 5
   m_Name: CloseButtonText
   m_TagString: Untagged
@@ -21198,6 +21576,23 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &1731228699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731228694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7331bead221b0c246ac912a3402cfa18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
+  defaultFont: {fileID: 11400000, guid: 274f2ab400641314c9be48ec98ffc3a9, type: 2}
+  chineseFont: {fileID: 11400000, guid: abf7c7723c113aa449982a2f7daf3e4d, type: 2}
+  japaneseFont: {fileID: 11400000, guid: da6dd765a7de9fc4b9068a014571ed7e, type: 2}
+  russianFont: {fileID: 11400000, guid: 9f9f98de3ddd6d84bbc429c2fb5c671a, type: 2}
 --- !u!1 &1737308692
 GameObject:
   m_ObjectHideFlags: 0
@@ -22201,6 +22596,7 @@ GameObject:
   - component: {fileID: 1851509139}
   - component: {fileID: 1851509138}
   - component: {fileID: 1851509140}
+  - component: {fileID: 1851509141}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -22224,8 +22620,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -139.24193, y: 11.2}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -106.07714, y: 11.2}
+  m_SizeDelta: {x: 336.1502, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1851509138
 MonoBehaviour:
@@ -22353,6 +22749,18 @@ MonoBehaviour:
   m_UpdateString:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1851509141}
+        m_TargetAssemblyTypeName: FontSwitcherTMPro, Assembly-CSharp
+        m_MethodName: PerformFontSwitch
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1851509138}
         m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
         m_MethodName: set_text
@@ -22368,6 +22776,23 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &1851509141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851509136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7331bead221b0c246ac912a3402cfa18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
+  defaultFont: {fileID: 11400000, guid: 274f2ab400641314c9be48ec98ffc3a9, type: 2}
+  chineseFont: {fileID: 11400000, guid: abf7c7723c113aa449982a2f7daf3e4d, type: 2}
+  japaneseFont: {fileID: 11400000, guid: da6dd765a7de9fc4b9068a014571ed7e, type: 2}
+  russianFont: {fileID: 11400000, guid: 9f9f98de3ddd6d84bbc429c2fb5c671a, type: 2}
 --- !u!1 &1851511584
 GameObject:
   m_ObjectHideFlags: 0
@@ -22858,6 +23283,7 @@ GameObject:
   - component: {fileID: 1895491628}
   - component: {fileID: 1895491627}
   - component: {fileID: 1895491626}
+  - component: {fileID: 1895491629}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -22909,6 +23335,18 @@ MonoBehaviour:
   m_UpdateString:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1895491629}
+        m_TargetAssemblyTypeName: FontSwitcherTMPro, Assembly-CSharp
+        m_MethodName: PerformFontSwitch
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1895491627}
         m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
         m_MethodName: set_text
@@ -23023,6 +23461,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1895491624}
   m_CullTransparentMesh: 1
+--- !u!114 &1895491629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1895491624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7331bead221b0c246ac912a3402cfa18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
+  defaultFont: {fileID: 11400000, guid: 274f2ab400641314c9be48ec98ffc3a9, type: 2}
+  chineseFont: {fileID: 11400000, guid: abf7c7723c113aa449982a2f7daf3e4d, type: 2}
+  japaneseFont: {fileID: 11400000, guid: da6dd765a7de9fc4b9068a014571ed7e, type: 2}
+  russianFont: {fileID: 11400000, guid: 9f9f98de3ddd6d84bbc429c2fb5c671a, type: 2}
 --- !u!1 &1898800411
 GameObject:
   m_ObjectHideFlags: 0
@@ -23748,6 +24203,18 @@ MonoBehaviour:
     - m_Text: German
       m_Image: {fileID: 0}
       m_Color: {r: 1, g: 1, b: 1, a: 1}
+    - m_Text: Chinese
+      m_Image: {fileID: 0}
+      m_Color: {r: 1, g: 1, b: 1, a: 1}
+    - m_Text: Japanese
+      m_Image: {fileID: 0}
+      m_Color: {r: 1, g: 1, b: 1, a: 1}
+    - m_Text: Portugese
+      m_Image: {fileID: 0}
+      m_Color: {r: 1, g: 1, b: 1, a: 1}
+    - m_Text: Russian
+      m_Image: {fileID: 0}
+      m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -23888,6 +24355,46 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
+  - m_TableReference:
+      m_TableCollectionName: GUID:c737d35fd43844f47ad6ae07b6374e77
+    m_TableEntryReference:
+      m_KeyId: 3635578544201728
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  - m_TableReference:
+      m_TableCollectionName: GUID:c737d35fd43844f47ad6ae07b6374e77
+    m_TableEntryReference:
+      m_KeyId: 3692683817000960
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  - m_TableReference:
+      m_TableCollectionName: GUID:c737d35fd43844f47ad6ae07b6374e77
+    m_TableEntryReference:
+      m_KeyId: 3876372857364480
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  - m_TableReference:
+      m_TableCollectionName: GUID:c737d35fd43844f47ad6ae07b6374e77
+    m_TableEntryReference:
+      m_KeyId: 3899585058447360
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  - m_TableReference:
+      m_TableCollectionName: GUID:c737d35fd43844f47ad6ae07b6374e77
+    m_TableEntryReference:
+      m_KeyId: 3899582734802944
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   loadingText:
     m_TableReference:
       m_TableCollectionName: GUID:c737d35fd43844f47ad6ae07b6374e77
@@ -23897,6 +24404,10 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
+  japaneseFont: {fileID: 11400000, guid: da6dd765a7de9fc4b9068a014571ed7e, type: 2}
+  simplifiedChineseFont: {fileID: 11400000, guid: a815a178812b6cd48980a0dc14688f56, type: 2}
+  russianFont: {fileID: 11400000, guid: 9f9f98de3ddd6d84bbc429c2fb5c671a, type: 2}
+  defaultFont: {fileID: 11400000, guid: 274f2ab400641314c9be48ec98ffc3a9, type: 2}
   references:
     version: 2
     RefIds: []
@@ -24042,7 +24553,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

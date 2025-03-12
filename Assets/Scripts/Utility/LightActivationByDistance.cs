@@ -19,6 +19,8 @@ public class LightActivationByDistance : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (otherObject == null) return; 
+        
         timer -= Time.deltaTime;
         if (timer <= 0)
         {

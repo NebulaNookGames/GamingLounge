@@ -27,7 +27,7 @@ public class ObjectPlacer : MonoBehaviour
     /// <param name="position">The position to place the object.</param>
     /// <param name="rotation">The rotation to apply to the object.</param>
     /// <returns>The index of the newly placed object in the list.</returns>
-    public int PlaceObject(ObjectData objectData, Vector3 position, Quaternion rotation, bool callPlacementEvent, bool reduceMoney)
+    public int PlaceObject(ObjectData objectData, Vector3 position, Quaternion rotation, bool callPlacementEvent, bool reduceMoney, int customizedID)
     {
         if(objectData.ID == 25) upgradePCIsPlaced = true;
         
@@ -44,7 +44,18 @@ public class ObjectPlacer : MonoBehaviour
         
         if (newObject.GetComponent<ActivateAtDistance>())
             newObject.GetComponent<ActivateAtDistance>().enabled = true;
-        
+
+        if (newObject.GetComponentInChildren<GameObjectChangerOnInput>(true))
+        {
+            Debug.Log("Setting color");
+            GameObjectChangerOnInput tempChanger = newObject.GetComponentInChildren<GameObjectChangerOnInput>(true); 
+            tempChanger.gameObject.SetActive(true);
+            tempChanger.ChangeActiveGameObjectByIndex(customizedID);
+            tempChanger.gameObject.SetActive(false);
+            Debug.Log("Color set");
+        }
+
+
         foreach (var index in arcadeMachineIndexes)
         {
             if (objectData.ID == index)

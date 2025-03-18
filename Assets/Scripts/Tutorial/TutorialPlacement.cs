@@ -56,7 +56,7 @@ public class TutorialPlacement : MonoBehaviour
         for (int i = 0; i < objectIndexes.Count; i++)
         {
             int index = objectPlacer.PlaceObject(objectsDatabase.objectsData[objectIndexes[i]], grid.CellToWorld(objectPositions[i]),
-                objectRotations[i], false, false);
+                objectRotations[i], false, false, 0);
             
             GridData selectedData = GetUsedGridData(i);
             if(objectRotations[i].y == 0)
@@ -159,7 +159,7 @@ public class TutorialPlacement : MonoBehaviour
             }
             
             int index = objectPlacer.PlaceObject(objectsDatabase.objectsData[objectIndex], grid.CellToWorld(pos),
-                rot, false, false);
+                rot, false, false, 0);
             PlacementSystem.Instance.furnitureData.AddObjectAt(pos, objectsDatabase.objectsData[objectIndex].Size,
                 index);
         }

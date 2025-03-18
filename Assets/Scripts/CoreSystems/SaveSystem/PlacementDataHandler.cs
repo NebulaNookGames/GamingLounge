@@ -12,6 +12,7 @@ public class PlacementDataHandler : DataHandler
     public List<Vector3Int> gridPositions = new();
     public List<Vector2Int> objectSizes = new();
     public List<int> placedObjectiDs = new();
+    public List<int> customizedObjectIDs = new();
 
     public List<ObjectData> objectDatas = new();
     public List<Vector3> positions = new();
@@ -27,6 +28,7 @@ public class PlacementDataHandler : DataHandler
         gridPositions.Clear();
         objectSizes.Clear();
         placedObjectiDs.Clear();
+        customizedObjectIDs.Clear();
         objectDatas.Clear();
         positions.Clear();
         rotations.Clear();
@@ -36,13 +38,13 @@ public class PlacementDataHandler : DataHandler
             int index = 0; 
             foreach (ObjectData objData in objectsDatabaseSO.objectsData)
             {
-                if (saveData.objectDatas[i].ID == objData.ID)
-                {
-                    index = objectPlacer.PlaceObject(
-                        objData,
-                        saveData.positions[i],
-                        saveData.rotations[i], false, false);
-                }
+               if (saveData.objectDatas[i].ID == objData.ID)
+                    {
+                        index = objectPlacer.PlaceObject(
+                            objData,
+                            saveData.positions[i],
+                            saveData.rotations[i], false, false, saveData.customizedObjectiDs[i]);
+                    }
             }
        
             switch (saveData.objectDatas[i].objectType)
@@ -83,6 +85,7 @@ public class PlacementDataHandler : DataHandler
         saveData.objectDatas = new List<ObjectData>(objectDatas);
         saveData.positions = new List<Vector3>(positions);
         saveData.rotations = new List<Quaternion>(rotations);
+        saveData.customizedObjectiDs = new List<int>(customizedObjectIDs);
     }
 
     public void AddPlacedObject(Vector3Int gridPosition, Vector2Int objectSize, int placedObjectiD)
@@ -97,6 +100,20 @@ public class PlacementDataHandler : DataHandler
         objectDatas.Add(objectData);
         positions.Add(position);
         rotations.Add(rotation);
+        customizedObjectIDs.Add(0);
+    }
+
+    public void ChangeCustomizedObjectID(Vector3Int pos, int newID)
+    {
+        for (int i = 0; i < positions.Count; i++)
+        {
+            if (positions[i] == pos)
+            {
+                customizedObjectIDs[i] = newID; 
+                Debug.Log("Changed customized id");
+                break; 
+            }
+        }
     }
 
     public void RemovePlacedObject(GameObject go)
@@ -117,6 +134,7 @@ public class PlacementDataHandler : DataHandler
             gridPositions.RemoveAt(index);
             objectSizes.RemoveAt(index);
             placedObjectiDs.RemoveAt(index);
+            customizedObjectIDs.RemoveAt(index);
             objectDatas.RemoveAt(index);
             positions.RemoveAt(index);
             rotations.RemoveAt(index);

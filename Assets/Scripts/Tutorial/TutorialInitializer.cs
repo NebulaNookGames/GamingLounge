@@ -29,10 +29,16 @@ public class TutorialInitializer : MonoBehaviour
 
     public void StartInputTutorial()
     {
-        moveTutorial.SetActive(true);
-        tutorialBackground.SetActive(true);
+        Invoke(nameof(ActivateTutorialUI), 2f);
         playerCam.SetActive(true);
     }
+
+    void ActivateTutorialUI()
+    {
+        moveTutorial.SetActive(true);
+        tutorialBackground.SetActive(true);
+    }
+
 
     public void StopInvoke()
     {

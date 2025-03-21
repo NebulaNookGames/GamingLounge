@@ -282,7 +282,6 @@ GameObject:
   - component: {fileID: -7940882060318916119}
   - component: {fileID: 6419432299224676230}
   - component: {fileID: 3863646618210865945}
-  - component: {fileID: 6012978691010425935}
   - component: {fileID: 7929677514275484748}
   m_Layer: 10
   m_Name: StandHologram
@@ -597,19 +596,6 @@ MonoBehaviour:
   centerofObject: {fileID: 3610165944730273518}
   scanAreaPrefab: {fileID: 8259399135421049515, guid: 8a3233882833e5b498a41204286ecc5d, type: 3}
   scanAreaInstance: {fileID: 0}
---- !u!114 &6012978691010425935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5767364422584940774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f0e9e88f5dd9c94fa903e0f8f77b327, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  component: {fileID: 6419432299224676230}
 --- !u!114 &7929677514275484748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -847,6 +833,8 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: -8901194519769889497, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  audioS: {fileID: 6419432299224676230}
+  audioC: {fileID: 8300000, guid: fed31101ece6dfa49a571db0d04f9bec, type: 3}
 --- !u!1001 &875250270601790203
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -10,8 +10,10 @@ public class GameObjectChangerOnInput : MonoBehaviour
 
     [SerializeField] public InputActionProperty interactAction;
 
-    private Vector3Int vector3IntPosition; 
+    private Vector3Int vector3IntPosition;
 
+    [SerializeField] private AudioSource audioS;
+    [SerializeField] private AudioClip audioC;
     private void OnEnable()
     {
         interactAction.action.performed += ChangeActiveGameObject; 
@@ -40,6 +42,8 @@ public class GameObjectChangerOnInput : MonoBehaviour
             currentIndex = 0;
             gameObjects[currentIndex].gameObject.SetActive(true);
         }
+        if(audioS && audioC)
+            audioS.PlayOneShot(audioC);
         
         PlacementDataHandler.instance.ChangeCustomizedObjectID(vector3IntPosition, currentIndex);
     }

@@ -7,12 +7,11 @@ public class MusicManager : MonoBehaviour
     public static MusicManager instance;
 
     public AudioMixer audioMixer;
-
-    public float transitionSpeed = 2f; // Adjust for smoothness
-    public float intenseDuration = 5f; // Time before switching back to chill
-    public float chillVolume = -20f; // Chill music volume
-    public float intenseVolume = -80f; // Intense music volume
-
+    public float transitionSpeed = 2f;
+    public float intenseDuration = 5f;
+    
+    private float baseVolume = -20f;
+    private bool isIntenseActive = false;
     private Coroutine fadeCoroutine;
     private Coroutine countdownCoroutine;
 
@@ -20,30 +19,35 @@ public class MusicManager : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-
-        if (audioMixer == null)
-        {
-            Debug.LogError("AudioMixer is not assigned in the MusicManager.");
-            return;
-        }
-
         SwitchToChill();
+    }
+
+    public void UpdateBaseVolume(float newBaseVolume)
+    {
+        baseVolume = newBaseVolume;
+
+        // Apply the volume change to the currently active music
+        if (isIntenseActive)
+        {
+            audioMixer.SetFloat("IntenseMusicVolume", baseVolume);
+        }
+        else
+        {
+            audioMixer.SetFloat("ChillMusicVolume", baseVolume);
+        }
     }
 
     public void BeIntense()
     {
         if (countdownCoroutine != null)
-        {
             StopCoroutine(countdownCoroutine);
-        }
         countdownCoroutine = StartCoroutine(IntenseCountdown());
 
         if (fadeCoroutine != null)
-        {
             StopCoroutine(fadeCoroutine);
-        }
 
-        fadeCoroutine = StartCoroutine(FadeMusic("IntenseMusicVolume", "ChillMusicVolume", chillVolume, intenseVolume));
+        isIntenseActive = true;
+        fadeCoroutine = StartCoroutine(FadeMusic("IntenseMusicVolume", "ChillMusicVolume", baseVolume, -80));
     }
 
     private IEnumerator IntenseCountdown()
@@ -55,11 +59,10 @@ public class MusicManager : MonoBehaviour
     public void SwitchToChill()
     {
         if (fadeCoroutine != null)
-        {
             StopCoroutine(fadeCoroutine);
-        }
 
-        fadeCoroutine = StartCoroutine(FadeMusic("ChillMusicVolume", "IntenseMusicVolume", chillVolume, intenseVolume));
+        isIntenseActive = false;
+        fadeCoroutine = StartCoroutine(FadeMusic("ChillMusicVolume", "IntenseMusicVolume", baseVolume, -80));
     }
 
     private IEnumerator FadeMusic(string fadeInParam, string fadeOutParam, float fadeInTarget, float fadeOutTarget)
@@ -73,17 +76,10 @@ public class MusicManager : MonoBehaviour
         {
             time += Time.deltaTime * transitionSpeed;
             audioMixer.SetFloat(fadeInParam, Mathf.Lerp(currentFadeIn, fadeInTarget, time));
-            yield return null;
-        }
-        audioMixer.SetFloat(fadeInParam, fadeInTarget);
-
-        time = 0f;
-        while (time < 1f)
-        {
-            time += Time.deltaTime * transitionSpeed;
             audioMixer.SetFloat(fadeOutParam, Mathf.Lerp(currentFadeOut, fadeOutTarget, time));
             yield return null;
         }
+        audioMixer.SetFloat(fadeInParam, fadeInTarget);
         audioMixer.SetFloat(fadeOutParam, fadeOutTarget);
 
         fadeCoroutine = null;

@@ -170,8 +170,32 @@ public class UnlockPanelHandler : MonoBehaviour
                 case 16: // nature candyland
                     SteamIntegration.instance.UnlockAchievement("CANDYLANDNATUREUNLOCK");
                     break;
+                case 17: // Lounge Chair 
+                    SteamIntegration.instance.UnlockAchievement("LOUNGECHAIRUNLOCK");
+                    break;
                 case 18: // rock 
                     SteamIntegration.instance.UnlockAchievement("ROCKUNLOCK");
+                    break;
+                case 19: // Tier4 
+                    SteamIntegration.instance.UnlockAchievement("TIER4STRUCTUREUNLOCK");
+                    break;
+                case 20: // Satellite dish
+                    SteamIntegration.instance.UnlockAchievement("SATELLITEDISHUNLOCK");
+                    break;
+                case 21: // Hologram
+                    SteamIntegration.instance.UnlockAchievement("HOLOGRAMUNLOCK");
+                    break;
+                case 22: // Couch02
+                    SteamIntegration.instance.UnlockAchievement("SCIFICOUCHUNLOCK");
+                    break;
+                case 23: // Fence
+                    SteamIntegration.instance.UnlockAchievement("FENCEUNLOCK");
+                    break;
+                case 24: // Floating lamp
+                    SteamIntegration.instance.UnlockAchievement("FLOATINGLAMPUNLOCK");
+                    break;
+                case 25: // Square lamp
+                    SteamIntegration.instance.UnlockAchievement("LAMPUNLOCK");
                     break;
             }
         }

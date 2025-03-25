@@ -229,8 +229,31 @@ public class PlacementState : IBuildingState
                 if (!canPlace)
                     break;
             }
-
             return canPlace;
+        }
+
+        if (database.objectsData[selectedObjectIndex].shouldCheckForAllowCollisions)
+        {
+            bool canPlace = true;
+            for (int i = 0; i < database.objectsData[selectedObjectIndex].allowCollisions.Length; i++)
+            {
+                switch (database.objectsData[selectedObjectIndex].allowCollisions[i])
+                {
+                    case ObjectType.Ground:
+                        canPlace = floorData.CanPlaceObjectAt(gridPosition, previewSystem.sizeToUse);
+                        break;
+                    case ObjectType.Wall:
+                        canPlace = wallData.CanPlaceObjectAt(gridPosition, previewSystem.sizeToUse);
+                        break;
+                    case ObjectType.WallDecor:
+                        canPlace = wallDecorData.CanPlaceObjectAt(gridPosition, previewSystem.sizeToUse);
+                        break;
+                    case ObjectType.Furniture:
+                        canPlace = furnitureData.CanPlaceObjectAt(gridPosition, previewSystem.sizeToUse);
+                        break;
+                }
+            }
+            return !canPlace; 
         }
         return true;
     }

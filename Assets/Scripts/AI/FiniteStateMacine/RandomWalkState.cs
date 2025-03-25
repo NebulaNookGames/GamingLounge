@@ -128,8 +128,11 @@ public class RandomWalkState : State
     private void Initialize()
     {
         // Only walk to a random position if the visitor hasn't walked enough or isn't invited to the lounge
-        if (visitorEntity.currentWalkAmount >= visitorEntity.walkAmount || !visitorEntity.invitedToLounge)
+        if (visitorEntity.currentWalkAmount >= visitorEntity.walkAmount)
             walkPosition = RandomNavSphere(entity.transform.position, walkRadius, -1, false);
+        else if(!visitorEntity.invitedToLounge)
+            walkPosition = RandomNavSphere(entity.transform.position, walkRadius, -1, false);
+
         else
             walkPosition = RandomNavSphere(entity.transform.position, walkRadius, -1, true);
 
@@ -169,6 +172,7 @@ public class RandomWalkState : State
         // Spawn the leave effect if it hasn't been spawned yet
         if (!leaveEffectSpawned)
         {
+            visitorEntity.SpawnObject(visitorEntity.goingHomeEffect);
             leaveEffectSpawned = true;
             effectSpawner.SpawnEffect();
         }

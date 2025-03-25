@@ -54,7 +54,7 @@ public class ObjectData
     [Tooltip("Object cost.")]
     [field: SerializeField] public int cost { get; private set; }
     
-    [Header("Collision Settings")]
+    [Header("Use if collisions need to occur for placement to be denied")]
     
     [Tooltip("Should collision be checked through overlapping?")]
     [field: SerializeField] public bool shouldCheckForOverlap { get; private set; }
@@ -62,9 +62,17 @@ public class ObjectData
     [Tooltip("The Layermask to use while overlap checking.")]
     [field: SerializeField] public LayerMask overlapCheckingLayermask { get; private set; }
     
+    [Header("Use if grid overlap needs to occur for placement to be denied")]
     [Tooltip("Should collision be checked by grid database cell occupation?")]
     [field: SerializeField] public bool shouldCheckForDatabase { get; private set; }
     
     [Tooltip("The type of the objects that deny collisions (e.g., ground, wall).")]
     [field: SerializeField] public ObjectType[] collisionObjectTypes { get; private set; }
+    
+    [Header("Use if grid overlap needs to occur for placement to be possible")]
+    [Tooltip("Should collision be checked by grid database cell occupation?")]
+    [field: SerializeField] public bool shouldCheckForAllowCollisions { get; private set; }
+    
+    [Tooltip("The type of the objects that allow collisions (e.g., ground, wall).")]
+    [field: SerializeField] public ObjectType[] allowCollisions { get; private set; }
 }

@@ -53,7 +53,7 @@ public class VisitorEntity : Entity
     public Vector3 raceOffset = new Vector3(.76f, .05f, 0);  // Offset for racing-related behavior
     public float bikeWaitTime = 1;            // Time the entity waits while using a bike
     public float raceWaitTime;                // Time the entity waits for a race-related activity
-
+    public GameObject goingHomeEffect; 
     public bool walkToDestinationIsOver = false;  // Flag indicating whether walking is completed
 
     private float destinationUpdateTime = 1f;
@@ -105,7 +105,7 @@ public class VisitorEntity : Entity
         CreateStates();   // Create the states for the entity
         CreateTransitions();  // Set up transitions between the states
         initialState = randomWalkState;  // Set the initial state
-        walkAmount = Random.Range(20, 40); // Randomly choose how many times the entity will walk
+        walkAmount = Random.Range(5, 10); // Randomly choose how many times the entity will walk
         currentDestinationUpdateTime = destinationUpdateTime;
     }
 

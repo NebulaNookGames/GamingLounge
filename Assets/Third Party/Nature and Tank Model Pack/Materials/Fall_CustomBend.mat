@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Fall_CustomBend
-  m_Shader: {fileID: -6465566751694194690, guid: 3669d0d16b0c2f7458e6d5ecc6223f3b, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: b15908c99435ee64b99d1502a7248541, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -61,6 +61,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Emission:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 10, y: 10}
@@ -69,7 +73,15 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 10, y: 10}
         m_Offset: {x: 0, y: 0}
+    - _Metallic:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Normal:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -78,6 +90,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Smoothness:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -104,6 +120,7 @@ Material:
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Amount: 0.015
+    - _BendAmount: 0.015
     - _BendStrength: 1
     - _Bend_Strength: 1
     - _Blend: 0
@@ -136,13 +153,22 @@ Material:
     - _SrcBlendAlpha: 1
     - _Surface: 0
     - _UVSec: 0
+    - _UseEmission: 0
+    - _UseMetallic: 0
+    - _UseNormal: 0
+    - _UseSmoothness: 0
+    - _UseTexture: 1
+    - _UseWind: 1
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0.7511673, g: 0.9811321, b: 0.6238519, a: 1}
+    - _Base_Color: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 0.94509804, g: 0.46561697, b: 0.039215684, a: 1}
     - _Direction: {r: 2, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _Tiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

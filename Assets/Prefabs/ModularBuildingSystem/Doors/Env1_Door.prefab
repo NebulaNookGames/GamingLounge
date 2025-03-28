@@ -418,6 +418,7 @@ GameObject:
   - component: {fileID: 7194009876627538166}
   - component: {fileID: 8627583888766812753}
   - component: {fileID: 6384072541914981507}
+  - component: {fileID: 2431499471011168747}
   m_Layer: 8
   m_Name: Env1_Door
   m_TagString: Untagged
@@ -531,16 +532,16 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1655804727539295675}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Remove
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 8639697984708892667}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
@@ -553,6 +554,18 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1655804727539295675}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Remove
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &6943281352829728341
 MonoBehaviour:
@@ -772,6 +785,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalRenderers:
   - {fileID: 6813610553239914206}
+--- !u!114 &2431499471011168747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5767364422584940774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d70dcaa09c2312c42a3c92c04092a57c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 1655804727539295675}
+  duration: 2
 --- !u!1 &6411228494095771073
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,6 +871,7 @@ MonoBehaviour:
   - Player
   parameterName: Interact
   anim: {fileID: 1655804727539295675}
+  updateTime: 1
 --- !u!54 &7927895925704309196
 Rigidbody:
   m_ObjectHideFlags: 0

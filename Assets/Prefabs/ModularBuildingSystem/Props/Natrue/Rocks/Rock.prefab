@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 7945342000085082837}
   - component: {fileID: 1070309045400964430}
   - component: {fileID: 7551557744610138565}
+  - component: {fileID: 5467785322932807362}
   m_Layer: 10
   m_Name: Rock
   m_TagString: Untagged
@@ -202,18 +203,6 @@ MonoBehaviour:
   OnDeactivatePlaceObject:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5253628250912662806}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Remove
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 4121715472614672718}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -225,6 +214,30 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 5253628250912662806}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Remove
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 5253628250912662806}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Remove
+          m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &-7940882060318916119
 MonoBehaviour:
@@ -421,6 +434,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   component: {fileID: 1140195030056168597}
+--- !u!114 &5467785322932807362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5767364422584940774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d70dcaa09c2312c42a3c92c04092a57c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 5253628250912662806}
+  duration: 2
 --- !u!1 &6163205003713474759
 GameObject:
   m_ObjectHideFlags: 0
@@ -675,6 +702,10 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: d8c41e4ce415d4d4dbf9c61e22a1d56c, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: d8c41e4ce415d4d4dbf9c61e22a1d56c, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: d8c41e4ce415d4d4dbf9c61e22a1d56c, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'

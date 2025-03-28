@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_Spring
-  m_Shader: {fileID: -6465566751694194690, guid: f353778d6aca8cb408de9558806990ab, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: b15908c99435ee64b99d1502a7248541, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -57,6 +57,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Smoothness:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Texture:
         m_Texture: {fileID: 2800000, guid: edc5e0be99bcc914283231a30e08e65f, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -75,13 +79,23 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlphaAmount: 0.5
+    - _AlphaAmount: 1
     - _Amount: 0.015
+    - _BendAmount: 0.015
+    - _BendStrength: 2
     - _EnableCulling: 0
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _UseEmission: 0
+    - _UseMetallic: 0
+    - _UseNormal: 0
+    - _UseSmoothness: 0
+    - _UseTexture: 1
+    - _UseWind: 0
     m_Colors:
+    - _Base_Color: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Direction: {r: 0, g: 0, b: 0, a: 0}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []

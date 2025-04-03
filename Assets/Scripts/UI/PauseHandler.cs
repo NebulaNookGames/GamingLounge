@@ -1,7 +1,8 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem; 
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
 
 /// <summary>
@@ -24,6 +25,7 @@ public class PauseHandler : MonoBehaviour
    public InputActionProperty pauseAction; 
    
    public EventSystem eventSystem;
+   public InputActionAsset inputActionAsset; 
    public Button topUIButton;
    
    
@@ -69,8 +71,11 @@ public class PauseHandler : MonoBehaviour
          Time.timeScale = 0;
          pauseMenu.SetActive(true);
          gameUI.SetActive(false);
-         if(eventSystem != null)
+         if (eventSystem != null)
+         {
             eventSystem.SetSelectedGameObject(topUIButton.gameObject);
+            eventSystem.gameObject.GetComponent<InputSystemUIInputModule>().actionsAsset = inputActionAsset;
+         }
       }
       else
       {

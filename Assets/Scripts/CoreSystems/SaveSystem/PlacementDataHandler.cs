@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+
 public class PlacementDataHandler : DataHandler
 {
     public static PlacementDataHandler instance; 
@@ -38,13 +40,18 @@ public class PlacementDataHandler : DataHandler
             int index = 0; 
             foreach (ObjectData objData in objectsDatabaseSO.objectsData)
             {
-               if (saveData.objectDatas[i].ID == objData.ID)
-                    {
-                        index = objectPlacer.PlaceObject(
-                            objData,
-                            saveData.positions[i],
-                            saveData.rotations[i], false, false, saveData.customizedObjectiDs[i]);
-                    }
+                if (saveData.objectDatas[i].ID == objData.ID)
+                {
+                    int customizedObjectId = (i < saveData.customizedObjectiDs.Count) ? saveData.customizedObjectiDs[i] : 0;
+
+                    index = objectPlacer.PlaceObject(
+                        objData,
+                        saveData.positions[i],
+                        saveData.rotations[i], 
+                        false, 
+                        false, 
+                        customizedObjectId);
+                }
             }
        
             switch (saveData.objectDatas[i].objectType)

@@ -21,8 +21,8 @@ public class SaveAndLoad : MonoBehaviour
     public SaveData loadedSaveData; 
     
     public bool saveDataLoaded = false;
-    public GameObject autoSaveCanvas; 
-    
+    public GameObject autoSaveCanvas;
+    private bool savedSecondTimeThisTime = false; 
     
     void Awake()
     {
@@ -81,7 +81,16 @@ public class SaveAndLoad : MonoBehaviour
 
             File.WriteAllText(Application.persistentDataPath + "/saveFile.json",
                 jsonString); // Save the string in a JSON file.
-        // }
+            if (!savedSecondTimeThisTime)
+            {
+                savedSecondTimeThisTime = true; 
+                
+                if(File.Exists(Application.persistentDataPath + "/saveDataTwo.json"))
+                    File.Delete(Application.persistentDataPath + "/saveDataTwo.json");
+                
+                File.WriteAllText(Application.persistentDataPath + "/saveDataTwo.json", jsonString);
+            }
+            // }
         // catch
         // {
         //     Debug.Log("Failed saving File.");

@@ -54,8 +54,7 @@ public class RandomWalkState : State
     {
         if (entity.Agent.isOnNavMesh)
             entity.Agent.isStopped = false;
-
-        entity.EntityAnimator.SetFloat("HorizontalSpeed", 1);  // Set animation speed for walking
+        
         effectSpawner = entity.GetComponent<EffectSpawner>();
         updateTimer = updateInterval;
 
@@ -138,7 +137,10 @@ public class RandomWalkState : State
 
         // Set the agent's destination if it's on the NavMesh
         if (entity.Agent.isOnNavMesh)
+        {
+            entity.EntityAnimator.SetFloat("HorizontalSpeed", 1);  // Set animation speed for walking
             entity.Agent.SetDestination(walkPosition);
+        }
 
         currentWaitTimeUntilAutoEnd = waitTimeUntilAutoEnd;  // Set the time before auto-ending the state
 

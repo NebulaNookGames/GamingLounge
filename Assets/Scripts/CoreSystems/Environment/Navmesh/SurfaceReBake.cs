@@ -30,9 +30,6 @@ public class SurfaceReBake : MonoBehaviour
 
         // If the placement system is not assigned, exit the method.
         if (placementSystem == null) return;
-
-        
-
         // Subscribe to the OnPlaced event to trigger the Rebake method when placement happens.
     }
 

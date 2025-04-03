@@ -84,13 +84,17 @@ public class WalkToDestinationState : State
                 entity.Agent.SetDestination(visitorEntity.conversationPartner.transform.position);
             // If the visitor has a destination object, set destination to that object
             else if (visitorEntity.gameObjectToWalkTo != null)
+            {
+                // Play walking animation
+                entity.EntityAnimator.SetFloat("HorizontalSpeed", 1.0f);
                 entity.Agent.SetDestination(visitorEntity.gameObjectToWalkTo.transform.position);
+            }
             // Default to the entity's current position if no destination is provided
-            else 
+            else
+            {
+                entity.EntityAnimator.SetFloat("HorizontalSpeed", 0);
                 entity.Agent.SetDestination(entity.transform.position);
-            
-            // Play walking animation
-            entity.EntityAnimator.SetFloat("HorizontalSpeed", 1.0f);
+            }
         }
     }
 

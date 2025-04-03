@@ -139,11 +139,6 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 3598366867079071758, guid: 002abc1d47ab9814d82121938908f686, type: 3}
   m_PrefabInstance: {fileID: 1373312153135360395}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &82875919 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4263052036238850183, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
-  m_PrefabInstance: {fileID: 8446446829056921443}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &124681849 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8619878165277444919, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
@@ -317,11 +312,6 @@ MonoBehaviour:
 --- !u!1 &933227773 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7439320403084742528, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
-  m_PrefabInstance: {fileID: 8446446829056921443}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1043567371 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3008797945267069436, guid: d4787b50e02f63442862898183e7ccaa, type: 3}
   m_PrefabInstance: {fileID: 8446446829056921443}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1057053124 stripped
@@ -651,6 +641,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 283277059153807514, guid: d39efdd88c4cd5a4789462e17674cee6, type: 3}
+      propertyPath: m_Size.y
+      value: 89.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 283277059153807514, guid: d39efdd88c4cd5a4789462e17674cee6, type: 3}
+      propertyPath: m_NavMeshData
+      value: 
+      objectReference: {fileID: 23800000, guid: 8682aa2be1262e44a820e69bb0764024, type: 2}
     - target: {fileID: 4085767117480526028, guid: d39efdd88c4cd5a4789462e17674cee6, type: 3}
       propertyPath: m_Name
       value: -----ENVIRONMENT-----
@@ -895,11 +893,11 @@ PrefabInstance:
     - target: {fileID: 4622920454102570717, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
       propertyPath: 'lockedGameObjects.Array.data[0]'
       value: 
-      objectReference: {fileID: 1043567371}
+      objectReference: {fileID: 0}
     - target: {fileID: 4622920454102570717, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
       propertyPath: 'lockedGameObjects.Array.data[1]'
       value: 
-      objectReference: {fileID: 82875919}
+      objectReference: {fileID: 0}
     - target: {fileID: 4622920454102570717, guid: 0387be4ee6850eb47b367549d8383821, type: 3}
       propertyPath: 'gameObjectsToDeactivate.Array.data[0]'
       value: 

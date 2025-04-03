@@ -93,15 +93,16 @@ public class FindMachineState : State
                         else
                         {
                             destination = machineInUse.GetComponent<UsagePositionStorage>().usagePosition.position;
+                            entity.EntityAnimator.SetFloat("HorizontalSpeed", 1);
                         }
                     }
                     else
                     {
                         destination = machineInUse.GetComponent<UsagePositionStorage>().usagePosition.position;
+                        entity.EntityAnimator.SetFloat("HorizontalSpeed", 1);
                     }
                     
                     entity.GetComponent<NavMeshAgent>().SetDestination(destination);
-                    entity.EntityAnimator.SetFloat("HorizontalSpeed", 1);
                 }
             }
             else

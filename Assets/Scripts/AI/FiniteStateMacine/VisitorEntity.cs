@@ -107,6 +107,7 @@ public class VisitorEntity : Entity
         initialState = randomWalkState;  // Set the initial state
         walkAmount = Random.Range(5, 10); // Randomly choose how many times the entity will walk
         currentDestinationUpdateTime = destinationUpdateTime;
+        invitedToLounge = true; 
     }
 
     /// <summary>

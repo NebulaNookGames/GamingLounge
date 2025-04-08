@@ -5,18 +5,20 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class UnlockPanelHandler : MonoBehaviour
 {
+    public int unlockSize = 26; 
     [SerializeField] private GameObject[] buttons;
     [SerializeField] private int[] cost;
     [SerializeField] public bool[] bought;
     [SerializeField] private GameObject[] unlockables;
     public UnityEvent onUpgradePCUnlocked;
     private bool firstBuy = true;
-    
     IEnumerator UnlockAchievementsAfterLoad()
     {
+        CheckBoughtSize();
         yield return new WaitForSeconds(1f);
         for (int i = 0; i < bought.Length; i++)
         {
@@ -30,6 +32,7 @@ public class UnlockPanelHandler : MonoBehaviour
 
     private void OnEnable()
     {
+        CheckBoughtSize();
         MoneyManager.instance.OnMoneyChanged += UpdateButtonInteractable;
         UpdateButtonInteractable(MoneyManager.instance.MoneyAmount);
         StartCoroutine(UnlockAchievementsAfterLoad());
@@ -42,6 +45,8 @@ public class UnlockPanelHandler : MonoBehaviour
 
     void UpdateButtonInteractable(int amount)
     {
+        CheckBoughtSize();
+        
         for(int i = 0; i < buttons.Length; i++)
         {
             if (bought[i])
@@ -64,6 +69,8 @@ public class UnlockPanelHandler : MonoBehaviour
 
     public void UnlockItem(int index)
     {
+        CheckBoughtSize();
+        
         if (cost[index] > MoneyManager.instance.MoneyAmount) return;
 
 
@@ -90,6 +97,8 @@ public class UnlockPanelHandler : MonoBehaviour
 
     public void UnlockAllItems()
     {
+        CheckBoughtSize();
+        
         for (int i = 0; i < buttons.Length; i++)
         {
             unlockables[i].SetActive(true);
@@ -104,11 +113,25 @@ public class UnlockPanelHandler : MonoBehaviour
     public void LoadUnlocks(bool[] bought)
     {
         this.bought = bought;
+        CheckBoughtSize();
         for(int i = 0; i < this.bought.Length; i++)
         {
             if (this.bought[i])
             {
                 unlockables[i].SetActive(true);
+            }
+        }
+    }
+
+    void CheckBoughtSize()
+    {
+        if (bought.Length < unlockSize)
+        {
+            bool[] temp = bought;
+            bought = new bool[unlockSize];
+            for (int i = 0; i < temp.Length && i < unlockSize; i++)
+            {
+                bought[i] = temp[i];
             }
         }
     }

@@ -81,7 +81,10 @@ public class WalkToDestinationState : State
         {
             // If the visitor has a conversation partner, set destination to their position
             if (visitorEntity.conversationPartner != null)
+            {
+                entity.EntityAnimator.SetFloat("HorizontalSpeed", 1.0f);
                 entity.Agent.SetDestination(visitorEntity.conversationPartner.transform.position);
+            }
             // If the visitor has a destination object, set destination to that object
             else if (visitorEntity.gameObjectToWalkTo != null)
             {

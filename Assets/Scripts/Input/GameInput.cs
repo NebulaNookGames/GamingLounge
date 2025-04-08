@@ -14,7 +14,7 @@ public class GameInput : MonoBehaviour
     #region Enums
 
     // Enum to define the types of game devices: Keyboard/Mouse or Gamepad
-    public enum GameDevice { KeyboardMouse, Gamepad, }
+    public enum GameDevice { KeyboardMouse, Gamepad}
 
     #endregion
 

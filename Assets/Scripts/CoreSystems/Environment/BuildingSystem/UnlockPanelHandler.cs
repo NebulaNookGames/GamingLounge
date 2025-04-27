@@ -78,6 +78,7 @@ public class UnlockPanelHandler : MonoBehaviour
         {
             InputManager.instance.placementInputUnlocked = true;
             onUpgradePCUnlocked?.Invoke();
+#if !UNITY_SWITCH
             try
             {
                 SteamIntegration.instance.UnlockAchievement("UPGRADEPCUNLOCK");
@@ -86,6 +87,7 @@ public class UnlockPanelHandler : MonoBehaviour
             {
                Debug.Log("Failed to unlock upgrade achievement");
             }
+#endif
         }
         firstBuy = false;  
         bought[index] = true;
@@ -138,6 +140,7 @@ public class UnlockPanelHandler : MonoBehaviour
 
     void UnlockAchievement(int index)
     {
+#if !UNITY_SWITCH
         try
         {
             switch (index)
@@ -226,5 +229,6 @@ public class UnlockPanelHandler : MonoBehaviour
         {
             Debug.Log("Failed unlock achievement");
         }
+#endif 
     }
 }

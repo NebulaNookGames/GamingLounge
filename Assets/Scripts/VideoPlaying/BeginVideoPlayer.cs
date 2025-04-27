@@ -10,7 +10,8 @@ public class BeginVideoPlayer : MonoBehaviour
     public VideoClip windowsClip; 
     
     public Material objectMaterial; // Assign your object's material
-    public Material logoMaterial;  
+    public Material logoMaterial;
+    public Material gameplayImageMaterial; 
     public VideoPlayer videoPlayer; // Assign your VideoPlayer component
     public RenderTexture renderTexture; // Default render texture (if any)
     public Material uniqueMaterial; 
@@ -28,9 +29,22 @@ public class BeginVideoPlayer : MonoBehaviour
 
     public void HandlePlay(bool play)
     {
+#if !UNITY_SWITCH
         currentPlay = play; 
         videoPlayer.Prepare();
         Invoke(nameof(StartOrPause), .2f);
+#endif 
+#if UNITY_SWITCH
+        if (play)
+            uniqueMaterial = gameplayImageMaterial;
+        else
+            uniqueMaterial = logoMaterial;
+        
+        Renderer renderer = GetComponent<Renderer>();
+        Material[] materials = renderer.materials;
+        materials[materialIndex] = uniqueMaterial;
+        renderer.materials = materials;
+#endif 
     }
 
     void StartOrPause()

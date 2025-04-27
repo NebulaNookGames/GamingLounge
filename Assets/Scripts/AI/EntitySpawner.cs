@@ -141,6 +141,7 @@ public class EntitySpawner : MonoBehaviour
             EntityManager.instance.currentNPCs.Add(newEntity); // Add to NPC list
             onAmountUpdated?.Invoke(); // Notify about amount update
 
+#if !UNITY_SWITCH
             // Check for achievements based on number of entities
             try
             {
@@ -163,6 +164,7 @@ public class EntitySpawner : MonoBehaviour
             {
                 Debug.Log("Failed unlocking entity achievement");
             }
+#endif 
         }
     }
 
@@ -214,6 +216,7 @@ public class EntitySpawner : MonoBehaviour
                 EntityManager.instance.currentNPCs.Add(newEntity); // Add to NPC list
                 amount++; // Increment the amount of spawned entities
 
+#if !UNITY_SWITCH
                 // Check for achievements
                 try
                 {
@@ -236,6 +239,7 @@ public class EntitySpawner : MonoBehaviour
                 {
                     Debug.Log("Failed unlocking entity achievement");
                 }
+#endif 
             }
         }
         onAmountUpdated?.Invoke(); // Notify about amount update

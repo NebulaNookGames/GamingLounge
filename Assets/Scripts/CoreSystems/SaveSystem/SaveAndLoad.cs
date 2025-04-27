@@ -6,25 +6,25 @@ public class SaveAndLoad : MonoBehaviour
 {
     public static SaveAndLoad instance;
 
-    [Tooltip("The data handlers which should receive and send data as a saveData object.")]
-    [SerializeField] DataHandler[] dataHandlers;
+    [Tooltip("The data handlers which should receive and send data as a SaveData object.")]
+    [SerializeField] private DataHandler[] dataHandlers;
 
     public Action onDataLoaded;
     
     [Header("Auto-Save Settings")]
-    [Tooltip("Enable or disable auto-save.")]
     [SerializeField] private bool autoSaveEnabled = true;
-
-    [Tooltip("Interval in seconds between auto-saves.")]
     [SerializeField] private float autoSaveInterval = 300f;
 
     public SaveData loadedSaveData; 
     
     public bool saveDataLoaded = false;
     public GameObject autoSaveCanvas;
-    private bool savedSecondTimeThisTime = false; 
-    
-    void Awake()
+    private bool savedSecondTimeThisTime = false;
+
+    private string mainSavePath => Path.Combine(Application.persistentDataPath, "saveFile.json");
+    private string backupSavePath => Path.Combine(Application.persistentDataPath, "saveDataTwo.json");
+
+    private void Awake()
     {
         if (instance == null) { instance = this; }
         else { Destroy(gameObject); }
@@ -33,85 +33,87 @@ public class SaveAndLoad : MonoBehaviour
         {
             StartAutoSave();
         }
+        
     }
 
-    /// <summary>
-    /// Starts the auto-save routine.
-    /// </summary>
     public void StartAutoSave()
     {
         InvokeRepeating(nameof(AutoSave), autoSaveInterval, autoSaveInterval);
     }
 
-    /// <summary>
-    /// Stops the auto-save routine.
-    /// </summary>
     public void StopAutoSave()
     {
         CancelInvoke(nameof(AutoSave));
     }
 
-    /// <summary>
-    /// Auto-save functionality triggered by InvokeRepeating.
-    /// </summary>
     private void AutoSave()
     {
         Debug.Log("Auto-Saving...");
-        autoSaveCanvas.SetActive(true);
-        Invoke(nameof(DisableAutoSaveCanvas), 7f);
+        if (autoSaveCanvas != null)
+        {
+            autoSaveCanvas.SetActive(true);
+            Invoke(nameof(DisableAutoSaveCanvas), 7f);
+        }
         Save();
     }
 
-    /// <summary>
-    /// Save the variables from a new savedata object to a JSON file.
-    /// </summary>
     public void Save()
     {
-        // try
-        // {
-            File.Delete(Application.persistentDataPath + "/saveFile.json");
+        try
+        {
             SaveData saveData = new SaveData();
 
-            foreach (DataHandler dataHandler in dataHandlers) // Recieve data from all data handlers.
+            foreach (DataHandler dataHandler in dataHandlers)
             {
                 dataHandler.SendData(saveData);
             }
 
-            string jsonString = JsonUtility.ToJson(saveData, true); // Create a new string for saving as JSON file data.
+            string jsonString = JsonUtility.ToJson(saveData, true);
 
-            File.WriteAllText(Application.persistentDataPath + "/saveFile.json",
-                jsonString); // Save the string in a JSON file.
+            // --- SAFE SAVE (write to temp file first) ---
+            string tempPath = mainSavePath + ".tmp";
+            File.WriteAllText(tempPath, jsonString);
+
+            if (File.Exists(mainSavePath))
+                File.Delete(mainSavePath);
+
+            File.Move(tempPath, mainSavePath);
+
+            // --- BACKUP SAVE ---
             if (!savedSecondTimeThisTime)
             {
-                savedSecondTimeThisTime = true; 
-                
-                if(File.Exists(Application.persistentDataPath + "/saveDataTwo.json"))
-                    File.Delete(Application.persistentDataPath + "/saveDataTwo.json");
-                
-                File.WriteAllText(Application.persistentDataPath + "/saveDataTwo.json", jsonString);
+                savedSecondTimeThisTime = true;
+
+                string tempBackupPath = backupSavePath + ".tmp";
+                File.WriteAllText(tempBackupPath, jsonString);
+
+                if (File.Exists(backupSavePath))
+                    File.Delete(backupSavePath);
+
+                File.Move(tempBackupPath, backupSavePath);
             }
-            // }
-        // catch
-        // {
-        //     Debug.Log("Failed saving File.");
-        // }
+        }
+        catch (Exception ex)
+        {
+            Debug.LogWarning("Failed saving file: " + ex.Message);
+        }
     }
 
-    /// <summary>
-    /// Loads the variables from a JSON file and stores them in a new savedata object.
-    /// </summary>
     public void Load()
     {
         try
         {
-            string jsonString =
-                File.ReadAllText(Application.persistentDataPath + "/saveFile.json"); // Save the data into a string.
+            if (!File.Exists(mainSavePath))
+            {
+                Debug.LogWarning("Save file not found!");
+                return;
+            }
 
-            loadedSaveData =
-                JsonUtility.FromJson<SaveData>(jsonString); // Save the string information to a save data object.
+            string jsonString = File.ReadAllText(mainSavePath);
 
-            foreach (DataHandler dataHandler in
-                     dataHandlers) // Distribute the save data information to each data handler.
+            loadedSaveData = JsonUtility.FromJson<SaveData>(jsonString);
+
+            foreach (DataHandler dataHandler in dataHandlers)
             {
                 dataHandler.ReceiveData(loadedSaveData);
             }
@@ -119,14 +121,15 @@ public class SaveAndLoad : MonoBehaviour
             onDataLoaded?.Invoke();
             saveDataLoaded = true;
         }
-        catch
+        catch (Exception ex)
         {
-            Debug.Log("Failed loading File.");
+            Debug.LogWarning("Failed loading file: " + ex.Message);
         }
     }
 
-    void DisableAutoSaveCanvas()
+    private void DisableAutoSaveCanvas()
     {
-        autoSaveCanvas.SetActive(false);
+        if (autoSaveCanvas != null)
+            autoSaveCanvas.SetActive(false);
     }
 }

@@ -1,4 +1,4 @@
-using System;
+    using System;
 using UnityEngine;
 using UnityEngine.UI; 
 
@@ -6,6 +6,7 @@ public class ValidIconOnDeviceChange : MonoBehaviour
 {
     public Sprite keyboardIcon;
     public Sprite gamepadIcon;
+    public Sprite switchIcon;
     Image imageToChange; 
     GameInput gameInput;
 
@@ -39,7 +40,17 @@ public class ValidIconOnDeviceChange : MonoBehaviour
     void GameInput_DeviceChanged(GameInput.GameDevice gameDevice)
     {
         if (gameDevice == GameInput.GameDevice.Gamepad)
+        {
+            #if !UNITY_SWITCH
             imageToChange.sprite = gamepadIcon;
+            #endif
+            #if UNITY_SWITCH
+            if(switchIcon != null)
+            imageToChange.sprite = switchIcon;
+            else
+            imageToChange.sprite = gamepadIcon;
+            #endif
+        }
         else
             imageToChange.sprite = keyboardIcon;
     }

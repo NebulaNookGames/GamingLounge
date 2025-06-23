@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.IO;
+using System.Collections;
 
 public class SaveAndLoad : MonoBehaviour
 {
@@ -10,88 +11,83 @@ public class SaveAndLoad : MonoBehaviour
     [SerializeField] private DataHandler[] dataHandlers;
 
     public Action onDataLoaded;
-    
+
     [Header("Auto-Save Settings")]
     [SerializeField] private bool autoSaveEnabled = true;
     [SerializeField] private float autoSaveInterval = 300f;
 
-    public SaveData loadedSaveData; 
-    
+    public SaveData loadedSaveData;
     public bool saveDataLoaded = false;
     public GameObject autoSaveCanvas;
     private bool savedSecondTimeThisTime = false;
+
+    private ISaveHandler saveHandler;
+
+#if UNITY_SWITCH && !UNITY_EDITOR
+    private SwitchSaveHandler switchSaveHandler;
+#endif
 
     private string mainSavePath => Path.Combine(Application.persistentDataPath, "saveFile.json");
     private string backupSavePath => Path.Combine(Application.persistentDataPath, "saveDataTwo.json");
 
     private void Awake()
     {
-        if (instance == null) { instance = this; }
-        else { Destroy(gameObject); }
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
+
+    private void Start()
+    {
+#if UNITY_SWITCH && !UNITY_EDITOR
+        StartCoroutine(InitializeSwitchSaveHandler());
+#else
+        saveHandler = new JsonSaveHandler(mainSavePath, backupSavePath);
+        // Load(); // Load is now handled by SaveInitializer
+#endif
 
         if (autoSaveEnabled)
         {
             StartAutoSave();
         }
-        
     }
 
-    public void StartAutoSave()
+#if UNITY_SWITCH && !UNITY_EDITOR
+    private IEnumerator InitializeSwitchSaveHandler()
     {
-        InvokeRepeating(nameof(AutoSave), autoSaveInterval, autoSaveInterval);
-    }
+        yield return new WaitForSeconds(0.2f); // Wait for Switch file systems to initialize
 
-    public void StopAutoSave()
-    {
-        CancelInvoke(nameof(AutoSave));
-    }
-
-    private void AutoSave()
-    {
-        Debug.Log("Auto-Saving...");
-        if (autoSaveCanvas != null)
+        try
         {
-            autoSaveCanvas.SetActive(true);
-            Invoke(nameof(DisableAutoSaveCanvas), 7f);
+            switchSaveHandler = new SwitchSaveHandler("SwitchSave.bin");
+            saveHandler = switchSaveHandler;
+
+            // Load(); // Load is now handled by SaveInitializer
         }
-        Save();
+        catch (Exception e)
+        {
+            Debug.LogError("Failed to initialize Switch save system: " + e.Message);
+        }
     }
+#endif
 
     public void Save()
     {
         try
         {
             SaveData saveData = new SaveData();
-
             foreach (DataHandler dataHandler in dataHandlers)
             {
                 dataHandler.SendData(saveData);
             }
 
-            string jsonString = JsonUtility.ToJson(saveData, true);
-
-            // --- SAFE SAVE (write to temp file first) ---
-            string tempPath = mainSavePath + ".tmp";
-            File.WriteAllText(tempPath, jsonString);
-
-            if (File.Exists(mainSavePath))
-                File.Delete(mainSavePath);
-
-            File.Move(tempPath, mainSavePath);
-
-            // --- BACKUP SAVE ---
-            if (!savedSecondTimeThisTime)
-            {
-                savedSecondTimeThisTime = true;
-
-                string tempBackupPath = backupSavePath + ".tmp";
-                File.WriteAllText(tempBackupPath, jsonString);
-
-                if (File.Exists(backupSavePath))
-                    File.Delete(backupSavePath);
-
-                File.Move(tempBackupPath, backupSavePath);
-            }
+            saveHandler.Save(saveData);
         }
         catch (Exception ex)
         {
@@ -103,16 +99,14 @@ public class SaveAndLoad : MonoBehaviour
     {
         try
         {
-            if (!File.Exists(mainSavePath))
+            SaveData saveData = saveHandler.Load();
+            if (saveData == null)
             {
-                Debug.LogWarning("Save file not found!");
+                Debug.LogWarning("Save file not found or is empty.");
                 return;
             }
 
-            string jsonString = File.ReadAllText(mainSavePath);
-
-            loadedSaveData = JsonUtility.FromJson<SaveData>(jsonString);
-
+            loadedSaveData = saveData;
             foreach (DataHandler dataHandler in dataHandlers)
             {
                 dataHandler.ReceiveData(loadedSaveData);
@@ -127,9 +121,30 @@ public class SaveAndLoad : MonoBehaviour
         }
     }
 
+    private void OnApplicationQuit()
+    {
+#if UNITY_SWITCH && !UNITY_EDITOR
+        switchSaveHandler?.Unmount();
+#endif
+    }
+
     private void DisableAutoSaveCanvas()
     {
         if (autoSaveCanvas != null)
             autoSaveCanvas.SetActive(false);
+    }
+
+    public void StartAutoSave() => InvokeRepeating(nameof(AutoSave), autoSaveInterval, autoSaveInterval);
+    public void StopAutoSave() => CancelInvoke(nameof(AutoSave));
+
+    private void AutoSave()
+    {
+        Debug.Log("Auto-Saving...");
+        if (autoSaveCanvas != null)
+        {
+            autoSaveCanvas.SetActive(true);
+            Invoke(nameof(DisableAutoSaveCanvas), 7f);
+        }
+        Save();
     }
 }

@@ -225,7 +225,8 @@ public class VisitorEntity : Entity
         {
             new Transition(() => { return randomStateIndex == 0; }, findInteractableState),
             new Transition(() => { return randomStateIndex == 1; }, findConversationState),
-            new Transition(() => { return randomStateIndex == 2; }, randomWalkState),
+            new Transition(() => { return randomStateIndex == 2; }, findConversationState),
+            new Transition(() => { return randomStateIndex == 3; }, randomWalkState),
             new Transition(() => { return true; }, randomWalkState),
         };
         behaviorRandomizationState.Transitions = behaviorRandomizationTransitions;

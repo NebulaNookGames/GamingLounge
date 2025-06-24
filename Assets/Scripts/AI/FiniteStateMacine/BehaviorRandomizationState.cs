@@ -62,7 +62,7 @@ public class BehaviorRandomizationState : State
     /// </summary>
     private void Initialization()
     {
-        visitorEntity.randomStateIndex = UnityEngine.Random.Range(0, 4);
+        visitorEntity.randomStateIndex = UnityEngine.Random.Range(0, 5);
     }
 
     #endregion Methods

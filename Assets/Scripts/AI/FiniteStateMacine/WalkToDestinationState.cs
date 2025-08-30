@@ -76,26 +76,24 @@ public class WalkToDestinationState : State
     {
         currentWalkTime = walkTime; // Initialize the current walk time
         entity.Agent.isStopped = false; // Ensure the agent is not stopped
-        
+        entity.EntityAnimator.SetFloat("HorizontalSpeed", 1.0f);
+
         if (visitorEntity.gameObject != null)
         {
             // If the visitor has a conversation partner, set destination to their position
             if (visitorEntity.conversationPartner != null)
             {
-                entity.EntityAnimator.SetFloat("HorizontalSpeed", 1.0f);
                 entity.Agent.SetDestination(visitorEntity.conversationPartner.transform.position);
             }
             // If the visitor has a destination object, set destination to that object
             else if (visitorEntity.gameObjectToWalkTo != null)
             {
                 // Play walking animation
-                entity.EntityAnimator.SetFloat("HorizontalSpeed", 1.0f);
                 entity.Agent.SetDestination(visitorEntity.gameObjectToWalkTo.transform.position);
             }
             // Default to the entity's current position if no destination is provided
             else
             {
-                entity.EntityAnimator.SetFloat("HorizontalSpeed", 0);
                 entity.Agent.SetDestination(entity.transform.position);
             }
         }

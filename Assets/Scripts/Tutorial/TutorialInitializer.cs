@@ -7,7 +7,7 @@ public class TutorialInitializer : MonoBehaviour
     [SerializeField] private TutorialPlacement tutorialPlacement;
     [SerializeField] private GameObject moveTutorial;
     [SerializeField] private GameObject tutorialBackground;
-    
+    public GameObject placementHelpIcon; 
     public GameObject playerCam; 
     private void Awake()
     {
@@ -23,6 +23,7 @@ public class TutorialInitializer : MonoBehaviour
         else
         {
             InputManager.instance.placementInputUnlocked = true; 
+            placementHelpIcon.SetActive(true);
             Destroy(gameObject);
         }
     }

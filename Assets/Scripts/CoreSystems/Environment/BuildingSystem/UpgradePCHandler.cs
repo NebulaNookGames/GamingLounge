@@ -13,7 +13,8 @@ public class UpgradePCHandler : MonoBehaviour
     public AudioClip offAudioclip;
 
     public InputActionProperty worldObjectUsageAction;
-    
+    public InputActionProperty menuBackAction; 
+
     private void OnEnable()
     {
         UpgradePCCanvas = GameObject.FindWithTag("UpgradeCanvas");
@@ -41,6 +42,8 @@ public class UpgradePCHandler : MonoBehaviour
             audioS.PlayOneShot(offAudioclip);
             InputReader.instance.enabled = true;
             InputManager.instance.enabled = true;
+            menuBackAction.action.performed -= UseObject;
+
         }
         else
         {
@@ -50,6 +53,7 @@ public class UpgradePCHandler : MonoBehaviour
             audioS.PlayOneShot(onAudioclip);
             InputReader.instance.enabled = false;
             InputManager.instance.enabled = false;
+            menuBackAction.action.performed += UseObject;
         }
         isActive = !isActive;
     }

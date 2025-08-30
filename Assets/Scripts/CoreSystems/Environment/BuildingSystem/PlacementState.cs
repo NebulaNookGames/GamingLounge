@@ -150,7 +150,7 @@ public class PlacementState : IBuildingState
                 worldCenter,
                 worldExtents,
                 rotation,
-                database.objectsData[selectedObjectIndex].overlapCheckingLayermask);
+                database.objectsData[selectedObjectIndex].OverlapCheckingLayermask);
 
             if (hitColliders.Length > 0)
             {
@@ -188,7 +188,7 @@ public class PlacementState : IBuildingState
                 worldCenter,
                 worldExtents,
                 rotation,
-                database.objectsData[selectedObjectIndex].overlapCheckingLayermask);
+                database.objectsData[selectedObjectIndex].OverlapCheckingLayermask);
 
             if (hitColliders.Length > 0)
             {

@@ -7,9 +7,14 @@ public class SteamIntegration : MonoBehaviour
 
     public static SteamIntegration instance;
 
+    public bool isFullVersion = true; 
+    
     private void Awake()
     {
-        instance = this; 
+        if(instance == null) 
+            instance = this;
+        else
+            Destroy(gameObject);
     }
 
     #endregion
@@ -20,8 +25,11 @@ public class SteamIntegration : MonoBehaviour
     {
         try
         {
+            
+#if !UNITY_SWITCH
             InitializeSteam();
             SetLocaleBasedOnSteamLanguage();
+#endif
             DontDestroyOnLoad(this);
         }
         catch (System.Exception e)
@@ -32,12 +40,16 @@ public class SteamIntegration : MonoBehaviour
 
     void Update()
     {
+#if !UNITY_SWITCH
         Steamworks.SteamClient.RunCallbacks();
+#endif
     }
 
     void OnApplicationQuit()
     {
+#if !UNITY_SWITCH
         Steamworks.SteamClient.Shutdown();
+#endif
     }
 
     #endregion
@@ -46,7 +58,11 @@ public class SteamIntegration : MonoBehaviour
 
     private void InitializeSteam()
     {
-        Steamworks.SteamClient.Init(3426730);  // App ID for your game on Steam
+        if(isFullVersion) 
+            Steamworks.SteamClient.Init(3426730);  // App ID for your game on Steam
+        else
+            Steamworks.SteamClient.Init(3526570);
+        
         PrintYourName();
     }
 
@@ -97,6 +113,8 @@ public class SteamIntegration : MonoBehaviour
     [Button]
     public void IsThisAchievementUnlocked(string id)
     {
+        if (!isFullVersion) return; 
+        
         var ach = new Steamworks.Data.Achievement();
         Debug.Log("Achievement " + id + " status: " + ach.State);
     }
@@ -104,6 +122,8 @@ public class SteamIntegration : MonoBehaviour
     [Button]
     public void UnlockAchievement(string id)
     {
+        if (!isFullVersion) return; 
+        
         var ach = new Steamworks.Data.Achievement(id);
         ach.Trigger();
         Debug.Log("Achievement " + id + " unlocked");
@@ -112,6 +132,8 @@ public class SteamIntegration : MonoBehaviour
     [Button]
     public void ClearAchievementStatus(string id)
     {
+        if (!isFullVersion) return; 
+        
         var ach = new Steamworks.Data.Achievement(id);
         ach.Clear();
         Debug.Log("Achievement " + id + " cleared");
@@ -120,6 +142,8 @@ public class SteamIntegration : MonoBehaviour
     [Button] // This adds a button in the Unity Editor if you use Odin Inspector
     public void ClearAllAchievements()
     {
+        if (!isFullVersion) return; 
+        
         string[] achievementIDs = {
             "TIER2STRUCTUREUNLOCK", "TIER3STRUCTUREUNLOCK", "CRYSTALUNLOCK", 
             "LIGHTSABERUNLOCK", "FLUXCAPACITORUNLOCK", "TRAFFICCONEUNLOCK", 

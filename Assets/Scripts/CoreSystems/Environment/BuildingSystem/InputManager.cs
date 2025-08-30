@@ -13,7 +13,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] private Camera sceneCamera; // The camera used to determine the position of objects in the scene
 
     public event Action OnClicked; // Event triggered when the player clicks
-    public event Action OnPlacementToggle; // Event triggered when placement mode is toggled
+    public event Action<bool> OnPlacementToggle; // Event triggered when placement mode is toggled
     public event Action OnRotate; // Event triggered when the player rotates an object
 
     public RectTransform virtualCursorTransform;
@@ -57,7 +57,7 @@ public class InputManager : MonoBehaviour
             return;
 
         toggleHandled = true;
-        OnPlacementToggle?.Invoke();
+        OnPlacementToggle?.Invoke(true);
     }
 
     void Clicked(InputAction.CallbackContext context)

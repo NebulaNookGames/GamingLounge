@@ -58,6 +58,8 @@ public class RandomWalkState : State
         effectSpawner = entity.GetComponent<EffectSpawner>();
         updateTimer = updateInterval;
 
+        entity.EntityAnimator.SetFloat("HorizontalSpeed", 1);  // Set animation speed for walking
+        
         Initialize();  // Start the walk state initialization
     }
 

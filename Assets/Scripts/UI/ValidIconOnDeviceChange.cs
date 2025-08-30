@@ -45,10 +45,10 @@ public class ValidIconOnDeviceChange : MonoBehaviour
             imageToChange.sprite = gamepadIcon;
             #endif
             #if UNITY_SWITCH
-            if(switchIcon != null)
-            imageToChange.sprite = switchIcon;
-            else
-            imageToChange.sprite = gamepadIcon;
+            if(switchIcon != null) 
+                imageToChange.sprite = switchIcon;
+            else 
+                imageToChange.sprite = gamepadIcon;
             #endif
         }
         else

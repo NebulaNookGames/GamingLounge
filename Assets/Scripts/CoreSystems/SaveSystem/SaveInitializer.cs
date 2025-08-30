@@ -5,55 +5,46 @@ using System.Collections;
 public class SaveInitializer : MonoBehaviour
 {
     public static SaveInitializer Instance;
-    
-    private static string lastSceneName;
 
+    private static string lastSceneName;
     private bool waitingForSaveSystem = false;
+    private bool hasLoadedSaveData = false;
 
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
             Destroy(gameObject);
-            return;
         }
-
-        transform.parent = null;
-        DontDestroyOnLoad(this.gameObject);
-
-        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        lastSceneName = scene.name;
-
-        // Only try to load if coming from MainMenu
+        // Also load when transitioning away from MainMenu, if needed
         if (scene.name != "MainMenu" && lastSceneName == "MainMenu")
         {
             StartCoroutine(WaitAndLoadSave());
         }
+
+        lastSceneName = scene.name;
     }
 
     private IEnumerator WaitAndLoadSave()
     {
-        if (waitingForSaveSystem) yield break;
+        yield return new WaitForSeconds(1f);
+        
         waitingForSaveSystem = true;
-
-        // Wait until SaveAndLoad is fully initialized
-        while (SaveAndLoad.instance == null || !SaveAndLoad.instance.saveDataLoaded)
-        {
-            yield return new WaitForSeconds(0.1f);
-        }
-
-        // Optional: add another small delay if needed
-        yield return new WaitForSeconds(0.2f);
-
+        
+        // Call load once ready
         SaveAndLoad.instance.Load();
+
+        hasLoadedSaveData = true;
         waitingForSaveSystem = false;
     }
 

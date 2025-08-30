@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System; 
 
 /// <summary>
 /// Manages the creation, destruction, and tracking of NPC entities in the game.
@@ -61,30 +62,37 @@ public class EntityManager : MonoBehaviour
 /// <summary>
 /// Stores values and properties related to an NPC in the game.
 /// </summary>
-[System.Serializable]
+[Serializable]
 public class NPCValues
 {
     [Header("NPC Properties")]
+
     [Tooltip("Random identifier for the NPC.")]
-    public int randomIndex = 0; // Random identifier for the NPC
+    public int randomIndex = 0;
 
     [Tooltip("Index to determine NPC's color.")]
-    public int colorIndex = 0; // Index to determine NPC's color
+    public int colorIndex = 0;
 
     [Tooltip("Flag to indicate if NPC is invited to lounge.")]
-    public bool invitedToLounge = false; // Flag to indicate if NPC is invited to lounge
+    public bool invitedToLounge = false;
 
-    [Tooltip("Last known location of the NPC.")]
-    public Vector3 lastLocation = Vector3.zero; // Last known location of the NPC
+    // Unity field (not binary-serializable)
+    [NonSerialized]
+    public Vector3 lastLocation = Vector3.zero;
 
-    #region Constructor
+    // Serializable proxy field for binary serialization
+    public SerializableVector3 lastLocationSerialized;
+
+    #region Constructors
+
+    /// <summary>
+    /// Default constructor for serialization.
+    /// </summary>
+    public NPCValues() { }
 
     /// <summary>
     /// Constructor to initialize NPC values.
     /// </summary>
-    /// <param name="randomIndex">Random index identifier for the NPC.</param>
-    /// <param name="colorIndex">Color index for the NPC.</param>
-    /// <param name="invitedToLounge">Flag indicating if the NPC is invited to lounge.</param>
     public NPCValues(int randomIndex, int colorIndex, bool invitedToLounge)
     {
         this.randomIndex = randomIndex;
@@ -92,5 +100,25 @@ public class NPCValues
         this.invitedToLounge = invitedToLounge;
     }
 
-    #endregion Constructor
+    #endregion
+
+    #region Binary Serialization Helpers
+
+    /// <summary>
+    /// Converts non-serializable fields to their serializable counterparts.
+    /// </summary>
+    public void PrepareForBinarySave()
+    {
+        lastLocationSerialized = new SerializableVector3(lastLocation);
+    }
+
+    /// <summary>
+    /// Converts serializable fields back into Unity-native values.
+    /// </summary>
+    public void RestoreFromBinaryLoad()
+    {
+        lastLocation = lastLocationSerialized.ToVector3();
+    }
+
+    #endregion
 }

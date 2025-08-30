@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.IO;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class SaveAndLoad : MonoBehaviour
 {
@@ -22,14 +23,17 @@ public class SaveAndLoad : MonoBehaviour
     private bool savedSecondTimeThisTime = false;
 
     private ISaveHandler saveHandler;
+    
+    private bool saveSystemMounted = false;
+    public bool IsReady => saveSystemMounted && saveDataLoaded;
 
 #if UNITY_SWITCH && !UNITY_EDITOR
     private SwitchSaveHandler switchSaveHandler;
-#endif
-
+#else
     private string mainSavePath => Path.Combine(Application.persistentDataPath, "saveFile.json");
     private string backupSavePath => Path.Combine(Application.persistentDataPath, "saveDataTwo.json");
-
+#endif 
+    
     private void Awake()
     {
         if (instance == null)
@@ -46,7 +50,7 @@ public class SaveAndLoad : MonoBehaviour
     private void Start()
     {
 #if UNITY_SWITCH && !UNITY_EDITOR
-        StartCoroutine(InitializeSwitchSaveHandler());
+        InitializeSwitchSaveHandler();
 #else
         saveHandler = new JsonSaveHandler(mainSavePath, backupSavePath);
         // Load(); // Load is now handled by SaveInitializer
@@ -59,22 +63,19 @@ public class SaveAndLoad : MonoBehaviour
     }
 
 #if UNITY_SWITCH && !UNITY_EDITOR
-    private IEnumerator InitializeSwitchSaveHandler()
+    private void InitializeSwitchSaveHandler()
+{
+    try
     {
-        yield return new WaitForSeconds(0.2f); // Wait for Switch file systems to initialize
-
-        try
-        {
-            switchSaveHandler = new SwitchSaveHandler("SwitchSave.bin");
-            saveHandler = switchSaveHandler;
-
-            // Load(); // Load is now handled by SaveInitializer
-        }
-        catch (Exception e)
-        {
-            Debug.LogError("Failed to initialize Switch save system: " + e.Message);
-        }
+        switchSaveHandler = new SwitchSaveHandler("SwitchSave.bin");
+        saveHandler = switchSaveHandler;
+        saveSystemMounted = true;  // ✅ Mark as mounted
     }
+    catch (Exception e)
+    {
+        Debug.LogError("Failed to initialize Switch save system: " + e.Message);
+    }
+}
 #endif
 
     public void Save()

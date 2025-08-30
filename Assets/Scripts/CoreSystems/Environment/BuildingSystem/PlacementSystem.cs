@@ -67,6 +67,8 @@ public class PlacementSystem : MonoBehaviour
 
     // public TextMeshProUGUI moneyText;
 
+    public GameObject placementInputHelper; 
+    
     private bool firstTimeToggle = true;
     
     private void Awake()
@@ -86,7 +88,7 @@ public class PlacementSystem : MonoBehaviour
         StopPlacement();
       
         inputManager.OnPlacementToggle += TogglePlacement;
-        TogglePlacement();
+        TogglePlacement(false);
         
         // foreach (GameObject lockedGridVisualization in lockedGridVisualizations) 
         //     lockedGridVisualization.SetActive(true);
@@ -128,7 +130,7 @@ public class PlacementSystem : MonoBehaviour
     /// <summary>
     /// Toggles the placement mode on and off.
     /// </summary>
-    private void TogglePlacement()
+    private void TogglePlacement(bool fromInput)
     {
         if (placementOn)
         {
@@ -147,7 +149,7 @@ public class PlacementSystem : MonoBehaviour
             
             if(GameInput.Instance)
                 GameInput.Instance.SetMouseVisibility(false);
-
+            
             StopPlacement();
         }
         else
@@ -164,6 +166,11 @@ public class PlacementSystem : MonoBehaviour
             
             placementCanvas.SetActive(true);
         }
+        
+        if(placementCanvas.activeSelf && fromInput)
+            placementInputHelper.SetActive(false);
+        else if (!placementCanvas.activeSelf && fromInput)
+            placementInputHelper.SetActive(true);
     }
 
     /// <summary>

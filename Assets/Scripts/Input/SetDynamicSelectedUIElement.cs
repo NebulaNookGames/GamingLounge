@@ -31,6 +31,9 @@ public class SetDynamicSelectedUIElement : MonoBehaviour
     // Changes the currently selected UI button based on the device and selection conditions
     public void Change()
     {
+        if(eventSystem == null && GameObject.FindObjectOfType<EventSystem>())
+            eventSystem = FindObjectOfType<EventSystem>(); 
+        
         // If eventSystem is null or the active game device is Keyboard/Mouse, do nothing
         if (eventSystem == null || (GameInput.Instance != null && GameInput.Instance.activeGameDevice == GameInput.GameDevice.KeyboardMouse)) return;
 

@@ -40,25 +40,29 @@ public class LocaleSelector : MonoBehaviour
     // Coroutine to set the selected locale
     private IEnumerator SetLocale(int localeID)
     {
-        // Prevent changing locale if it's already in progress
         active = true;
-        
-        // Store the current dropdown value (language selection)
-        int currentSetLocale = languageDropdown.value;
 
-        // Wait until localization settings are initialized
+        // Wait until localization system is ready
         yield return LocalizationSettings.InitializationOperation;
 
-        // Set the selected locale based on the dropdown value
-        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[currentSetLocale];
+        // ✅ Use the provided localeID, not the dropdown's value
+        if (localeID >= 0 && localeID < LocalizationSettings.AvailableLocales.Locales.Count)
+        {
+            LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[localeID];
+            Debug.Log("Locale set to: " + LocalizationSettings.SelectedLocale.Identifier.Code);
+        }
+        else
+        {
+            Debug.LogWarning("Invalid locale ID: " + localeID);
+        }
 
-        // Reset the active flag after the locale change
         active = false;
     }
 
     // Method to handle locale change triggered by the dropdown
     public void ChangeLocale(int localeID)
     {
+        Debug.Log("Locale changed");
         // Return early if a locale change is already in progress
         if (active == true) return;
 

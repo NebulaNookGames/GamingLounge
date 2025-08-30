@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
@@ -8,10 +9,10 @@ public class DemoInitializer : MonoBehaviour
     [SerializeField] public List<GameObject> gameObjectsToDeactivate;
 
     [SerializeField] public Button expandButton; 
-    
-    // Called when the script is initialized (before the first frame update)
-    private void Awake()
+
+    private void Start()
     {
+        if (SteamIntegration.instance && SteamIntegration.instance.isFullVersion) return; 
         // Deactivate each GameObject in the gameObjectsToDeactivate list
         foreach (GameObject go in gameObjectsToDeactivate)
         {

@@ -89,6 +89,9 @@ public class VisitorEntity : Entity
 
                 currentDestinationUpdateTime = destinationUpdateTime;
                 agent.SetDestination(agent.destination);
+                
+                if(agent.velocity.magnitude > .1f) 
+                    entityAnimator.SetFloat("HorizontalSpeed", 1.0f);
             }
         }
     }

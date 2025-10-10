@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 1914966045522102487}
   - component: {fileID: 2523462624664329234}
   - component: {fileID: 6887358053937286050}
+  - component: {fileID: 4710997965570015649}
   m_Layer: 10
   m_Name: DestroyedConsole
   m_TagString: Untagged
@@ -207,6 +208,18 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 2664563312530198389}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Remove
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 2664563312530198389}
         m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
         m_MethodName: SetTrigger
         m_Mode: 5
@@ -218,6 +231,20 @@ MonoBehaviour:
           m_StringArgument: Remove
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4710997965570015649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5767364422584940774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d70dcaa09c2312c42a3c92c04092a57c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 2664563312530198389}
+  duration: 2
 --- !u!1001 &3899602275901677822
 PrefabInstance:
   m_ObjectHideFlags: 0

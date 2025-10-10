@@ -12,6 +12,7 @@ public class DemoInitializer : MonoBehaviour
 
     private void Start()
     {
+#if !UNITY_SWITCH
         if (SteamIntegration.instance && SteamIntegration.instance.isFullVersion) return; 
         // Deactivate each GameObject in the gameObjectsToDeactivate list
         foreach (GameObject go in gameObjectsToDeactivate)
@@ -20,5 +21,6 @@ public class DemoInitializer : MonoBehaviour
         }
 
         expandButton.interactable = false; 
+#endif
     }
 }

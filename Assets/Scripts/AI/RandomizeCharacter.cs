@@ -61,6 +61,12 @@ public class RandomizeCharacter : MonoBehaviour
     public void GenerateNew()
     {
         int randomIndex = Random.Range(0, characters.Length); // Randomly select a character
+
+        for (int i = 0; i < characters.Length; i++)
+        {
+            if(i != randomIndex)
+                Destroy(characters[i]);
+        }
         
         characters[randomIndex].SetActive(true); // Activate the selected character
         entity.EntityAnimator = characters[randomIndex].GetComponent<Animator>(); // Set the character's animator
@@ -107,13 +113,13 @@ public class RandomizeCharacter : MonoBehaviour
         characterMeshes[characterIndex].GetComponent<SkinnedMeshRenderer>().materials[headIndexes[characterIndex]].SetFloat("_Hue", colorIndex);
         characterMeshes[characterIndex].GetComponent<SkinnedMeshRenderer>().materials[clothIndexes[characterIndex]].SetFloat("_Hue", colorIndex);
 
-        // Apply color to LOD Level 1 meshes
-        lodLevel01CharacterMeshes[characterIndex].GetComponent<SkinnedMeshRenderer>().materials[headIndexes[characterIndex]].SetFloat("_Hue", colorIndex);
-        lodLevel01CharacterMeshes[characterIndex].GetComponent<SkinnedMeshRenderer>().materials[clothIndexes[characterIndex]].SetFloat("_Hue", colorIndex);
-
-        // Apply color to LOD Level 2 meshes
-        lodLevel02CharacterMeshes[characterIndex].GetComponent<SkinnedMeshRenderer>().materials[headIndexes[characterIndex]].SetFloat("_Hue", colorIndex);
-        lodLevel02CharacterMeshes[characterIndex].GetComponent<SkinnedMeshRenderer>().materials[clothIndexes[characterIndex]].SetFloat("_Hue", colorIndex);
+        // // Apply color to LOD Level 1 meshes
+        // lodLevel01CharacterMeshes[characterIndex].GetComponent<SkinnedMeshRenderer>().materials[headIndexes[characterIndex]].SetFloat("_Hue", colorIndex);
+        // lodLevel01CharacterMeshes[characterIndex].GetComponent<SkinnedMeshRenderer>().materials[clothIndexes[characterIndex]].SetFloat("_Hue", colorIndex);
+        //
+        // // Apply color to LOD Level 2 meshes
+        // lodLevel02CharacterMeshes[characterIndex].GetComponent<SkinnedMeshRenderer>().materials[headIndexes[characterIndex]].SetFloat("_Hue", colorIndex);
+        // lodLevel02CharacterMeshes[characterIndex].GetComponent<SkinnedMeshRenderer>().materials[clothIndexes[characterIndex]].SetFloat("_Hue", colorIndex);
     }
 
     #endregion Helper Methods

@@ -406,6 +406,7 @@ GameObject:
   - component: {fileID: 5886976585874924351}
   - component: {fileID: 6199283487077844923}
   - component: {fileID: 2906795030566670112}
+  - component: {fileID: 4675649728852382181}
   m_Layer: 10
   m_Name: Fence01
   m_TagString: Untagged
@@ -554,6 +555,18 @@ MonoBehaviour:
   OnDeactivatePlaceObject:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 2853069279916194862}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
       - m_Target: {fileID: 2853069279916194862}
         m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
         m_MethodName: SetTrigger
@@ -723,6 +736,20 @@ MonoBehaviour:
   objectToActivate: {fileID: 3156722226304093096}
   objectToCheckDistanceFrom: {fileID: 4671418362306633361}
   distanceToActivate: 0.5
+--- !u!114 &4675649728852382181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5046924598155189539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d70dcaa09c2312c42a3c92c04092a57c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 2853069279916194862}
+  duration: 2
 --- !u!1 &8873326041863608475
 GameObject:
   m_ObjectHideFlags: 0

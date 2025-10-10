@@ -79,7 +79,9 @@ public class PlayState : State
     public override void EnterState()
     {
         entity.Agent.isStopped = true;
-        visitorEntity.headTracking.noTracking = true; // Disable head tracking during play
+        if(visitorEntity.headTracking) 
+            visitorEntity.headTracking.noTracking = true; // Disable head tracking during play
+        
         Initialization(); // Initialize the state
     }
 
@@ -149,7 +151,10 @@ public class PlayState : State
 
         // Clear machine and visitor head tracking
         visitorEntity.machineInUse = null;
-        visitorEntity.headTracking.noTracking = false;
+        
+        if(visitorEntity.headTracking) 
+            visitorEntity.headTracking.noTracking = false;
+        
         entity.Agent.isStopped = false;
         entity.Agent.avoidancePriority = initialAvoidancePriority;
     }

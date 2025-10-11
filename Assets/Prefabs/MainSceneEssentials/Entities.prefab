@@ -83,6 +83,8 @@ MonoBehaviour:
   maxAmount: 0
   amountPerLand: 10
   initialAmount: 20
+  switchAmountPerLand: 5
+  switchInitialAmount: 10
   maxAmountFromLand: 0
   amount: 0
   expandHandler: {fileID: 0}
@@ -99,6 +101,10 @@ PrefabInstance:
     - target: {fileID: 1189618843407812, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1189618843407812, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4095570033422622, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -151,7 +157,27 @@ PrefabInstance:
     - target: {fileID: 1744283145792785036, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
       propertyPath: 'm_Materials.Array.data[1]'
       value: 
-      objectReference: {fileID: 2100000, guid: a0bbcf0accda2044eb6aab827bfa0b36, type: 2}
+      objectReference: {fileID: 2100000, guid: 37bf7cc1e8737a84d91c226ef73bc970, type: 2}
+    - target: {fileID: 3220571680816647814, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
+      propertyPath: far clip plane
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 3220571680816647814, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
+      propertyPath: m_BackGroundColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3220571680816647814, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3220571680816647814, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3220571680816647814, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5970218356188293973, guid: 41c209abb2d73574a9baf7bf474510cc, type: 3}
       propertyPath: m_Antialiasing
       value: 0

@@ -53,6 +53,12 @@ public class BehaviorRandomizationState : State
         CheckSwitchState(); // Contained in Base class.
     }
 
+    public override void ExitState()
+    {
+        entity.EntityAnimator.enabled = false;
+        visitorEntity.EntityAnimator.GetComponent<MeshBaker>().BakeMesh();
+    }
+
     #endregion State Methods
 
     #region Methods
@@ -62,6 +68,8 @@ public class BehaviorRandomizationState : State
     /// </summary>
     private void Initialization()
     {
+        entity.EntityAnimator.enabled = true;
+        visitorEntity.EntityAnimator.GetComponent<MeshBaker>().UnbakeMesh();
         visitorEntity.randomStateIndex = UnityEngine.Random.Range(0, 5);
     }
 

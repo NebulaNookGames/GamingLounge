@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class RandomizeCharacter : MonoBehaviour
 {
@@ -8,16 +9,12 @@ public class RandomizeCharacter : MonoBehaviour
     [Tooltip("Array of different character GameObjects.")]
     [SerializeField] private GameObject[] characters; // List of character prefabs
     
+    [FormerlySerializedAs("characterMeshes")]
     [Header("Character Meshes")]
     [Tooltip("Array of character meshes used in different LOD levels.")]
-    [SerializeField] private GameObject[] characterMeshes; // Meshes for the character
+    [SerializeField] private GameObject[] skinnedCharMeshes; // Meshes for the character
     
-    [Header("Level of Detail (LOD) Meshes")]
-    [Tooltip("LOD level 1 meshes for characters.")]
-    [SerializeField] private GameObject[] lodLevel01CharacterMeshes; // LOD Level 1 meshes
-    
-    [Tooltip("LOD level 2 meshes for characters.")]
-    [SerializeField] private GameObject[] lodLevel02CharacterMeshes; // LOD Level 2 meshes
+    [SerializeField] private GameObject[] normalCharMeshes; // Meshes for the character
     
     [Header("Mesh Material Indexes")]
     [Tooltip("Indexes to access head materials for character customization.")]
@@ -110,16 +107,10 @@ public class RandomizeCharacter : MonoBehaviour
     private void ApplyCharacterColor(int characterIndex, int colorIndex)
     {
         // Apply the color to character meshes
-        characterMeshes[characterIndex].GetComponent<SkinnedMeshRenderer>().materials[headIndexes[characterIndex]].SetFloat("_Hue", colorIndex);
-        characterMeshes[characterIndex].GetComponent<SkinnedMeshRenderer>().materials[clothIndexes[characterIndex]].SetFloat("_Hue", colorIndex);
-
-        // // Apply color to LOD Level 1 meshes
-        // lodLevel01CharacterMeshes[characterIndex].GetComponent<SkinnedMeshRenderer>().materials[headIndexes[characterIndex]].SetFloat("_Hue", colorIndex);
-        // lodLevel01CharacterMeshes[characterIndex].GetComponent<SkinnedMeshRenderer>().materials[clothIndexes[characterIndex]].SetFloat("_Hue", colorIndex);
-        //
-        // // Apply color to LOD Level 2 meshes
-        // lodLevel02CharacterMeshes[characterIndex].GetComponent<SkinnedMeshRenderer>().materials[headIndexes[characterIndex]].SetFloat("_Hue", colorIndex);
-        // lodLevel02CharacterMeshes[characterIndex].GetComponent<SkinnedMeshRenderer>().materials[clothIndexes[characterIndex]].SetFloat("_Hue", colorIndex);
+        skinnedCharMeshes[characterIndex].GetComponent<SkinnedMeshRenderer>().materials[headIndexes[characterIndex]].SetFloat("_Hue", colorIndex);
+        skinnedCharMeshes[characterIndex].GetComponent<SkinnedMeshRenderer>().materials[clothIndexes[characterIndex]].SetFloat("_Hue", colorIndex);
+        normalCharMeshes[characterIndex].GetComponent<MeshRenderer>().materials[headIndexes[characterIndex]].SetFloat("_Hue", colorIndex);
+        normalCharMeshes[characterIndex].GetComponent<MeshRenderer>().materials[clothIndexes[characterIndex]].SetFloat("_Hue", colorIndex);
     }
 
     #endregion Helper Methods

@@ -23,6 +23,8 @@ public class EntitySpawner : MonoBehaviour
     public int maxAmount = 0; // Maximum number of entities allowed to spawn
     public int amountPerLand = 10; // Number of entities to spawn per land
     public int initialAmount = 20; // Initial number of entities to spawn
+    public int switchAmountPerLand = 10;
+    public int switchInitialAmount = 20;
     public int maxAmountFromLand; // Maximum amount based on bought land
     public int amount; // Current number of spawned entities
     public ExpandHandler expandHandler; // Reference to the ExpandHandler to track land expansion
@@ -78,8 +80,13 @@ public class EntitySpawner : MonoBehaviour
                 }
             }
 
+#if !UNITY_SWITCH
             // Calculate max amount of entities based on bought land and initial amount
             maxAmountFromLand = ((boughtLandAmount * amountPerLand) + initialAmount);
+#endif
+#if UNITY_SWITCH
+            maxAmountFromLand = ((boughtLandAmount * switchAmountPerLand) + switchInitialAmount);
+#endif
             maxAmount = WorldInteractables.instance.machineCount;
 
             if (maxAmount >= maxAmountFromLand)

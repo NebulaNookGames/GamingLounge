@@ -21,6 +21,7 @@ public class MoneyManager : MonoBehaviour
     private void Awake()
     {
         instance = this; 
+        //Invoke(nameof(SetCheatMoney), 10f);
     }
 
     public void SetMoney(int amount)
@@ -33,6 +34,12 @@ public class MoneyManager : MonoBehaviour
         if (moneyAmount < 0)
             moneyAmount = 0; 
         
+        OnMoneyChanged?.Invoke(moneyAmount);
+    }
+
+    void SetCheatMoney()
+    {
+        moneyAmount = 2000000; 
         OnMoneyChanged?.Invoke(moneyAmount);
     }
 

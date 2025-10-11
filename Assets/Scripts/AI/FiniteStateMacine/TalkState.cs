@@ -23,8 +23,16 @@ public class TalkState : State
 
     public override void EnterState()
     {
+        entity.EntityAnimator.enabled = true;
+        visitorEntity.EntityAnimator.GetComponent<MeshBaker>().UnbakeMesh();
         entity.Agent.isStopped = true;
         Initialization();
+    }
+
+    public override void ExitState()
+    {
+        entity.EntityAnimator.enabled = false;
+        visitorEntity.EntityAnimator.GetComponent<MeshBaker>().BakeMesh();
     }
 
     public override void UpdateState()
@@ -37,7 +45,7 @@ public class TalkState : State
         {
             visitorEntity.conversationPartner = null;
             visitorEntity.gameObjectToWalkTo = null; 
-            visitorEntity.headTracking.specificTarget = null;
+            //visitorEntity.headTracking.specificTarget = null;
             CheckSwitchState(); // Contained in Base class.
         }
     }
@@ -76,7 +84,7 @@ public class TalkState : State
         // Set head tracking target
         if (visitorEntity.conversationPartner != null)
         {
-            visitorEntity.headTracking.specificTarget = visitorEntity.conversationPartner.transform.GetComponentInChildren<PointOfInterest>();
+            // visitorEntity.headTracking.specificTarget = visitorEntity.conversationPartner.transform.GetComponentInChildren<PointOfInterest>();
         }
     }
 

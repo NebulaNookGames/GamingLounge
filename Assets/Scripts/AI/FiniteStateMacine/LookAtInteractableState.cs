@@ -47,6 +47,8 @@ public class LookAtInteractableState : State
     /// </summary>
     public override void EnterState()
     {
+        entity.EntityAnimator.enabled = true;
+        visitorEntity.EntityAnimator.GetComponent<MeshBaker>().UnbakeMesh();
         entity.Agent.autoRepath = false;  // Disable automatic pathfinding repathing to prevent interruption
         entity.Agent.isStopped = true;    // Stop the agent's movement
         Initialization();                 // Initialize the look-at interaction and idle timer
@@ -72,6 +74,8 @@ public class LookAtInteractableState : State
     /// </summary>
     public override void ExitState()
     {
+        entity.EntityAnimator.enabled = false;
+        visitorEntity.EntityAnimator.GetComponent<MeshBaker>().BakeMesh();
         visitorEntity.gameObjectToWalkTo = null;  // Clear the target object to walk to
         entity.Agent.enabled = true;               // Re-enable the agent for movement
     }

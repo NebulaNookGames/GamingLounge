@@ -40,6 +40,12 @@ public class FindInteractableState : State
         Initialize();
     }
 
+    public override void ExitState()
+    {
+        entity.EntityAnimator.enabled = false;
+        visitorEntity.EntityAnimator.GetComponent<MeshBaker>().BakeMesh();
+    }
+
     /// <summary>
     /// Checks if the state should transition.
     /// </summary>
@@ -57,13 +63,15 @@ public class FindInteractableState : State
     /// </summary>
     private void Initialize()
     {
+        entity.EntityAnimator.enabled = true;
+        visitorEntity.EntityAnimator.GetComponent<MeshBaker>().UnbakeMesh();
         PointOfInterest chosenPOI = null;
         float lastDistance = float.MaxValue;
         
         foreach (PointOfInterest poi in WorldInteractables.instance.pointOfInterests)
         {
             // Ignore character-based POIs or the entity's current ignored POI.
-            if (poi.isCharacter || poi == visitorEntity.headTracking.ignorePointOfInterest) continue;
+            if (poi.isCharacter) continue;
             
             float tempDistance = Vector3.Distance(poi.transform.position, visitorEntity.transform.position);
             

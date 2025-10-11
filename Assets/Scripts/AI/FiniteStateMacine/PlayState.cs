@@ -78,9 +78,10 @@ public class PlayState : State
     /// </summary>
     public override void EnterState()
     {
+        entity.EntityAnimator.enabled = true;
         entity.Agent.isStopped = true;
-        if(visitorEntity.headTracking) 
-            visitorEntity.headTracking.noTracking = true; // Disable head tracking during play
+        //if(visitorEntity.headTracking) 
+        //    visitorEntity.headTracking.noTracking = true; // Disable head tracking during play
         
         Initialization(); // Initialize the state
     }
@@ -152,11 +153,14 @@ public class PlayState : State
         // Clear machine and visitor head tracking
         visitorEntity.machineInUse = null;
         
-        if(visitorEntity.headTracking) 
-            visitorEntity.headTracking.noTracking = false;
+        //if(visitorEntity.headTracking) 
+         //   visitorEntity.headTracking.noTracking = false;
         
         entity.Agent.isStopped = false;
         entity.Agent.avoidancePriority = initialAvoidancePriority;
+        
+        visitorEntity.EntityAnimator.GetComponent<MeshBaker>().BakeMesh();
+        entity.EntityAnimator.enabled = false;
     }
 
     #endregion State Methods
@@ -181,6 +185,8 @@ public class PlayState : State
         {
             case MachineType.ArcadeMachine:
                 entity.EntityAnimator.SetBool("InteractArcadeMachine", true);
+                //entity.EntityAnimator.enabled = false;
+                visitorEntity.EntityAnimator.GetComponent<MeshBaker>().BakeMesh();
                 break;
             case MachineType.Bike:
                 visitorEntity.machineInUse.GetComponentInChildren<HandleAnimationStarting>().PlayAnimation(visitorEntity.bikeWaitTime, "Play");
@@ -198,7 +204,11 @@ public class PlayState : State
                 if (visitorEntity.seatInUse && visitorEntity.shouldUseSeat)
                     entity.EntityAnimator.SetBool("SitChair", true);
                 else
+                {
                     entity.EntityAnimator.SetBool("Interact", true);
+                    //entity.EntityAnimator.enabled = false;
+                    visitorEntity.EntityAnimator.GetComponent<MeshBaker>().BakeMesh();
+                }
                 break;
         }
 
@@ -220,6 +230,7 @@ public class PlayState : State
     /// </summary>
     private void ResetAnimations()
     {
+        entity.EntityAnimator.enabled = true;
         entity.EntityAnimator.SetBool("InteractArcadeMachine", false);
         entity.EntityAnimator.SetBool("SitChair", false);
         entity.EntityAnimator.SetBool("SitBike", false);
@@ -245,6 +256,7 @@ public class PlayState : State
             doRaceAnim = false;
             didRacePosChange = false;
         }
+        visitorEntity.EntityAnimator.GetComponent<MeshBaker>().UnbakeMesh();
     }
 
     #endregion Methods

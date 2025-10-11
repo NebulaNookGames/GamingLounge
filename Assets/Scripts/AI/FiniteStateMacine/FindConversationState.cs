@@ -99,7 +99,9 @@ public class FindConversationState : State
         if (WorldInteractables.instance.openToChatEntities.Contains(entity.gameObject))
             WorldInteractables.instance.openToChatEntities.Remove(entity.gameObject);
         
-        currentChatFindDuration = 0; 
+        currentChatFindDuration = 0;
+        entity.EntityAnimator.enabled = false;
+        visitorEntity.EntityAnimator.GetComponent<MeshBaker>().BakeMesh();
     }
     
     #endregion State Methods
@@ -111,6 +113,8 @@ public class FindConversationState : State
     /// </summary>
     private void Initialize()
     {
+        entity.EntityAnimator.enabled = true;
+        visitorEntity.EntityAnimator.GetComponent<MeshBaker>().UnbakeMesh();
        entity.EntityAnimator.SetFloat("HorizontalSpeed", 0);
        WorldInteractables.instance.openToChatEntities.Add(entity.gameObject);
     }

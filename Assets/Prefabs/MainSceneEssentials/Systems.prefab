@@ -484,6 +484,12 @@ MonoBehaviour:
   - {fileID: 2100000, guid: e61e38c76fa3c4d46855e0ccde5ed03b, type: 2}
   - {fileID: 2100000, guid: 21e50028c7405574c8faf573d5afd12c, type: 2}
   - {fileID: 2100000, guid: 08e3aa4b0e692fc47aae541a87b70b85, type: 2}
+  - {fileID: 2100000, guid: a0bbcf0accda2044eb6aab827bfa0b36, type: 2}
+  - {fileID: 2100000, guid: 256ae535a5cce6d46beb8c9b57db9184, type: 2}
+  - {fileID: 2100000, guid: 944c35393b7647b46894ce9f82baaef1, type: 2}
+  - {fileID: 2100000, guid: d200e73dc4d4a3e40a5ed0301703426c, type: 2}
+  - {fileID: 2100000, guid: 4020b7fee8c38094cb821476c62a2646, type: 2}
+  - {fileID: 2100000, guid: 792e6b47abd0d144ca449168406783c4, type: 2}
   skinnedMeshRenderer: {fileID: 0}
 --- !u!1 &2409919026165144217
 GameObject:
@@ -833,7 +839,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5203011168251112991}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25d598b7ec3c6474e9d19e772c055c11, type: 3}
   m_Name: 
@@ -959,6 +965,7 @@ MonoBehaviour:
   validPlacementInteractionAudioclip: {fileID: 8300000, guid: f6198ed9a43f6b2489262a3525612bda, type: 3}
   invalidPlacementInteractionAudioclip: {fileID: 8300000, guid: 55a1540f90a3210409ce7aca18c5832c, type: 3}
   validRemoveInteractionAudioclip: {fileID: 8300000, guid: bb52ed9c3d244f14b8a47feb7481a00b, type: 3}
+  placementInputHelper: {fileID: 0}
 --- !u!114 &8053812927660157417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1427,7 +1434,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9199578609773100941
 Transform:
   m_ObjectHideFlags: 0
@@ -1467,9 +1474,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  lockedGameObjects:
-  - {fileID: 0}
-  - {fileID: 0}
+  expandButton: {fileID: 0}
 --- !u!1001 &2071259323082706329
 PrefabInstance:
   m_ObjectHideFlags: 0

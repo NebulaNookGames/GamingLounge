@@ -18,7 +18,8 @@ public class IdleState : State
     /// Increases over time until it reaches idleDuration.
     /// </summary>
     private float currentIdleTime;
-
+    private VisitorEntity visitorEntity;
+    
     #endregion Variables
 
     #region Constructor
@@ -27,8 +28,9 @@ public class IdleState : State
     /// Initializes the IdleState with an associated entity.
     /// </summary>
     /// <param name="entity">The entity that this state is associated with.</param>
-    public IdleState(Entity entity) : base(entity)
+    public IdleState(Entity entity, VisitorEntity _visitorEntity) : base(entity)
     {
+        visitorEntity = _visitorEntity;
     }
 
     #endregion Constructor
@@ -40,6 +42,8 @@ public class IdleState : State
     /// </summary>
     public override void EnterState()
     {
+        entity.EntityAnimator.enabled = true;
+        visitorEntity.EntityAnimator.GetComponent<MeshBaker>().BakeMesh();
         entity.Agent.isStopped = true;  // Ensure the agent stops moving
         Initialization();              // Initialize idle state (e.g., play animation)
     }
@@ -65,6 +69,7 @@ public class IdleState : State
     /// </summary>
     public override void ExitState()
     {
+        entity.EntityAnimator.enabled = false;
         entity.Agent.enabled = true; // Re-enable the agent to allow movement
     }
 

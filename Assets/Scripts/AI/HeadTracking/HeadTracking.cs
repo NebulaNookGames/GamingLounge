@@ -24,8 +24,8 @@ public class HeadTracking : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if(entity != null)
-            entity.headTracking = this;
+        //if(entity != null)
+            //entity.headTracking = this;
         
         updateTimer = updateInterval;
     }

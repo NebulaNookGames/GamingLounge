@@ -72,9 +72,21 @@ public class Cost : MonoBehaviour
         }
 
         if (inBuilding)
+        {
+#if UNITY_SWITCH
+            cost = maximumAmount * 2;
+#endif
+#if !UNITY_SWITCH
             cost = maximumAmount;
+#endif
+        }
         else
+#if UNITY_SWITCH
+            cost = minimumAmount * 2;
+#endif
+#if !UNITY_SWITCH
             cost = minimumAmount;
+#endif
         
         int tenPercent = Mathf.RoundToInt(cost * 0.1f);
         int tempMulti = 0; 

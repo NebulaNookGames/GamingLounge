@@ -63,6 +63,8 @@ public class WalkToDestinationState : State
     public override void ExitState()
     {
         visitorEntity.walkToDestinationIsOver = false; // Reset walking completion status
+        entity.EntityAnimator.enabled = false;
+        visitorEntity.EntityAnimator.GetComponent<MeshBaker>().BakeMesh();
     }
 
     #endregion State Methods
@@ -74,6 +76,8 @@ public class WalkToDestinationState : State
     /// </summary>
     private void Initialize()
     {
+        visitorEntity.EntityAnimator.GetComponent<MeshBaker>().UnbakeMesh();
+        entity.EntityAnimator.enabled = true;
         currentWalkTime = walkTime; // Initialize the current walk time
         entity.Agent.isStopped = false; // Ensure the agent is not stopped
         entity.EntityAnimator.SetFloat("HorizontalSpeed", 1.0f);

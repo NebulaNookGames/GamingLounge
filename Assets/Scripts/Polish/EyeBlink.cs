@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using System.Collections;
+using Random = UnityEngine.Random;
 
 public class EyeBlink : MonoBehaviour
 {
@@ -16,10 +18,15 @@ public class EyeBlink : MonoBehaviour
     #endregion
 
     #region Unity Methods
-
-    void Start()
+    
+    private void OnEnable()
     {
         StartCoroutine(BlinkRoutine());
+    }
+
+    private void OnDisable()
+    {
+        StopCoroutine(BlinkRoutine());
     }
 
     #endregion
@@ -38,7 +45,7 @@ public class EyeBlink : MonoBehaviour
             Material[] mats = faceRenderer.materials;
             mats[eyeIndex] = mats[skinIndex];
             faceRenderer.materials = mats;
-
+            
             yield return new WaitForSeconds(blinkDuration);
 
             // Swap back to normal material

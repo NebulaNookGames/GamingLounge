@@ -40,7 +40,7 @@ public class VisitorEntity : Entity
     public GameObject machineInUse;           // Current machine the entity is interacting with
     public GameObject seatInUse;              // Seat that the entity is using (if any)
     public bool shouldUseSeat = false;        // Whether the entity should use a seat
-    public HeadTracking headTracking;         // Controls the entity's head tracking behavior
+    // public HeadTracking headTracking;         // Controls the entity's head tracking behavior
     public int talkIndex;                    // The index of the current conversation
     public int walkAmount = 10;               // The number of times the entity will walk
     public int currentWalkAmount = 0;         // Current progress in walking
@@ -78,10 +78,18 @@ public class VisitorEntity : Entity
     private new void Update()
     {
         base.Update();
+        
         if (agent && agent.isOnNavMesh && agent.destination != Vector3.zero)
         {
-            currentDestinationUpdateTime -= Time.deltaTime;
+            if (agent.velocity.magnitude > .1f)
+            {
+                if(!entityAnimator.enabled)
+                    entityAnimator.enabled = true;
+                    
+                entityAnimator.SetFloat("HorizontalSpeed", 1.0f);
+            }
             
+            currentDestinationUpdateTime -= Time.deltaTime;
             if (currentDestinationUpdateTime <= 0)
             {
                 if (agent.autoRepath)
@@ -89,9 +97,6 @@ public class VisitorEntity : Entity
 
                 currentDestinationUpdateTime = destinationUpdateTime;
                 agent.SetDestination(agent.destination);
-                
-                if(agent.velocity.magnitude > .1f) 
-                    entityAnimator.SetFloat("HorizontalSpeed", 1.0f);
             }
         }
     }
@@ -120,7 +125,7 @@ public class VisitorEntity : Entity
     private void CreateStates()
     {
         // Initialize states for the visitor entity
-        idleState = new IdleState(this);
+        idleState = new IdleState(this, this);
         randomWalkState = new RandomWalkState(this, this, maxWalkRadius);
         findMachineState = new FindMachineState(this, this);
         playState = new PlayState(this, this);
@@ -247,6 +252,5 @@ public class VisitorEntity : Entity
     {
         Instantiate(objectToSpawn, transform.position, Quaternion.identity);
     }
-
     #endregion Additional Methods
 }

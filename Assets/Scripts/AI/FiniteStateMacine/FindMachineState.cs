@@ -33,6 +33,8 @@ public class FindMachineState : State
     /// </summary>
     public override void EnterState()
     {
+        entity.EntityAnimator.enabled = true;
+           visitorEntity.EntityAnimator.GetComponent<MeshBaker>().UnbakeMesh();
         if (entity.Agent.isOnNavMesh)
             entity.Agent.isStopped = false;
         
@@ -45,6 +47,12 @@ public class FindMachineState : State
     public override void UpdateState()
     {
         CheckSwitchState();
+    }
+
+    public override void ExitState()
+    {
+        entity.EntityAnimator.enabled = false;
+        visitorEntity.EntityAnimator.GetComponent<MeshBaker>().BakeMesh();
     }
 
     #endregion State Methods

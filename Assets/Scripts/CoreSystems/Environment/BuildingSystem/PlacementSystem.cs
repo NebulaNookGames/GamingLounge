@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using System.Collections;
 using System.Collections.Generic;
+using nn;
+using nn.hid;
 using TMPro;
 using UnityEngine.UI; 
 

@@ -1,4 +1,5 @@
 using System.Numerics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using Vector3 = UnityEngine.Vector3;
@@ -58,10 +59,14 @@ public class RandomWalkState : State
         effectSpawner = entity.GetComponent<EffectSpawner>();
         updateTimer = updateInterval;
 
-        entity.EntityAnimator.SetFloat("HorizontalSpeed", 1);  // Set animation speed for walking
+        //entity.EntityAnimator.enabled = true;
+        visitorEntity.EntityAnimator.GetComponent<MeshBaker>().BakeMesh();
+        //entity.EntityAnimator.SetFloat("HorizontalSpeed", 1);  // Set animation speed for walking
         
         Initialize();  // Start the walk state initialization
     }
+    
+    
 
     // ReSharper disable Unity.PerformanceAnalysis
     /// <summary>
@@ -116,6 +121,8 @@ public class RandomWalkState : State
     /// </summary>
     public override void ExitState()
     {
+        entity.EntityAnimator.enabled = false;
+        visitorEntity.EntityAnimator.GetComponent<MeshBaker>().BakeMesh();
         visitorEntity.currentWalkAmount++;
     }
 
@@ -140,7 +147,7 @@ public class RandomWalkState : State
         // Set the agent's destination if it's on the NavMesh
         if (entity.Agent.isOnNavMesh)
         {
-            entity.EntityAnimator.SetFloat("HorizontalSpeed", 1);  // Set animation speed for walking
+            //entity.EntityAnimator.SetFloat("HorizontalSpeed", 1);  // Set animation speed for walking
             entity.Agent.SetDestination(walkPosition);
         }
 

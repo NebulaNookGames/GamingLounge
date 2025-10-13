@@ -1,4 +1,4 @@
-#if UNITY_SWITCH
+#if UNITY_SWITCH && !UNITY_EDITOR
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -26,58 +26,19 @@ public class SwitchSaveSystem<T> : SaveSystem<T> where T : new()
 
         UserHandle userHandle = new UserHandle();
         nn.Result result;
-
-// #if NN_ACCOUNT_OPENUSER_ENABLE
-//         Debug.Log("Startup User Account: None - Prompting user to select an account");
-//
-//         result = Account.ShowUserSelector(ref _userId);
-//         while (nn.account.Account.ResultCancelledByUser.Includes(result))
-//         {
-//             Debug.LogWarning("User cancelled account selection. Prompting again...");
-//             result = Account.ShowUserSelector(ref _userId);
-//         }
-//
-//         if (!result.IsSuccess())
-//         {
-//             Debug.LogError($"Account.ShowUserSelector failed: {result.ToString()}");
-//         }
-//
-//         result = Account.OpenUser(ref userHandle, _userId);
-//         if (!result.IsSuccess())
-//         {
-//             Debug.LogError($"Account.OpenUser failed: {result.ToString()}");
-//         }
-//
-//         result = nn.fs.SaveData.Ensure(_userId);
-//         if (!result.IsSuccess())
-//         {
-//             if (nn.fs.SaveData.ResultUsableSpaceNotEnoughForSaveData.Includes(result))
-//             {
-//                 Debug.LogError("Insufficient space for save data.");
-//             }
-//             else
-//             {
-//                 Debug.LogError($"SaveData.Ensure failed: {result.ToString()}");
-//             }
-//         }
-// #else
-        Debug.Log("Startup User Account: Required - Using preselected account");
+        
+        Console.WriteLine("Startup User Account: Required - Using preselected account");
 
         if (!Account.TryOpenPreselectedUser(ref userHandle))
         {
-            Debug.LogError("TryOpenPreselectedUser failed");
+            Console.WriteLine("TryOpenPreselectedUser failed");
         }
 
         result = Account.GetUserId(ref _userId, userHandle);
         if (!result.IsSuccess())
         {
-            Debug.LogError($"Failed to get UserId from preselected user: {result.ToString()}");
+            Console.WriteLine($"Failed to get UserId from preselected user: {result.ToString()}");
         }
-// #endif
-
-        // Account.CloseUser(userHandle);
-
-        // Initialize _savedData just in case
         if (_savedData == null)
             _savedData = new List<T>();
 
@@ -94,11 +55,11 @@ public class SwitchSaveSystem<T> : SaveSystem<T> where T : new()
         if (result.IsSuccess())
         {
             _isMounted = true;
-            Debug.Log($"Mounted '{MOUNT_NAME}' successfully.");
+            Console.WriteLine($"Mounted '{MOUNT_NAME}' successfully.");
         }
         else
         {
-            Debug.LogError($"Mount failed: {GetResultDescription(result)}");
+            Console.WriteLine($"Mount failed: {GetResultDescription(result)}");
             // You may want to throw or handle error here
         }
     }
@@ -107,7 +68,7 @@ public class SwitchSaveSystem<T> : SaveSystem<T> where T : new()
     {
         if (!_isMounted)
         {
-            Debug.Log("Unmount skipped: not mounted.");
+            Console.WriteLine("Unmount skipped: not mounted.");
             return;
         }
 
@@ -115,11 +76,11 @@ public class SwitchSaveSystem<T> : SaveSystem<T> where T : new()
         {
             nn.fs.FileSystem.Unmount(MOUNT_NAME);
             _isMounted = false;
-            Debug.Log($"Unmounted '{MOUNT_NAME}' successfully.");
+            Console.WriteLine($"Unmounted '{MOUNT_NAME}' successfully.");
         }
         catch (Exception ex)
         {
-            Debug.LogWarning($"Unmount threw exception (likely not mounted): {ex.Message}");
+            Console.WriteLine($"Unmount threw exception (likely not mounted): {ex.Message}");
         }
     }
 
@@ -159,19 +120,19 @@ public class SwitchSaveSystem<T> : SaveSystem<T> where T : new()
                     result = nn.fs.File.Create(_filePath, dataByteArray.LongLength);
                     if (!result.IsSuccess())
                     {
-                        Debug.LogError($"Failed to create file: {_filePath}, {GetResultDescription(result)}");
+                        Console.WriteLine($"Failed to create file: {_filePath}, {GetResultDescription(result)}");
                         Unmount();
                         return;
                     }
                     else
                     {
-                        Debug.Log("Successfully created file.");
+                        Console.WriteLine("Successfully created file.");
                         continue;
                     }
                 }
                 else
                 {
-                    Debug.LogError($"Failed to open file: {_filePath}, {GetResultDescription(result)}");
+                    Console.WriteLine($"Failed to open file: {_filePath}, {GetResultDescription(result)}");
                     Unmount();
                     return;
                 }
@@ -180,7 +141,7 @@ public class SwitchSaveSystem<T> : SaveSystem<T> where T : new()
             result = nn.fs.File.SetSize(_fileHandle, dataByteArray.LongLength);
             if (nn.fs.FileSystem.ResultUsableSpaceNotEnough.Includes(result))
             {
-                Debug.LogError($"Insufficient space to write {dataByteArray.LongLength} bytes to {_filePath}");
+                Console.WriteLine($"Insufficient space to write {dataByteArray.LongLength} bytes to {_filePath}");
                 nn.fs.File.Close(_fileHandle);
                 Unmount();
                 return;
@@ -191,7 +152,7 @@ public class SwitchSaveSystem<T> : SaveSystem<T> where T : new()
 
             if (!result.IsSuccess())
             {
-                Debug.LogError($"Failed to write file: {_filePath}, {GetResultDescription(result)}");
+                Console.WriteLine($"Failed to write file: {_filePath}, {GetResultDescription(result)}");
                 Unmount();
                 return;
             }
@@ -199,7 +160,7 @@ public class SwitchSaveSystem<T> : SaveSystem<T> where T : new()
             result = nn.fs.FileSystem.Commit(MOUNT_NAME);
             if (!result.IsSuccess())
             {
-                Debug.LogError($"Failed to commit file system changes for mount {MOUNT_NAME}: {GetResultDescription(result)}");
+                Console.WriteLine($"Failed to commit file system changes for mount {MOUNT_NAME}: {GetResultDescription(result)}");
                 Unmount();
                 return;
             }
@@ -208,13 +169,13 @@ public class SwitchSaveSystem<T> : SaveSystem<T> where T : new()
             UnityEngine.Switch.Notification.LeaveExitRequestHandlingSection();
 #endif
 
-            Debug.Log($"Save successful: {_filePath} ({dataByteArray.Length} bytes written)");
+            Console.WriteLine($"Save successful: {_filePath} ({dataByteArray.Length} bytes written)");
 
             Unmount();
         }
         catch (Exception ex)
         {
-            Debug.LogError("Exception during save: " + ex.Message + "\n" + ex.StackTrace);
+            Console.WriteLine("Exception during save: " + ex.Message + "\n" + ex.StackTrace);
             Unmount();
         }
     }
@@ -223,7 +184,7 @@ public class SwitchSaveSystem<T> : SaveSystem<T> where T : new()
     {
         try
         {
-            Debug.Log("Loading");
+            Console.WriteLine("Loading");
             Mount();
 
             _fileHandle = new nn.fs.FileHandle();
@@ -233,11 +194,11 @@ public class SwitchSaveSystem<T> : SaveSystem<T> where T : new()
             {
                 if (nn.fs.FileSystem.ResultPathNotFound.Includes(result))
                 {
-                    Debug.LogWarning($"File not found: {_filePath}. Save data may not exist yet.");
+                    Console.WriteLine($"File not found: {_filePath}. Save data may not exist yet.");
                 }
                 else
                 {
-                    Debug.LogError($"Failed to open file: {_filePath}, {GetResultDescription(result)}");
+                    Console.WriteLine($"Failed to open file: {_filePath}, {GetResultDescription(result)}");
                 }
 
                 LoadingCompleted();
@@ -250,7 +211,7 @@ public class SwitchSaveSystem<T> : SaveSystem<T> where T : new()
 
             if (fileSize <= 0)
             {
-                Debug.LogWarning($"Save file is empty: {_filePath}");
+                Console.WriteLine($"Save file is empty: {_filePath}");
                 nn.fs.File.Close(_fileHandle);
                 LoadingCompleted();
                 Unmount();
@@ -264,7 +225,7 @@ public class SwitchSaveSystem<T> : SaveSystem<T> where T : new()
 
             if (!result.IsSuccess())
             {
-                Debug.LogError("Critical error: Failed to read save file");
+                Console.WriteLine("Critical error: Failed to read save file");
                 LoadingCompleted();
                 Unmount();
                 return;
@@ -277,11 +238,11 @@ public class SwitchSaveSystem<T> : SaveSystem<T> where T : new()
                     BinaryFormatter formatter = new BinaryFormatter();
                     _savedData = (List<T>)formatter.Deserialize(stream);
                 }
-                Debug.Log($"Load successful: {_filePath} ({fileSize} bytes read)");
+                Console.WriteLine($"Load successful: {_filePath} ({fileSize} bytes read)");
             }
             catch (Exception e)
             {
-                Debug.LogError("Failed to deserialize save data: " + e.Message);
+                Console.WriteLine("Failed to deserialize save data: " + e.Message);
                 _savedData = new List<T>() { new T() };
             }
 
@@ -290,7 +251,7 @@ public class SwitchSaveSystem<T> : SaveSystem<T> where T : new()
         }
         catch (Exception ex)
         {
-            Debug.LogError("Exception during load: " + ex.Message + "\n" + ex.StackTrace);
+            Console.WriteLine("Exception during load: " + ex.Message + "\n" + ex.StackTrace);
             LoadingCompleted();
             Unmount();
         }

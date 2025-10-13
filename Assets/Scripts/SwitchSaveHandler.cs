@@ -1,4 +1,4 @@
-#if UNITY_SWITCH
+#if UNITY_SWITCH && !UNITY_EDITOR
 
 using UnityEngine;
 using System;
@@ -28,11 +28,11 @@ public class SwitchSaveHandler : ISaveHandler
 
             dataSlot.CopyFrom(binaryData);
             switchSaveSystem.Save();
-            Debug.Log("Switch save successful");
+            Console.WriteLine("Switch save successful");
         }
         catch (Exception e)
         {
-            Debug.LogError("Switch save failed: " + e.Message);
+            Console.WriteLine("Switch save failed: " + e.Message);
         }
     }
 
@@ -45,17 +45,17 @@ public class SwitchSaveHandler : ISaveHandler
 
             if (binaryData == null)
             {
-                Debug.LogWarning("No save data found.");
+                Console.WriteLine("No save data found.");
                 return null;
             }
 
             SaveData data = binaryData.ToSaveData();
-            Debug.Log("Switch load successful");
+            Console.WriteLine("Switch load successful");
             return data;
         }
         catch (Exception e)
         {
-            Debug.LogError("Switch load failed: " + e.Message);
+            Console.WriteLine("Switch load failed: " + e.Message);
             return null;
         }
     }

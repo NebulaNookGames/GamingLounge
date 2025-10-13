@@ -30,7 +30,6 @@ public class FontSwitcherTMPro : MonoBehaviour
     {
         if (text == null) return; 
         Locale currentLocale = LocalizationSettings.SelectedLocale;
-        Debug.Log(currentLocale.SortOrder);
         if (currentLocale.SortOrder == 2)
             text.font = chineseFont;
         else if (currentLocale.SortOrder == 3)

@@ -73,7 +73,7 @@ public class SaveAndLoad : MonoBehaviour
     }
     catch (Exception e)
     {
-        Debug.LogError("Failed to initialize Switch save system: " + e.Message);
+        Console.WriteLine("Failed to initialize Switch save system: " + e.Message);
     }
 }
 #endif
@@ -92,7 +92,7 @@ public class SaveAndLoad : MonoBehaviour
         }
         catch (Exception ex)
         {
-            Debug.LogWarning("Failed saving file: " + ex.Message);
+            Console.WriteLine("Failed saving file: " + ex.Message);
         }
     }
 
@@ -103,7 +103,7 @@ public class SaveAndLoad : MonoBehaviour
             SaveData saveData = saveHandler.Load();
             if (saveData == null)
             {
-                Debug.LogWarning("Save file not found or is empty.");
+                Console.WriteLine("Save file not found or is empty.");
                 return;
             }
 
@@ -118,7 +118,7 @@ public class SaveAndLoad : MonoBehaviour
         }
         catch (Exception ex)
         {
-            Debug.LogWarning("Failed loading file: " + ex.Message);
+            Console.WriteLine("Failed loading file: " + ex.Message);
         }
     }
 
@@ -140,7 +140,7 @@ public class SaveAndLoad : MonoBehaviour
 
     private void AutoSave()
     {
-        Debug.Log("Auto-Saving...");
+        Console.WriteLine("Auto-Saving...");
         if (autoSaveCanvas != null)
         {
             autoSaveCanvas.SetActive(true);

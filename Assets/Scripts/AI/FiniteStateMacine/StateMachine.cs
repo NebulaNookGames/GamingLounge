@@ -45,14 +45,12 @@ public class StateMachine
     {
         if (newState == null)
         {
-            Console.WriteLine("Attempted to transition to a null state.");
             return;
         }
 
         // Check if we are trying to transition to the same state
         if (newState == currentState)
         {
-            Console.WriteLine("Already in the target state.");
             return;
         }
 
@@ -63,7 +61,7 @@ public class StateMachine
         newState.EnterState();
         
         // Log the state transition for debugging purposes
-        Console.WriteLine($"Transitioning from {currentState.GetType().Name} to {newState.GetType().Name}");
+        //Console.WriteLine($"Transitioning from {currentState.GetType().Name} to {newState.GetType().Name}");
         
         // Update the current state to the new one
         currentState = newState;

@@ -42,14 +42,32 @@ public class ValidIconOnDeviceChange : MonoBehaviour
         if (gameDevice == GameInput.GameDevice.Gamepad)
         {
             #if !UNITY_SWITCH
-            imageToChange.sprite = gamepadIcon;
-            #endif
-            #if UNITY_SWITCH
-            if(switchIcon != null) 
-                imageToChange.sprite = switchIcon;
-            else 
+            if (gamepadIcon == null)
+                imageToChange.enabled = false;
+            else
+            {
+                imageToChange.enabled = true;
                 imageToChange.sprite = gamepadIcon;
-            #endif
+            }
+#endif
+            #if UNITY_SWITCH
+            if (gamepadIcon == null && switchIcon == null)
+            {
+                imageToChange.enabled = false;
+            }
+            else if (switchIcon != null)
+            {
+                imageToChange.enabled = true;
+                imageToChange.sprite = switchIcon;
+            }
+            else if (gamepadIcon != null)
+            {
+                imageToChange.enabled = true;
+                imageToChange.sprite = gamepadIcon;
+            }
+            else
+                imageToChange.enabled = false;
+#endif
         }
         else
             imageToChange.sprite = keyboardIcon;

@@ -16,6 +16,8 @@ public class UnlockPanelHandler : MonoBehaviour
     [SerializeField] private GameObject[] unlockables;
     public UnityEvent onUpgradePCUnlocked;
     private bool firstBuy = true;
+    public AudioSource audioS;
+    public AudioClip audioC;
     IEnumerator UnlockAchievementsAfterLoad()
     {
         CheckBoughtSize();
@@ -49,18 +51,11 @@ public class UnlockPanelHandler : MonoBehaviour
         
         for(int i = 0; i < buttons.Length; i++)
         {
-            if (bought[i])
-            {
-                buttons[i].GetComponent<Button>().interactable = false;
-                continue;
-            }
-            
             if (cost[i] <= amount)
             {
                 buttons[i].GetComponent<Button>().interactable = true;
             }
-
-            else
+            else if(cost[i] > amount && !bought[i])
             {
                 buttons[i].GetComponent<Button>().interactable = false;
             }
@@ -69,15 +64,18 @@ public class UnlockPanelHandler : MonoBehaviour
 
     public void UnlockItem(int index)
     {
+        if (bought[index]) return;
+        if (cost[index] > MoneyManager.instance.MoneyAmount) return;
+        
         CheckBoughtSize();
         
-        if (cost[index] > MoneyManager.instance.MoneyAmount) return;
-
-
         if (firstBuy && !SaveAndLoad.instance.saveDataLoaded)
         {
+            InputManager.instance.enabled = true;
             InputManager.instance.placementInputUnlocked = true;
+            InputReader.instance.enabled = true;
             onUpgradePCUnlocked?.Invoke();
+            
 #if !UNITY_SWITCH
             try
             {
@@ -92,8 +90,8 @@ public class UnlockPanelHandler : MonoBehaviour
         firstBuy = false;  
         bought[index] = true;
         unlockables[index].SetActive(true);
-        buttons[index].GetComponent<Button>().interactable = false;
         MoneyManager.instance.ChangeMoney(-cost[index]);
+        audioS.PlayOneShot(audioC);
         UnlockAchievement(index);
     }
 
@@ -104,9 +102,7 @@ public class UnlockPanelHandler : MonoBehaviour
         for (int i = 0; i < buttons.Length; i++)
         {
             unlockables[i].SetActive(true);
-            buttons[i].GetComponent<Button>().interactable = false;
             bought[i] = true;
-            
         }
         
         UpdateButtonInteractable(MoneyManager.instance.MoneyAmount);

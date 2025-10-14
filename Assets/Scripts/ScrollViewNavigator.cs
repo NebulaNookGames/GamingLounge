@@ -53,23 +53,6 @@ public class ScrollViewNavigator : MonoBehaviour
  void Move()
  {
   rect.LeanMoveLocal(targetPos, tweenTime).setEase(tweenType);
-  if (currentButton >= maxButtons)
-  {
-   nextButton.interactable = false;
-  }
-  else
-  {
-   nextButton.interactable = true;
-  }
-
-  if (currentButton <= 1)
-  {
-   previousButton.interactable = false;
-  }
-  else
-  {
-   previousButton.interactable = true;
-  }
  }
 
  void UpdateButtonNavigation()

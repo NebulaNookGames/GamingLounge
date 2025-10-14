@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class ChangedButtonDisabledColor : MonoBehaviour
 {
     public Color newColor = Color.green;
+    public Color newSelectedColor = Color.blue;
     public Button button;
 
     private void Awake()
@@ -17,6 +18,8 @@ public class ChangedButtonDisabledColor : MonoBehaviour
     {
         ColorBlock colorBlock = button.colors;
         colorBlock.disabledColor = newColor;
+        colorBlock.normalColor = newColor;
+        colorBlock.selectedColor = newSelectedColor;
         button.colors = colorBlock;
         GetComponentInChildren<TextMeshProUGUI>().enabled = false; 
     }

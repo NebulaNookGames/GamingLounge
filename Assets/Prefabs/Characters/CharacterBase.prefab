@@ -10659,7 +10659,7 @@ Transform:
   m_GameObject: {fileID: 6199060854717272141}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071069, y: -2.0411197e-14, z: 8.258684e-14, w: 0.7071067}
-  m_LocalPosition: {x: -0.0035544026, y: -0.006930113, z: 0.0013067349}
+  m_LocalPosition: {x: -1.747, y: -0.007, z: 0.001}
   m_LocalScale: {x: 1, y: 0.99999994, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14745,15 +14745,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e836866d307b53240a44643fb87a2482, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doIt: 0
-  bodies:
-  - {fileID: 3929918098917202806}
-  - {fileID: 1220710149560642278}
-  - {fileID: 6199060854717272141}
-  heads:
-  - {fileID: 8836702987715023196}
-  - {fileID: 1240138913935261952}
-  - {fileID: 2278866958591840492}
+  characters: []
+  skinnedCharMeshes: []
+  normalCharMeshes: []
+  headIndexes: 
+  clothIndexes: 
+  npcValueHolder: {fileID: 0}
+  entity: {fileID: 0}
 --- !u!1 &8402355359274772985
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using nn;
 using nn.hid;
 using TMPro;
+using UnityEngine.InputSystem.XR;
 using UnityEngine.UI; 
 
 /// <summary>

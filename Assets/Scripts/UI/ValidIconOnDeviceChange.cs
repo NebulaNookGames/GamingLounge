@@ -39,6 +39,8 @@ public class ValidIconOnDeviceChange : MonoBehaviour
 
     void GameInput_DeviceChanged(GameInput.GameDevice gameDevice)
     {
+        imageToChange.enabled = true; 
+        
         if (gameDevice == GameInput.GameDevice.Gamepad)
         {
             #if !UNITY_SWITCH
@@ -70,6 +72,14 @@ public class ValidIconOnDeviceChange : MonoBehaviour
 #endif
         }
         else
-            imageToChange.sprite = keyboardIcon;
+        {
+            if (keyboardIcon == null)
+                imageToChange.enabled = false;
+            else
+            {
+                imageToChange.enabled = true;
+                imageToChange.sprite = keyboardIcon;
+            }
+        }
     }
 }
